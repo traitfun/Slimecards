@@ -36,13 +36,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* ═══════════ DASHBOARD ═══════════ */
 .hero-img-wrap{position:relative;width:100%;padding-top:5.5rem;}
-.hero-img{width:100%;max-height:85vh;object-fit:cover;object-position:center;display:block;}
-.hero-img-overlay{position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(0deg,var(--dark) 0%,transparent 100%);}
+.hero-img{width:100%;max-height:88vh;object-fit:cover;object-position:center;display:block;}
+.hero-img-overlay{position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(0deg,var(--dark) 0%,transparent 100%);}
 .dash-menu{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;padding:2rem 1.5rem;}
 .dash-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:0.9rem 2rem;font-family:'Cinzel',serif;font-weight:600;font-size:0.88rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s;}
 .dash-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
 .dash-btn.primary{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;font-weight:700;}
-.dash-btn.primary:hover{box-shadow:0 8px 30px rgba(240,192,64,0.4);color:#000;}
+.dash-btn.primary:hover{box-shadow:0 8px 30px rgba(240,192,64,0.4);color:#000;transform:translateY(-2px);}
 .steps-section{padding:5rem 1.5rem;background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 50%,var(--dark) 100%);}
 .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
 .step-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.8rem 1.4rem;transition:all 0.4s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
@@ -227,22 +227,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ DASHBOARD ══ -->
 <div class="page active" id="page-dashboard">
-
-  <!-- HERO IMAGE -->
   <div class="hero-img-wrap">
     <img src="assets/dashboard/hero.jpg" alt="Slime Breaker" class="hero-img">
     <div class="hero-img-overlay"></div>
   </div>
-
-  <!-- MENU -->
   <div class="dash-menu">
     <button class="dash-btn primary" onclick="showPage('gacha')">🎰 Try Gacha</button>
-    <button class="dash-btn" onclick="showPage('nft')">⚔ Collection</button>
+    <button class="dash-btn" onclick="showPage('nft')">⚔ Gallery</button>
     <button class="dash-btn" onclick="showPage('dungeon')">🏯 Dungeon</button>
     <button class="dash-btn" onclick="showPage('forge')">⚗️ Forge</button>
   </div>
-
-  <!-- HOW IT WORKS -->
+  <div class="steps-section">
+    <p class="section-label">Gameplay Loop</p>
+    <h2 class="section-title" style="text-align:center;">How It Works</h2>
+    <div class="divider"></div>
+    <p class="section-desc" style="text-align:center;margin-bottom:2.5rem;">Simple idle mechanics, deep strategy. No real-time combat.</p>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">01</div><div class="step-icon">🎰</div><div class="step-title">Gacha</div><div class="step-desc">Roll to collect Slime NFTs across 5 rarity tiers. Each with unique weapons and powers.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-icon">⚔️</div><div class="step-title">Dungeon Run</div><div class="step-desc">Send your Slime in, choose difficulty, wait for timer, collect loot automatically.</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-icon">📦</div><div class="step-title">Loot & Boxes</div><div class="step-desc">Collect potions, ores, equipment. Hard dungeons drop $SLIME, Bankr and ETH boxes.</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-icon">⚗️</div><div class="step-title">Forge</div><div class="step-desc">Combine dungeon materials to craft powerful potions and equipment for your Slimes.</div></div>
+      <div class="step-card"><div class="step-num">05</div><div class="step-icon">⬆️</div><div class="step-title">Upgrade</div><div class="step-desc">Use materials and $SLIME to level up NFTs. Higher level Slimes clear harder dungeons.</div></div>
+    </div>
+  </div>
+</div>
   <div class="steps-section">
     <p class="section-label">Gameplay Loop</p>
     <h2 class="section-title" style="text-align:center;">How It Works</h2>
