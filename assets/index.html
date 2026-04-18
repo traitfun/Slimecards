@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLIME BREAKER</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#f0c040;--gold2:#ffd700;--dark:#080810;--dark2:#0d0d1a;--purple2:#a855f7;--cyan:#00e5ff;--red:#ff2244;--green:#00ff88;--rare:#3b82f6;--epic:#a855f7;--legend:#f0c040;--mythic:#ff2244;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:#fff;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.7rem 1.5rem;background:rgba(8,8,16,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(240,192,64,0.15);}
+.nav-logo{font-family:'Cinzel Decorative',serif;font-size:1rem;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;cursor:pointer;flex-shrink:0;}
+.nav-links{display:flex;gap:0.2rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.5);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:all 0.3s;padding:0.4rem 0.65rem;cursor:pointer;border-radius:2px;}
+.nav-links a:hover{color:#fff;}
+.nav-links a.active{color:var(--gold);background:rgba(240,192,64,0.08);}
+.nav-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.45rem 1.1rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.72rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);transition:all 0.3s;flex-shrink:0;}
+.nav-btn:hover{box-shadow:0 0 20px rgba(240,192,64,0.4);}
+@media(max-width:768px){.nav-links{display:none;}}
+
+/* PAGES */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* SHARED */
+.pg-head{padding-top:5.5rem;text-align:center;padding-bottom:1.5rem;}
+.section-label{font-size:0.68rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;}
+.section-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:700;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.section-desc{color:rgba(255,255,255,0.45);font-size:0.9rem;max-width:520px;margin:0.8rem auto 0;line-height:1.7;}
+.divider{width:55px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0.8rem auto;}
+
+/* ═══════════ DASHBOARD ═══════════ */
+.hero-img-wrap{position:relative;width:100%;padding-top:5.5rem;}
+.hero-img{width:100%;max-height:85vh;object-fit:cover;object-position:center;display:block;}
+.hero-img-overlay{position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(0deg,var(--dark) 0%,transparent 100%);}
+.dash-menu{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;padding:2rem 1.5rem;}
+.dash-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:0.9rem 2rem;font-family:'Cinzel',serif;font-weight:600;font-size:0.88rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s;}
+.dash-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.dash-btn.primary{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;font-weight:700;}
+.dash-btn.primary:hover{box-shadow:0 8px 30px rgba(240,192,64,0.4);color:#000;}
+.steps-section{padding:5rem 1.5rem;background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 50%,var(--dark) 100%);}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
+.step-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.8rem 1.4rem;transition:all 0.4s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
+.step-card:hover{border-color:rgba(240,192,64,0.3);transform:translateY(-5px);background:rgba(240,192,64,0.04);}
+.step-num{font-family:'Cinzel Decorative',serif;font-size:2.2rem;font-weight:900;color:rgba(240,192,64,0.12);margin-bottom:0.7rem;}
+.step-icon{font-size:1.6rem;margin-bottom:0.7rem;}
+.step-title{font-family:'Cinzel',serif;font-size:0.95rem;font-weight:600;color:var(--gold);margin-bottom:0.5rem;letter-spacing:1px;}
+.step-desc{color:rgba(255,255,255,0.45);font-size:0.82rem;line-height:1.7;}
+
+/* ═══════════ NFT ═══════════ */
+.nft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem 5rem;}
+.nft-card{position:relative;border-radius:4px;overflow:hidden;cursor:pointer;aspect-ratio:2/3;background:#111;border:1px solid rgba(240,192,64,0.12);transition:all 0.3s;}
+.nft-card:hover{transform:translateY(-6px) scale(1.03);border-color:rgba(240,192,64,0.4);z-index:5;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+.nft-card img{width:100%;height:100%;object-fit:cover;display:block;}
+.nft-card .card-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,0.9) 0%,transparent 100%);padding:0.8rem 0.6rem 0.6rem;opacity:0;transition:opacity 0.3s;}
+.nft-card:hover .card-info{opacity:1;}
+.card-info-name{font-family:'Cinzel',serif;font-size:0.7rem;color:#fff;letter-spacing:1px;}
+#nft-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem;}
+#nft-modal.open{display:flex;}
+.modal-box{background:var(--dark2);border:1px solid rgba(240,192,64,0.25);border-radius:6px;max-width:660px;width:100%;display:grid;grid-template-columns:1fr 1.2fr;overflow:hidden;max-height:90vh;position:relative;}
+.modal-img{width:100%;object-fit:cover;display:block;}
+.modal-info{padding:1.8rem;display:flex;flex-direction:column;gap:0.9rem;overflow-y:auto;}
+.modal-close-btn{position:absolute;top:0.8rem;right:0.8rem;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;}
+.modal-title{font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:var(--gold);}
+.modal-lore{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7;}
+.modal-stat{display:flex;justify-content:space-between;padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem;}
+.modal-stat span:first-child{color:rgba(255,255,255,0.3);letter-spacing:1px;font-size:0.72rem;text-transform:uppercase;}
+@media(max-width:560px){.modal-box{grid-template-columns:1fr;}.modal-img{max-height:200px;}}
+
+/* ═══════════ GACHA ═══════════ */
+.gacha-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 5rem);gap:2rem;padding:2rem;}
+.gacha-stats{display:flex;gap:3rem;}
+.g-stat{text-align:center;}
+.g-stat-num{font-family:'Cinzel Decorative',serif;font-size:1.8rem;color:var(--gold);}
+.g-stat-label{font-size:0.62rem;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;}
+#orbWrap{position:relative;width:210px;height:210px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.15s;}
+#orbWrap:hover{transform:scale(1.04);}
+#orbWrap:active{transform:scale(0.96);}
+.bh-outer{position:absolute;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,transparent 35%,rgba(80,0,160,0.12) 55%,rgba(168,85,247,0.08) 70%,transparent 85%);animation:outerPulse 3s ease infinite;}
+@keyframes outerPulse{0%,100%{opacity:0.6;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
+.bh-ring{position:absolute;border-radius:50%;pointer-events:none;}
+.bh-r1{width:110%;height:38%;background:linear-gradient(90deg,transparent 5%,rgba(240,120,0,0.5) 25%,rgba(255,200,50,0.9) 50%,rgba(240,120,0,0.5) 75%,transparent 95%);top:50%;left:50%;transform:translate(-50%,-50%) rotateX(75deg);animation:acc1 4s linear infinite;filter:blur(2px);}
+.bh-r2{width:135%;height:22%;background:linear-gradient(90deg,transparent 10%,rgba(168,85,247,0.3) 35%,rgba(200,100,255,0.6) 50%,rgba(168,85,247,0.3) 65%,transparent 90%);top:50%;left:50%;transform:translate(-50%,-50%) rotateX(80deg) rotate(20deg);animation:acc2 7s linear infinite reverse;filter:blur(3px);}
+.bh-r3{width:160%;height:14%;background:linear-gradient(90deg,transparent 15%,rgba(0,200,255,0.15) 40%,rgba(100,220,255,0.35) 50%,rgba(0,200,255,0.15) 60%,transparent 85%);top:50%;left:50%;transform:translate(-50%,-50%) rotateX(83deg) rotate(-15deg);animation:acc3 11s linear infinite;filter:blur(4px);}
+@keyframes acc1{to{transform:translate(-50%,-50%) rotateX(75deg) rotate(360deg);}}
+@keyframes acc2{to{transform:translate(-50%,-50%) rotateX(80deg) rotate(-340deg);}}
+@keyframes acc3{to{transform:translate(-50%,-50%) rotateX(83deg) rotate(360deg);}}
+.bh-horizon{position:absolute;width:50%;height:50%;border-radius:50%;z-index:4;background:radial-gradient(circle,#000 60%,rgba(10,0,20,1));box-shadow:0 0 0 3px rgba(240,150,0,0.2),0 0 25px rgba(240,120,0,0.3);animation:horizPulse 4s ease infinite;}
+@keyframes horizPulse{0%,100%{box-shadow:0 0 0 3px rgba(240,150,0,0.2),0 0 25px rgba(240,120,0,0.3);}50%{box-shadow:0 0 0 5px rgba(240,150,0,0.35),0 0 50px rgba(240,120,0,0.5);}}
+#bhCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;}
+.tap-hint{font-size:0.68rem;letter-spacing:4px;color:rgba(255,255,255,0.3);text-transform:uppercase;animation:blinkA 2s ease infinite;}
+@keyframes blinkA{0%,100%{opacity:0.3}50%{opacity:0.8}}
+.roll-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.roll-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.8rem 1.8rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.82rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.3s;text-transform:uppercase;}
+.roll-btn:hover{box-shadow:0 0 25px rgba(240,192,64,0.4);transform:translateY(-2px);}
+.roll-btn.x10{background:linear-gradient(135deg,var(--epic),#6b21a8);color:#fff;}
+#gacha-overlay{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;}
+#gacha-overlay.open{display:flex;}
+#reveal-flash{position:fixed;inset:0;z-index:160;opacity:0;pointer-events:none;transition:opacity 0.1s;}
+.card-flip-wrap{width:min(210px,55vw);aspect-ratio:2/3;perspective:1000px;cursor:pointer;position:relative;z-index:165;}
+.card-flip{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);}
+.card-flip.flipped{transform:rotateY(180deg);}
+.card-face{position:absolute;inset:0;border-radius:6px;overflow:hidden;backface-visibility:hidden;}
+.card-back{background:radial-gradient(circle at center,#1a0a30,#000);border:2px solid rgba(240,192,64,0.4);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;font-size:3.5rem;color:rgba(240,192,64,0.3);}
+.card-front{transform:rotateY(180deg);}
+.card-front img{width:100%;height:100%;object-fit:cover;}
+#reveal-name{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--gold);opacity:0;transition:opacity 0.5s 1s;}
+#reveal-actions{display:flex;gap:1rem;opacity:0;transition:opacity 0.5s 1.5s;}
+.rev-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:2px;padding:0.7rem 1.5rem;cursor:pointer;text-transform:uppercase;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all 0.3s;}
+.rev-btn.gold{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;}
+#multi-overlay{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:2rem;}
+#multi-overlay.open{display:flex;}
+.multi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.5rem;max-width:min(580px,95vw);}
+.mini-card{aspect-ratio:2/3;border-radius:4px;overflow:hidden;transform:scale(0);opacity:0;transition:transform 0.4s cubic-bezier(0.2,0.8,0.3,1),opacity 0.4s;border:1px solid rgba(240,192,64,0.3);}
+.mini-card img{width:100%;height:100%;object-fit:cover;}
+.mini-card.show{transform:scale(1);opacity:1;}
+.multi-close{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;font-family:'Cinzel',serif;font-weight:700;font-size:0.82rem;letter-spacing:2px;padding:0.8rem 2rem;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);opacity:0;transition:opacity 0.5s;text-transform:uppercase;}
+.burst-p{position:fixed;width:5px;height:5px;border-radius:50%;pointer-events:none;z-index:170;}
+
+/* ═══════════ DUNGEON ═══════════ */
+.dungeon-section{max-width:1000px;margin:0 auto;padding:0 1.5rem 5rem;}
+.energy-box{background:rgba(255,255,255,0.03);border:1px solid rgba(240,192,64,0.2);padding:1.1rem 1.8rem;max-width:360px;margin:0 auto 2.5rem;}
+.energy-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;}
+.energy-label{font-size:0.68rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;}
+.energy-num{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);}
+.energy-track{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-bottom:0.4rem;}
+.energy-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;width:70%;}
+.energy-regen{font-size:0.62rem;color:rgba(255,255,255,0.2);letter-spacing:2px;}
+.dungeon-grid{display:flex;flex-direction:column;gap:1.5rem;}
+.dcard{display:grid;grid-template-columns:280px 1fr;border:1px solid;border-radius:4px;overflow:hidden;transition:all 0.3s;}
+.dcard:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.4);}
+.dcard-img{position:relative;overflow:hidden;min-height:200px;}
+.dcard-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.85;transition:opacity 0.3s;}
+.dcard:hover .dcard-img img{opacity:1;}
+.dcard-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(8,8,16,0.8) 100%);}
+.dcard-body{padding:1.5rem;display:flex;flex-direction:column;gap:1rem;background:rgba(8,8,16,0.6);}
+.dcard-diff{font-family:'Cinzel Decorative',serif;font-size:1.2rem;font-weight:700;}
+.dcard-table{width:100%;border-collapse:collapse;}
+.dcard-table tr{border-bottom:1px solid rgba(255,255,255,0.05);}
+.dcard-table tr:last-child{border-bottom:none;}
+.dcard-table td{padding:0.35rem 0;font-size:0.82rem;}
+.dcard-table td:first-child{color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase;font-size:0.68rem;width:80px;}
+.dcard-table td:last-child{color:#fff;font-family:'Cinzel',serif;}
+.dcard-rewards-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.4rem;}
+.dcard-rewards{list-style:none;display:flex;flex-direction:column;gap:0.3rem;}
+.dcard-rewards li{font-size:0.82rem;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:0.5rem;}
+.dcard-rewards li::before{content:'▸';font-size:0.6rem;opacity:0.5;}
+.dcard-enter{margin-top:auto;padding:0.65rem;border:1px solid;color:#fff;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.3s;background:rgba(255,255,255,0.06);}
+.dcard-enter:hover{background:rgba(255,255,255,0.14);}
+.dcard.easy{border-color:rgba(0,255,136,0.25);}
+.dcard.medium{border-color:rgba(59,130,246,0.3);}
+.dcard.hard{border-color:rgba(168,85,247,0.35);}
+.dcard.extreme{border-color:rgba(255,34,68,0.4);}
+@media(max-width:600px){.dcard{grid-template-columns:1fr;}.dcard-img{min-height:160px;}.dcard-img-overlay{background:linear-gradient(180deg,transparent 60%,rgba(8,8,16,0.9) 100%);}}
+
+/* ═══════════ FORGE ═══════════ */
+.forge-wrap{max-width:880px;margin:0 auto;padding:0 1.5rem 5rem;display:flex;flex-direction:column;gap:1rem;}
+.forge-label{font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:4px;color:rgba(255,255,255,0.22);text-transform:uppercase;padding-bottom:0.7rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.recipe{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.2rem;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0.7rem;transition:all 0.3s;}
+.recipe:hover{border-color:rgba(240,192,64,0.22);background:rgba(240,192,64,0.03);}
+.ing{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);padding:0.75rem;text-align:center;border-radius:3px;}
+.ing-icon{font-size:1.7rem;}
+.ing-name{font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:0.2rem;}
+.ing-qty{font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gold);margin-top:0.1rem;}
+.rec-arrow{font-size:1.1rem;color:var(--gold);text-align:center;opacity:0.45;}
+.res{background:rgba(240,192,64,0.04);border:1px solid rgba(240,192,64,0.16);padding:0.75rem;text-align:center;border-radius:3px;}
+.res-icon{font-size:1.9rem;}
+.res-name{font-family:'Cinzel',serif;font-size:0.82rem;color:var(--gold);letter-spacing:1px;margin-top:0.2rem;}
+.res-desc{font-size:0.65rem;color:rgba(255,255,255,0.32);margin-top:0.12rem;}
+.craft-btn{margin-top:0.65rem;padding:0.4rem 1.1rem;background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;font-family:'Cinzel',serif;font-weight:700;font-size:0.65rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);transition:all 0.3s;text-transform:uppercase;}
+.craft-btn:hover{box-shadow:0 0 14px rgba(240,192,64,0.3);}
+@media(max-width:560px){.recipe{grid-template-columns:1fr;}.rec-arrow{transform:rotate(90deg);}}
+
+/* ═══════════ MARKET ═══════════ */
+.market-wrap{max-width:980px;margin:0 auto;padding:0 1.5rem 5rem;}
+.coming-soon{text-align:center;padding:3rem 2rem;background:rgba(255,255,255,0.02);border:1px solid rgba(240,192,64,0.1);margin-bottom:2rem;}
+.cs-icon{font-size:3.2rem;margin-bottom:0.8rem;}
+.cs-title{font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.7rem;}
+.cs-desc{color:rgba(255,255,255,0.38);font-size:0.85rem;line-height:1.7;max-width:360px;margin:0 auto;}
+.market-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:1rem;}
+.listing{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:1.1rem;opacity:0.42;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,0 100%);}
+.listing-icon{font-size:2rem;text-align:center;margin-bottom:0.6rem;}
+.listing-name{font-family:'Cinzel',serif;font-size:0.82rem;text-align:center;margin-bottom:0.2rem;}
+.listing-seller{font-size:0.62rem;color:rgba(255,255,255,0.22);letter-spacing:1px;text-align:center;margin-bottom:0.7rem;}
+.listing-price{display:flex;justify-content:space-between;padding-top:0.65rem;border-top:1px solid rgba(255,255,255,0.05);font-size:0.78rem;}
+.listing-price span:first-child{color:rgba(255,255,255,0.25);font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;}
+.listing-price span:last-child{font-family:'Cinzel',serif;color:var(--gold);}
+
+/* ═══════════ PROFILE ═══════════ */
+.profile-wrap{max-width:780px;margin:0 auto;padding:0 1.5rem 5rem;display:flex;flex-direction:column;gap:1.3rem;}
+.wallet-box{background:rgba(255,255,255,0.03);border:1px solid rgba(240,192,64,0.18);padding:2rem;text-align:center;}
+.wallet-icon{font-size:2.8rem;margin-bottom:0.7rem;}
+.wallet-label{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:1.2rem;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:0.9rem;}
+.stat-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.1rem;text-align:center;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);}
+.stat-box-num{font-family:'Cinzel Decorative',serif;font-size:1.7rem;font-weight:900;color:var(--gold);}
+.stat-box-label{font-size:0.62rem;letter-spacing:3px;color:rgba(255,255,255,0.28);text-transform:uppercase;margin-top:0.2rem;}
+.inv-label{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:4px;color:rgba(255,255,255,0.22);text-transform:uppercase;margin-bottom:0.9rem;}
+.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:0.65rem;}
+.inv-slot{aspect-ratio:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.15rem;font-size:1.5rem;cursor:pointer;transition:all 0.3s;}
+.inv-slot:hover{border-color:rgba(240,192,64,0.3);background:rgba(240,192,64,0.04);}
+.inv-slot.empty{opacity:0.18;font-size:0.9rem;color:rgba(255,255,255,0.3);}
+.inv-qty{font-size:0.58rem;font-family:'Cinzel',serif;color:var(--gold);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('dashboard')">SLIME BREAKER</div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('dashboard')" class="active" id="nav-dashboard">Dashboard</a></li>
+    <li><a onclick="showPage('nft')" id="nav-nft">Gallery</a></li>
+    <li><a onclick="showPage('gacha')" id="nav-gacha">Gacha</a></li>
+    <li><a onclick="showPage('dungeon')" id="nav-dungeon">Dungeon</a></li>
+    <li><a onclick="showPage('forge')" id="nav-forge">Forge</a></li>
+    <li><a onclick="showPage('market')" id="nav-market">Market</a></li>
+    <li><a onclick="showPage('profile')" id="nav-profile">Profile</a></li>
+  </ul>
+  <button class="nav-btn" onclick="showPage('gacha')">🎰 Gacha</button>
+</nav>
+
+<!-- ══ DASHBOARD ══ -->
+<div class="page active" id="page-dashboard">
+
+  <!-- HERO IMAGE -->
+  <div class="hero-img-wrap">
+    <img src="assets/dashboard/hero.jpg" alt="Slime Breaker" class="hero-img">
+    <div class="hero-img-overlay"></div>
+  </div>
+
+  <!-- MENU -->
+  <div class="dash-menu">
+    <button class="dash-btn primary" onclick="showPage('gacha')">🎰 Try Gacha</button>
+    <button class="dash-btn" onclick="showPage('nft')">⚔ Collection</button>
+    <button class="dash-btn" onclick="showPage('dungeon')">🏯 Dungeon</button>
+    <button class="dash-btn" onclick="showPage('forge')">⚗️ Forge</button>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="steps-section">
+    <p class="section-label">Gameplay Loop</p>
+    <h2 class="section-title" style="text-align:center;">How It Works</h2>
+    <div class="divider"></div>
+    <p class="section-desc" style="text-align:center;margin-bottom:2.5rem;">Simple idle mechanics, deep strategy. No real-time combat.</p>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">01</div><div class="step-icon">🎰</div><div class="step-title">Gacha</div><div class="step-desc">Roll to collect Slime NFTs across 5 rarity tiers. Each with unique weapons and powers.</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-icon">⚔️</div><div class="step-title">Dungeon Run</div><div class="step-desc">Send your Slime in, choose difficulty, wait for timer, collect loot automatically.</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-icon">📦</div><div class="step-title">Loot & Boxes</div><div class="step-desc">Collect potions, ores, equipment. Hard dungeons drop $SLIME, Bankr and ETH boxes.</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-icon">⚗️</div><div class="step-title">Forge</div><div class="step-desc">Combine dungeon materials to craft powerful potions and equipment for your Slimes.</div></div>
+      <div class="step-card"><div class="step-num">05</div><div class="step-icon">⬆️</div><div class="step-title">Upgrade</div><div class="step-desc">Use materials and $SLIME to level up NFTs. Higher level Slimes clear harder dungeons.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NFT ══ -->
+<div class="page" id="page-nft">
+  <div class="pg-head">
+    <p class="section-label">Collection</p>
+    <h2 class="section-title">NFT Gallery</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Each Slime is a unique warrior forged in the dungeon depths.</p>
+  </div>
+  <div class="nft-grid" id="nftGrid"></div>
+</div>
+<div id="nft-modal" onclick="closeNftModal(event)">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="closeNftModal()">✕</button>
+    <img id="modalImg" src="" alt="" class="modal-img">
+    <div class="modal-info">
+      <div id="modalTitle" class="modal-title"></div>
+      <p id="modalLore" class="modal-lore"></p>
+      <div id="modalStats"></div>
+      <button onclick="closeNftModal()" class="btn-primary" style="margin-top:auto;">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GACHA ══ -->
+<div class="page" id="page-gacha">
+  <div class="gacha-wrap">
+    <div class="gacha-stats">
+      <div class="g-stat"><div class="g-stat-num" id="totalRolls">0</div><div class="g-stat-label">Total Rolls</div></div>
+      <div class="g-stat"><div class="g-stat-num" id="uniqueCount">0</div><div class="g-stat-label">Unique</div></div>
+    </div>
+    <div id="orbWrap" onclick="roll(1)">
+      <div class="bh-outer"></div>
+      <div class="bh-ring bh-r1"></div>
+      <div class="bh-ring bh-r2"></div>
+      <div class="bh-ring bh-r3"></div>
+      <canvas id="bhCanvas" width="210" height="210"></canvas>
+      <div class="bh-horizon"></div>
+    </div>
+    <div class="tap-hint">Tap the orb to summon</div>
+    <div class="roll-btns">
+      <button class="roll-btn" onclick="roll(1)">Summon ×1</button>
+      <button class="roll-btn x10" onclick="roll(10)">Summon ×10</button>
+    </div>
+  </div>
+</div>
+<div id="gacha-overlay">
+  <div id="reveal-flash"></div>
+  <div class="card-flip-wrap" onclick="flipRevealCard()">
+    <div class="card-flip" id="cardFlip">
+      <div class="card-face card-back">✦</div>
+      <div class="card-face card-front"><img id="revealImg" src="" alt=""></div>
+    </div>
+  </div>
+  <div id="reveal-name"></div>
+  <div id="reveal-actions">
+    <button class="rev-btn" onclick="rollAgain()">Roll Again</button>
+    <button class="rev-btn gold" onclick="closeReveal()">Collect ✓</button>
+  </div>
+</div>
+<div id="multi-overlay">
+  <div class="multi-grid" id="multiGrid"></div>
+  <button class="multi-close" id="multiClose" onclick="closeMulti()">Collect All ✓</button>
+</div>
+
+<!-- ══ DUNGEON ══ -->
+<div class="page" id="page-dungeon">
+  <div class="pg-head">
+    <p class="section-label">Choose Your Battle</p>
+    <h2 class="section-title">Dungeon</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Send your Slime in. Wait for the timer. Collect your loot.</p>
+  </div>
+  <div class="dungeon-section">
+    <div class="energy-box">
+      <div class="energy-top"><span class="energy-label">⚡ Energy</span><span class="energy-num">70 / 100</span></div>
+      <div class="energy-track"><div class="energy-fill"></div></div>
+      <div class="energy-regen">+1 per 5 min · Full in 2h30m</div>
+    </div>
+    <div class="dungeon-grid">
+
+      <div class="dcard easy">
+        <div class="dcard-img">
+          <img src="assets/dungeon_easy.png" alt="Easy Dungeon" onerror="this.style.background='#0a1a0a'">
+          <div class="dcard-img-overlay"></div>
+        </div>
+        <div class="dcard-body">
+          <div class="dcard-diff" style="color:var(--green)">🟢 Easy</div>
+          <table class="dcard-table">
+            <tr><td>Timer</td><td>30 minutes</td></tr>
+            <tr><td>Energy</td><td style="color:var(--green)">10 Energy</td></tr>
+            <tr><td>Fee</td><td style="color:var(--green)">Free</td></tr>
+          </table>
+          <div>
+            <div class="dcard-rewards-label">Rewards</div>
+            <ul class="dcard-rewards"><li>Potions</li><li>Ore & Equipment</li><li>Pet drop (2%)</li></ul>
+          </div>
+          <button class="dcard-enter" style="border-color:rgba(0,255,136,0.3);">Enter Dungeon →</button>
+        </div>
+      </div>
+
+      <div class="dcard medium">
+        <div class="dcard-img">
+          <img src="assets/dungeon_medium.png" alt="Medium Dungeon" onerror="this.style.background='#0a0a1a'">
+          <div class="dcard-img-overlay"></div>
+        </div>
+        <div class="dcard-body">
+          <div class="dcard-diff" style="color:var(--rare)">🔵 Medium</div>
+          <table class="dcard-table">
+            <tr><td>Timer</td><td>2 hours</td></tr>
+            <tr><td>Energy</td><td style="color:var(--rare)">20 Energy</td></tr>
+            <tr><td>Fee</td><td style="color:var(--rare)">Free</td></tr>
+          </table>
+          <div>
+            <div class="dcard-rewards-label">Rewards</div>
+            <ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME</li><li>Pet drop (5%)</li></ul>
+          </div>
+          <button class="dcard-enter" style="border-color:rgba(59,130,246,0.3);">Enter Dungeon →</button>
+        </div>
+      </div>
+
+      <div class="dcard hard">
+        <div class="dcard-img">
+          <img src="assets/dungeon_hard.png" alt="Hard Dungeon" onerror="this.style.background='#0f0a1a'">
+          <div class="dcard-img-overlay"></div>
+        </div>
+        <div class="dcard-body">
+          <div class="dcard-diff" style="color:var(--epic)">🟣 Hard</div>
+          <table class="dcard-table">
+            <tr><td>Timer</td><td>6 hours</td></tr>
+            <tr><td>Energy</td><td style="color:var(--epic)">30 Energy</td></tr>
+            <tr><td>Fee</td><td style="color:var(--epic)">$SLIME</td></tr>
+          </table>
+          <div>
+            <div class="dcard-rewards-label">Rewards</div>
+            <ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr</li><li>Pet drop (10%)</li></ul>
+          </div>
+          <button class="dcard-enter" style="border-color:rgba(168,85,247,0.3);">Enter Dungeon →</button>
+        </div>
+      </div>
+
+      <div class="dcard extreme">
+        <div class="dcard-img">
+          <img src="assets/dungeon_extreme.png" alt="Extreme Dungeon" onerror="this.style.background='#1a0a0a'">
+          <div class="dcard-img-overlay"></div>
+        </div>
+        <div class="dcard-body">
+          <div class="dcard-diff" style="color:var(--mythic)">🔴 Extreme</div>
+          <table class="dcard-table">
+            <tr><td>Timer</td><td>12 hours</td></tr>
+            <tr><td>Energy</td><td style="color:var(--mythic)">40 Energy</td></tr>
+            <tr><td>Fee</td><td style="color:var(--mythic)">$SLIME</td></tr>
+          </table>
+          <div>
+            <div class="dcard-rewards-label">Rewards</div>
+            <ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr + ETH</li><li>Pet drop (18%)</li></ul>
+          </div>
+          <button class="dcard-enter" style="border-color:rgba(255,34,68,0.3);">Enter Dungeon →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORGE ══ -->
+<div class="page" id="page-forge">
+  <div class="pg-head">
+    <p class="section-label">Crafting</p>
+    <h2 class="section-title">Forge</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Combine dungeon materials to craft potions and equipment.</p>
+  </div>
+  <div class="forge-wrap">
+    <div class="forge-label">⚗️ Potions</div>
+    <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🧪</div><div class="res-name">Small Potion</div><div class="res-desc">HP +20</div><button class="craft-btn">Craft</button></div></div>
+    <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Gold Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚗️</div><div class="res-name">Medium Potion</div><div class="res-desc">HP +50</div><button class="craft-btn">Craft</button></div></div>
+    <div class="recipe"><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Crystal Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🔮</div><div class="res-name">Large Potion</div><div class="res-desc">HP +100</div><button class="craft-btn">Craft</button></div></div>
+    <div class="recipe"><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">⭐</div><div class="ing-name">Prime Core</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">💊</div><div class="res-name">Elixir</div><div class="res-desc">Full HP Restore</div><button class="craft-btn">Craft</button></div></div>
+    <div class="forge-label" style="margin-top:0.3rem;">⚡ Energy</div>
+    <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚡</div><div class="res-name">Stamina Drink</div><div class="res-desc">Energy +30</div><button class="craft-btn">Craft</button></div></div>
+    <div class="forge-label" style="margin-top:0.3rem;">🛡️ Equipment</div>
+    <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🛡️</div><div class="res-name">Iron Shield</div><div class="res-desc">DEF +5</div><button class="craft-btn">Craft</button></div></div>
+    <div class="recipe"><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Crystal Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Gold Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">💍</div><div class="res-name">Power Ring</div><div class="res-desc">ATK +8</div><button class="craft-btn">Craft</button></div></div>
+  </div>
+</div>
+
+<!-- ══ MARKET ══ -->
+<div class="page" id="page-market">
+  <div class="pg-head">
+    <p class="section-label">Player Trading</p>
+    <h2 class="section-title">Market</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Buy and sell items with other players using $SLIME.</p>
+  </div>
+  <div class="market-wrap">
+    <div class="coming-soon"><div class="cs-icon">🏪</div><div class="cs-title">Coming Soon</div><p class="cs-desc">The player market is under construction. Soon you'll be able to trade dungeon loot, potions and equipment with other players.</p></div>
+    <div style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:4px;color:rgba(255,255,255,0.18);text-transform:uppercase;margin-bottom:1rem;">Preview</div>
+    <div class="market-grid">
+      <div class="listing"><div class="listing-icon">🧪</div><div class="listing-name">Small Potion ×5</div><div class="listing-seller">by 0x1234...abcd</div><div class="listing-price"><span>Price</span><span>25 $SLIME</span></div></div>
+      <div class="listing"><div class="listing-icon">⚙️</div><div class="listing-name">Silver Ore ×10</div><div class="listing-seller">by 0xabcd...5678</div><div class="listing-price"><span>Price</span><span>80 $SLIME</span></div></div>
+      <div class="listing"><div class="listing-icon">🛡️</div><div class="listing-name">Iron Shield</div><div class="listing-seller">by 0x9876...efgh</div><div class="listing-price"><span>Price</span><span>120 $SLIME</span></div></div>
+      <div class="listing"><div class="listing-icon">💎</div><div class="listing-name">Crystal Ore ×3</div><div class="listing-seller">by 0xijkl...2345</div><div class="listing-price"><span>Price</span><span>150 $SLIME</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROFILE ══ -->
+<div class="page" id="page-profile">
+  <div class="pg-head">
+    <p class="section-label">Commander</p>
+    <h2 class="section-title">Profile</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="profile-wrap">
+    <div class="wallet-box"><div class="wallet-icon">👛</div><div class="wallet-label">Connect Your Wallet</div><button class="btn-primary">Connect Wallet</button></div>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">Slimes Owned</div></div>
+      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">Dungeon Runs</div></div>
+      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">$SLIME Earned</div></div>
+      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">Items Crafted</div></div>
+    </div>
+    <div>
+      <div class="inv-label">🎒 Inventory</div>
+      <div class="inv-grid">
+        <div class="inv-slot"><span>🧪</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot"><span>⚗️</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot"><span>🔮</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot"><span>⚡</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot"><span>🪨</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot"><span>⚙️</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot"><span>💎</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot"><span>✨</span><span class="inv-qty">×0</span></div>
+        <div class="inv-slot empty">+</div>
+        <div class="inv-slot empty">+</div>
+        <div class="inv-slot empty">+</div>
+        <div class="inv-slot empty">+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── ROUTER ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const el = document.getElementById('nav-' + name);
+  if(el) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── PARTICLES ──
+const pc = document.getElementById('particles');
+['#f0c040','#a855f7','#00e5ff','#ff2244','#00ff88'].forEach((c, ci) => {
+  for(let i = 0; i < 5; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const s = Math.random()*3+1;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${c};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*15}s;`;
+    pc.appendChild(p);
+  }
+});
+
+// ── NFT GRID ──
+const cardNums = [1,2,3,9,10,11,12,13,14,16,20,21,24,27,28,29,34,35,36,37,38,39,40,41,42,43,45,47,48,49,54,55,57,62,63,64,67];
+const nftGrid = document.getElementById('nftGrid');
+cardNums.forEach(n => {
+  const id = String(n).padStart(3,'0');
+  const div = document.createElement('div');
+  div.className = 'nft-card';
+  div.innerHTML = `<img src="assets/card_${id}.png" alt="Slime #${id}" loading="lazy" onerror="this.style.background='#1a1a2e'"><div class="card-info"><div class="card-info-name">Slime #${id}</div></div>`;
+  div.onclick = () => openNftModal(n);
+  nftGrid.appendChild(div);
+});
+function openNftModal(n) {
+  const id = String(n).padStart(3,'0');
+  document.getElementById('modalImg').src = `assets/card_${id}.png`;
+  document.getElementById('modalTitle').textContent = `Slime #${id}`;
+  document.getElementById('modalLore').textContent = 'Born from the depths of the dungeon, this Slime has survived countless battles and emerged stronger than ever. Its unique elemental power makes it a formidable warrior.';
+  document.getElementById('modalStats').innerHTML = `<div class="modal-stat"><span>ATK</span><span>—</span></div><div class="modal-stat"><span>HP</span><span>—</span></div><div class="modal-stat"><span>SPD</span><span>—</span></div><div class="modal-stat"><span>Rarity</span><span style="color:var(--gold)">TBD</span></div>`;
+  document.getElementById('nft-modal').classList.add('open');
+}
+function closeNftModal(e) {
+  if(!e || e.target === document.getElementById('nft-modal')) document.getElementById('nft-modal').classList.remove('open');
+}
+
+// ── BLACK HOLE ──
+const bhCanvas = document.getElementById('bhCanvas');
+const bhCtx = bhCanvas.getContext('2d');
+const bhW=210,bhH=210,bhCX=bhW/2,bhCY=bhH/2;
+const sw = Array.from({length:95},()=>({
+  angle:Math.random()*Math.PI*2,radius:26+Math.random()*76,
+  speed:(0.004+Math.random()*0.008)*(Math.random()<0.5?1:-1),
+  size:Math.random()*1.4+0.3,
+  color:['rgba(240,120,0,','rgba(120,0,180,','rgba(0,180,240,','rgba(240,180,0,'][~~(Math.random()*4)],
+  alpha:Math.random()*0.5+0.2,life:Math.random(),
+}));
+(function bhLoop(){
+  bhCtx.clearRect(0,0,bhW,bhH);
+  sw.forEach(s=>{
+    s.radius-=0.01;s.angle+=s.speed*(78/Math.max(s.radius,16));s.life+=0.008;
+    if(s.radius<16||s.life>1){s.radius=52+Math.random()*48;s.angle=Math.random()*Math.PI*2;s.life=0;}
+    const x=bhCX+Math.cos(s.angle)*s.radius;
+    const y=bhCY+Math.sin(s.angle)*s.radius*0.28;
+    const fade=Math.sin(s.life*Math.PI);
+    const dist=s.radius/102;
+    const a=s.alpha*fade*(0.3+dist*0.7);
+    bhCtx.beginPath();bhCtx.arc(x,y,s.size*(0.5+dist*0.8),0,Math.PI*2);
+    bhCtx.fillStyle=s.color+a+')';bhCtx.fill();
+  });
+  const mask=bhCtx.createRadialGradient(bhCX,bhCY,0,bhCX,bhCY,56);
+  mask.addColorStop(0,'rgba(0,0,0,1)');mask.addColorStop(0.7,'rgba(0,0,0,0.95)');
+  mask.addColorStop(0.85,'rgba(0,0,0,0.5)');mask.addColorStop(1,'rgba(0,0,0,0)');
+  bhCtx.fillStyle=mask;bhCtx.fillRect(0,0,bhW,bhH);
+  requestAnimationFrame(bhLoop);
+})();
+
+// ── GACHA ──
+const CARDS = cardNums.map(n=>({name:'Slime #'+String(n).padStart(3,'0'),img:'assets/card_'+String(n).padStart(3,'0')+'.png'}));
+let totalRolls=0,collected=new Set(),isRolling=false,currentCard=null;
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+
+function flashScreen(col,dur=120){
+  const f=document.getElementById('reveal-flash');
+  f.style.background=col;f.style.opacity='1';
+  setTimeout(()=>f.style.opacity='0',dur);
+}
+function spawnBurst(x,y,col,n=14){
+  for(let i=0;i<n;i++){
+    const b=document.createElement('div');b.className='burst-p';
+    b.style.cssText=`left:${x}px;top:${y}px;background:${col};`;
+    document.body.appendChild(b);
+    const a=(i/n)*Math.PI*2,d=80+Math.random()*120;
+    b.style.transition='all 0.9s cubic-bezier(0.2,0.8,0.3,1)';
+    setTimeout(()=>{b.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(0)`;b.style.opacity='0';},50);
+    setTimeout(()=>b.remove(),1000);
+  }
+}
+function orbShake(){
+  const o=document.getElementById('orbWrap');
+  o.style.animation='none';
+  setTimeout(()=>{
+    o.style.transition='transform 0.05s';
+    let i=0;
+    const s=setInterval(()=>{
+      o.style.transform=`translate(${(Math.random()-.5)*12}px,${(Math.random()-.5)*12}px)`;
+      if(++i>8){clearInterval(s);o.style.transform='';}
+    },60);
+  },10);
+}
+function updateStats(){
+  document.getElementById('totalRolls').textContent=totalRolls;
+  document.getElementById('uniqueCount').textContent=collected.size;
+}
+
+async function roll(n){
+  if(isRolling) return;
+  isRolling=true;
+  if(n===1) await singleRoll();
+  else await multiRoll(n);
+}
+
+async function singleRoll(){
+  const card=CARDS[~~(Math.random()*CARDS.length)];
+  currentCard=card;totalRolls++;collected.add(card.name);updateStats();
+  orbShake();
+  await wait(300);
+  flashScreen('rgba(240,192,64,0.6)',200);
+  await wait(400);
+  document.getElementById('revealImg').src=card.img;
+  document.getElementById('cardFlip').classList.remove('flipped');
+  document.getElementById('reveal-name').style.opacity='0';
+  document.getElementById('reveal-actions').style.opacity='0';
+  document.getElementById('gacha-overlay').classList.add('open');
+  setTimeout(()=>{
+    document.getElementById('cardFlip').classList.add('flipped');
+    setTimeout(()=>{
+      document.getElementById('reveal-name').textContent=card.name;
+      document.getElementById('reveal-name').style.opacity='1';
+      document.getElementById('reveal-actions').style.opacity='1';
+      spawnBurst(window.innerWidth/2,window.innerHeight/2,'#f0c040',16);
+    },500);
+  },900);
+}
+
+function flipRevealCard(){
+  const flip=document.getElementById('cardFlip');
+  if(!flip.classList.contains('flipped')){
+    flip.classList.add('flipped');
+    setTimeout(()=>{
+      document.getElementById('reveal-name').textContent=currentCard.name;
+      document.getElementById('reveal-name').style.opacity='1';
+      document.getElementById('reveal-actions').style.opacity='1';
+      spawnBurst(window.innerWidth/2,window.innerHeight/2,'#f0c040',16);
+    },400);
+  }
+}
+function closeReveal(){document.getElementById('gacha-overlay').classList.remove('open');isRolling=false;}
+function rollAgain(){closeReveal();setTimeout(()=>roll(1),400);}
+
+async function multiRoll(n){
+  const cards=Array.from({length:n},()=>CARDS[~~(Math.random()*CARDS.length)]);
+  totalRolls+=n;cards.forEach(c=>collected.add(c.name));updateStats();
+  orbShake();
+  flashScreen('rgba(168,85,247,0.4)',200);
+  await wait(250);flashScreen('rgba(240,192,64,0.5)',150);
+  await wait(200);flashScreen('rgba(255,255,255,0.5)',150);
+  await wait(400);
+  const grid=document.getElementById('multiGrid');
+  const closeBtn=document.getElementById('multiClose');
+  grid.innerHTML='';closeBtn.style.opacity='0';
+  document.getElementById('multi-overlay').classList.add('open');
+  cards.forEach((card,i)=>{
+    const div=document.createElement('div');div.className='mini-card';
+    div.innerHTML=`<img src="${card.img}" alt="${card.name}" loading="lazy">`;
+    grid.appendChild(div);
+    setTimeout(()=>{div.classList.add('show');if(i%3===0)flashScreen('rgba(240,192,64,0.3)',80);},100+i*120);
+  });
+  setTimeout(()=>closeBtn.style.opacity='1',100+cards.length*120+500);
+}
+function closeMulti(){document.getElementById('multi-overlay').classList.remove('open');isRolling=false;}
+</script>
+</body>
+</html>
