@@ -206,6 +206,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .inv-slot:hover{border-color:rgba(240,192,64,0.3);background:rgba(240,192,64,0.04);}
 .inv-slot.empty{opacity:0.18;font-size:0.9rem;color:rgba(255,255,255,0.3);}
 .inv-qty{font-size:0.58rem;font-family:'Cinzel',serif;color:var(--gold);}
+/* ═══════════ TABS ═══════════ */
+.tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:0 1.5rem;margin-bottom:0;}
+.tab-btn{padding:0.8rem 1.4rem;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;margin-bottom:-1px;}
+.tab-btn:hover{color:rgba(255,255,255,0.8);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+/* Quest */
+.quest-grid{display:flex;flex-direction:column;gap:1rem;max-width:700px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+.quest-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;transition:all 0.3s;}
+.quest-card:hover{border-color:rgba(240,192,64,0.25);}
+.quest-icon{font-size:2rem;flex-shrink:0;}
+.quest-info{flex:1;}
+.quest-name{font-family:'Cinzel',serif;font-size:0.9rem;color:#fff;margin-bottom:0.3rem;}
+.quest-desc{font-size:0.78rem;color:rgba(255,255,255,0.4);}
+.quest-reward{font-size:0.75rem;color:var(--gold);font-family:'Cinzel',serif;margin-top:0.3rem;}
+.quest-progress{width:100%;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:0.5rem;}
+.quest-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;}
+.quest-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.5rem 1.2rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.7rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);flex-shrink:0;}
+/* Upgrade */
+.upgrade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+.upgrade-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;}
+.upgrade-card:hover{border-color:rgba(240,192,64,0.3);transform:translateY(-3px);}
+.upgrade-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+.upgrade-card-info{padding:0.6rem;text-align:center;}
+.upgrade-card-name{font-size:0.68rem;color:rgba(255,255,255,0.5);font-family:'Cinzel',serif;}
+.upgrade-card-lvl{font-size:0.75rem;color:var(--gold);font-family:'Cinzel Decorative',serif;}
 </style>
 </head>
 <body>
@@ -215,14 +242,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   <div class="nav-logo" onclick="showPage('dashboard')">SLIME BREAKER</div>
   <ul class="nav-links">
     <li><a onclick="showPage('dashboard')" class="active" id="nav-dashboard">Dashboard</a></li>
-    <li><a onclick="showPage('nft')" id="nav-nft">Gallery</a></li>
-    <li><a onclick="showPage('gacha')" id="nav-gacha">Gacha</a></li>
+    <li><a onclick="showPage('slimecards')" id="nav-slimecards">Slime Cards</a></li>
     <li><a onclick="showPage('dungeon')" id="nav-dungeon">Dungeon</a></li>
-    <li><a onclick="showPage('forge')" id="nav-forge">Forge</a></li>
+    <li><a onclick="showPage('ascend')" id="nav-ascend">Ascend</a></li>
     <li><a onclick="showPage('market')" id="nav-market">Market</a></li>
     <li><a onclick="showPage('profile')" id="nav-profile">Profile</a></li>
   </ul>
-  <button class="nav-btn" onclick="showPage('gacha')">🎰 Gacha</button>
+  <button class="nav-btn" onclick="showPage('slimecards');switchTab('slimecards','summon')">🔮 Summon</button>
 </nav>
 
 <!-- ══ DASHBOARD ══ -->
@@ -252,16 +278,59 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </div>
 
-<!-- ══ NFT ══ -->
-<div class="page" id="page-nft">
+
+<!-- ══ SLIME CARDS ══ -->
+<div class="page" id="page-slimecards">
   <div class="pg-head">
-    <p class="section-label">Collection</p>
-    <h2 class="section-title">NFT Gallery</h2>
+    <p class="section-label">Your Slimes</p>
+    <h2 class="section-title">Slime Cards</h2>
     <div class="divider"></div>
-    <p class="section-desc">Each Slime is a unique warrior forged in the dungeon depths.</p>
   </div>
-  <div class="nft-grid" id="nftGrid"></div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('slimecards','summon')">🔮 Summon</button>
+    <button class="tab-btn" onclick="switchTab('slimecards','collection')">⚔️ Collection</button>
+    <button class="tab-btn" onclick="switchTab('slimecards','pets')">🐾 Pets</button>
+  </div>
+
+  <!-- SUMMON TAB -->
+  <div class="tab-content active" id="tab-slimecards-summon">
+    <div class="gacha-wrap">
+      <div class="gacha-stats">
+        <div class="g-stat"><div class="g-stat-num" id="totalRolls">0</div><div class="g-stat-label">Total Rolls</div></div>
+        <div class="g-stat"><div class="g-stat-num" id="uniqueCount">0</div><div class="g-stat-label">Unique</div></div>
+      </div>
+      <div id="orbWrap" onclick="roll(1)">
+        <div class="bh-outer"></div>
+        <div class="bh-ring bh-r1"></div>
+        <div class="bh-ring bh-r2"></div>
+        <div class="bh-ring bh-r3"></div>
+        <canvas id="bhCanvas" width="210" height="210"></canvas>
+        <div class="bh-horizon"></div>
+      </div>
+      <div class="tap-hint">Tap the orb to summon</div>
+      <div class="roll-btns">
+        <button class="roll-btn" onclick="roll(1)">Summon ×1</button>
+        <button class="roll-btn x10" onclick="roll(10)">Summon ×10</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLLECTION TAB -->
+  <div class="tab-content" id="tab-slimecards-collection">
+    <div class="nft-grid" id="nftGrid"></div>
+  </div>
+
+  <!-- PETS TAB -->
+  <div class="tab-content" id="tab-slimecards-pets">
+    <div style="text-align:center;padding:5rem 2rem;">
+      <div style="font-size:3rem;margin-bottom:1rem;">🐾</div>
+      <div style="font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;">Pets Coming Soon</div>
+      <p style="color:rgba(255,255,255,0.4);font-size:0.88rem;">Pets drop from dungeon runs. Equip them to boost your Slimes in battle.</p>
+    </div>
+  </div>
 </div>
+
+<!-- NFT MODAL -->
 <div id="nft-modal" onclick="closeNftModal(event)">
   <div class="modal-box">
     <button class="modal-close-btn" onclick="closeNftModal()">✕</button>
@@ -275,28 +344,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </div>
 
-<!-- ══ GACHA ══ -->
-<div class="page" id="page-gacha">
-  <div class="gacha-wrap">
-    <div class="gacha-stats">
-      <div class="g-stat"><div class="g-stat-num" id="totalRolls">0</div><div class="g-stat-label">Total Rolls</div></div>
-      <div class="g-stat"><div class="g-stat-num" id="uniqueCount">0</div><div class="g-stat-label">Unique</div></div>
-    </div>
-    <div id="orbWrap" onclick="roll(1)">
-      <div class="bh-outer"></div>
-      <div class="bh-ring bh-r1"></div>
-      <div class="bh-ring bh-r2"></div>
-      <div class="bh-ring bh-r3"></div>
-      <canvas id="bhCanvas" width="210" height="210"></canvas>
-      <div class="bh-horizon"></div>
-    </div>
-    <div class="tap-hint">Tap the orb to summon</div>
-    <div class="roll-btns">
-      <button class="roll-btn" onclick="roll(1)">Summon ×1</button>
-      <button class="roll-btn x10" onclick="roll(10)">Summon ×10</button>
-    </div>
-  </div>
-</div>
+<!-- GACHA OVERLAYS -->
 <div id="gacha-overlay">
   <div id="reveal-flash"></div>
   <div class="card-flip-wrap" onclick="flipRevealCard()">
@@ -319,122 +367,155 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <!-- ══ DUNGEON ══ -->
 <div class="page" id="page-dungeon">
   <div class="pg-head">
-    <p class="section-label">Choose Your Battle</p>
+    <p class="section-label">Adventure</p>
     <h2 class="section-title">Dungeon</h2>
     <div class="divider"></div>
-    <p class="section-desc">Send your Slime in. Wait for the timer. Collect your loot.</p>
   </div>
-  <div class="dungeon-section">
-    <div class="energy-box">
-      <div class="energy-top"><span class="energy-label">⚡ Energy</span><span class="energy-num">70 / 100</span></div>
-      <div class="energy-track"><div class="energy-fill"></div></div>
-      <div class="energy-regen">+1 per 5 min · Full in 2h30m</div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('dungeon','run')">⚔️ Dungeon Run</button>
+    <button class="tab-btn" onclick="switchTab('dungeon','quest')">📜 Quest</button>
+  </div>
+
+  <!-- DUNGEON RUN TAB -->
+  <div class="tab-content active" id="tab-dungeon-run">
+    <div class="dungeon-section">
+      <div class="energy-box">
+        <div class="energy-top"><span class="energy-label">⚡ Energy</span><span class="energy-num">70 / 100</span></div>
+        <div class="energy-track"><div class="energy-fill"></div></div>
+        <div class="energy-regen">+1 per 5 min · Full in 2h30m</div>
+      </div>
+      <div class="dungeon-grid">
+        <div class="dcard easy">
+          <div class="dcard-img"><img src="assets/dungeon/dungeon_easy.png" alt="Easy" onerror="this.style.background='#0a1a0a'"><div class="dcard-img-overlay"></div></div>
+          <div class="dcard-body">
+            <div class="dcard-diff" style="color:var(--green)">🟢 Easy</div>
+            <table class="dcard-table"><tr><td>Timer</td><td>30 min</td></tr><tr><td>Energy</td><td style="color:var(--green)">10</td></tr><tr><td>Fee</td><td style="color:var(--green)">Free</td></tr></table>
+            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions</li><li>Ore & Equipment</li><li>Pet drop (2%)</li></ul></div>
+            <button class="dcard-enter">Enter Dungeon →</button>
+          </div>
+        </div>
+        <div class="dcard medium">
+          <div class="dcard-img"><img src="assets/dungeon/dungeon_medium.png" alt="Medium" onerror="this.style.background='#0a0a1a'"><div class="dcard-img-overlay"></div></div>
+          <div class="dcard-body">
+            <div class="dcard-diff" style="color:var(--rare)">🔵 Medium</div>
+            <table class="dcard-table"><tr><td>Timer</td><td>2 hours</td></tr><tr><td>Energy</td><td style="color:var(--rare)">20</td></tr><tr><td>Fee</td><td style="color:var(--rare)">Free</td></tr></table>
+            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME</li><li>Pet drop (5%)</li></ul></div>
+            <button class="dcard-enter">Enter Dungeon →</button>
+          </div>
+        </div>
+        <div class="dcard hard">
+          <div class="dcard-img"><img src="assets/dungeon/dungeon_hard.png" alt="Hard" onerror="this.style.background='#0f0a1a'"><div class="dcard-img-overlay"></div></div>
+          <div class="dcard-body">
+            <div class="dcard-diff" style="color:var(--epic)">🟣 Hard</div>
+            <table class="dcard-table"><tr><td>Timer</td><td>6 hours</td></tr><tr><td>Energy</td><td style="color:var(--epic)">30</td></tr><tr><td>Fee</td><td style="color:var(--epic)">$SLIME</td></tr></table>
+            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr</li><li>Pet drop (10%)</li></ul></div>
+            <button class="dcard-enter">Enter Dungeon →</button>
+          </div>
+        </div>
+        <div class="dcard extreme">
+          <div class="dcard-img"><img src="assets/dungeon/dungeon_extreme.png" alt="Extreme" onerror="this.style.background='#1a0a0a'"><div class="dcard-img-overlay"></div></div>
+          <div class="dcard-body">
+            <div class="dcard-diff" style="color:var(--mythic)">🔴 Extreme</div>
+            <table class="dcard-table"><tr><td>Timer</td><td>12 hours</td></tr><tr><td>Energy</td><td style="color:var(--mythic)">40</td></tr><tr><td>Fee</td><td style="color:var(--mythic)">$SLIME</td></tr></table>
+            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr + ETH</li><li>Pet drop (18%)</li></ul></div>
+            <button class="dcard-enter">Enter Dungeon →</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="dungeon-grid">
+  </div>
 
-      <div class="dcard easy">
-        <div class="dcard-img">
-          <img src="assets/dungeon/dungeon_easy.png" alt="Easy Dungeon" onerror="this.style.background='#0a1a0a'">
-          <div class="dcard-img-overlay"></div>
+  <!-- QUEST TAB -->
+  <div class="tab-content" id="tab-dungeon-quest">
+    <div class="quest-grid">
+      <div class="quest-card">
+        <div class="quest-icon">⚔️</div>
+        <div class="quest-info">
+          <div class="quest-name">First Blood</div>
+          <div class="quest-desc">Complete 1 dungeon run</div>
+          <div class="quest-reward">+50 $SLIME · +1 Small Potion</div>
+          <div class="quest-progress"><div class="quest-progress-fill" style="width:0%"></div></div>
         </div>
-        <div class="dcard-body">
-          <div class="dcard-diff" style="color:var(--green)">🟢 Easy</div>
-          <table class="dcard-table">
-            <tr><td>Timer</td><td>30 minutes</td></tr>
-            <tr><td>Energy</td><td style="color:var(--green)">10 Energy</td></tr>
-            <tr><td>Fee</td><td style="color:var(--green)">Free</td></tr>
-          </table>
-          <div>
-            <div class="dcard-rewards-label">Rewards</div>
-            <ul class="dcard-rewards"><li>Potions</li><li>Ore & Equipment</li><li>Pet drop (2%)</li></ul>
-          </div>
-          <button class="dcard-enter" style="border-color:rgba(0,255,136,0.3);">Enter Dungeon →</button>
-        </div>
+        <button class="quest-btn">0/1</button>
       </div>
-
-      <div class="dcard medium">
-        <div class="dcard-img">
-          <img src="assets/dungeon/dungeon_medium.png" alt="Medium Dungeon" onerror="this.style.background='#0a0a1a'">
-          <div class="dcard-img-overlay"></div>
+      <div class="quest-card">
+        <div class="quest-icon">🎰</div>
+        <div class="quest-info">
+          <div class="quest-name">Summoner</div>
+          <div class="quest-desc">Summon 10 Slimes</div>
+          <div class="quest-reward">+100 $SLIME · +1 Medium Potion</div>
+          <div class="quest-progress"><div class="quest-progress-fill" style="width:0%"></div></div>
         </div>
-        <div class="dcard-body">
-          <div class="dcard-diff" style="color:var(--rare)">🔵 Medium</div>
-          <table class="dcard-table">
-            <tr><td>Timer</td><td>2 hours</td></tr>
-            <tr><td>Energy</td><td style="color:var(--rare)">20 Energy</td></tr>
-            <tr><td>Fee</td><td style="color:var(--rare)">Free</td></tr>
-          </table>
-          <div>
-            <div class="dcard-rewards-label">Rewards</div>
-            <ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME</li><li>Pet drop (5%)</li></ul>
-          </div>
-          <button class="dcard-enter" style="border-color:rgba(59,130,246,0.3);">Enter Dungeon →</button>
-        </div>
+        <button class="quest-btn">0/10</button>
       </div>
-
-      <div class="dcard hard">
-        <div class="dcard-img">
-          <img src="assets/dungeon/dungeon_hard.png" alt="Hard Dungeon" onerror="this.style.background='#0f0a1a'">
-          <div class="dcard-img-overlay"></div>
+      <div class="quest-card">
+        <div class="quest-icon">🟣</div>
+        <div class="quest-info">
+          <div class="quest-name">Hard Mode</div>
+          <div class="quest-desc">Complete 3 Hard dungeon runs</div>
+          <div class="quest-reward">+200 $SLIME · 📦 Box $SLIME</div>
+          <div class="quest-progress"><div class="quest-progress-fill" style="width:0%"></div></div>
         </div>
-        <div class="dcard-body">
-          <div class="dcard-diff" style="color:var(--epic)">🟣 Hard</div>
-          <table class="dcard-table">
-            <tr><td>Timer</td><td>6 hours</td></tr>
-            <tr><td>Energy</td><td style="color:var(--epic)">30 Energy</td></tr>
-            <tr><td>Fee</td><td style="color:var(--epic)">$SLIME</td></tr>
-          </table>
-          <div>
-            <div class="dcard-rewards-label">Rewards</div>
-            <ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr</li><li>Pet drop (10%)</li></ul>
-          </div>
-          <button class="dcard-enter" style="border-color:rgba(168,85,247,0.3);">Enter Dungeon →</button>
-        </div>
+        <button class="quest-btn">0/3</button>
       </div>
-
-      <div class="dcard extreme">
-        <div class="dcard-img">
-          <img src="assets/dungeon/dungeon_extreme.png" alt="Extreme Dungeon" onerror="this.style.background='#1a0a0a'">
-          <div class="dcard-img-overlay"></div>
+      <div class="quest-card">
+        <div class="quest-icon">⚗️</div>
+        <div class="quest-info">
+          <div class="quest-name">Alchemist</div>
+          <div class="quest-desc">Craft 5 potions</div>
+          <div class="quest-reward">+150 $SLIME · +1 Crystal Ore</div>
+          <div class="quest-progress"><div class="quest-progress-fill" style="width:0%"></div></div>
         </div>
-        <div class="dcard-body">
-          <div class="dcard-diff" style="color:var(--mythic)">🔴 Extreme</div>
-          <table class="dcard-table">
-            <tr><td>Timer</td><td>12 hours</td></tr>
-            <tr><td>Energy</td><td style="color:var(--mythic)">40 Energy</td></tr>
-            <tr><td>Fee</td><td style="color:var(--mythic)">$SLIME</td></tr>
-          </table>
-          <div>
-            <div class="dcard-rewards-label">Rewards</div>
-            <ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr + ETH</li><li>Pet drop (18%)</li></ul>
-          </div>
-          <button class="dcard-enter" style="border-color:rgba(255,34,68,0.3);">Enter Dungeon →</button>
-        </div>
+        <button class="quest-btn">0/5</button>
       </div>
-
+      <div class="quest-card">
+        <div class="quest-icon">🔴</div>
+        <div class="quest-info">
+          <div class="quest-name">Extreme Challenger</div>
+          <div class="quest-desc">Complete 1 Extreme dungeon run</div>
+          <div class="quest-reward">+500 $SLIME · 📦 Box Bankr</div>
+          <div class="quest-progress"><div class="quest-progress-fill" style="width:0%"></div></div>
+        </div>
+        <button class="quest-btn">0/1</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══ FORGE ══ -->
-<div class="page" id="page-forge">
+<!-- ══ ASCEND ══ -->
+<div class="page" id="page-ascend">
   <div class="pg-head">
-    <p class="section-label">Crafting</p>
-    <h2 class="section-title">Forge</h2>
+    <p class="section-label">Power Up</p>
+    <h2 class="section-title">Ascend</h2>
     <div class="divider"></div>
-    <p class="section-desc">Combine dungeon materials to craft potions and equipment.</p>
   </div>
-  <div class="forge-wrap">
-    <div class="forge-label">⚗️ Potions</div>
-    <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🧪</div><div class="res-name">Small Potion</div><div class="res-desc">HP +20</div><button class="craft-btn">Craft</button></div></div>
-    <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Gold Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚗️</div><div class="res-name">Medium Potion</div><div class="res-desc">HP +50</div><button class="craft-btn">Craft</button></div></div>
-    <div class="recipe"><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Crystal Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🔮</div><div class="res-name">Large Potion</div><div class="res-desc">HP +100</div><button class="craft-btn">Craft</button></div></div>
-    <div class="recipe"><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">⭐</div><div class="ing-name">Prime Core</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">💊</div><div class="res-name">Elixir</div><div class="res-desc">Full HP Restore</div><button class="craft-btn">Craft</button></div></div>
-    <div class="forge-label" style="margin-top:0.3rem;">⚡ Energy</div>
-    <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚡</div><div class="res-name">Stamina Drink</div><div class="res-desc">Energy +30</div><button class="craft-btn">Craft</button></div></div>
-    <div class="forge-label" style="margin-top:0.3rem;">🛡️ Equipment</div>
-    <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🛡️</div><div class="res-name">Iron Shield</div><div class="res-desc">DEF +5</div><button class="craft-btn">Craft</button></div></div>
-    <div class="recipe"><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Crystal Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Gold Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">💍</div><div class="res-name">Power Ring</div><div class="res-desc">ATK +8</div><button class="craft-btn">Craft</button></div></div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('ascend','forge')">⚗️ Forge</button>
+    <button class="tab-btn" onclick="switchTab('ascend','upgrade')">⬆️ Upgrade</button>
+  </div>
+
+  <!-- FORGE TAB -->
+  <div class="tab-content active" id="tab-ascend-forge">
+    <div class="forge-wrap">
+      <div class="forge-label">⚗️ Potions</div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🧪</div><div class="res-name">Small Potion</div><div class="res-desc">HP +20</div><button class="craft-btn">Craft</button></div></div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Gold Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚗️</div><div class="res-name">Medium Potion</div><div class="res-desc">HP +50</div><button class="craft-btn">Craft</button></div></div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Crystal Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🔮</div><div class="res-name">Large Potion</div><div class="res-desc">HP +100</div><button class="craft-btn">Craft</button></div></div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">⭐</div><div class="ing-name">Prime Core</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">💊</div><div class="res-name">Elixir</div><div class="res-desc">Full HP Restore</div><button class="craft-btn">Craft</button></div></div>
+      <div class="forge-label" style="margin-top:0.3rem;">⚡ Energy</div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚡</div><div class="res-name">Stamina Drink</div><div class="res-desc">Energy +30</div><button class="craft-btn">Craft</button></div></div>
+      <div class="forge-label" style="margin-top:0.3rem;">🛡️ Equipment</div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🛡️</div><div class="res-name">Iron Shield</div><div class="res-desc">DEF +5</div><button class="craft-btn">Craft</button></div></div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Crystal Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Gold Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">💍</div><div class="res-name">Power Ring</div><div class="res-desc">ATK +8</div><button class="craft-btn">Craft</button></div></div>
+    </div>
+  </div>
+
+  <!-- UPGRADE TAB -->
+  <div class="tab-content" id="tab-ascend-upgrade">
+    <div style="text-align:center;padding:3rem 2rem 1rem;">
+      <p style="color:rgba(255,255,255,0.4);font-size:0.88rem;">Select a Slime to upgrade</p>
+    </div>
+    <div class="upgrade-grid" id="upgradeGrid"></div>
   </div>
 </div>
 
@@ -504,6 +585,20 @@ function showPage(name) {
   window.scrollTo(0, 0);
 }
 
+// ── TAB SWITCHER ──
+function switchTab(page, tab) {
+  const contents = document.querySelectorAll(`#page-${page} .tab-content`);
+  const btns = document.querySelectorAll(`#page-${page} .tab-btn`);
+  contents.forEach(c => c.classList.remove('active'));
+  btns.forEach(b => b.classList.remove('active'));
+  const target = document.getElementById(`tab-${page}-${tab}`);
+  if(target) target.classList.add('active');
+  // Find matching button by onclick
+  btns.forEach(b => { if(b.getAttribute('onclick').includes(`'${tab}'`)) b.classList.add('active'); });
+  // Init black hole canvas if switching to summon
+  if(tab === 'summon') initBH();
+}
+
 // ── PARTICLES ──
 const pc = document.getElementById('particles');
 if(pc) {
@@ -521,13 +616,20 @@ if(pc) {
 // ── NFT GRID ──
 const cardNums = [1,2,3,9,10,11,12,13,14,16,20,21,24,27,28,29,34,35,36,37,38,39,40,41,42,43,45,47,48,49,54,55,57,62,63,64,67];
 const nftGrid = document.getElementById('nftGrid');
+const upgradeGrid = document.getElementById('upgradeGrid');
 cardNums.forEach(n => {
   const id = String(n).padStart(3,'0');
+  // NFT collection grid
   const div = document.createElement('div');
   div.className = 'nft-card';
   div.innerHTML = `<img src="assets/card/card_${id}.png" alt="Slime #${id}" loading="lazy" onerror="this.style.background='#1a1a2e'"><div class="card-info"><div class="card-info-name">Slime #${id}</div></div>`;
   div.onclick = () => openNftModal(n);
   nftGrid.appendChild(div);
+  // Upgrade grid
+  const udiv = document.createElement('div');
+  udiv.className = 'upgrade-card';
+  udiv.innerHTML = `<img src="assets/card/card_${id}.png" alt="Slime #${id}" loading="lazy" onerror="this.style.background='#1a1a2e'"><div class="upgrade-card-info"><div class="upgrade-card-name">Slime #${id}</div><div class="upgrade-card-lvl">LV 1</div></div>`;
+  upgradeGrid.appendChild(udiv);
 });
 function openNftModal(n) {
   const id = String(n).padStart(3,'0');
@@ -542,8 +644,13 @@ function closeNftModal(e) {
 }
 
 // ── BLACK HOLE ──
-const bhCanvas = document.getElementById('bhCanvas');
-const bhCtx = bhCanvas.getContext('2d');
+let bhRunning = false;
+function initBH() {
+  if(bhRunning) return;
+  bhRunning = true;
+  const bhCanvas = document.getElementById('bhCanvas');
+  if(!bhCanvas) return;
+  const bhCtx = bhCanvas.getContext('2d');
 const bhW=210,bhH=210,bhCX=bhW/2,bhCY=bhH/2;
 const sw = Array.from({length:95},()=>({
   angle:Math.random()*Math.PI*2,radius:26+Math.random()*76,
@@ -571,6 +678,8 @@ const sw = Array.from({length:95},()=>({
   bhCtx.fillStyle=mask;bhCtx.fillRect(0,0,bhW,bhH);
   requestAnimationFrame(bhLoop);
 })();
+}
+initBH();
 
 // ── GACHA ──
 const CARDS = cardNums.map(n=>({name:'Slime #'+String(n).padStart(3,'0'),img:'assets/card/card_'+String(n).padStart(3,'0')+'.png'}));
