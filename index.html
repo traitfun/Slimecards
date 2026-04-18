@@ -228,13 +228,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .quest-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;}
 .quest-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.5rem 1.2rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.7rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);flex-shrink:0;}
 /* Upgrade */
-.upgrade-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;max-width:900px;margin:0 auto;padding:2rem 1.5rem 5rem;}
-.upgrade-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;}
-.upgrade-card:hover{border-color:rgba(240,192,64,0.3);transform:translateY(-3px);}
-.upgrade-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
-.upgrade-card-info{padding:0.6rem;text-align:center;}
-.upgrade-card-name{font-size:0.68rem;color:rgba(255,255,255,0.5);font-family:'Cinzel',serif;}
-.upgrade-card-lvl{font-size:0.75rem;color:var(--gold);font-family:'Cinzel Decorative',serif;}
+.upgrade-wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+.upgrade-top{display:grid;grid-template-columns:180px 1fr;gap:1.5rem;margin-bottom:2rem;}
+.upgrade-slot{width:180px;aspect-ratio:2/3;background:rgba(255,255,255,0.03);border:2px dashed rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:4px;cursor:pointer;transition:border-color 0.3s;}
+.upgrade-slot:hover{border-color:rgba(240,192,64,0.3);}
+.upgrade-slot-empty{text-align:center;}
+.upgrade-stats-panel{display:flex;flex-direction:column;gap:0.7rem;}
+.upgrade-card-title{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;}
+.upgrade-card-rarity{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.upgrade-stat-row{display:flex;justify-content:space-between;padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85rem;}
+.upgrade-stat-row span:first-child{color:rgba(255,255,255,0.35);letter-spacing:1px;font-size:0.72rem;text-transform:uppercase;}
+.upgrade-materials{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:0.8rem;margin-top:0.3rem;}
+.upgrade-mat-label{font-size:0.65rem;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:0.5rem;}
+.upgrade-mat-row{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:rgba(255,255,255,0.6);padding:0.2rem 0;}
+.upgrade-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.8rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.82rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.3s;text-transform:uppercase;margin-top:0.3rem;}
+.upgrade-btn:hover{box-shadow:0 0 20px rgba(240,192,64,0.4);}
+.upgrade-select-label{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:4px;color:rgba(255,255,255,0.22);text-transform:uppercase;margin-bottom:0.8rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06);}
+.upgrade-select-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:0.6rem;}
+.upg-card{cursor:pointer;border:1px solid rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;transition:all 0.3s;}
+.upg-card:hover{border-color:rgba(240,192,64,0.4);transform:translateY(-2px);}
+.upg-card.selected{border-color:var(--gold);box-shadow:0 0 12px rgba(240,192,64,0.3);}
+.upg-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+@media(max-width:500px){.upgrade-top{grid-template-columns:130px 1fr;}.upgrade-slot{width:130px;}}
 </style>
 </head>
 <body>
@@ -514,10 +529,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
   <!-- UPGRADE TAB -->
   <div class="tab-content" id="tab-ascend-upgrade">
-    <div style="text-align:center;padding:3rem 2rem 1rem;">
-      <p style="color:rgba(255,255,255,0.4);font-size:0.88rem;">Select a Slime to upgrade</p>
+    <div class="upgrade-wrap">
+      <!-- TOP: Slot + Stats -->
+      <div class="upgrade-top">
+        <!-- Slot kiri -->
+        <div class="upgrade-slot" id="upgradeSlot" onclick="document.getElementById('upgradeSlot').classList.contains('empty') ? null : null">
+          <div class="upgrade-slot-empty" id="upgradeSlotEmpty">
+            <div style="font-size:2.5rem;opacity:0.3">+</div>
+            <div style="font-size:0.7rem;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-top:0.3rem">SELECT SLIME</div>
+          </div>
+          <img id="upgradeSlotImg" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
+        </div>
+        <!-- Stats kanan -->
+        <div class="upgrade-stats-panel">
+          <div class="upgrade-card-title" id="upgradeCardName">—</div>
+          <div class="upgrade-card-rarity" id="upgradeCardRarity">Select a Slime</div>
+          <div class="upgrade-stat-row"><span>LV</span><span id="upgLv">—</span></div>
+          <div class="upgrade-stat-row"><span>ATK</span><span id="upgAtk">—</span></div>
+          <div class="upgrade-stat-row"><span>HP</span><span id="upgHp">—</span></div>
+          <div class="upgrade-stat-row"><span>SPD</span><span id="upgSpd">—</span></div>
+          <div class="upgrade-materials" id="upgMaterials" style="display:none;">
+            <div class="upgrade-mat-label">Materials Needed</div>
+            <div class="upgrade-mat-row"><span>🪨</span><span id="matStone">Stone Shard ×5</span></div>
+            <div class="upgrade-mat-row"><span>💎</span><span id="matCrystal">Crystal Ore ×3</span></div>
+            <div class="upgrade-mat-row"><span>💰</span><span id="matSlime">50 $SLIME</span></div>
+          </div>
+          <button class="upgrade-btn" id="upgradeBtn" onclick="doUpgrade()" style="display:none;">⬆️ UPGRADE</button>
+        </div>
+      </div>
+      <!-- BOTTOM: Slime grid -->
+      <div class="upgrade-select-label">Your Slimes</div>
+      <div class="upgrade-select-grid" id="upgradeSelectGrid"></div>
     </div>
-    <div class="upgrade-grid" id="upgradeGrid"></div>
   </div>
 </div>
 
@@ -684,7 +727,6 @@ const cardData = [
 
 const cardNums = Array.from({length:50},(_,i)=>i+1);
 const nftGrid = document.getElementById('nftGrid');
-const upgradeGrid = document.getElementById('upgradeGrid');
 cardData.forEach(c => {
   const id = String(c.id).padStart(3,'0');
   const col = RARITY_COLOR[c.rarity];
@@ -701,13 +743,91 @@ cardData.forEach(c => {
     </div>`;
   div.onclick = () => openNftModal(c.id);
   nftGrid.appendChild(div);
-  // Upgrade grid
-  const udiv = document.createElement('div');
-  udiv.className = 'upgrade-card';
-  udiv.style.borderColor = col + '44';
-  udiv.innerHTML = `<img src="assets/card/card_${id}.png" alt="${c.name}" loading="lazy" onerror="this.style.background='#1a1a2e'"><div class="upgrade-card-info"><div class="upgrade-card-name" style="color:${col}">${c.name}</div><div class="upgrade-card-lvl">LV 1</div></div>`;
-  upgradeGrid.appendChild(udiv);
 });
+
+// ── UPGRADE SYSTEM ──
+const upgradeSelectGrid = document.getElementById('upgradeSelectGrid');
+const slimeLevels = {};
+cardData.forEach(c => { slimeLevels[c.id] = 1; });
+
+const UPGRADE_MATERIALS = {
+  common:  {stone:3,  crystal:1,  slime:20},
+  rare:    {stone:5,  crystal:2,  slime:50},
+  epic:    {stone:8,  crystal:4,  slime:120},
+  legend:  {stone:12, crystal:7,  slime:300},
+  mythic:  {stone:20, crystal:12, slime:800},
+};
+const BASE_STATS = {
+  common:  {atk:15,  hp:120, spd:6},
+  rare:    {atk:30,  hp:190, spd:11},
+  epic:    {atk:60,  hp:280, spd:18},
+  legend:  {atk:95,  hp:390, spd:25},
+  mythic:  {atk:160, hp:620, spd:37},
+};
+
+let selectedUpgradeId = null;
+
+if(upgradeSelectGrid) {
+  cardData.forEach(c => {
+    const id = String(c.id).padStart(3,'0');
+    const col = RARITY_COLOR[c.rarity];
+    const div = document.createElement('div');
+    div.className = 'upg-card';
+    div.id = `upgcard-${c.id}`;
+    div.style.borderColor = col + '33';
+    div.innerHTML = `<img src="assets/card/card_${id}.png" loading="lazy" onerror="this.style.background='#1a1a2e'">`;
+    div.onclick = () => selectUpgradeCard(c.id);
+    upgradeSelectGrid.appendChild(div);
+  });
+}
+
+function selectUpgradeCard(id) {
+  const c = cardData.find(x => x.id === id);
+  const imgId = String(id).padStart(3,'0');
+  const col = RARITY_COLOR[c.rarity];
+  const lv = slimeLevels[id];
+  const base = BASE_STATS[c.rarity];
+  const atk = Math.round(base.atk * (1 + (lv-1)*0.05));
+  const hp  = Math.round(base.hp  * (1 + (lv-1)*0.08));
+  const spd = Math.round(base.spd * (1 + (lv-1)*0.02));
+  const atkNext = Math.round(base.atk * (1 + lv*0.05));
+  const hpNext  = Math.round(base.hp  * (1 + lv*0.08));
+  const spdNext = Math.round(base.spd * (1 + lv*0.02));
+  const mat = UPGRADE_MATERIALS[c.rarity];
+  selectedUpgradeId = id;
+
+  document.getElementById('upgradeSlotEmpty').style.display = 'none';
+  const slotImg = document.getElementById('upgradeSlotImg');
+  slotImg.src = `assets/card/card_${imgId}.png`;
+  slotImg.style.display = 'block';
+  document.getElementById('upgradeSlot').style.borderColor = col;
+  document.getElementById('upgradeSlot').style.borderStyle = 'solid';
+  document.getElementById('upgradeCardName').textContent = c.name;
+  document.getElementById('upgradeCardName').style.color = col;
+  document.getElementById('upgradeCardRarity').textContent = c.rarity.toUpperCase();
+  document.getElementById('upgradeCardRarity').style.color = col;
+  document.getElementById('upgLv').textContent  = `${lv} → ${lv+1}`;
+  document.getElementById('upgAtk').textContent = `${atk} → ${atkNext}`;
+  document.getElementById('upgHp').textContent  = `${hp} → ${hpNext}`;
+  document.getElementById('upgSpd').textContent = `${spd} → ${spdNext}`;
+  document.getElementById('matStone').textContent   = `Stone Shard ×${mat.stone}`;
+  document.getElementById('matCrystal').textContent = `Crystal Ore ×${mat.crystal}`;
+  document.getElementById('matSlime').textContent   = `${mat.slime} $SLIME`;
+  document.getElementById('upgMaterials').style.display = 'block';
+  document.getElementById('upgradeBtn').style.display = 'block';
+  document.querySelectorAll('.upg-card').forEach(d => d.classList.remove('selected'));
+  document.getElementById(`upgcard-${id}`).classList.add('selected');
+}
+
+function doUpgrade() {
+  if(!selectedUpgradeId) return;
+  slimeLevels[selectedUpgradeId]++;
+  selectUpgradeCard(selectedUpgradeId);
+  const btn = document.getElementById('upgradeBtn');
+  btn.textContent = '✨ UPGRADED!';
+  btn.style.background = 'linear-gradient(135deg,#00ff88,#00aa55)';
+  setTimeout(() => { btn.textContent = '⬆️ UPGRADE'; btn.style.background = ''; }, 1500);
+}
 function openNftModal(n) {
   const c = cardData.find(x => x.id === n);
   const id = String(n).padStart(3,'0');
