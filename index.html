@@ -35,22 +35,55 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .divider{width:55px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0.8rem auto;}
 
 /* ═══════════ DASHBOARD ═══════════ */
-.hero-img-wrap{position:relative;width:100%;padding-top:5.5rem;}
-.hero-img{width:100%;max-height:88vh;object-fit:cover;object-position:center;display:block;}
-.hero-img-overlay{position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(0deg,var(--dark) 0%,transparent 100%);}
-.dash-menu{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;padding:2rem 1.5rem;}
-.dash-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:0.9rem 2rem;font-family:'Cinzel',serif;font-weight:600;font-size:0.88rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s;}
-.dash-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
-.dash-btn.primary{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;font-weight:700;}
-.dash-btn.primary:hover{box-shadow:0 8px 30px rgba(240,192,64,0.4);color:#000;transform:translateY(-2px);}
-.steps-section{padding:5rem 1.5rem;background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 50%,var(--dark) 100%);}
-.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
-.step-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.8rem 1.4rem;transition:all 0.4s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
-.step-card:hover{border-color:rgba(240,192,64,0.3);transform:translateY(-5px);background:rgba(240,192,64,0.04);}
-.step-num{font-family:'Cinzel Decorative',serif;font-size:2.2rem;font-weight:900;color:rgba(240,192,64,0.12);margin-bottom:0.7rem;}
-.step-icon{font-size:1.6rem;margin-bottom:0.7rem;}
-.step-title{font-family:'Cinzel',serif;font-size:0.95rem;font-weight:600;color:var(--gold);margin-bottom:0.5rem;letter-spacing:1px;}
-.step-desc{color:rgba(255,255,255,0.45);font-size:0.82rem;line-height:1.7;}
+/* ═══════════ DASHBOARD HUB ═══════════ */
+.hub-hero{position:relative;width:100%;padding-top:3.5rem;}
+.hub-hero-img{width:100%;height:52vw;max-height:420px;min-height:220px;object-fit:cover;object-position:center top;display:block;}
+.hub-hero-fade{position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(0deg,#0B0F1A 0%,rgba(11,15,26,0.6) 55%,transparent 100%);}
+.hub-hero-content{position:absolute;bottom:1.4rem;left:1.5rem;}
+.hub-hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;color:#E6EAF2;letter-spacing:0.05em;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.7);}
+.hub-hero-sub{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(198,168,90,0.7);margin-top:0.25rem;}
+
+/* Action buttons */
+.hub-actions{display:flex;gap:0.6rem;padding:1rem 1.5rem;flex-wrap:wrap;}
+.hab{flex:1;min-width:100px;padding:0.72rem 0.8rem;font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#E6EAF2;transition:all 0.2s ease;}
+.hab:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.16);background:rgba(255,255,255,0.07);filter:brightness(1.1);}
+.hab-gold{background:linear-gradient(135deg,#b8922e,#c6a85a);color:#1a1000;border:none;font-weight:700;}
+.hab-gold:hover{filter:brightness(1.1);border:none;}
+
+/* Body */
+.hub-body{max-width:1000px;margin:0 auto;padding:0 1.5rem 5rem;display:flex;flex-direction:column;gap:1.5rem;}
+
+/* Quick stats */
+.hub-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.7rem;}
+.hub-stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:0.9rem 1rem;transition:border-color 0.2s;}
+.hub-stat:hover{border-color:rgba(198,168,90,0.2);}
+.hs-num{font-family:'Cinzel Decorative',serif;font-size:1.4rem;font-weight:700;color:#E6EAF2;line-height:1;}
+.hs-label{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(138,147,165,0.55);margin-top:0.3rem;font-weight:500;}
+
+/* Section */
+.hub-section{}
+.hub-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.hub-section-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(138,147,165,0.5);font-weight:500;}
+.hub-section-link{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(198,168,90,0.5);background:none;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;transition:color 0.2s;}
+.hub-section-link:hover{color:#C6A85A;}
+
+/* Slime row */
+.hub-slime-row{display:flex;gap:0.6rem;overflow-x:auto;padding-bottom:0.5rem;scrollbar-width:none;}
+.hub-slime-row::-webkit-scrollbar{display:none;}
+.hub-sc{flex-shrink:0;width:90px;border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;filter:saturate(0.75);}
+.hub-sc:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.16);box-shadow:0 6px 18px rgba(0,0,0,0.35);filter:saturate(0.95);}
+.hub-sc img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+
+/* Activity */
+.hub-activity{display:flex;flex-direction:column;gap:0;}
+.ha-item{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.ha-item:last-child{border-bottom:none;}
+.ha-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;opacity:0.8;}
+.ha-text{flex:1;font-size:0.78rem;color:rgba(230,234,242,0.55);}
+.ha-text strong{color:rgba(230,234,242,0.8);font-weight:500;}
+.ha-time{font-size:0.62rem;color:rgba(138,147,165,0.3);letter-spacing:0.06em;}
+
+@media(max-width:500px){.hub-stats{grid-template-columns:repeat(2,1fr);}.hab{font-size:0.65rem;padding:0.65rem 0.6rem;}.hub-sc{width:76px;}}
 
 /* ═══════════ NFT ═══════════ */
 /* ═══════════ COLLECTION ═══════════ */
@@ -312,28 +345,69 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ DASHBOARD ══ -->
 <div class="page active" id="page-dashboard">
-  <div class="hero-img-wrap">
-    <img src="assets/dashboard/hero.jpg" alt="Slime Breaker" class="hero-img">
-    <div class="hero-img-overlay"></div>
-  </div>
-  <div class="dash-menu">
-    <button class="dash-btn primary" onclick="showPage('gacha')">🎰 Try Gacha</button>
-    <button class="dash-btn" onclick="showPage('nft')">⚔ Gallery</button>
-    <button class="dash-btn" onclick="showPage('dungeon')">🏯 Dungeon</button>
-    <button class="dash-btn" onclick="showPage('forge')">⚗️ Forge</button>
-  </div>
-  <div class="steps-section">
-    <p class="section-label">Gameplay Loop</p>
-    <h2 class="section-title" style="text-align:center;">How It Works</h2>
-    <div class="divider"></div>
-    <p class="section-desc" style="text-align:center;margin-bottom:2.5rem;">Simple idle mechanics, deep strategy. No real-time combat.</p>
-    <div class="steps-grid">
-      <div class="step-card"><div class="step-num">01</div><div class="step-icon">🎰</div><div class="step-title">Gacha</div><div class="step-desc">Roll to collect Slime NFTs across 5 rarity tiers. Each with unique weapons and powers.</div></div>
-      <div class="step-card"><div class="step-num">02</div><div class="step-icon">⚔️</div><div class="step-title">Dungeon Run</div><div class="step-desc">Send your Slime in, choose difficulty, wait for timer, collect loot automatically.</div></div>
-      <div class="step-card"><div class="step-num">03</div><div class="step-icon">📦</div><div class="step-title">Loot & Boxes</div><div class="step-desc">Collect potions, ores, equipment. Hard dungeons drop $SLIME, Bankr and ETH boxes.</div></div>
-      <div class="step-card"><div class="step-num">04</div><div class="step-icon">⚗️</div><div class="step-title">Forge</div><div class="step-desc">Combine dungeon materials to craft powerful potions and equipment for your Slimes.</div></div>
-      <div class="step-card"><div class="step-num">05</div><div class="step-icon">⬆️</div><div class="step-title">Upgrade</div><div class="step-desc">Use materials and $SLIME to level up NFTs. Higher level Slimes clear harder dungeons.</div></div>
+
+  <!-- HERO -->
+  <div class="hub-hero">
+    <img src="assets/dashboard/hero.jpg" alt="Slime Breaker" class="hub-hero-img">
+    <div class="hub-hero-fade"></div>
+    <div class="hub-hero-content">
+      <div class="hub-hero-title">Slime Breaker</div>
+      <div class="hub-hero-sub">Web3 Idle Dungeon · Base Network</div>
     </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="hub-actions">
+    <button class="hab hab-gold" onclick="showPage('slimecards');switchTab('slimecards','summon')">🎰 Gacha</button>
+    <button class="hab" onclick="showPage('dungeon')">⚔️ Dungeon</button>
+    <button class="hab" onclick="showPage('ascend');switchTab('ascend','forge')">🧪 Forge</button>
+    <button class="hab" onclick="showPage('slimecards');switchTab('slimecards','collection')">📦 Collection</button>
+  </div>
+
+  <div class="hub-body">
+
+    <!-- QUICK STATS -->
+    <div class="hub-stats">
+      <div class="hub-stat">
+        <div class="hs-num">50</div>
+        <div class="hs-label">Slimes</div>
+      </div>
+      <div class="hub-stat">
+        <div class="hs-num">0</div>
+        <div class="hs-label">Runs</div>
+      </div>
+      <div class="hub-stat">
+        <div class="hs-num">0</div>
+        <div class="hs-label">$SLIME</div>
+      </div>
+      <div class="hub-stat">
+        <div class="hs-num">0</div>
+        <div class="hs-label">Items</div>
+      </div>
+    </div>
+
+    <!-- YOUR SLIMES ROW -->
+    <div class="hub-section">
+      <div class="hub-section-head">
+        <span class="hub-section-label">Your Slimes</span>
+        <button class="hub-section-link" onclick="showPage('slimecards');switchTab('slimecards','collection')">View all →</button>
+      </div>
+      <div class="hub-slime-row" id="hubSlimeRow"></div>
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+    <div class="hub-section">
+      <div class="hub-section-head">
+        <span class="hub-section-label">Recent Activity</span>
+      </div>
+      <div class="hub-activity">
+        <div class="ha-item"><span class="ha-dot" style="background:#b07ed4"></span><span class="ha-text">Summoned <strong>Ivory Swordsman</strong></span><span class="ha-time">Just now</span></div>
+        <div class="ha-item"><span class="ha-dot" style="background:#C6A85A"></span><span class="ha-text">Collection unlocked · 50 Slimes</span><span class="ha-time">—</span></div>
+        <div class="ha-item"><span class="ha-dot" style="background:#6b9fd4"></span><span class="ha-text">Dungeon Easy · Ready to enter</span><span class="ha-time">—</span></div>
+        <div class="ha-item"><span class="ha-dot" style="background:#7ec8a0"></span><span class="ha-text">Welcome to Slime Breaker</span><span class="ha-time">—</span></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -956,6 +1030,19 @@ function applyCollFilters() {
 }
 
 buildCollGrid(cardData);
+
+// ── HUB SLIME ROW ──
+const hubRow = document.getElementById('hubSlimeRow');
+if(hubRow) {
+  cardData.slice(0, 8).forEach(c => {
+    const id = String(c.id).padStart(3,'0');
+    const div = document.createElement('div');
+    div.className = 'hub-sc';
+    div.innerHTML = `<img src="assets/card/card_${id}.png" loading="lazy" onerror="this.style.background='#0d1018'">`;
+    div.onclick = () => { showPage('slimecards'); switchTab('slimecards','collection'); };
+    hubRow.appendChild(div);
+  });
+}
 
 // Keep nftGrid reference for modal (empty hidden div)
 const nftGrid = document.getElementById('nftGrid');
