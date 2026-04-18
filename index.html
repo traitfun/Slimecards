@@ -53,7 +53,47 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .step-desc{color:rgba(255,255,255,0.45);font-size:0.82rem;line-height:1.7;}
 
 /* ═══════════ NFT ═══════════ */
-.nft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem 5rem;}
+/* ═══════════ COLLECTION ═══════════ */
+.coll-wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+.coll-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;}
+.coll-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(198,168,90,0.6);margin-bottom:0.3rem;font-weight:500;}
+.coll-title{font-family:'Cinzel Decorative',serif;font-size:1.5rem;font-weight:600;color:#E6EAF2;letter-spacing:0.04em;}
+.coll-divider{width:40px;height:1px;background:linear-gradient(90deg,rgba(198,168,90,0.5),transparent);margin-top:0.6rem;}
+.coll-count{font-size:0.68rem;letter-spacing:0.12em;color:rgba(138,147,165,0.6);font-weight:500;padding-bottom:0.2rem;}
+
+/* Controls */
+.coll-controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+.coll-filters{display:flex;gap:0.3rem;flex-wrap:wrap;}
+.cf-btn{padding:0.3rem 0.85rem;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:1px solid rgba(255,255,255,0.07);color:rgba(138,147,165,0.7);cursor:pointer;transition:all 0.2s;font-family:'Rajdhani',sans-serif;font-weight:600;}
+.cf-btn:hover{color:#E6EAF2;border-color:rgba(255,255,255,0.14);}
+.cf-btn.active{color:#C6A85A;border-color:rgba(198,168,90,0.3);background:rgba(198,168,90,0.05);}
+.cs-select{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);color:rgba(138,147,165,0.7);padding:0.3rem 0.75rem;font-size:0.65rem;letter-spacing:0.1em;font-family:'Rajdhani',sans-serif;font-weight:600;cursor:pointer;outline:none;text-transform:uppercase;}
+.cs-select:focus{border-color:rgba(198,168,90,0.3);color:#C6A85A;}
+
+/* Grid */
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.85rem;}
+.cc{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:transform 0.22s ease,border-color 0.22s,box-shadow 0.22s,filter 0.22s;filter:saturate(0.78);background:#0d1018;}
+.cc:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.16);box-shadow:0 8px 24px rgba(0,0,0,0.35);filter:saturate(0.92) brightness(1.04);}
+.cc.cc-selected{border-color:rgba(198,168,90,0.55);box-shadow:0 6px 20px rgba(198,168,90,0.1);filter:saturate(1);transform:scale(1.02);}
+.cc img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+.cc-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(5,7,13,0.88) 0%,rgba(5,7,13,0.3) 60%,transparent 100%);padding:0.55rem 0.5rem 0.45rem;opacity:0;transition:opacity 0.22s;}
+.cc:hover .cc-overlay,.cc.cc-selected .cc-overlay{opacity:1;}
+.cc-name{font-family:'Cinzel',serif;font-size:0.68rem;color:#E6EAF2;letter-spacing:0.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cc-lv{font-size:0.58rem;color:rgba(138,147,165,0.6);letter-spacing:0.08em;margin-top:0.1rem;}
+.cc.cc-selected .cc-lv{color:rgba(198,168,90,0.7);}
+.cc-rdot{position:absolute;top:0.35rem;right:0.35rem;width:5px;height:5px;border-radius:50%;opacity:0.8;}
+
+/* Empty state */
+.coll-empty{text-align:center;padding:5rem 2rem;}
+.ce-icon{font-size:2rem;color:rgba(255,255,255,0.1);margin-bottom:1rem;font-family:'Cinzel Decorative',serif;}
+.ce-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(230,234,242,0.3);margin-bottom:0.4rem;letter-spacing:0.08em;}
+.ce-sub{font-size:0.75rem;color:rgba(138,147,165,0.3);letter-spacing:0.08em;}
+
+/* Keep old nft-grid for modal compatibility */
+.nft-grid{display:none;}
+.card-rarity-dot{display:none;}
+.card-info-rarity{display:none;}
+.card-info-name{display:none;}
 .nft-card{position:relative;border-radius:4px;overflow:hidden;cursor:pointer;aspect-ratio:2/3;background:#111;border:1px solid rgba(240,192,64,0.12);transition:all 0.3s;}
 .nft-card:hover{transform:translateY(-6px) scale(1.03);border-color:rgba(240,192,64,0.4);z-index:5;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
 .nft-card img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -125,40 +165,42 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .burst-p{position:fixed;width:5px;height:5px;border-radius:50%;pointer-events:none;z-index:170;}
 
 /* ═══════════ DUNGEON ═══════════ */
-.dungeon-section{max-width:1000px;margin:0 auto;padding:0 1.5rem 5rem;}
-.energy-box{background:rgba(255,255,255,0.03);border:1px solid rgba(240,192,64,0.2);padding:1.1rem 1.8rem;max-width:360px;margin:0 auto 2.5rem;}
-.energy-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;}
-.energy-label{font-size:0.68rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;}
-.energy-num{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);}
-.energy-track{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-bottom:0.4rem;}
-.energy-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;width:70%;}
-.energy-regen{font-size:0.62rem;color:rgba(255,255,255,0.2);letter-spacing:2px;}
-.dungeon-grid{display:flex;flex-direction:column;gap:1.5rem;}
-.dcard{display:grid;grid-template-columns:280px 1fr;border:1px solid;border-radius:4px;overflow:hidden;transition:all 0.3s;}
-.dcard:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.4);}
-.dcard-img{position:relative;overflow:hidden;min-height:200px;}
-.dcard-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.85;transition:opacity 0.3s;}
-.dcard:hover .dcard-img img{opacity:1;}
-.dcard-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(8,8,16,0.8) 100%);}
-.dcard-body{padding:1.5rem;display:flex;flex-direction:column;gap:1rem;background:rgba(8,8,16,0.6);}
-.dcard-diff{font-family:'Cinzel Decorative',serif;font-size:1.2rem;font-weight:700;}
-.dcard-table{width:100%;border-collapse:collapse;}
-.dcard-table tr{border-bottom:1px solid rgba(255,255,255,0.05);}
-.dcard-table tr:last-child{border-bottom:none;}
-.dcard-table td{padding:0.35rem 0;font-size:0.82rem;}
-.dcard-table td:first-child{color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase;font-size:0.68rem;width:80px;}
-.dcard-table td:last-child{color:#fff;font-family:'Cinzel',serif;}
-.dcard-rewards-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.4rem;}
-.dcard-rewards{list-style:none;display:flex;flex-direction:column;gap:0.3rem;}
-.dcard-rewards li{font-size:0.82rem;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:0.5rem;}
-.dcard-rewards li::before{content:'▸';font-size:0.6rem;opacity:0.5;}
-.dcard-enter{margin-top:auto;padding:0.65rem;border:1px solid;color:#fff;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.3s;background:rgba(255,255,255,0.06);}
-.dcard-enter:hover{background:rgba(255,255,255,0.14);}
-.dcard.easy{border-color:rgba(0,255,136,0.25);}
-.dcard.medium{border-color:rgba(59,130,246,0.3);}
-.dcard.hard{border-color:rgba(168,85,247,0.35);}
-.dcard.extreme{border-color:rgba(255,34,68,0.4);}
-@media(max-width:600px){.dcard{grid-template-columns:1fr;}.dcard-img{min-height:160px;}.dcard-img-overlay{background:linear-gradient(180deg,transparent 60%,rgba(8,8,16,0.9) 100%);}}
+/* ═══════════ DUNGEON PREMIUM ═══════════ */
+.dng-wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+.dng-energy{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.1rem 1.4rem;margin-bottom:2rem;max-width:480px;}
+.dng-energy-left{display:flex;align-items:center;gap:0.8rem;}
+.dng-energy-icon{font-size:1.1rem;opacity:0.7;}
+.dng-energy-label{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(138,147,165,0.6);font-weight:500;margin-bottom:0.15rem;}
+.dng-energy-val{font-family:'Cinzel',serif;font-size:1rem;color:#E6EAF2;font-weight:600;}
+.dng-energy-max{font-size:0.78rem;color:rgba(138,147,165,0.5);font-weight:400;}
+.dng-bar-track{height:4px;background:rgba(255,255,255,0.06);overflow:hidden;margin-bottom:0.35rem;}
+.dng-bar-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),rgba(198,168,90,0.8));transition:width 0.6s ease;}
+.dng-energy-regen{font-size:0.62rem;color:rgba(138,147,165,0.4);letter-spacing:0.06em;}
+.dng-cards{display:flex;flex-direction:column;gap:1.2rem;}
+.dc{display:grid;grid-template-columns:260px 1fr;border:1px solid rgba(255,255,255,0.07);overflow:hidden;transition:transform 0.22s ease,box-shadow 0.22s,border-color 0.22s;background:rgba(255,255,255,0.02);}
+.dc:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.12);}
+.dc-img{position:relative;overflow:hidden;}
+.dc-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.75;transition:opacity 0.22s;}
+.dc:hover .dc-img img{opacity:0.9;}
+.dc-img-fade{position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(5,7,13,0.85) 100%);}
+.dc-body{padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:0.9rem;}
+.dc-head{display:flex;align-items:center;gap:0.6rem;}
+.dc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;opacity:0.85;}
+.dc-diff{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;letter-spacing:0.05em;}
+.dc-rec{margin-left:auto;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(138,147,165,0.4);border:1px solid rgba(255,255,255,0.06);padding:0.15rem 0.5rem;}
+.dc-table{width:100%;border-collapse:collapse;}
+.dc-table tr{border-bottom:1px solid rgba(255,255,255,0.05);}
+.dc-table tr:last-child{border-bottom:none;}
+.dc-table td{padding:0.32rem 0;font-size:0.78rem;}
+.dt-l{color:rgba(138,147,165,0.5);letter-spacing:0.1em;text-transform:uppercase;font-size:0.62rem;font-weight:500;width:65px;}
+.dt-v{color:#E6EAF2;font-weight:500;}
+.dc-rew-label{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(138,147,165,0.4);font-weight:500;margin-bottom:0.45rem;}
+.dc-rew-list{display:flex;flex-direction:column;gap:0.25rem;}
+.dc-rew-list span{font-size:0.75rem;color:rgba(230,234,242,0.55);}
+.dc-btn{margin-top:auto;padding:0.65rem 1rem;background:rgba(255,255,255,0.04);border:1px solid;color:var(--dc);border-color:color-mix(in srgb,var(--dc) 25%,transparent);font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.14em;cursor:pointer;text-transform:uppercase;transition:all 0.2s;}
+.dc-btn:hover{background:color-mix(in srgb,var(--dc) 10%,transparent);transform:translateY(-1px);}
+.dc-btn:active{transform:scale(0.98);}
+@media(max-width:600px){.dc{grid-template-columns:1fr;}.dc-img{min-height:140px;}.dc-img-fade{background:linear-gradient(180deg,transparent 40%,rgba(5,7,13,0.9) 100%);}}
 
 /* ═══════════ FORGE ═══════════ */
 .forge-wrap{max-width:880px;margin:0 auto;padding:0 1.5rem 5rem;display:flex;flex-direction:column;gap:1rem;}
@@ -227,56 +269,29 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .quest-progress{width:100%;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:0.5rem;}
 .quest-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;}
 .quest-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.5rem 1.2rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.7rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);flex-shrink:0;}
-/* Upgrade/Ascend - Premium */
-.ascend-page{max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
-.asc-main{display:grid;grid-template-columns:190px 1fr;gap:1.5rem;margin-bottom:2.5rem;}
-.asc-slot-wrap{position:relative;}
-.asc-slot{aspect-ratio:2/3;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;overflow:hidden;backdrop-filter:blur(8px);transition:border-color 0.25s,box-shadow 0.25s;}
-.asc-slot.has-card{border-color:rgba(198,168,90,0.35);box-shadow:0 8px 32px rgba(0,0,0,0.4),0 0 0 1px rgba(198,168,90,0.1);}
-.asc-slot-empty{text-align:center;}
-.asc-plus{width:32px;height:32px;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:rgba(255,255,255,0.18);margin:0 auto 0.6rem;}
-.asc-empty-text{font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.18);line-height:1.7;}
-.asc-lv-badge{position:absolute;bottom:0.5rem;left:0.5rem;background:rgba(10,12,16,0.9);border:1px solid rgba(198,168,90,0.35);padding:0.18rem 0.55rem;font-size:0.62rem;letter-spacing:0.12em;color:#C6A85A;font-family:'Rajdhani',sans-serif;}
-.asc-stats{display:flex;flex-direction:column;gap:0;}
-.asc-empty-panel{padding:1rem 0;}
-.asc-empty-title{font-family:'Cinzel Decorative',serif;font-size:1rem;color:rgba(232,228,220,0.25);margin-bottom:0.4rem;}
-.asc-empty-sub{font-size:0.78rem;color:rgba(232,228,220,0.18);line-height:1.6;max-width:260px;}
-.asc-name{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;line-height:1.2;margin-bottom:0.2rem;}
-.asc-rarity-tag{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(232,228,220,0.35);margin-bottom:1rem;display:block;}
-.asc-table{width:100%;border-collapse:collapse;margin-bottom:1rem;}
-.asc-table tr{border-bottom:1px solid rgba(255,255,255,0.06);}
-.asc-table tr:last-child{border-bottom:none;}
-.asc-table td{padding:0.5rem 0;font-size:0.8rem;}
-.at-label{color:rgba(232,228,220,0.28);letter-spacing:0.08em;text-transform:uppercase;font-size:0.65rem;width:45px;font-weight:500;}
-.at-old{color:#e8e4dc;}
-.at-arr{color:rgba(255,255,255,0.15);padding:0 0.5rem;font-size:0.75rem;}
-.at-new{color:#7ec8a0;}
-.at-diff{color:#7ec8a0;font-size:0.65rem;padding-left:0.3rem;opacity:0.7;}
-.asc-materials{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:0.8rem 0.9rem;margin-bottom:1rem;}
-.asc-mat-header{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(232,228,220,0.3);margin-bottom:0.6rem;font-weight:500;}
-.asc-mat-row{display:flex;align-items:center;gap:0.6rem;font-size:0.78rem;color:rgba(232,228,220,0.6);padding:0.2rem 0;}
-.asc-mat-name{flex:1;}
-.asc-mat-qty{color:#e8e4dc;font-weight:500;}
-.asc-btn{width:100%;padding:0.82rem;background:linear-gradient(135deg,#b8922e 0%,#c6a85a 50%,#a67c26 100%);color:#1a1200;border:none;font-family:'Cinzel',serif;font-size:0.9rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:filter 0.2s,transform 0.1s;clip-path:none;}
-.asc-btn:hover{filter:brightness(1.08);}
-.asc-btn:active{transform:scale(0.99);}
-.asc-btn.success{background:linear-gradient(135deg,#3a7a50,#7ec8a0);color:#0a1a10;}
-.asc-grid-section{border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;}
-.asc-grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;}
-.asc-grid-title{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(232,228,220,0.3);font-weight:500;}
-.asc-filters{display:flex;gap:0.25rem;flex-wrap:wrap;}
-.asc-filter{padding:0.22rem 0.65rem;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;background:none;border:1px solid rgba(255,255,255,0.07);color:rgba(232,228,220,0.3);cursor:pointer;transition:all 0.2s;font-family:'Rajdhani',sans-serif;font-weight:600;}
-.asc-filter:hover{color:rgba(232,228,220,0.7);}
-.asc-filter.active{color:#C6A85A;border-color:rgba(198,168,90,0.3);background:rgba(198,168,90,0.06);}
-.asc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:0.55rem;}
-.asc-card{position:relative;cursor:pointer;overflow:hidden;border:1px solid rgba(255,255,255,0.07);transition:transform 0.2s ease,border-color 0.2s,box-shadow 0.2s;filter:saturate(0.7);}
-.asc-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.14);filter:saturate(0.9);z-index:2;}
-.asc-card.selected{border-color:#C6A85A;box-shadow:0 4px 16px rgba(198,168,90,0.12);filter:saturate(1);}
-.asc-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
-.asc-card-lv{position:absolute;bottom:0;left:0;right:0;background:rgba(10,12,16,0.82);padding:0.18rem 0.3rem;font-size:0.56rem;letter-spacing:0.08em;color:rgba(232,228,220,0.35);text-align:center;}
-.asc-card.selected .asc-card-lv{color:#C6A85A;}
-.asc-rdot{position:absolute;top:0.28rem;right:0.28rem;width:4px;height:4px;border-radius:50%;}
-@media(max-width:520px){.asc-main{grid-template-columns:130px 1fr;}.asc-grid{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));}}
+/* Upgrade */
+.upgrade-wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+.upgrade-top{display:grid;grid-template-columns:180px 1fr;gap:1.5rem;margin-bottom:2rem;}
+.upgrade-slot{width:180px;aspect-ratio:2/3;background:rgba(255,255,255,0.03);border:2px dashed rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:4px;cursor:pointer;transition:border-color 0.3s;}
+.upgrade-slot:hover{border-color:rgba(240,192,64,0.3);}
+.upgrade-slot-empty{text-align:center;}
+.upgrade-stats-panel{display:flex;flex-direction:column;gap:0.7rem;}
+.upgrade-card-title{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#fff;}
+.upgrade-card-rarity{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.upgrade-stat-row{display:flex;justify-content:space-between;padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85rem;}
+.upgrade-stat-row span:first-child{color:rgba(255,255,255,0.35);letter-spacing:1px;font-size:0.72rem;text-transform:uppercase;}
+.upgrade-materials{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:0.8rem;margin-top:0.3rem;}
+.upgrade-mat-label{font-size:0.65rem;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:0.5rem;}
+.upgrade-mat-row{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:rgba(255,255,255,0.6);padding:0.2rem 0;}
+.upgrade-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.8rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.82rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.3s;text-transform:uppercase;margin-top:0.3rem;}
+.upgrade-btn:hover{box-shadow:0 0 20px rgba(240,192,64,0.4);}
+.upgrade-select-label{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:4px;color:rgba(255,255,255,0.22);text-transform:uppercase;margin-bottom:0.8rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06);}
+.upgrade-select-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:0.6rem;}
+.upg-card{cursor:pointer;border:1px solid rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;transition:all 0.3s;}
+.upg-card:hover{border-color:rgba(240,192,64,0.4);transform:translateY(-2px);}
+.upg-card.selected{border-color:var(--gold);box-shadow:0 0 12px rgba(240,192,64,0.3);}
+.upg-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+@media(max-width:500px){.upgrade-top{grid-template-columns:130px 1fr;}.upgrade-slot{width:130px;}}
 </style>
 </head>
 <body>
@@ -360,8 +375,45 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 
   <!-- COLLECTION TAB -->
-  <div class="tab-content" id="tab-slimecards-collection">
-    <div class="nft-grid" id="nftGrid"></div>
+  <div class="tab-content active" id="tab-slimecards-collection">
+    <div class="coll-wrap">
+      <!-- Header -->
+      <div class="coll-header">
+        <div>
+          <div class="coll-label">Your Slimes</div>
+          <div class="coll-title">Collection</div>
+          <div class="coll-divider"></div>
+        </div>
+        <div class="coll-count" id="collCount">50 Slimes</div>
+      </div>
+      <!-- Controls -->
+      <div class="coll-controls">
+        <div class="coll-filters" id="collFilters">
+          <button class="cf-btn active" onclick="collFilter('all',this)">All</button>
+          <button class="cf-btn" onclick="collFilter('common',this)">Common</button>
+          <button class="cf-btn" onclick="collFilter('rare',this)">Rare</button>
+          <button class="cf-btn" onclick="collFilter('epic',this)">Epic</button>
+          <button class="cf-btn" onclick="collFilter('legend',this)">Legend</button>
+          <button class="cf-btn" onclick="collFilter('mythic',this)">Mythic</button>
+        </div>
+        <div class="coll-sort">
+          <select class="cs-select" onchange="collSort(this.value)">
+            <option value="id">Sort: Default</option>
+            <option value="level">Sort: Level ↓</option>
+            <option value="rarity">Sort: Rarity</option>
+            <option value="name">Sort: Name</option>
+          </select>
+        </div>
+      </div>
+      <!-- Grid -->
+      <div class="coll-grid" id="collGrid"></div>
+      <!-- Empty state -->
+      <div class="coll-empty" id="collEmpty" style="display:none;">
+        <div class="ce-icon">◈</div>
+        <div class="ce-title">No Slimes Found</div>
+        <div class="ce-sub">Try changing your filters</div>
+      </div>
+    </div>
   </div>
 
   <!-- PETS TAB -->
@@ -422,49 +474,138 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
   <!-- DUNGEON RUN TAB -->
   <div class="tab-content active" id="tab-dungeon-run">
-    <div class="dungeon-section">
-      <div class="energy-box">
-        <div class="energy-top"><span class="energy-label">⚡ Energy</span><span class="energy-num">70 / 100</span></div>
-        <div class="energy-track"><div class="energy-fill"></div></div>
-        <div class="energy-regen">+1 per 5 min · Full in 2h30m</div>
+    <div class="dng-wrap">
+
+      <!-- Energy Panel -->
+      <div class="dng-energy">
+        <div class="dng-energy-left">
+          <span class="dng-energy-icon">⚡</span>
+          <div>
+            <div class="dng-energy-label">Energy</div>
+            <div class="dng-energy-val">70 <span class="dng-energy-max">/ 100</span></div>
+          </div>
+        </div>
+        <div class="dng-energy-right">
+          <div class="dng-bar-track"><div class="dng-bar-fill" style="width:70%"></div></div>
+          <div class="dng-energy-regen">+1 every 5 min · Full in 2h30m</div>
+        </div>
       </div>
-      <div class="dungeon-grid">
-        <div class="dcard easy">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_easy.png" alt="Easy" onerror="this.style.background='#0a1a0a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--green)">🟢 Easy</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>30 min</td></tr><tr><td>Energy</td><td style="color:var(--green)">10</td></tr><tr><td>Fee</td><td style="color:var(--green)">Free</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions</li><li>Ore & Equipment</li><li>Pet drop (2%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+      <!-- Dungeon Cards -->
+      <div class="dng-cards">
+
+        <div class="dc" data-diff="easy">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_easy.png" alt="Easy" onerror="this.style.background='#081208'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#6EE7B7"></div>
+              <div class="dc-diff" style="color:#6EE7B7">Easy</div>
+              <div class="dc-rec">Lv. 1+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">30 min</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#6EE7B7">10</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#6EE7B7">Free</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions</span>
+                <span>⚙️ Equipment</span>
+                <span>🐾 Pet drop (2%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#6EE7B7">Enter Dungeon →</button>
           </div>
         </div>
-        <div class="dcard medium">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_medium.png" alt="Medium" onerror="this.style.background='#0a0a1a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--rare)">🔵 Medium</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>2 hours</td></tr><tr><td>Energy</td><td style="color:var(--rare)">20</td></tr><tr><td>Fee</td><td style="color:var(--rare)">Free</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME</li><li>Pet drop (5%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+        <div class="dc" data-diff="medium">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_medium.png" alt="Medium" onerror="this.style.background='#080a14'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#60A5FA"></div>
+              <div class="dc-diff" style="color:#60A5FA">Medium</div>
+              <div class="dc-rec">Lv. 15+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">2 hours</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#60A5FA">20</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#60A5FA">Free</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions + Items</span>
+                <span>📦 Box $SLIME</span>
+                <span>🐾 Pet drop (5%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#60A5FA">Enter Dungeon →</button>
           </div>
         </div>
-        <div class="dcard hard">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_hard.png" alt="Hard" onerror="this.style.background='#0f0a1a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--epic)">🟣 Hard</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>6 hours</td></tr><tr><td>Energy</td><td style="color:var(--epic)">30</td></tr><tr><td>Fee</td><td style="color:var(--epic)">$SLIME</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr</li><li>Pet drop (10%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+        <div class="dc" data-diff="hard">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_hard.png" alt="Hard" onerror="this.style.background='#0e0814'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#C084FC"></div>
+              <div class="dc-diff" style="color:#C084FC">Hard</div>
+              <div class="dc-rec">Lv. 30+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">6 hours</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#C084FC">30</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#C084FC">$SLIME</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions + Items</span>
+                <span>📦 Box $SLIME + Bankr</span>
+                <span>🐾 Pet drop (10%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#C084FC">Enter Dungeon →</button>
           </div>
         </div>
-        <div class="dcard extreme">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_extreme.png" alt="Extreme" onerror="this.style.background='#1a0a0a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--mythic)">🔴 Extreme</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>12 hours</td></tr><tr><td>Energy</td><td style="color:var(--mythic)">40</td></tr><tr><td>Fee</td><td style="color:var(--mythic)">$SLIME</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr + ETH</li><li>Pet drop (18%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+        <div class="dc" data-diff="extreme">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_extreme.png" alt="Extreme" onerror="this.style.background='#140808'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#F87171"></div>
+              <div class="dc-diff" style="color:#F87171">Extreme</div>
+              <div class="dc-rec">Lv. 50+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">12 hours</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#F87171">40</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#F87171">$SLIME</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions + Items</span>
+                <span>📦 Box $SLIME + Bankr + ETH</span>
+                <span>🐾 Pet drop (18%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#F87171">Enter Dungeon →</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -556,66 +697,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
   <!-- UPGRADE TAB -->
   <div class="tab-content" id="tab-ascend-upgrade">
-    <div class="ascend-page">
-
-      <!-- TOP: Card slot + Stats -->
-      <div class="asc-main">
-        <!-- LEFT: Card slot -->
-        <div class="asc-slot-wrap">
-          <div class="asc-slot" id="ascSlot">
-            <div class="asc-slot-empty" id="ascSlotEmpty">
-              <div class="asc-plus">+</div>
-              <div class="asc-empty-text">Select Slime<br>from below</div>
-            </div>
-            <img id="ascSlotImg" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
+    <div class="upgrade-wrap">
+      <!-- TOP: Slot + Stats -->
+      <div class="upgrade-top">
+        <!-- Slot kiri -->
+        <div class="upgrade-slot" id="upgradeSlot" onclick="document.getElementById('upgradeSlot').classList.contains('empty') ? null : null">
+          <div class="upgrade-slot-empty" id="upgradeSlotEmpty">
+            <div style="font-size:2.5rem;opacity:0.3">+</div>
+            <div style="font-size:0.7rem;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-top:0.3rem">SELECT SLIME</div>
           </div>
-          <div class="asc-lv-badge" id="ascLvBadge" style="display:none;">LV 1</div>
+          <img id="upgradeSlotImg" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
         </div>
-
-        <!-- RIGHT: Stats panel -->
-        <div class="asc-stats" id="ascStats">
-          <div class="asc-empty-panel" id="ascPanelEmpty">
-            <div class="asc-empty-title">No Slime Selected</div>
-            <div class="asc-empty-sub">Choose a slime from your collection below to begin Ascension.</div>
+        <!-- Stats kanan -->
+        <div class="upgrade-stats-panel">
+          <div class="upgrade-card-title" id="upgradeCardName">—</div>
+          <div class="upgrade-card-rarity" id="upgradeCardRarity">Select a Slime</div>
+          <div class="upgrade-stat-row"><span>LV</span><span id="upgLv">—</span></div>
+          <div class="upgrade-stat-row"><span>ATK</span><span id="upgAtk">—</span></div>
+          <div class="upgrade-stat-row"><span>HP</span><span id="upgHp">—</span></div>
+          <div class="upgrade-stat-row"><span>SPD</span><span id="upgSpd">—</span></div>
+          <div class="upgrade-materials" id="upgMaterials" style="display:none;">
+            <div class="upgrade-mat-label">Materials Needed</div>
+            <div class="upgrade-mat-row"><span>🪨</span><span id="matStone">Stone Shard ×5</span></div>
+            <div class="upgrade-mat-row"><span>💎</span><span id="matCrystal">Crystal Ore ×3</span></div>
+            <div class="upgrade-mat-row"><span>💰</span><span id="matSlime">50 $SLIME</span></div>
           </div>
-          <div id="ascPanelFull" style="display:none;flex-direction:column;gap:0;">
-            <div style="margin-bottom:1rem;">
-              <div class="asc-name" id="ascName">—</div>
-              <div class="asc-rarity-tag" id="ascRarityTag">—</div>
-            </div>
-            <table class="asc-table">
-              <tr><td class="at-label">LV</td><td class="at-old" id="ascLvOld">—</td><td class="at-arr">→</td><td class="at-new" id="ascLvNew">—</td><td class="at-diff"></td></tr>
-              <tr><td class="at-label">ATK</td><td class="at-old" id="ascAtkOld">—</td><td class="at-arr">→</td><td class="at-new" id="ascAtkNew">—</td><td class="at-diff" id="ascAtkDiff"></td></tr>
-              <tr><td class="at-label">HP</td><td class="at-old" id="ascHpOld">—</td><td class="at-arr">→</td><td class="at-new" id="ascHpNew">—</td><td class="at-diff" id="ascHpDiff"></td></tr>
-              <tr><td class="at-label">SPD</td><td class="at-old" id="ascSpdOld">—</td><td class="at-arr">→</td><td class="at-new" id="ascSpdNew">—</td><td class="at-diff" id="ascSpdDiff"></td></tr>
-            </table>
-            <div class="asc-materials" id="ascMats">
-              <div class="asc-mat-header">Required Materials</div>
-              <div class="asc-mat-row"><span>🪨</span><span class="asc-mat-name">Stone Shard</span><span class="asc-mat-qty" id="ascMatStone">×3</span></div>
-              <div class="asc-mat-row"><span>💎</span><span class="asc-mat-name">Crystal Ore</span><span class="asc-mat-qty" id="ascMatCrystal">×1</span></div>
-              <div class="asc-mat-row"><span>🌕</span><span class="asc-mat-name">$SLIME</span><span class="asc-mat-qty" id="ascMatSlime">20</span></div>
-            </div>
-            <button class="asc-btn" id="ascBtn" onclick="doAscend()">Ascend</button>
-          </div>
+          <button class="upgrade-btn" id="upgradeBtn" onclick="doUpgrade()" style="display:none;">⬆️ UPGRADE</button>
         </div>
       </div>
-
       <!-- BOTTOM: Slime grid -->
-      <div class="asc-grid-section">
-        <div class="asc-grid-header">
-          <div class="asc-grid-title">Your Collection</div>
-          <div class="asc-filters">
-            <button class="asc-filter active" onclick="ascFilter('all',this)">All</button>
-            <button class="asc-filter" onclick="ascFilter('common',this)">Common</button>
-            <button class="asc-filter" onclick="ascFilter('rare',this)">Rare</button>
-            <button class="asc-filter" onclick="ascFilter('epic',this)">Epic</button>
-            <button class="asc-filter" onclick="ascFilter('legend',this)">Legend</button>
-            <button class="asc-filter" onclick="ascFilter('mythic',this)">Mythic</button>
-          </div>
-        </div>
-        <div class="asc-grid" id="ascGrid"></div>
-      </div>
-
+      <div class="upgrade-select-label">Your Slimes</div>
+      <div class="upgrade-select-grid" id="upgradeSelectGrid"></div>
     </div>
   </div>
 </div>
@@ -782,38 +894,86 @@ const cardData = [
 ];
 
 const cardNums = Array.from({length:50},(_,i)=>i+1);
+const collGrid = document.getElementById('collGrid');
+const collLevels = {};
+cardData.forEach(c => { collLevels[c.id] = 1; });
+let collCurrent = [...cardData];
+let collFilterVal = 'all';
+let collSortVal = 'id';
+let collSelectedId = null;
+
+function buildCollGrid(data) {
+  collGrid.innerHTML = '';
+  const empty = document.getElementById('collEmpty');
+  if(!data.length) { empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  document.getElementById('collCount').textContent = `${data.length} Slime${data.length!==1?'s':''}`;
+  data.forEach(c => {
+    const id = String(c.id).padStart(3,'0');
+    const col = RARITY_COLOR[c.rarity];
+    const lv = collLevels[c.id];
+    const div = document.createElement('div');
+    div.className = 'cc' + (collSelectedId===c.id?' cc-selected':'');
+    div.dataset.rarity = c.rarity;
+    div.id = `cc-${c.id}`;
+    div.innerHTML = `
+      <div class="cc-rdot" style="background:${col}"></div>
+      <img src="assets/card/card_${id}.png" loading="lazy" onerror="this.style.background='#0d1018'">
+      <div class="cc-overlay">
+        <div class="cc-name">${c.name}</div>
+        <div class="cc-lv">Lv.${lv}</div>
+      </div>`;
+    div.onclick = () => {
+      collSelectedId = c.id;
+      document.querySelectorAll('.cc').forEach(d=>d.classList.remove('cc-selected'));
+      div.classList.add('cc-selected');
+      openNftModal(c.id);
+    };
+    collGrid.appendChild(div);
+  });
+}
+
+function collFilter(rarity, el) {
+  collFilterVal = rarity;
+  document.querySelectorAll('.cf-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  applyCollFilters();
+}
+
+function collSort(val) {
+  collSortVal = val;
+  applyCollFilters();
+}
+
+function applyCollFilters() {
+  let data = collFilterVal === 'all' ? [...cardData] : cardData.filter(c=>c.rarity===collFilterVal);
+  const order = {common:0,rare:1,epic:2,legend:3,mythic:4};
+  if(collSortVal==='rarity') data.sort((a,b)=>order[b.rarity]-order[a.rarity]);
+  else if(collSortVal==='level') data.sort((a,b)=>collLevels[b.id]-collLevels[a.id]);
+  else if(collSortVal==='name') data.sort((a,b)=>a.name.localeCompare(b.name));
+  else data.sort((a,b)=>a.id-b.id);
+  buildCollGrid(data);
+}
+
+buildCollGrid(cardData);
+
+// Keep nftGrid reference for modal (empty hidden div)
 const nftGrid = document.getElementById('nftGrid');
-cardData.forEach(c => {
-  const id = String(c.id).padStart(3,'0');
-  const col = RARITY_COLOR[c.rarity];
-  // NFT collection grid
-  const div = document.createElement('div');
-  div.className = 'nft-card';
-  div.style.borderColor = col + '44';
-  div.innerHTML = `
-    <img src="assets/card/card_${id}.png" alt="${c.name}" loading="lazy" onerror="this.style.background='#1a1a2e'">
-    <div class="card-rarity-dot" style="background:${col};"></div>
-    <div class="card-info">
-      <div class="card-info-rarity" style="color:${col}">${c.rarity.toUpperCase()}</div>
-      <div class="card-info-name">${c.name}</div>
-    </div>`;
-  div.onclick = () => openNftModal(c.id);
-  nftGrid.appendChild(div);
-});
 
-// ── ASCEND SYSTEM ──
-const ascGrid = document.getElementById('ascGrid');
-const ascLevels = {};
-cardData.forEach(c => { ascLevels[c.id] = 1; });
 
-const ASC_MAT = {
+// ── UPGRADE SYSTEM ──
+const upgradeSelectGrid = document.getElementById('upgradeSelectGrid');
+const slimeLevels = {};
+cardData.forEach(c => { slimeLevels[c.id] = 1; });
+
+const UPGRADE_MATERIALS = {
   common:  {stone:3,  crystal:1,  slime:20},
   rare:    {stone:5,  crystal:2,  slime:50},
   epic:    {stone:8,  crystal:4,  slime:120},
   legend:  {stone:12, crystal:7,  slime:300},
   mythic:  {stone:20, crystal:12, slime:800},
 };
-const ASC_STATS = {
+const BASE_STATS = {
   common:  {atk:15,  hp:120, spd:6},
   rare:    {atk:30,  hp:190, spd:11},
   epic:    {atk:60,  hp:280, spd:18},
@@ -821,100 +981,68 @@ const ASC_STATS = {
   mythic:  {atk:160, hp:620, spd:37},
 };
 
-let selectedAscId = null;
+let selectedUpgradeId = null;
 
-if(ascGrid) {
+if(upgradeSelectGrid) {
   cardData.forEach(c => {
     const id = String(c.id).padStart(3,'0');
     const col = RARITY_COLOR[c.rarity];
     const div = document.createElement('div');
-    div.className = 'asc-card';
-    div.dataset.rarity = c.rarity;
-    div.id = `asc-${c.id}`;
-    div.innerHTML = `
-      <div class="asc-rdot" style="background:${col}"></div>
-      <img src="assets/card/card_${id}.png" loading="lazy" onerror="this.style.background='#1a1a2e'">
-      <div class="asc-card-lv" id="asc-lv-${c.id}">LV 1</div>`;
-    div.onclick = () => selectAscCard(c.id);
-    ascGrid.appendChild(div);
+    div.className = 'upg-card';
+    div.id = `upgcard-${c.id}`;
+    div.style.borderColor = col + '33';
+    div.innerHTML = `<img src="assets/card/card_${id}.png" loading="lazy" onerror="this.style.background='#1a1a2e'">`;
+    div.onclick = () => selectUpgradeCard(c.id);
+    upgradeSelectGrid.appendChild(div);
   });
 }
 
-function selectAscCard(id) {
+function selectUpgradeCard(id) {
   const c = cardData.find(x => x.id === id);
   const imgId = String(id).padStart(3,'0');
   const col = RARITY_COLOR[c.rarity];
-  const lv = ascLevels[id];
-  const base = ASC_STATS[c.rarity];
-  const mat = ASC_MAT[c.rarity];
+  const lv = slimeLevels[id];
+  const base = BASE_STATS[c.rarity];
   const atk = Math.round(base.atk * (1 + (lv-1)*0.05));
   const hp  = Math.round(base.hp  * (1 + (lv-1)*0.08));
-  const spd = +(base.spd * (1 + (lv-1)*0.02)).toFixed(1);
-  const atkN = Math.round(base.atk * (1 + lv*0.05));
-  const hpN  = Math.round(base.hp  * (1 + lv*0.08));
-  const spdN = +(base.spd * (1 + lv*0.02)).toFixed(1);
-  selectedAscId = id;
+  const spd = Math.round(base.spd * (1 + (lv-1)*0.02));
+  const atkNext = Math.round(base.atk * (1 + lv*0.05));
+  const hpNext  = Math.round(base.hp  * (1 + lv*0.08));
+  const spdNext = Math.round(base.spd * (1 + lv*0.02));
+  const mat = UPGRADE_MATERIALS[c.rarity];
+  selectedUpgradeId = id;
 
-  // Slot
-  document.getElementById('ascSlotEmpty').style.display = 'none';
-  const img = document.getElementById('ascSlotImg');
-  img.src = `assets/card/card_${imgId}.png`;
-  img.style.display = 'block';
-  const slot = document.getElementById('ascSlot');
-  slot.classList.add('has-card');
-  const badge = document.getElementById('ascLvBadge');
-  badge.textContent = `LV ${lv}`;
-  badge.style.display = 'block';
-  badge.style.color = col;
-  badge.style.borderColor = col + '55';
-
-  // Stats
-  document.getElementById('ascPanelEmpty').style.display = 'none';
-  const full = document.getElementById('ascPanelFull');
-  full.style.display = 'flex';
-  document.getElementById('ascName').textContent = c.name;
-  document.getElementById('ascRarityTag').textContent = c.rarity.toUpperCase();
-  document.getElementById('ascRarityTag').style.color = col;
-  document.getElementById('ascLvOld').textContent = lv;
-  document.getElementById('ascLvNew').textContent = lv + 1;
-  document.getElementById('ascAtkOld').textContent = atk;
-  document.getElementById('ascAtkNew').textContent = atkN;
-  document.getElementById('ascAtkDiff').textContent = `+${atkN-atk}`;
-  document.getElementById('ascHpOld').textContent = hp;
-  document.getElementById('ascHpNew').textContent = hpN;
-  document.getElementById('ascHpDiff').textContent = `+${hpN-hp}`;
-  document.getElementById('ascSpdOld').textContent = spd;
-  document.getElementById('ascSpdNew').textContent = spdN;
-  document.getElementById('ascSpdDiff').textContent = spdN > spd ? `+${(spdN-spd).toFixed(1)}` : '—';
-  document.getElementById('ascMatStone').textContent = `×${mat.stone}`;
-  document.getElementById('ascMatCrystal').textContent = `×${mat.crystal}`;
-  document.getElementById('ascMatSlime').textContent = mat.slime;
-  const btn = document.getElementById('ascBtn');
-  btn.style.display = 'block';
-  btn.textContent = 'Ascend';
-  btn.className = 'asc-btn';
-
-  // Grid highlight
-  document.querySelectorAll('.asc-card').forEach(d => d.classList.remove('selected'));
-  document.getElementById(`asc-${id}`).classList.add('selected');
+  document.getElementById('upgradeSlotEmpty').style.display = 'none';
+  const slotImg = document.getElementById('upgradeSlotImg');
+  slotImg.src = `assets/card/card_${imgId}.png`;
+  slotImg.style.display = 'block';
+  document.getElementById('upgradeSlot').style.borderColor = col;
+  document.getElementById('upgradeSlot').style.borderStyle = 'solid';
+  document.getElementById('upgradeCardName').textContent = c.name;
+  document.getElementById('upgradeCardName').style.color = col;
+  document.getElementById('upgradeCardRarity').textContent = c.rarity.toUpperCase();
+  document.getElementById('upgradeCardRarity').style.color = col;
+  document.getElementById('upgLv').textContent  = `${lv} → ${lv+1}`;
+  document.getElementById('upgAtk').textContent = `${atk} → ${atkNext}`;
+  document.getElementById('upgHp').textContent  = `${hp} → ${hpNext}`;
+  document.getElementById('upgSpd').textContent = `${spd} → ${spdNext}`;
+  document.getElementById('matStone').textContent   = `Stone Shard ×${mat.stone}`;
+  document.getElementById('matCrystal').textContent = `Crystal Ore ×${mat.crystal}`;
+  document.getElementById('matSlime').textContent   = `${mat.slime} $SLIME`;
+  document.getElementById('upgMaterials').style.display = 'block';
+  document.getElementById('upgradeBtn').style.display = 'block';
+  document.querySelectorAll('.upg-card').forEach(d => d.classList.remove('selected'));
+  document.getElementById(`upgcard-${id}`).classList.add('selected');
 }
 
-function doAscend() {
-  if(!selectedAscId) return;
-  ascLevels[selectedAscId]++;
-  document.getElementById(`asc-lv-${selectedAscId}`).textContent = `LV ${ascLevels[selectedAscId]}`;
-  const btn = document.getElementById('ascBtn');
-  btn.textContent = '✦ Ascended';
-  btn.classList.add('success');
-  setTimeout(() => selectAscCard(selectedAscId), 1200);
-}
-
-function ascFilter(rarity, el) {
-  document.querySelectorAll('.asc-filter').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('.asc-card').forEach(d => {
-    d.style.display = (rarity === 'all' || d.dataset.rarity === rarity) ? '' : 'none';
-  });
+function doUpgrade() {
+  if(!selectedUpgradeId) return;
+  slimeLevels[selectedUpgradeId]++;
+  selectUpgradeCard(selectedUpgradeId);
+  const btn = document.getElementById('upgradeBtn');
+  btn.textContent = '✨ UPGRADED!';
+  btn.style.background = 'linear-gradient(135deg,#00ff88,#00aa55)';
+  setTimeout(() => { btn.textContent = '⬆️ UPGRADE'; btn.style.background = ''; }, 1500);
 }
 function openNftModal(n) {
   const c = cardData.find(x => x.id === n);
