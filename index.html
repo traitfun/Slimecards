@@ -257,7 +257,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         <button class="btn-secondary" onclick="showPage('dungeon')">Enter Dungeon</button>
       </div>
       <div class="hero-stats">
-        <div><div class="hstat-num">67</div><div class="hstat-label">Slime NFTs</div></div>
+        <div><div class="hstat-num">56</div><div class="hstat-label">Slime NFTs</div></div>
         <div><div class="hstat-num">5</div><div class="hstat-label">Rarity Tiers</div></div>
         <div><div class="hstat-num">4</div><div class="hstat-label">Dungeons</div></div>
         <div><div class="hstat-num">Base</div><div class="hstat-label">Network</div></div>
@@ -544,7 +544,7 @@ const pc = document.getElementById('particles');
 });
 
 // ── NFT GRID ──
-const cardNums = Array.from({length:67},(_,i)=>i+1);
+const cardNums = [1,2,3,5,6,7,9,10,11,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,45,47,48,49,52,53,54,55,57,58,59,61,62,63,64,66,67];
 const nftGrid = document.getElementById('nftGrid');
 cardNums.forEach(n => {
   const id = String(n).padStart(3,'0');
