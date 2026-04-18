@@ -361,7 +361,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <div class="dcard easy">
         <div class="dcard-img">
-          <img src="assets/dungeon_easy.png" alt="Easy Dungeon" onerror="this.style.background='#0a1a0a'">
+          <img src="assets/dungeon/dungeon_easy.png" alt="Easy Dungeon" onerror="this.style.background='#0a1a0a'">
           <div class="dcard-img-overlay"></div>
         </div>
         <div class="dcard-body">
@@ -381,7 +381,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <div class="dcard medium">
         <div class="dcard-img">
-          <img src="assets/dungeon_medium.png" alt="Medium Dungeon" onerror="this.style.background='#0a0a1a'">
+          <img src="assets/dungeon/dungeon_medium.png" alt="Medium Dungeon" onerror="this.style.background='#0a0a1a'">
           <div class="dcard-img-overlay"></div>
         </div>
         <div class="dcard-body">
@@ -401,7 +401,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <div class="dcard hard">
         <div class="dcard-img">
-          <img src="assets/dungeon_hard.png" alt="Hard Dungeon" onerror="this.style.background='#0f0a1a'">
+          <img src="assets/dungeon/dungeon_hard.png" alt="Hard Dungeon" onerror="this.style.background='#0f0a1a'">
           <div class="dcard-img-overlay"></div>
         </div>
         <div class="dcard-body">
@@ -421,7 +421,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <div class="dcard extreme">
         <div class="dcard-img">
-          <img src="assets/dungeon_extreme.png" alt="Extreme Dungeon" onerror="this.style.background='#1a0a0a'">
+          <img src="assets/dungeon/dungeon_extreme.png" alt="Extreme Dungeon" onerror="this.style.background='#1a0a0a'">
           <div class="dcard-img-overlay"></div>
         </div>
         <div class="dcard-body">
@@ -550,13 +550,13 @@ cardNums.forEach(n => {
   const id = String(n).padStart(3,'0');
   const div = document.createElement('div');
   div.className = 'nft-card';
-  div.innerHTML = `<img src="assets/card_${id}.png" alt="Slime #${id}" loading="lazy" onerror="this.style.background='#1a1a2e'"><div class="card-info"><div class="card-info-name">Slime #${id}</div></div>`;
+  div.innerHTML = `<img src="assets/card/card_${id}.png" alt="Slime #${id}" loading="lazy" onerror="this.style.background='#1a1a2e'"><div class="card-info"><div class="card-info-name">Slime #${id}</div></div>`;
   div.onclick = () => openNftModal(n);
   nftGrid.appendChild(div);
 });
 function openNftModal(n) {
   const id = String(n).padStart(3,'0');
-  document.getElementById('modalImg').src = `assets/card_${id}.png`;
+  document.getElementById('modalImg').src = `assets/card/card_${id}.png`;
   document.getElementById('modalTitle').textContent = `Slime #${id}`;
   document.getElementById('modalLore').textContent = 'Born from the depths of the dungeon, this Slime has survived countless battles and emerged stronger than ever. Its unique elemental power makes it a formidable warrior.';
   document.getElementById('modalStats').innerHTML = `<div class="modal-stat"><span>ATK</span><span>—</span></div><div class="modal-stat"><span>HP</span><span>—</span></div><div class="modal-stat"><span>SPD</span><span>—</span></div><div class="modal-stat"><span>Rarity</span><span style="color:var(--gold)">TBD</span></div>`;
@@ -598,7 +598,7 @@ const sw = Array.from({length:95},()=>({
 })();
 
 // ── GACHA ──
-const CARDS = cardNums.map(n=>({name:'Slime #'+String(n).padStart(3,'0'),img:'assets/card_'+String(n).padStart(3,'0')+'.png'}));
+const CARDS = cardNums.map(n=>({name:'Slime #'+String(n).padStart(3,'0'),img:'assets/card/card_'+String(n).padStart(3,'0')+'.png'}));
 let totalRolls=0,collected=new Set(),isRolling=false,currentCard=null;
 const wait = ms => new Promise(r=>setTimeout(r,ms));
 
