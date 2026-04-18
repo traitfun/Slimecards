@@ -28,7 +28,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .page.active{display:block;}
 
 /* SHARED */
-.pg-head{padding-top:5.5rem;text-align:center;padding-bottom:1.5rem;}
+.pg-head{display:none;}
 .section-label{font-size:0.68rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;}
 .section-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:700;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .section-desc{color:rgba(255,255,255,0.45);font-size:0.9rem;max-width:520px;margin:0.8rem auto 0;line-height:1.7;}
@@ -284,7 +284,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .inv-slot.empty{opacity:0.18;font-size:0.9rem;color:rgba(255,255,255,0.3);}
 .inv-qty{font-size:0.58rem;font-family:'Cinzel',serif;color:var(--gold);}
 /* ═══════════ TABS ═══════════ */
-.tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:0 1.5rem;margin-bottom:0;}
+.tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:5rem 1.5rem 0;margin-bottom:0;}
 .tab-btn{padding:0.8rem 1.4rem;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;margin-bottom:-1px;}
 .tab-btn:hover{color:rgba(255,255,255,0.8);}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
@@ -340,7 +340,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <li><a onclick="showPage('market')" id="nav-market">Market</a></li>
     <li><a onclick="showPage('profile')" id="nav-profile">Profile</a></li>
   </ul>
-  <button class="nav-btn" onclick="showPage('slimecards');switchTab('slimecards','summon')">🔮 Summon</button>
+  <button class="nav-btn" onclick="alert('Coming Soon')">Connect Wallet</button>
 </nav>
 
 <!-- ══ DASHBOARD ══ -->
@@ -358,10 +358,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
   <!-- ACTION BUTTONS -->
   <div class="hub-actions">
-    <button class="hab hab-gold" onclick="showPage('slimecards');switchTab('slimecards','summon')">🎰 Gacha</button>
-    <button class="hab" onclick="showPage('dungeon')">⚔️ Dungeon</button>
-    <button class="hab" onclick="showPage('ascend');switchTab('ascend','forge')">🧪 Forge</button>
-    <button class="hab" onclick="showPage('slimecards');switchTab('slimecards','collection')">📦 Collection</button>
+    <button class="hab hab-gold" onclick="showPage('slimecards');switchTab('slimecards','summon')">Gacha</button>
+    <button class="hab" onclick="showPage('dungeon')">Dungeon</button>
+    <button class="hab" onclick="showPage('ascend');switchTab('ascend','forge')">Forge</button>
+    <button class="hab" onclick="showPage('slimecards');switchTab('slimecards','collection')">Collection</button>
   </div>
 
   <div class="hub-body">
@@ -414,15 +414,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ SLIME CARDS ══ -->
 <div class="page" id="page-slimecards">
-  <div class="pg-head">
-    <p class="section-label">Your Slimes</p>
-    <h2 class="section-title">Slime Cards</h2>
-    <div class="divider"></div>
-  </div>
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('slimecards','summon')">🔮 Summon</button>
-    <button class="tab-btn" onclick="switchTab('slimecards','collection')">⚔️ Collection</button>
-    <button class="tab-btn" onclick="switchTab('slimecards','pets')">🐾 Pets</button>
+    <button class="tab-btn active" onclick="switchTab('slimecards','summon')">Summon</button>
+    <button class="tab-btn" onclick="switchTab('slimecards','collection')">Collection</button>
+    <button class="tab-btn" onclick="switchTab('slimecards','pets')">Pets</button>
   </div>
 
   <!-- SUMMON TAB -->
@@ -536,14 +531,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ DUNGEON ══ -->
 <div class="page" id="page-dungeon">
-  <div class="pg-head">
-    <p class="section-label">Adventure</p>
-    <h2 class="section-title">Dungeon</h2>
-    <div class="divider"></div>
-  </div>
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('dungeon','run')">⚔️ Dungeon Run</button>
-    <button class="tab-btn" onclick="switchTab('dungeon','quest')">📜 Quest</button>
+    <button class="tab-btn active" onclick="switchTab('dungeon','run')">Dungeon Run</button>
+    <button class="tab-btn" onclick="switchTab('dungeon','quest')">Quest</button>
   </div>
 
   <!-- DUNGEON RUN TAB -->
@@ -743,14 +733,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ ASCEND ══ -->
 <div class="page" id="page-ascend">
-  <div class="pg-head">
-    <p class="section-label">Power Up</p>
-    <h2 class="section-title">Ascend</h2>
-    <div class="divider"></div>
-  </div>
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('ascend','forge')">⚗️ Forge</button>
-    <button class="tab-btn" onclick="switchTab('ascend','upgrade')">⬆️ Upgrade</button>
+    <button class="tab-btn active" onclick="switchTab('ascend','forge')">Forge</button>
+    <button class="tab-btn" onclick="switchTab('ascend','upgrade')">Upgrade</button>
   </div>
 
   <!-- FORGE TAB -->
@@ -796,7 +781,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
             <div class="upgrade-mat-row"><span>💎</span><span id="matCrystal">Crystal Ore ×3</span></div>
             <div class="upgrade-mat-row"><span>💰</span><span id="matSlime">50 $SLIME</span></div>
           </div>
-          <button class="upgrade-btn" id="upgradeBtn" onclick="doUpgrade()" style="display:none;">⬆️ UPGRADE</button>
+          <button class="upgrade-btn" id="upgradeBtn" onclick="doUpgrade()" style="display:none;">UPGRADE</button>
         </div>
       </div>
       <!-- BOTTOM: Slime grid -->
@@ -808,11 +793,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ MARKET ══ -->
 <div class="page" id="page-market">
-  <div class="pg-head">
-    <p class="section-label">Player Trading</p>
-    <h2 class="section-title">Market</h2>
-    <div class="divider"></div>
-    <p class="section-desc">Buy and sell items with other players using $SLIME.</p>
+<p class="section-desc">Buy and sell items with other players using $SLIME.</p>
   </div>
   <div class="market-wrap">
     <div class="coming-soon"><div class="cs-icon">🏪</div><div class="cs-title">Coming Soon</div><p class="cs-desc">The player market is under construction. Soon you'll be able to trade dungeon loot, potions and equipment with other players.</p></div>
@@ -828,11 +809,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ PROFILE ══ -->
 <div class="page" id="page-profile">
-  <div class="pg-head">
-    <p class="section-label">Commander</p>
-    <h2 class="section-title">Profile</h2>
-    <div class="divider"></div>
-  </div>
+</div>
   <div class="profile-wrap">
     <div class="wallet-box"><div class="wallet-icon">👛</div><div class="wallet-label">Connect Your Wallet</div><button class="btn-primary">Connect Wallet</button></div>
     <div class="stats-grid">
@@ -1129,7 +1106,7 @@ function doUpgrade() {
   const btn = document.getElementById('upgradeBtn');
   btn.textContent = '✨ UPGRADED!';
   btn.style.background = 'linear-gradient(135deg,#00ff88,#00aa55)';
-  setTimeout(() => { btn.textContent = '⬆️ UPGRADE'; btn.style.background = ''; }, 1500);
+  setTimeout(() => { btn.textContent = 'UPGRADE'; btn.style.background = ''; }, 1500);
 }
 function openNftModal(n) {
   const c = cardData.find(x => x.id === n);
