@@ -9,7 +9,7 @@
 :root{--gold:#f0c040;--gold2:#ffd700;--dark:#080810;--dark2:#0d0d1a;--purple2:#a855f7;--cyan:#00e5ff;--red:#ff2244;--green:#00ff88;--rare:#3b82f6;--epic:#a855f7;--legend:#f0c040;--mythic:#ff2244;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--dark);color:#fff;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+body{background:var(--dark);color:#fff;overflow-x:hidden;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
 
 /* NAV */
@@ -793,8 +793,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ MARKET ══ -->
 <div class="page" id="page-market">
-<p class="section-desc">Buy and sell items with other players using $SLIME.</p>
-  </div>
   <div class="market-wrap">
     <div class="coming-soon"><div class="cs-icon">🏪</div><div class="cs-title">Coming Soon</div><p class="cs-desc">The player market is under construction. Soon you'll be able to trade dungeon loot, potions and equipment with other players.</p></div>
     <div style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:4px;color:rgba(255,255,255,0.18);text-transform:uppercase;margin-bottom:1rem;">Preview</div>
@@ -809,7 +807,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ PROFILE ══ -->
 <div class="page" id="page-profile">
-</div>
   <div class="profile-wrap">
     <div class="wallet-box"><div class="wallet-icon">👛</div><div class="wallet-label">Connect Your Wallet</div><button class="btn-primary">Connect Wallet</button></div>
     <div class="stats-grid">
