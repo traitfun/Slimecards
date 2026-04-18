@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLIME BREAKER — Gacha</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #f0c040;
+  --common-c: #9ca3af;
+  --rare-c: #3b82f6;
+  --epic-c: #a855f7;
+  --legend-c: #f0c040;
+  --mythic-c: #ff2244;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#000; overflow:hidden; font-family:'Rajdhani',sans-serif; user-select:none; }
+
+canvas#bg { position:fixed; inset:0; z-index:0; }
+
+/* ── VIGNETTE ── */
+.vignette {
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between;
+  background:linear-gradient(180deg,rgba(0,0,0,0.8) 0%,transparent 100%);
+}
+.nav-logo {
+  font-family:'Cinzel Decorative',serif; font-size:1rem; font-weight:900;
+  background:linear-gradient(135deg,var(--gold),#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  text-decoration:none;
+}
+.nav-back {
+  color:rgba(255,255,255,0.4); font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;
+  text-decoration:none; transition:color 0.3s;
+}
+.nav-back:hover { color:var(--gold); }
+
+/* ── MAIN STAGE ── */
+#stage {
+  position:fixed; inset:0; z-index:2;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2rem;
+}
+
+/* ── ORB ── */
+#orbWrap {
+  position:relative; width:240px; height:240px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:transform 0.15s ease;
+}
+#orbWrap:hover { transform:scale(1.04); }
+#orbWrap:active { transform:scale(0.96); }
+
+.bh-ring {
+  position:absolute; border-radius:50%; pointer-events:none;
+}
+.bh-ring-1 {
+  width:110%; height:38%; border-radius:50%;
+  background:linear-gradient(90deg,transparent 5%,rgba(240,120,0,0.5) 25%,rgba(255,200,50,0.9) 50%,rgba(240,120,0,0.5) 75%,transparent 95%);
+  top:50%; left:50%; transform:translate(-50%,-50%) rotateX(75deg);
+  animation:accrete1 4s linear infinite;
+  filter:blur(2px);
+}
+.bh-ring-2 {
+  width:135%; height:22%;
+  background:linear-gradient(90deg,transparent 10%,rgba(168,85,247,0.3) 35%,rgba(200,100,255,0.6) 50%,rgba(168,85,247,0.3) 65%,transparent 90%);
+  top:50%; left:50%; transform:translate(-50%,-50%) rotateX(80deg) rotate(20deg);
+  animation:accrete2 7s linear infinite reverse;
+  filter:blur(3px);
+}
+.bh-ring-3 {
+  width:160%; height:14%;
+  background:linear-gradient(90deg,transparent 15%,rgba(0,200,255,0.15) 40%,rgba(100,220,255,0.35) 50%,rgba(0,200,255,0.15) 60%,transparent 85%);
+  top:50%; left:50%; transform:translate(-50%,-50%) rotateX(83deg) rotate(-15deg);
+  animation:accrete3 11s linear infinite;
+  filter:blur(4px);
+}
+@keyframes accrete1 { to{transform:translate(-50%,-50%) rotateX(75deg) rotate(360deg);} }
+@keyframes accrete2 { to{transform:translate(-50%,-50%) rotateX(80deg) rotate(-340deg);} }
+@keyframes accrete3 { to{transform:translate(-50%,-50%) rotateX(83deg) rotate(360deg);} }
+
+.bh-horizon {
+  position:absolute; width:50%; height:50%; border-radius:50%; z-index:4;
+  background:radial-gradient(circle,#000 60%,rgba(10,0,20,1));
+  box-shadow:0 0 0 3px rgba(240,150,0,0.2),0 0 25px rgba(240,120,0,0.3),0 0 60px rgba(100,0,200,0.15);
+  animation:horizonPulse 4s ease infinite;
+}
+@keyframes horizonPulse {
+  0%,100%{box-shadow:0 0 0 3px rgba(240,150,0,0.2),0 0 25px rgba(240,120,0,0.3),0 0 60px rgba(100,0,200,0.15);}
+  50%{box-shadow:0 0 0 5px rgba(240,150,0,0.35),0 0 50px rgba(240,120,0,0.5),0 0 90px rgba(100,0,200,0.25);}
+}
+
+.bh-outer {
+  position:absolute; width:100%; height:100%; border-radius:50%; z-index:1;
+  background:radial-gradient(circle,transparent 35%,rgba(80,0,160,0.12) 55%,rgba(168,85,247,0.08) 70%,transparent 85%);
+  animation:outerPulse 3s ease infinite;
+}
+@keyframes outerPulse { 0%,100%{opacity:0.6;transform:scale(1);} 50%{opacity:1;transform:scale(1.03);} }
+
+#bhCanvas {
+  position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none;
+}
+
+/* Tap hint */
+.tap-hint {
+  font-size:0.7rem; letter-spacing:4px; color:rgba(255,255,255,0.35);
+  text-transform:uppercase; animation:blink 2s ease infinite; text-align:center;
+}
+@keyframes blink { 0%,100%{opacity:0.35} 50%{opacity:0.8} }
+
+/* ── ROLL BUTTONS ── */
+.roll-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+
+.roll-btn {
+  background:linear-gradient(135deg,var(--gold),#b8860b); color:#000; border:none;
+  font-family:'Cinzel',serif; font-weight:700; font-size:0.85rem; letter-spacing:2px;
+  padding:0.75rem 1.8rem; cursor:pointer;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  transition:all 0.3s; text-transform:uppercase;
+}
+.roll-btn:hover { box-shadow:0 0 25px rgba(240,192,64,0.4); transform:translateY(-2px); }
+.roll-btn.x10 { background:linear-gradient(135deg,#a855f7,#6b21a8); color:#fff; }
+.roll-btn.x10:hover { box-shadow:0 0 25px rgba(168,85,247,0.4); }
+
+/* ── COLLECTION COUNTER ── */
+.collection-bar {
+  display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap;
+}
+.col-stat { text-align:center; }
+.col-num { font-family:'Cinzel',serif; font-size:1.3rem; font-weight:700; }
+.col-label { font-size:0.65rem; letter-spacing:3px; color:rgba(255,255,255,0.3); text-transform:uppercase; }
+
+/* ── FLASH OVERLAY ── */
+#flashOverlay {
+  position:fixed; inset:0; z-index:30; opacity:0; pointer-events:none;
+  transition:opacity 0.1s;
+}
+
+/* ── CARD REVEAL SCREEN ── */
+#revealScreen {
+  position:fixed; inset:0; z-index:40;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.5s;
+}
+
+#revealBg {
+  position:absolute; inset:0; opacity:0; transition:opacity 0.5s;
+}
+
+.reveal-particles {
+  position:absolute; inset:0; pointer-events:none; overflow:hidden;
+}
+
+/* Card flip container */
+#cardFlipWrap {
+  position:relative; z-index:5;
+  width:min(240px,55vw); aspect-ratio:2/3;
+  perspective:1000px; cursor:pointer;
+}
+
+#cardFlip {
+  width:100%; height:100%; position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+
+#cardFlip.flipped { transform:rotateY(180deg); }
+
+.card-face {
+  position:absolute; inset:0; border-radius:8px; overflow:hidden;
+  backface-visibility:hidden;
+}
+
+.card-back {
+  background:radial-gradient(circle at center,#1a0a30,#000);
+  border:2px solid rgba(240,192,64,0.4);
+  display:flex; align-items:center; justify-content:center;
+}
+
+.card-back-symbol {
+  font-family:'Cinzel Decorative',serif; font-size:4rem;
+  color:rgba(240,192,64,0.3); text-shadow:0 0 30px rgba(240,192,64,0.5);
+  animation:backSpin 4s linear infinite;
+}
+@keyframes backSpin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+.card-front { transform:rotateY(180deg); }
+.card-front img { width:100%; height:100%; object-fit:cover; }
+
+/* Rarity glow around card */
+#cardGlow {
+  position:absolute; inset:-20px; border-radius:12px; opacity:0;
+  transition:opacity 0.5s; pointer-events:none; z-index:4;
+  filter:blur(15px);
+}
+
+/* Rarity label */
+#rarityLabel {
+  position:relative; z-index:6; margin-top:1.5rem;
+  font-family:'Cinzel',serif; font-weight:700; font-size:1.2rem;
+  letter-spacing:6px; text-transform:uppercase; opacity:0;
+  transition:opacity 0.5s 0.8s;
+}
+
+#cardName {
+  position:relative; z-index:6; margin-top:0.5rem;
+  font-family:'Cinzel Decorative',serif; font-size:1.4rem; font-weight:700;
+  color:#fff; text-shadow:0 0 20px currentColor; opacity:0;
+  transition:opacity 0.5s 1s;
+  text-align:center;
+}
+
+#revealActions {
+  position:relative; z-index:6; margin-top:2rem;
+  display:flex; gap:1rem; opacity:0; transition:opacity 0.5s 1.5s;
+}
+.rev-btn {
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+  color:#fff; font-family:'Cinzel',serif; font-size:0.8rem; letter-spacing:2px;
+  padding:0.7rem 1.5rem; cursor:pointer; text-transform:uppercase;
+  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+  transition:all 0.3s;
+}
+.rev-btn:hover { background:rgba(255,255,255,0.2); }
+.rev-btn.gold { background:linear-gradient(135deg,var(--gold),#b8860b); color:#000; border:none; }
+
+/* ── ORB SHAKE ── */
+@keyframes shake {
+  0%,100%{transform:translate(0,0) rotate(0)}
+  10%{transform:translate(-8px,-4px) rotate(-3deg)}
+  20%{transform:translate(8px,4px) rotate(3deg)}
+  30%{transform:translate(-6px,6px) rotate(-2deg)}
+  40%{transform:translate(6px,-6px) rotate(2deg)}
+  50%{transform:translate(-10px,2px) rotate(-4deg)}
+  60%{transform:translate(10px,-2px) rotate(4deg)}
+  70%{transform:translate(-4px,8px) rotate(-1deg)}
+  80%{transform:translate(4px,-8px) rotate(1deg)}
+  90%{transform:translate(-2px,4px) rotate(-2deg)}
+}
+
+.orb-shake { animation:shake 0.6s ease !important; }
+
+/* ── MULTI REVEAL (x10) ── */
+#multiScreen {
+  position:fixed; inset:0; z-index:40;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; gap:1.5rem;
+}
+
+.multi-grid {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:0.6rem;
+  max-width:min(600px,95vw);
+}
+
+.mini-card {
+  aspect-ratio:2/3; border-radius:4px; overflow:hidden; position:relative;
+  transform:scale(0) rotate(var(--r,0deg)); opacity:0;
+  transition:transform 0.4s cubic-bezier(0.2,0.8,0.3,1), opacity 0.4s ease;
+  cursor:pointer;
+}
+.mini-card img { width:100%; height:100%; object-fit:cover; }
+.mini-card .mini-rarity {
+  position:absolute; bottom:0; left:0; right:0; padding:0.3rem;
+  font-size:0.55rem; letter-spacing:1px; text-transform:uppercase; font-weight:700;
+  text-align:center; background:rgba(0,0,0,0.7); font-family:'Rajdhani',sans-serif;
+}
+.mini-card.show { transform:scale(1) rotate(0deg); opacity:1; }
+
+.multi-close {
+  background:linear-gradient(135deg,var(--gold),#b8860b); color:#000; border:none;
+  font-family:'Cinzel',serif; font-weight:700; font-size:0.85rem; letter-spacing:2px;
+  padding:0.8rem 2rem; cursor:pointer;
+  clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  opacity:0; transition:opacity 0.5s; text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div class="vignette"></div>
+<div id="flashOverlay"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">SLIME BREAKER</a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<!-- MAIN STAGE -->
+<div id="stage">
+  <!-- Collection stats -->
+  <div class="collection-bar">
+    <div class="col-stat"><div class="col-num" id="totalRolls" style="color:var(--gold)">0</div><div class="col-label">Total Rolls</div></div>
+    <div class="col-stat"><div class="col-num" id="countLegend" style="color:var(--legend-c)">0</div><div class="col-label">Legend</div></div>
+    <div class="col-stat"><div class="col-num" id="countMythic" style="color:var(--mythic-c)">0</div><div class="col-label">Mythic</div></div>
+  </div>
+
+  <!-- ORB -->
+  <div id="orbWrap" onclick="roll(1)">
+    <div class="bh-outer"></div>
+    <div class="bh-ring bh-ring-1"></div>
+    <div class="bh-ring bh-ring-2"></div>
+    <div class="bh-ring bh-ring-3"></div>
+    <canvas id="bhCanvas" width="240" height="240"></canvas>
+    <div class="bh-horizon"></div>
+  </div>
+
+  <div class="tap-hint">Tap the orb to summon</div>
+
+  <!-- ROLL BUTTONS -->
+  <div class="roll-btns">
+    <button class="roll-btn" onclick="roll(1)">Summon ×1</button>
+    <button class="roll-btn x10" onclick="roll(10)">Summon ×10</button>
+  </div>
+</div>
+
+<!-- SINGLE REVEAL SCREEN -->
+<div id="revealScreen">
+  <div id="revealBg"></div>
+  <div class="reveal-particles" id="revealParticles"></div>
+  <div id="cardGlow"></div>
+  <div id="cardFlipWrap" onclick="flipCard()">
+    <div id="cardFlip">
+      <div class="card-face card-back">
+        <div class="card-back-symbol">✦</div>
+      </div>
+      <div class="card-face card-front">
+        <img id="revealImg" src="" alt="">
+      </div>
+    </div>
+  </div>
+  <div id="rarityLabel"></div>
+  <div id="cardName"></div>
+  <div id="revealActions">
+    <button class="rev-btn" onclick="rollAgain()">Roll Again</button>
+    <button class="rev-btn gold" onclick="closeReveal()">Collect</button>
+  </div>
+</div>
+
+<!-- MULTI REVEAL SCREEN -->
+<div id="multiScreen">
+  <div class="multi-grid" id="multiGrid"></div>
+  <button class="multi-close" id="multiClose" onclick="closeMulti()">Collect All</button>
+</div>
+
+<script>
+// ── BLACK HOLE SWIRL CANVAS ──
+const bhCanvas = document.getElementById('bhCanvas');
+const bhCtx = bhCanvas.getContext('2d');
+const bhW = 240, bhH = 240, bhCX = bhW/2, bhCY = bhH/2;
+
+const swirlers = Array.from({length:120}, (_, i) => ({
+  angle: Math.random() * Math.PI * 2,
+  radius: 30 + Math.random() * 85,
+  speed: (0.004 + Math.random() * 0.008) * (Math.random()<0.5?1:-1),
+  size: Math.random() * 1.5 + 0.3,
+  color: [
+    `rgba(240,${100+~~(Math.random()*100)},0,`,
+    `rgba(${100+~~(Math.random()*80)},0,${180+~~(Math.random()*75)},`,
+    `rgba(0,${150+~~(Math.random()*80)},${200+~~(Math.random()*55)},`,
+    `rgba(${220+~~(Math.random()*35)},${180+~~(Math.random()*40)},0,`,
+  ][~~(Math.random()*4)],
+  alpha: Math.random() * 0.5 + 0.2,
+  life: Math.random(),
+}));
+
+(function bhLoop() {
+  bhCtx.clearRect(0, 0, bhW, bhH);
+
+  // Outer glow halo
+  const halo = bhCtx.createRadialGradient(bhCX, bhCY, 55, bhCX, bhCY, 115);
+  halo.addColorStop(0, 'rgba(0,0,0,0)');
+  halo.addColorStop(0.4, 'rgba(80,0,160,0.06)');
+  halo.addColorStop(0.7, 'rgba(168,85,247,0.04)');
+  halo.addColorStop(1, 'rgba(0,0,0,0)');
+  bhCtx.fillStyle = halo;
+  bhCtx.fillRect(0, 0, bhW, bhH);
+
+  swirlers.forEach(s => {
+    // Spiral inward as they orbit
+    s.radius -= 0.012;
+    s.angle += s.speed * (80 / Math.max(s.radius, 20));
+    s.life += 0.008;
+    if (s.radius < 20 || s.life > 1) {
+      s.radius = 60 + Math.random() * 55;
+      s.angle = Math.random() * Math.PI * 2;
+      s.life = 0;
+    }
+
+    const x = bhCX + Math.cos(s.angle) * s.radius;
+    const y = bhCY + Math.sin(s.angle) * s.radius * 0.3; // flatten = disk shape
+    const fade = Math.sin(s.life * Math.PI);
+    const dist = s.radius / 115;
+    const a = s.alpha * fade * (0.3 + dist * 0.7);
+
+    bhCtx.beginPath();
+    bhCtx.arc(x, y, s.size * (0.5 + dist * 0.8), 0, Math.PI * 2);
+    bhCtx.fillStyle = s.color + a + ')';
+    bhCtx.fill();
+  });
+
+  // Dark center mask
+  const mask = bhCtx.createRadialGradient(bhCX, bhCY, 0, bhCX, bhCY, 62);
+  mask.addColorStop(0, 'rgba(0,0,0,1)');
+  mask.addColorStop(0.7, 'rgba(0,0,0,0.95)');
+  mask.addColorStop(0.85, 'rgba(0,0,0,0.5)');
+  mask.addColorStop(1, 'rgba(0,0,0,0)');
+  bhCtx.fillStyle = mask;
+  bhCtx.fillRect(0, 0, bhW, bhH);
+
+  requestAnimationFrame(bhLoop);
+})();
+
+
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
+window.addEventListener('resize', () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
+
+const pts = Array.from({length:120}, () => ({
+  x:Math.random()*W, y:Math.random()*H,
+  vx:(Math.random()-.5)*.15, vy:-Math.random()*.2-.03,
+  r:Math.random()*1.2+.3,
+  c:['rgba(240,192,64,','rgba(168,85,247,','rgba(0,200,255,','rgba(255,80,40,'][~~(Math.random()*4)],
+  a:Math.random()*.4+.1, p:Math.random()*Math.PI*2
+}));
+
+(function loop(){
+  ctx.fillStyle='rgba(0,0,0,0.12)'; ctx.fillRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.p+=.015; p.x+=p.vx; p.y+=p.vy;
+    if(p.y<-5){p.y=H+5;p.x=Math.random()*W;}
+    const a=p.a*(Math.sin(p.p)*.4+.6);
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.c+a+')'; ctx.fill();
+  });
+  requestAnimationFrame(loop);
+})();
+
+// ── CARD DATA ──
+const validNums = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,27,29,30,31,32,34,35];
+const CARDS = validNums.map(n => ({
+  name: 'Slime #' + String(n).padStart(3,'0'),
+  rarity: 'common',
+  img: 'assets/card_' + String(n).padStart(3,'0') + '.png',
+  w: 1
+}));
+
+const RARITY_COLOR = { common:'#f0c040' };
+const RARITY_BG = { common:'rgba(240,192,64,0.1)' };
+
+// Stats
+let totalRolls=0, countLegend=0, countMythic=0;
+const collection = {};
+
+// ── RANDOM ──
+function drawCard() {
+  return CARDS[Math.floor(Math.random()*CARDS.length)];
+}
+
+// ── HELPERS ──
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+
+function flashScreen(color='rgba(255,255,255,0.8)', dur=120) {
+  const f=document.getElementById('flashOverlay');
+  f.style.background=color; f.style.opacity='1';
+  setTimeout(()=>f.style.opacity='0', dur);
+}
+
+function spawnParticles(container, color, n=20) {
+  container.innerHTML='';
+  for(let i=0;i<n;i++){
+    const p=document.createElement('div');
+    const size=Math.random()*6+2;
+    const angle=Math.random()*Math.PI*2;
+    const dist=100+Math.random()*200;
+    const startX=40+Math.random()*20+'%';
+    const startY=30+Math.random()*20+'%';
+    p.style.cssText=`
+      position:absolute;left:${startX};top:${startY};
+      width:${size}px;height:${size}px;border-radius:50%;
+      background:${color};opacity:1;
+      transition:transform ${0.6+Math.random()*0.8}s cubic-bezier(0.2,0.8,0.3,1), opacity ${0.8+Math.random()*0.4}s ease;
+    `;
+    container.appendChild(p);
+    setTimeout(()=>{
+      p.style.transform=`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px) scale(0)`;
+      p.style.opacity='0';
+    },50+i*20);
+  }
+}
+
+function orbShake() {
+  const orb=document.getElementById('orbWrap');
+  orb.classList.add('orb-shake');
+  setTimeout(()=>orb.classList.remove('orb-shake'),700);
+}
+
+let isRolling=false;
+let currentCard=null;
+
+// ── SINGLE ROLL ──
+async function roll(n) {
+  if(isRolling) return;
+  isRolling=true;
+
+  if(n===1) {
+    await singleRoll();
+  } else {
+    await multiRoll(n);
+  }
+}
+
+async function singleRoll() {
+  const card = drawCard();
+  currentCard = card;
+  totalRolls++;
+  if(card.rarity==='legend') countLegend++;
+  if(card.rarity==='mythic') countMythic++;
+  updateStats();
+
+  // Shake orb
+  orbShake();
+
+  // Flash based on rarity
+  const flashColors = {
+    common:'rgba(200,200,200,0.3)',
+    rare:'rgba(59,130,246,0.5)',
+    epic:'rgba(168,85,247,0.6)',
+    legend:'rgba(240,192,64,0.7)',
+    mythic:'rgba(255,34,68,0.8)'
+  };
+
+  await wait(300);
+  flashScreen(flashColors[card.rarity], 200);
+  if(['epic','legend','mythic'].includes(card.rarity)) {
+    await wait(200);
+    flashScreen(flashColors[card.rarity], 150);
+  }
+  if(['legend','mythic'].includes(card.rarity)) {
+    await wait(150);
+    flashScreen(flashColors[card.rarity], 200);
+  }
+
+  await wait(300);
+  showReveal(card);
+}
+
+function showReveal(card) {
+  const screen = document.getElementById('revealScreen');
+  const revBg = document.getElementById('revealBg');
+  const cardGlow = document.getElementById('cardGlow');
+  const rarityLabel = document.getElementById('rarityLabel');
+  const cardName = document.getElementById('cardName');
+  const actions = document.getElementById('revealActions');
+  const particles = document.getElementById('revealParticles');
+  const flip = document.getElementById('cardFlip');
+  const img = document.getElementById('revealImg');
+
+  const color = RARITY_COLOR[card.rarity];
+
+  // Reset flip
+  flip.classList.remove('flipped');
+  img.src = card.img;
+  rarityLabel.style.opacity='0';
+  cardName.style.opacity='0';
+  actions.style.opacity='0';
+  cardGlow.style.opacity='0';
+
+  // Set colors
+  revBg.style.background = `radial-gradient(ellipse at center, ${RARITY_BG[card.rarity]} 0%, rgba(0,0,0,0.95) 70%)`;
+  cardGlow.style.background = color;
+  rarityLabel.style.color = color;
+  rarityLabel.textContent = '— '+card.rarity.toUpperCase()+' —';
+  cardName.textContent = card.name;
+  cardName.style.color = color;
+
+  // Show screen
+  screen.style.pointerEvents='all';
+  screen.style.opacity='1';
+  revBg.style.opacity='1';
+
+  // Auto flip after 1s for epic+
+  const autoFlip = ['epic','legend','mythic'].includes(card.rarity) ? 800 : 1200;
+  setTimeout(()=>{
+    flip.classList.add('flipped');
+    setTimeout(()=>{
+      cardGlow.style.opacity='0.6';
+      rarityLabel.style.opacity='1';
+      cardName.style.opacity='1';
+      actions.style.opacity='1';
+      spawnParticles(particles, color, card.rarity==='mythic'?40:card.rarity==='legend'?28:16);
+    },500);
+  }, autoFlip);
+}
+
+function flipCard() {
+  const flip = document.getElementById('cardFlip');
+  if(!flip.classList.contains('flipped')) {
+    flip.classList.add('flipped');
+    const card = currentCard;
+    const color = RARITY_COLOR[card.rarity];
+    setTimeout(()=>{
+      document.getElementById('cardGlow').style.opacity='0.6';
+      document.getElementById('rarityLabel').style.opacity='1';
+      document.getElementById('cardName').style.opacity='1';
+      document.getElementById('revealActions').style.opacity='1';
+      spawnParticles(document.getElementById('revealParticles'), color, 20);
+    },400);
+  }
+}
+
+function closeReveal() {
+  const screen = document.getElementById('revealScreen');
+  screen.style.opacity='0';
+  screen.style.pointerEvents='none';
+  document.getElementById('revealBg').style.opacity='0';
+  isRolling=false;
+}
+
+function rollAgain() {
+  closeReveal();
+  setTimeout(()=>roll(1),400);
+}
+
+// ── MULTI ROLL ──
+async function multiRoll(n) {
+  const cards = Array.from({length:n},()=>drawCard());
+  totalRolls+=n;
+  cards.forEach(c=>{
+    if(c.rarity==='legend') countLegend++;
+    if(c.rarity==='mythic') countMythic++;
+  });
+  updateStats();
+
+  orbShake();
+
+  // Dramatic flash sequence
+  flashScreen('rgba(168,85,247,0.4)', 200);
+  await wait(250);
+  flashScreen('rgba(240,192,64,0.5)', 150);
+  await wait(200);
+  flashScreen('rgba(255,255,255,0.6)', 200);
+  await wait(400);
+
+  showMulti(cards);
+}
+
+function showMulti(cards) {
+  const screen = document.getElementById('multiScreen');
+  const grid = document.getElementById('multiGrid');
+  const closeBtn = document.getElementById('multiClose');
+
+  grid.innerHTML='';
+  closeBtn.style.opacity='0';
+
+  screen.style.opacity='1';
+  screen.style.pointerEvents='all';
+
+  // Determine highest rarity for bg
+  const rarityOrder = ['common','rare','epic','legend','mythic'];
+  const highest = cards.reduce((h,c)=>rarityOrder.indexOf(c.rarity)>rarityOrder.indexOf(h)?c.rarity:h,'common');
+  screen.style.background=`radial-gradient(ellipse at center,${RARITY_BG[highest]} 0%,rgba(0,0,0,0.97) 70%)`;
+
+  cards.forEach((card,i)=>{
+    const div=document.createElement('div');
+    div.className='mini-card';
+    div.style.setProperty('--r',(Math.random()*20-10)+'deg');
+    div.style.boxShadow=`0 0 0 1px ${RARITY_COLOR[card.rarity]}66, 0 0 15px ${RARITY_COLOR[card.rarity]}33`;
+    div.innerHTML=`
+      <img src="${card.img}" alt="${card.name}" loading="lazy">
+      <div class="mini-rarity" style="color:${RARITY_COLOR[card.rarity]}">${card.rarity}</div>
+    `;
+    grid.appendChild(div);
+
+    setTimeout(()=>{
+      div.classList.add('show');
+      if(['legend','mythic'].includes(card.rarity)) flashScreen(RARITY_COLOR[card.rarity]+'88',100);
+    }, 100+i*120);
+  });
+
+  setTimeout(()=>closeBtn.style.opacity='1', 100+cards.length*120+500);
+}
+
+function closeMulti() {
+  const screen=document.getElementById('multiScreen');
+  screen.style.opacity='0';
+  screen.style.pointerEvents='none';
+  isRolling=false;
+}
+
+function updateStats() {
+  document.getElementById('totalRolls').textContent=totalRolls;
+  document.getElementById('countLegend').textContent=countLegend;
+  document.getElementById('countMythic').textContent=countMythic;
+}
+</script>
+</body>
+</html>
