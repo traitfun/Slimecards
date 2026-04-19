@@ -512,24 +512,26 @@ html, body {
 }
 #multi-screen.active { display: flex; }
 #multi-grid {
-  display: flex; gap: 0.6rem; flex-wrap: wrap;
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
   justify-content: center;
-  max-width: 800px;
-  padding: 0 1.5rem;
+  max-width: 600px;
+  padding: 0 1rem;
 }
 .mc {
-  width: 90px;
+  width: 110px;
   border: 1px solid rgba(255,255,255,0.08);
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px) scale(0.9);
-  transition: opacity 0.4s ease, transform 0.4s ease;
   cursor: pointer;
+  transition: filter 0.2s, transform 0.2s, opacity 0.4s ease, box-shadow 0.2s;
   filter: saturate(0.8);
-  transition: filter 0.2s, transform 0.2s, opacity 0.4s, transform 0.4s;
 }
-.mc:hover { filter: saturate(1); transform: translateY(-3px) scale(1)!important; }
+.mc:hover { filter: saturate(1); transform: translateY(-3px) scale(1.02) !important; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
 .mc img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+.mc-info { padding: 0.35rem 0.4rem; background: rgba(5,7,13,0.9); }
+.mc-rarity { font-size: 0.5rem; letter-spacing: 0.15em; font-weight: 600; font-family: 'DM Mono', monospace; }
+.mc-name { font-size: 0.62rem; color: rgba(230,234,242,0.8); font-family: 'Cormorant Garamond', serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mc.visible { opacity: 1; transform: translateY(0) scale(1); }
 #multi-close {
   padding: 0.65rem 2.5rem;
@@ -617,7 +619,7 @@ body::after {
     <!-- Buttons -->
     <div id="btns">
       <button class="summon-btn" onclick="summon(1)">Summon</button>
-      <button class="summon-btn x10" onclick="summon(10)">× 10</button>
+      <button class="summon-btn x10" onclick="summon(5)">× 5</button>
     </div>
   </div>
 </div>
@@ -894,16 +896,20 @@ async function multiReveal(cards) {
     const div = document.createElement('div');
     div.className = 'mc';
     const col = RARITY_COLOR[c.rarity];
-    div.style.borderColor = col + '33';
-    div.innerHTML = `<img src="${cardImg(c.id)}" onerror="this.style.background='#0d1018'">`;
-    div.title = `${c.name} · ${c.rarity}`;
+    div.style.borderColor = col + '44';
+    div.innerHTML = `
+      <img src="${cardImg(c.id)}" onerror="this.style.background='#0d1018'">
+      <div class="mc-info">
+        <div class="mc-rarity" style="color:${col}">${c.rarity.toUpperCase()}</div>
+        <div class="mc-name">${c.name}</div>
+      </div>`;
     div.onclick = () => div.style.filter = 'saturate(1)';
     grid.appendChild(div);
 
-    setTimeout(() => div.classList.add('visible'), i * 80 + 100);
+    setTimeout(() => div.classList.add('visible'), i * 120 + 100);
   });
 
-  setTimeout(() => closeBtn.classList.add('visible'), 600);
+  setTimeout(() => closeBtn.classList.add('visible'), cards.length * 120 + 400);
 }
 
 function closeMulti() {
