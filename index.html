@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SLIME BREAKER</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&family=Rajdhani:wght@300;400;600;700&family=DM+Mono:wght@300;400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#f0c040;--gold2:#ffd700;--dark:#080810;--dark2:#0d0d1a;--purple2:#a855f7;--cyan:#00e5ff;--red:#ff2244;--green:#00ff88;--rare:#3b82f6;--epic:#a855f7;--legend:#f0c040;--mythic:#ff2244;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -269,8 +269,143 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .listing-price span:last-child{font-family:'Cinzel',serif;color:var(--gold);}
 
 /* ═══════════ PROFILE ═══════════ */
-.profile-wrap{max-width:780px;margin:0 auto;padding:0 1.5rem 5rem;display:flex;flex-direction:column;gap:1.3rem;}
-.wallet-box{background:rgba(255,255,255,0.03);border:1px solid rgba(240,192,64,0.18);padding:2rem;text-align:center;}
+/* ══ PROFILE PAGE ══ */
+.profile-wrap{max-width:520px;margin:0 auto;padding:0 1rem 5rem;display:flex;flex-direction:column;gap:1rem;}
+/* Top bar strip */
+.prf-topbar{display:grid;grid-template-columns:1fr auto;gap:0.8rem;align-items:center;padding:0.75rem 1rem;background:rgba(6,8,15,0.7);border:1px solid rgba(255,255,255,0.07);margin-bottom:0;}
+.prf-ps{display:flex;flex-direction:column;gap:4px;}
+.prf-level{display:flex;align-items:center;gap:7px;}
+.prf-lv-pill{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.12em;padding:2px 8px;background:rgba(198,168,90,0.1);border:1px solid rgba(198,168,90,0.35);color:var(--gold);}
+.prf-lv-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace;}
+.prf-energy{display:flex;align-items:center;gap:6px;}
+.prf-e-lbl{font-size:10px;color:rgba(255,255,255,0.25);font-family:'DM Mono',monospace;white-space:nowrap;}
+.prf-e-track{flex:1;max-width:70px;height:2px;background:rgba(255,255,255,0.07);}
+.prf-e-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),var(--gold));width:70%;}
+/* Right active slime */
+.prf-as{display:flex;align-items:center;gap:8px;}
+.prf-avatar{width:40px;aspect-ratio:2/3;border:1px solid rgba(198,168,90,0.3);overflow:hidden;cursor:pointer;position:relative;flex-shrink:0;transition:border-color 0.2s,box-shadow 0.2s;}
+.prf-avatar:hover{border-color:var(--gold);box-shadow:0 0 14px rgba(198,168,90,0.18);}
+.prf-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+.prf-avatar::after{content:'▾';position:absolute;bottom:0;right:0;font-size:7px;color:rgba(198,168,90,0.7);background:rgba(0,0,0,0.5);padding:1px 2px;}
+.prf-info{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.prf-tag{font-size:8px;letter-spacing:0.28em;text-transform:uppercase;color:#22d3ee;opacity:0.65;font-family:'DM Mono',monospace;}
+.prf-slime-name{font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:85px;}
+.prf-hp-row{display:flex;align-items:center;gap:5px;}
+.prf-hp-track{flex:1;height:3px;background:rgba(255,255,255,0.07);overflow:hidden;}
+.prf-hp-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);transition:width 0.4s,background 0.4s;}
+.prf-hp-fill.med{background:linear-gradient(90deg,#fbbf24,#fde68a);}
+.prf-hp-fill.low{background:linear-gradient(90deg,#f87171,#fca5a5);}
+.prf-hp-num{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);white-space:nowrap;}
+.prf-heal-btn{width:28px;height:28px;flex-shrink:0;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all 0.2s;}
+.prf-heal-btn:hover{background:rgba(52,211,153,0.14);border-color:rgba(52,211,153,0.45);}
+.prf-heal-btn:active{transform:scale(0.9);}
+/* Overview card */
+.prf-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1rem 1.1rem;position:relative;overflow:hidden;}
+.prf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,168,90,0.25),transparent);}
+.prf-ov-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.9rem;}
+.prf-wallet{font-family:'DM Mono',monospace;font-size:13px;color:#e2ddd6;}
+.prf-wallet em{color:var(--gold);font-style:normal;}
+.prf-wallet-sub{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:3px;font-family:'DM Mono',monospace;}
+.prf-rank{padding:3px 9px;border:1px solid rgba(180,105,45,0.45);font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#d08040;background:rgba(180,105,45,0.06);}
+.prf-ov-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.prf-stat{text-align:center;padding:8px 5px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);}
+.prf-stat-num{font-family:'Cinzel',serif;font-size:16px;font-weight:500;color:#e2ddd6;}
+.prf-stat-key{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:3px;}
+/* Active slime showcase */
+.prf-showcase{border-color:rgba(198,168,90,0.18);overflow:hidden;}
+.prf-sc-head{display:flex;align-items:center;gap:7px;padding:7px 12px;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(198,168,90,0.03);}
+.prf-sc-dot{width:6px;height:6px;border-radius:50%;background:#22d3ee;box-shadow:0 0 8px #22d3ee;animation:prfPulse 2.2s ease-in-out infinite;}
+@keyframes prfPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
+.prf-sc-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#22d3ee;}
+.prf-sc-body{display:grid;grid-template-columns:90px 1fr;}
+.prf-sc-img{position:relative;overflow:hidden;}
+.prf-sc-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82) brightness(0.9);}
+.prf-sc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(6,8,15,0.7) 100%),linear-gradient(0deg,rgba(6,8,15,0.3) 0%,transparent 40%);}
+.prf-sc-data{padding:12px 13px;display:flex;flex-direction:column;justify-content:center;gap:7px;}
+.prf-sc-name{font-family:'Cinzel',serif;font-size:14px;font-weight:500;color:#e2ddd6;line-height:1.1;}
+.prf-sc-lv{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:-2px;}
+.prf-sc-hp{display:flex;flex-direction:column;gap:4px;}
+.prf-sc-hp-top{display:flex;justify-content:space-between;align-items:baseline;}
+.prf-sc-hp-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
+.prf-sc-hp-val{font-family:'DM Mono',monospace;font-size:12px;color:#34d399;transition:color 0.3s;}
+.prf-sc-hp-val.med{color:#fbbf24;}.prf-sc-hp-val.low{color:#f87171;}
+.prf-sc-track{height:5px;background:rgba(255,255,255,0.07);overflow:hidden;}
+.prf-sc-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);transition:width 0.4s,background 0.4s;}
+.prf-sc-fill.med{background:linear-gradient(90deg,#fbbf24,#fde68a);}
+.prf-sc-fill.low{background:linear-gradient(90deg,#f87171,#fca5a5);}
+.prf-sc-buff{font-size:10px;color:rgba(34,211,238,0.45);font-style:italic;}
+/* Bottom tabs */
+.prf-tabs{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);}
+.prf-tab{padding:9px 4px;text-align:center;cursor:pointer;border-top:2px solid transparent;transition:all 0.2s;}
+.prf-tab:hover{background:rgba(255,255,255,0.02);}
+.prf-tab.on{border-top-color:var(--gold);background:rgba(198,168,90,0.04);}
+.prf-tab-ico{font-size:16px;}
+.prf-tab-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:3px;}
+.prf-tab.on .prf-tab-lbl{color:var(--gold);}
+/* Tab panels */
+.prf-panel{display:none;flex-direction:column;gap:8px;}
+.prf-panel.on{display:flex;}
+.prf-sec-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);}
+/* Materials */
+.prf-mat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.prf-mat{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;cursor:pointer;transition:border-color 0.2s;}
+.prf-mat:hover{border-color:rgba(255,255,255,0.13);}
+.prf-mat-ico{font-size:20px;}
+.prf-mat-amt{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;}
+.prf-mat-nm{font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;}
+/* Consumables */
+.prf-cons-list{display:flex;flex-direction:column;gap:6px;}
+.prf-con{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 11px;transition:border-color 0.2s;}
+.prf-con:hover{border-color:rgba(255,255,255,0.1);}
+.prf-con-ico{font-size:20px;flex-shrink:0;}
+.prf-con-body{flex:1;}
+.prf-con-name{font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;}
+.prf-con-desc{font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px;font-style:italic;}
+.prf-con-qty{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);flex-shrink:0;}
+.prf-use-btn{padding:4px 9px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.prf-use-g{background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.25);color:#34d399;}
+.prf-use-g:hover{background:rgba(52,211,153,0.14);border-color:rgba(52,211,153,0.45);}
+.prf-use-gold{background:rgba(198,168,90,0.07);border:1px solid rgba(198,168,90,0.25);color:var(--gold);}
+.prf-use-gold:hover{background:rgba(198,168,90,0.14);border-color:rgba(198,168,90,0.45);}
+.prf-use-btn:active{transform:scale(0.94);}
+/* Cards mini */
+.prf-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;}
+.prf-mini-card{border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;filter:saturate(0.7);transition:all 0.22s;}
+.prf-mini-card:hover{filter:saturate(1);transform:translateY(-2px);}
+.prf-mini-card.active{border-color:var(--gold);filter:saturate(1);}
+.prf-mini-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+/* Pets */
+.prf-pets-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;}
+.prf-pet{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:8px 10px;cursor:pointer;transition:border-color 0.2s;}
+.prf-pet:hover{border-color:rgba(198,168,90,0.25);}
+.prf-pet.active-pet{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.03);}
+.prf-pet-thumb{width:34px;aspect-ratio:2/3;overflow:hidden;border:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+.prf-pet-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8);}
+.prf-pet-meta{flex:1;min-width:0;}
+.prf-pet-nm{font-family:'Cinzel',serif;font-size:10px;color:#e2ddd6;}
+.prf-pet-sk{font-size:9px;color:rgba(198,168,90,0.5);margin-top:2px;}
+.prf-pet-lv{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);margin-top:2px;}
+/* Select modal */
+#prf-modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;padding:1rem;}
+#prf-modal.open{display:flex;}
+.prf-sheet{width:100%;max-width:520px;background:#0a0d16;border:1px solid rgba(255,255,255,0.07);border-bottom:none;padding:1.2rem 1rem 2rem;animation:prfRise 0.28s cubic-bezier(0.2,0,0.1,1);position:relative;}
+.prf-sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,168,90,0.28),transparent);}
+@keyframes prfRise{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.prf-sheet-title{font-family:'Cinzel',serif;font-size:14px;font-weight:500;color:#e2ddd6;margin-bottom:3px;}
+.prf-sheet-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:14px;}
+.prf-modal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.prf-modal-card{cursor:pointer;border:1px solid rgba(255,255,255,0.07);overflow:hidden;filter:saturate(0.65);transition:all 0.22s;}
+.prf-modal-card:hover{filter:saturate(0.9);transform:translateY(-2px);}
+.prf-modal-card.sel{border-color:var(--gold);filter:saturate(1);box-shadow:0 0 12px rgba(198,168,90,0.14);}
+.prf-modal-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+.prf-modal-lbl{font-family:'DM Mono',monospace;font-size:8px;padding:3px 4px;background:rgba(5,7,13,0.9);color:rgba(255,255,255,0.25);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
+.prf-close-btn{width:100%;margin-top:12px;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.25);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.prf-close-btn:hover{border-color:rgba(255,255,255,0.16);color:rgba(255,255,255,0.5);}
+/* Toast */
+#prf-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:5px 16px;z-index:400;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;opacity:0;transition:opacity 0.25s;pointer-events:none;white-space:nowrap;}
+#prf-toast.green{background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);color:#34d399;}
+#prf-toast.gold{background:rgba(198,168,90,0.12);border:1px solid rgba(198,168,90,0.3);color:var(--gold);}
+#prf-toast.show{opacity:1;}
 .wallet-icon{font-size:2.8rem;margin-bottom:0.7rem;}
 .wallet-label{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:1.2rem;}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:0.9rem;}
@@ -839,32 +974,141 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <!-- ══ PROFILE ══ -->
 <div class="page" id="page-profile">
   <div class="profile-wrap">
-    <div class="wallet-box"><div class="wallet-icon">👛</div><div class="wallet-label">Connect Your Wallet</div><button class="btn-primary">Connect Wallet</button></div>
-    <div class="stats-grid">
-      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">Slimes Owned</div></div>
-      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">Dungeon Runs</div></div>
-      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">$SLIME Earned</div></div>
-      <div class="stat-box"><div class="stat-box-num">0</div><div class="stat-box-label">Items Crafted</div></div>
-    </div>
-    <div>
-      <div class="inv-label">🎒 Inventory</div>
-      <div class="inv-grid">
-        <div class="inv-slot"><span>🧪</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot"><span>⚗️</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot"><span>🔮</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot"><span>⚡</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot"><span>🪨</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot"><span>⚙️</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot"><span>💎</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot"><span>✨</span><span class="inv-qty">×0</span></div>
-        <div class="inv-slot empty">+</div>
-        <div class="inv-slot empty">+</div>
-        <div class="inv-slot empty">+</div>
-        <div class="inv-slot empty">+</div>
+
+    <!-- Top bar strip -->
+    <div class="prf-topbar">
+      <div class="prf-ps">
+        <div class="prf-level">
+          <div class="prf-lv-pill">Lv 12</div>
+          <div class="prf-lv-title">Commander</div>
+        </div>
+        <div class="prf-energy">
+          <span style="font-size:10px;opacity:.45">⚡</span>
+          <span class="prf-e-lbl">70 / 100</span>
+          <div class="prf-e-track"><div class="prf-e-fill"></div></div>
+        </div>
+      </div>
+      <div class="prf-as">
+        <div class="prf-avatar" onclick="prfOpenModal()">
+          <img id="prf-tb-img" src="assets/card/card_001.png" onerror="this.style.background='#0d1018'">
+        </div>
+        <div class="prf-info">
+          <div class="prf-tag">Active</div>
+          <div class="prf-slime-name" id="prf-tb-name">Ivory Swordsman</div>
+          <div class="prf-hp-row">
+            <div class="prf-hp-track">
+              <div class="prf-hp-fill" id="prf-tb-hp" style="width:40%"></div>
+            </div>
+            <span class="prf-hp-num" id="prf-tb-txt">40/100</span>
+          </div>
+        </div>
+        <button class="prf-heal-btn" onclick="prfHeal(20)">🧪</button>
       </div>
     </div>
+
+    <!-- Player Overview -->
+    <div class="prf-card">
+      <div class="prf-ov-top">
+        <div>
+          <div class="prf-wallet"><em>0xA91</em>...F3D</div>
+          <div class="prf-wallet-sub">Slime Breaker · Base Network</div>
+        </div>
+        <div class="prf-rank">🏅 Bronze</div>
+      </div>
+      <div class="prf-ov-stats">
+        <div class="prf-stat"><div class="prf-stat-num">2,450</div><div class="prf-stat-key">Power</div></div>
+        <div class="prf-stat"><div class="prf-stat-num">18</div><div class="prf-stat-key">Runs</div></div>
+        <div class="prf-stat"><div class="prf-stat-num" style="color:var(--gold)">340</div><div class="prf-stat-key">$SLIME</div></div>
+      </div>
+    </div>
+
+    <!-- Active Slime Showcase -->
+    <div class="prf-card prf-showcase">
+      <div class="prf-sc-head">
+        <div class="prf-sc-dot"></div>
+        <div class="prf-sc-lbl">Active Slime</div>
+      </div>
+      <div class="prf-sc-body">
+        <div class="prf-sc-img"><img id="prf-ss-img" src="assets/card/card_001.png" onerror="this.style.background='#0d1018'"></div>
+        <div class="prf-sc-data">
+          <div>
+            <div class="prf-sc-name" id="prf-ss-name">Ivory Swordsman</div>
+            <div class="prf-sc-lv" id="prf-ss-lv">LV 8 · Common</div>
+          </div>
+          <div class="prf-sc-hp">
+            <div class="prf-sc-hp-top">
+              <span class="prf-sc-hp-lbl">HP</span>
+              <span class="prf-sc-hp-val" id="prf-ss-val">40 / 100</span>
+            </div>
+            <div class="prf-sc-track"><div class="prf-sc-fill" id="prf-ss-hp" style="width:40%"></div></div>
+          </div>
+          <div class="prf-sc-buff">🐾 +5% $SLIME Drop · Shadowfang</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Tabs -->
+    <div class="prf-tabs">
+      <div class="prf-tab on" onclick="prfTab('materials',this)"><div class="prf-tab-ico">🪨</div><div class="prf-tab-lbl">Materials</div></div>
+      <div class="prf-tab" onclick="prfTab('consumables',this)"><div class="prf-tab-ico">🧪</div><div class="prf-tab-lbl">Items</div></div>
+      <div class="prf-tab" onclick="prfTab('cards',this)"><div class="prf-tab-ico">⚔️</div><div class="prf-tab-lbl">Slimes</div></div>
+      <div class="prf-tab" onclick="prfTab('pets',this)"><div class="prf-tab-ico">🐾</div><div class="prf-tab-lbl">Pets</div></div>
+    </div>
+
+    <div class="prf-panel on" id="prf-p-materials">
+      <div class="prf-sec-lbl">Materials</div>
+      <div class="prf-mat-grid">
+        <div class="prf-mat"><div class="prf-mat-ico">🪨</div><div class="prf-mat-amt">×12</div><div class="prf-mat-nm">Stone</div></div>
+        <div class="prf-mat"><div class="prf-mat-ico">⚙️</div><div class="prf-mat-amt">×8</div><div class="prf-mat-nm">Silver Ore</div></div>
+        <div class="prf-mat"><div class="prf-mat-ico">💎</div><div class="prf-mat-amt">×3</div><div class="prf-mat-nm">Crystal</div></div>
+        <div class="prf-mat"><div class="prf-mat-ico">✨</div><div class="prf-mat-amt">×1</div><div class="prf-mat-nm">Void Shard</div></div>
+        <div class="prf-mat"><div class="prf-mat-ico">🌿</div><div class="prf-mat-amt">×6</div><div class="prf-mat-nm">Iron Ore</div></div>
+        <div class="prf-mat"><div class="prf-mat-ico">🔩</div><div class="prf-mat-amt">×4</div><div class="prf-mat-nm">Gold Ore</div></div>
+        <div class="prf-mat"><div class="prf-mat-ico">⭐</div><div class="prf-mat-amt">×0</div><div class="prf-mat-nm">Prime Core</div></div>
+        <div class="prf-mat"><div class="prf-mat-ico">🐾</div><div class="prf-mat-amt">×5</div><div class="prf-mat-nm">Pet Shard</div></div>
+      </div>
+    </div>
+
+    <div class="prf-panel" id="prf-p-consumables">
+      <div class="prf-sec-lbl">Consumables</div>
+      <div class="prf-cons-list">
+        <div class="prf-con"><div class="prf-con-ico">🧪</div><div class="prf-con-body"><div class="prf-con-name">Small Potion</div><div class="prf-con-desc">Restore 20 HP</div></div><div class="prf-con-qty">×4</div><button class="prf-use-btn prf-use-g" onclick="prfHeal(20)">Use</button></div>
+        <div class="prf-con"><div class="prf-con-ico">⚗️</div><div class="prf-con-body"><div class="prf-con-name">Medium Potion</div><div class="prf-con-desc">Restore 50 HP</div></div><div class="prf-con-qty">×1</div><button class="prf-use-btn prf-use-g" onclick="prfHeal(50)">Use</button></div>
+        <div class="prf-con"><div class="prf-con-ico">⚡</div><div class="prf-con-body"><div class="prf-con-name">Stamina Flask</div><div class="prf-con-desc">+30 Energy</div></div><div class="prf-con-qty">×2</div><button class="prf-use-btn prf-use-gold">Use</button></div>
+        <div class="prf-con"><div class="prf-con-ico">🔮</div><div class="prf-con-body"><div class="prf-con-name">Dungeon Token</div><div class="prf-con-desc">+1 Extra dungeon run</div></div><div class="prf-con-qty">×1</div><button class="prf-use-btn prf-use-gold">Use</button></div>
+      </div>
+    </div>
+
+    <div class="prf-panel" id="prf-p-cards">
+      <div class="prf-sec-lbl">Your Slimes</div>
+      <div class="prf-cards-grid" id="prf-cards-grid"></div>
+    </div>
+
+    <div class="prf-panel" id="prf-p-pets">
+      <div class="prf-sec-lbl">Your Pets</div>
+      <div class="prf-pets-grid">
+        <div class="prf-pet active-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_shadowfang.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Shadowfang</div><div class="prf-pet-sk">+5% $SLIME Drop</div><div class="prf-pet-lv">LV 2 — Active</div></div></div>
+        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_frostkit.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Frostkit</div><div class="prf-pet-sk">+3% Loot Box</div><div class="prf-pet-lv">LV 1</div></div></div>
+        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_gearpup.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Gearpup</div><div class="prf-pet-sk">+8% EXP Gain</div><div class="prf-pet-lv">LV 1</div></div></div>
+        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_aquapaw.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Aquapaw</div><div class="prf-pet-sk">+6% HP Regen</div><div class="prf-pet-lv">LV 1</div></div></div>
+        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_pyronix.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Pyronix</div><div class="prf-pet-sk">+5% ATK Bonus</div><div class="prf-pet-lv">LV 1</div></div></div>
+        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_lumikin.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Lumikin</div><div class="prf-pet-sk">+6% Heal</div><div class="prf-pet-lv">LV 1</div></div></div>
+      </div>
+    </div>
+
   </div>
 </div>
+
+<!-- Profile Select Modal -->
+<div id="prf-modal" onclick="prfHandleOverlay(event)">
+  <div class="prf-sheet">
+    <div class="prf-sheet-title">Select Active Slime</div>
+    <div class="prf-sheet-sub">Tap to equip</div>
+    <div class="prf-modal-grid" id="prf-modal-grid"></div>
+    <button class="prf-close-btn" onclick="prfCloseModal()">← Close</button>
+  </div>
+</div>
+<div id="prf-toast"></div>
 
 <script>
 // ── ROUTER ──
@@ -970,24 +1214,9 @@ const cardData = [
   {id:48, name:'Thunder God',       rarity:'mythic'},
   {id:49, name:'Abyssal Serpent',   rarity:'mythic'},
   {id:50, name:'Gladiator Rex',     rarity:'mythic'},
-  // NEW BATCH
-  {id:51, name:'Void Phantom',      rarity:'epic'},
-  {id:52, name:'Jungle Mystic',     rarity:'rare'},
-  {id:53, name:'Pumpkin Reaper',    rarity:'rare'},
-  {id:54, name:'Arctic Wanderer',   rarity:'rare'},
-  {id:55, name:'Inferno Demon',     rarity:'epic'},
-  {id:56, name:'Amber Torch',       rarity:'rare'},
-  {id:57, name:'Necro Warden',      rarity:'epic'},
-  {id:58, name:'Blaze Crusader',    rarity:'rare'},
-  {id:59, name:'Rainbow Unicorn',   rarity:'epic'},
-  {id:60, name:'Swamp Druid',       rarity:'rare'},
-  {id:61, name:'Phantom Reaper',    rarity:'legend'},
-  {id:62, name:'Void Sorcerer',     rarity:'epic'},
-  {id:63, name:'Storm Herald',      rarity:'rare'},
-  {id:64, name:'Celestial Ghost',   rarity:'rare'},
 ];
 
-const cardNums = Array.from({length:64},(_,i)=>i+1);
+const cardNums = Array.from({length:50},(_,i)=>i+1);
 const collGrid = document.getElementById('collGrid');
 const collLevels = {};
 cardData.forEach(c => { collLevels[c.id] = 1; });
@@ -1409,6 +1638,124 @@ async function multiRoll(n){
   setTimeout(()=>closeBtn.style.opacity='1',100+cards.length*120+500);
 }
 function closeMulti(){document.getElementById('multi-overlay').classList.remove('open');isRolling=false;}
+// ── PROFILE SYSTEM ──
+(function(){
+  const NAMES=['Ivory Swordsman','Shadow Rogue','Rose Archer','Crimson Fisher','Silver Knight','Teal Clockwork','Blush Bowman','Indigo Orb','Violet Scribe','Lime Trickster','Scarlet Spearman','Frost Wanderer','Sand Warrior','Glitch Runner','Dark Pilgrim','Dusk Stalker','Sakura Ronin','Navy Anchor','Starfall Mage','Crystal Ghost','Jade Soldier','Paper Golem','Prism Duelist','Origami Titan','Twin Tempest','Fire Emperor','Desert Pharaoh','Astral Keeper','Coral Warden','Aqua Trident','Rainbow Dancer','Inferno Oracle','Bloomblade','Void Paladin','Necro Sovereign','Crystal Empress','Lava Reaper','Celestial Herald','Toxic Gunner','Golden Pharaoh','Moon Phantom','Void Harbinger','Neon Chaos','Arctic Specter','Solar Champion','Grim Specter','Crimson Shogun','Thunder God','Abyssal Serpent','Gladiator Rex'];
+  const RARITY=['Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Legend','Legend','Legend','Legend','Legend','Legend','Legend','Mythic','Mythic','Mythic','Mythic','Mythic'];
+  let prfHp=40, prfMax=100, prfActive=1;
+
+  function hpCls(h,m){const p=h/m;return p>0.5?'':(p>0.25?'med':'low');}
+
+  function prfSyncHP(){
+    const pct=Math.max(0,(prfHp/prfMax)*100);
+    const cls=hpCls(prfHp,prfMax);
+    const tbBar=document.getElementById('prf-tb-hp');
+    if(tbBar){tbBar.style.width=pct+'%';tbBar.className='prf-hp-fill '+cls;}
+    const tbTxt=document.getElementById('prf-tb-txt');
+    if(tbTxt) tbTxt.textContent=prfHp+'/'+prfMax;
+    const ssBar=document.getElementById('prf-ss-hp');
+    if(ssBar){ssBar.style.width=pct+'%';ssBar.className='prf-sc-fill '+cls;}
+    const ssVal=document.getElementById('prf-ss-val');
+    if(ssVal){ssVal.textContent=prfHp+' / '+prfMax;ssVal.className='prf-sc-hp-val '+cls;}
+  }
+
+  window.prfHeal=function(amt){
+    const prev=prfHp;
+    prfHp=Math.min(prfMax,prfHp+amt);
+    prfSyncHP();
+    prfToast(prfHp>prev?'+'+(prfHp-prev)+' HP':'Already full!',prfHp>prev?'green':'gold');
+  };
+
+  window.prfTab=function(name,btn){
+    document.querySelectorAll('.prf-panel').forEach(p=>p.classList.remove('on'));
+    document.querySelectorAll('.prf-tab').forEach(b=>b.classList.remove('on'));
+    const panel=document.getElementById('prf-p-'+name);
+    if(panel) panel.classList.add('on');
+    btn.classList.add('on');
+  };
+
+  let prfToastTimer;
+  window.prfToast=function(msg,type='green'){
+    const el=document.getElementById('prf-toast');
+    if(!el) return;
+    clearTimeout(prfToastTimer);
+    el.textContent=msg; el.className=type+' show';
+    prfToastTimer=setTimeout(()=>el.classList.remove('show'),1800);
+  };
+
+  // Build mini cards grid
+  function buildPrfCards(){
+    const grid=document.getElementById('prf-cards-grid');
+    if(!grid||grid.children.length) return;
+    for(let i=1;i<=12;i++){
+      const d=document.createElement('div');
+      d.className='prf-mini-card'+(i===prfActive?' active':'');
+      d.id='prf-mc-'+i;
+      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.background='#0d1018'">`;
+      d.onclick=()=>prfSetActive(i);
+      grid.appendChild(d);
+    }
+  }
+
+  // Build modal grid
+  function buildPrfModal(){
+    const grid=document.getElementById('prf-modal-grid');
+    if(!grid||grid.children.length) return;
+    for(let i=1;i<=16;i++){
+      const d=document.createElement('div');
+      d.className='prf-modal-card'+(i===prfActive?' sel':'');
+      d.id='prf-md-'+i;
+      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.background='#0d1018'"><div class="prf-modal-lbl">${NAMES[i-1]||'Slime #'+i}</div>`;
+      d.onclick=()=>prfSetActive(i);
+      grid.appendChild(d);
+    }
+  }
+
+  window.prfSetActive=function(id){
+    prfActive=id;
+    const src=`assets/card/card_${String(id).padStart(3,'0')}.png`;
+    const name=NAMES[id-1]||'Slime #'+id;
+    const rar=RARITY[id-1]||'Common';
+    const lv=Math.floor(Math.random()*12)+1;
+    const els={img1:'prf-tb-img',name1:'prf-tb-name',img2:'prf-ss-img',name2:'prf-ss-name',lv:'prf-ss-lv'};
+    if(document.getElementById(els.img1)) document.getElementById(els.img1).src=src;
+    if(document.getElementById(els.name1)) document.getElementById(els.name1).textContent=name;
+    if(document.getElementById(els.img2)) document.getElementById(els.img2).src=src;
+    if(document.getElementById(els.name2)) document.getElementById(els.name2).textContent=name;
+    if(document.getElementById(els.lv)) document.getElementById(els.lv).textContent=`LV ${lv} · ${rar}`;
+    prfHp=Math.floor(Math.random()*65)+20; prfMax=100; prfSyncHP();
+    document.querySelectorAll('.prf-modal-card').forEach(c=>c.classList.remove('sel'));
+    document.querySelectorAll('.prf-mini-card').forEach(c=>c.classList.remove('active'));
+    const md=document.getElementById('prf-md-'+id); if(md) md.classList.add('sel');
+    const mc=document.getElementById('prf-mc-'+id); if(mc) mc.classList.add('active');
+    prfCloseModal();
+    prfToast(name+' equipped','gold');
+  };
+
+  window.prfOpenModal=function(){
+    buildPrfModal();
+    document.getElementById('prf-modal').classList.add('open');
+  };
+  window.prfCloseModal=function(){
+    document.getElementById('prf-modal').classList.remove('open');
+  };
+  window.prfHandleOverlay=function(e){
+    if(e.target===document.getElementById('prf-modal')) prfCloseModal();
+  };
+
+  // Init when profile page is shown
+  const origShowPage=window.showPage;
+  window.showPage=function(name){
+    origShowPage(name);
+    if(name==='profile'){
+      buildPrfCards();
+      buildPrfModal();
+      prfSyncHP();
+    }
+  };
+
+  prfSyncHP();
+})();
 </script>
 </body>
 </html>
