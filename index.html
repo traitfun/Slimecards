@@ -936,9 +936,24 @@ const cardData = [
   {id:48, name:'Thunder God',       rarity:'mythic'},
   {id:49, name:'Abyssal Serpent',   rarity:'mythic'},
   {id:50, name:'Gladiator Rex',     rarity:'mythic'},
+  // NEW BATCH (14 cards)
+  {id:51, name:'Void Phantom',      rarity:'epic'},
+  {id:52, name:'Jungle Mystic',     rarity:'rare'},
+  {id:53, name:'Pumpkin Reaper',    rarity:'rare'},
+  {id:54, name:'Arctic Wanderer',   rarity:'rare'},
+  {id:55, name:'Inferno Demon',     rarity:'epic'},
+  {id:56, name:'Amber Torch',       rarity:'rare'},
+  {id:57, name:'Necro Warden',      rarity:'epic'},
+  {id:58, name:'Blaze Crusader',    rarity:'rare'},
+  {id:59, name:'Rainbow Unicorn',   rarity:'epic'},
+  {id:60, name:'Swamp Druid',       rarity:'rare'},
+  {id:61, name:'Phantom Reaper',    rarity:'legend'},
+  {id:62, name:'Void Sorcerer',     rarity:'epic'},
+  {id:63, name:'Storm Herald',      rarity:'rare'},
+  {id:64, name:'Celestial Ghost',   rarity:'rare'},
 ];
 
-const cardNums = Array.from({length:50},(_,i)=>i+1);
+const cardNums = Array.from({length:64},(_,i)=>i+1);
 const collGrid = document.getElementById('collGrid');
 const collLevels = {};
 cardData.forEach(c => { collLevels[c.id] = 1; });
