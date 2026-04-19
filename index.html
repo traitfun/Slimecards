@@ -9,7 +9,7 @@
 :root{--gold:#f0c040;--gold2:#ffd700;--dark:#080810;--dark2:#0d0d1a;--purple2:#a855f7;--cyan:#00e5ff;--red:#ff2244;--green:#00ff88;--rare:#3b82f6;--epic:#a855f7;--legend:#f0c040;--mythic:#ff2244;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--dark);color:#fff;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+body{background:var(--dark);color:#fff;overflow-x:hidden;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4;}
 
 /* NAV */
@@ -28,32 +28,105 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .page.active{display:block;}
 
 /* SHARED */
-.pg-head{padding-top:5.5rem;text-align:center;padding-bottom:1.5rem;}
+.pg-head{display:none;}
 .section-label{font-size:0.68rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;}
 .section-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:700;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,0.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .section-desc{color:rgba(255,255,255,0.45);font-size:0.9rem;max-width:520px;margin:0.8rem auto 0;line-height:1.7;}
 .divider{width:55px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0.8rem auto;}
 
 /* ═══════════ DASHBOARD ═══════════ */
-.hero-img-wrap{position:relative;width:100%;padding-top:5.5rem;}
-.hero-img{width:100%;max-height:88vh;object-fit:cover;object-position:center;display:block;}
-.hero-img-overlay{position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(0deg,var(--dark) 0%,transparent 100%);}
-.dash-menu{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;padding:2rem 1.5rem;}
-.dash-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:0.9rem 2rem;font-family:'Cinzel',serif;font-weight:600;font-size:0.88rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all 0.3s;}
-.dash-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
-.dash-btn.primary{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;font-weight:700;}
-.dash-btn.primary:hover{box-shadow:0 8px 30px rgba(240,192,64,0.4);color:#000;transform:translateY(-2px);}
-.steps-section{padding:5rem 1.5rem;background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 50%,var(--dark) 100%);}
-.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto;}
-.step-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.8rem 1.4rem;transition:all 0.4s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));}
-.step-card:hover{border-color:rgba(240,192,64,0.3);transform:translateY(-5px);background:rgba(240,192,64,0.04);}
-.step-num{font-family:'Cinzel Decorative',serif;font-size:2.2rem;font-weight:900;color:rgba(240,192,64,0.12);margin-bottom:0.7rem;}
-.step-icon{font-size:1.6rem;margin-bottom:0.7rem;}
-.step-title{font-family:'Cinzel',serif;font-size:0.95rem;font-weight:600;color:var(--gold);margin-bottom:0.5rem;letter-spacing:1px;}
-.step-desc{color:rgba(255,255,255,0.45);font-size:0.82rem;line-height:1.7;}
+/* ═══════════ DASHBOARD HUB ═══════════ */
+.hub-hero{position:relative;width:100%;padding-top:3.5rem;}
+.hub-hero-img{width:100%;height:52vw;max-height:420px;min-height:220px;object-fit:cover;object-position:center top;display:block;}
+.hub-hero-fade{position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(0deg,#0B0F1A 0%,rgba(11,15,26,0.6) 55%,transparent 100%);}
+.hub-hero-content{position:absolute;bottom:1.4rem;left:1.5rem;}
+.hub-hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.1rem,3.5vw,1.8rem);font-weight:700;color:#E6EAF2;letter-spacing:0.05em;line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,0.7);}
+.hub-hero-sub{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(198,168,90,0.7);margin-top:0.25rem;}
+
+/* Action buttons */
+.hub-actions{display:flex;gap:0.6rem;padding:1rem 1.5rem;flex-wrap:wrap;}
+.hab{flex:1;min-width:100px;padding:0.72rem 0.8rem;font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:#E6EAF2;transition:all 0.2s ease;}
+.hab:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.16);background:rgba(255,255,255,0.07);filter:brightness(1.1);}
+.hab-gold{background:linear-gradient(135deg,#b8922e,#c6a85a);color:#1a1000;border:none;font-weight:700;}
+.hab-gold:hover{filter:brightness(1.1);border:none;}
+
+/* Body */
+.hub-body{max-width:1000px;margin:0 auto;padding:0 1.5rem 5rem;display:flex;flex-direction:column;gap:1.5rem;}
+
+/* Quick stats */
+.hub-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.7rem;}
+.hub-stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:0.9rem 1rem;transition:border-color 0.2s;}
+.hub-stat:hover{border-color:rgba(198,168,90,0.2);}
+.hs-num{font-family:'Cinzel Decorative',serif;font-size:1.4rem;font-weight:700;color:#E6EAF2;line-height:1;}
+.hs-label{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(138,147,165,0.55);margin-top:0.3rem;font-weight:500;}
+
+/* Section */
+.hub-section{}
+.hub-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.8rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.hub-section-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(138,147,165,0.5);font-weight:500;}
+.hub-section-link{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(198,168,90,0.5);background:none;border:none;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;transition:color 0.2s;}
+.hub-section-link:hover{color:#C6A85A;}
+
+/* Slime row */
+.hub-slime-row{display:flex;gap:0.6rem;overflow-x:auto;padding-bottom:0.5rem;scrollbar-width:none;}
+.hub-slime-row::-webkit-scrollbar{display:none;}
+.hub-sc{flex-shrink:0;width:90px;border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;transition:transform 0.2s,border-color 0.2s,box-shadow 0.2s;filter:saturate(0.75);}
+.hub-sc:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.16);box-shadow:0 6px 18px rgba(0,0,0,0.35);filter:saturate(0.95);}
+.hub-sc img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+
+/* Activity */
+.hub-activity{display:flex;flex-direction:column;gap:0;}
+.ha-item{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.ha-item:last-child{border-bottom:none;}
+.ha-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;opacity:0.8;}
+.ha-text{flex:1;font-size:0.78rem;color:rgba(230,234,242,0.55);}
+.ha-text strong{color:rgba(230,234,242,0.8);font-weight:500;}
+.ha-time{font-size:0.62rem;color:rgba(138,147,165,0.3);letter-spacing:0.06em;}
+
+@media(max-width:500px){.hub-stats{grid-template-columns:repeat(2,1fr);}.hab{font-size:0.65rem;padding:0.65rem 0.6rem;}.hub-sc{width:76px;}}
 
 /* ═══════════ NFT ═══════════ */
-.nft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem 5rem;}
+/* ═══════════ COLLECTION ═══════════ */
+.coll-wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+.coll-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.5rem;}
+.coll-label{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(198,168,90,0.6);margin-bottom:0.3rem;font-weight:500;}
+.coll-title{font-family:'Cinzel Decorative',serif;font-size:1.5rem;font-weight:600;color:#E6EAF2;letter-spacing:0.04em;}
+.coll-divider{width:40px;height:1px;background:linear-gradient(90deg,rgba(198,168,90,0.5),transparent);margin-top:0.6rem;}
+.coll-count{font-size:0.68rem;letter-spacing:0.12em;color:rgba(138,147,165,0.6);font-weight:500;padding-bottom:0.2rem;}
+
+/* Controls */
+.coll-controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+.coll-filters{display:flex;gap:0.3rem;flex-wrap:wrap;}
+.cf-btn{padding:0.3rem 0.85rem;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:1px solid rgba(255,255,255,0.07);color:rgba(138,147,165,0.7);cursor:pointer;transition:all 0.2s;font-family:'Rajdhani',sans-serif;font-weight:600;}
+.cf-btn:hover{color:#E6EAF2;border-color:rgba(255,255,255,0.14);}
+.cf-btn.active{color:#C6A85A;border-color:rgba(198,168,90,0.3);background:rgba(198,168,90,0.05);}
+.cs-select{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);color:rgba(138,147,165,0.7);padding:0.3rem 0.75rem;font-size:0.65rem;letter-spacing:0.1em;font-family:'Rajdhani',sans-serif;font-weight:600;cursor:pointer;outline:none;text-transform:uppercase;}
+.cs-select:focus{border-color:rgba(198,168,90,0.3);color:#C6A85A;}
+
+/* Grid */
+.coll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.85rem;}
+.cc{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.07);cursor:pointer;transition:transform 0.22s ease,border-color 0.22s,box-shadow 0.22s,filter 0.22s;filter:saturate(0.78);background:#0d1018;}
+.cc:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.16);box-shadow:0 8px 24px rgba(0,0,0,0.35);filter:saturate(0.92) brightness(1.04);}
+.cc.cc-selected{border-color:rgba(198,168,90,0.55);box-shadow:0 6px 20px rgba(198,168,90,0.1);filter:saturate(1);transform:scale(1.02);}
+.cc img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+.cc-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(5,7,13,0.88) 0%,rgba(5,7,13,0.3) 60%,transparent 100%);padding:0.55rem 0.5rem 0.45rem;opacity:0;transition:opacity 0.22s;}
+.cc:hover .cc-overlay,.cc.cc-selected .cc-overlay{opacity:1;}
+.cc-name{font-family:'Cinzel',serif;font-size:0.68rem;color:#E6EAF2;letter-spacing:0.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cc-lv{font-size:0.58rem;color:rgba(138,147,165,0.6);letter-spacing:0.08em;margin-top:0.1rem;}
+.cc.cc-selected .cc-lv{color:rgba(198,168,90,0.7);}
+.cc-rdot{position:absolute;top:0.35rem;right:0.35rem;width:5px;height:5px;border-radius:50%;opacity:0.8;}
+
+/* Empty state */
+.coll-empty{text-align:center;padding:5rem 2rem;}
+.ce-icon{font-size:2rem;color:rgba(255,255,255,0.1);margin-bottom:1rem;font-family:'Cinzel Decorative',serif;}
+.ce-title{font-family:'Cinzel',serif;font-size:1rem;color:rgba(230,234,242,0.3);margin-bottom:0.4rem;letter-spacing:0.08em;}
+.ce-sub{font-size:0.75rem;color:rgba(138,147,165,0.3);letter-spacing:0.08em;}
+
+/* Keep old nft-grid for modal compatibility */
+.nft-grid{display:none;}
+.card-rarity-dot{display:none;}
+.card-info-rarity{display:none;}
+.card-info-name{display:none;}
 .nft-card{position:relative;border-radius:4px;overflow:hidden;cursor:pointer;aspect-ratio:2/3;background:#111;border:1px solid rgba(240,192,64,0.12);transition:all 0.3s;}
 .nft-card:hover{transform:translateY(-6px) scale(1.03);border-color:rgba(240,192,64,0.4);z-index:5;box-shadow:0 10px 30px rgba(0,0,0,0.5);}
 .nft-card img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -125,40 +198,42 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .burst-p{position:fixed;width:5px;height:5px;border-radius:50%;pointer-events:none;z-index:170;}
 
 /* ═══════════ DUNGEON ═══════════ */
-.dungeon-section{max-width:1000px;margin:0 auto;padding:0 1.5rem 5rem;}
-.energy-box{background:rgba(255,255,255,0.03);border:1px solid rgba(240,192,64,0.2);padding:1.1rem 1.8rem;max-width:360px;margin:0 auto 2.5rem;}
-.energy-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;}
-.energy-label{font-size:0.68rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;}
-.energy-num{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);}
-.energy-track{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin-bottom:0.4rem;}
-.energy-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;width:70%;}
-.energy-regen{font-size:0.62rem;color:rgba(255,255,255,0.2);letter-spacing:2px;}
-.dungeon-grid{display:flex;flex-direction:column;gap:1.5rem;}
-.dcard{display:grid;grid-template-columns:280px 1fr;border:1px solid;border-radius:4px;overflow:hidden;transition:all 0.3s;}
-.dcard:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.4);}
-.dcard-img{position:relative;overflow:hidden;min-height:200px;}
-.dcard-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.85;transition:opacity 0.3s;}
-.dcard:hover .dcard-img img{opacity:1;}
-.dcard-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(8,8,16,0.8) 100%);}
-.dcard-body{padding:1.5rem;display:flex;flex-direction:column;gap:1rem;background:rgba(8,8,16,0.6);}
-.dcard-diff{font-family:'Cinzel Decorative',serif;font-size:1.2rem;font-weight:700;}
-.dcard-table{width:100%;border-collapse:collapse;}
-.dcard-table tr{border-bottom:1px solid rgba(255,255,255,0.05);}
-.dcard-table tr:last-child{border-bottom:none;}
-.dcard-table td{padding:0.35rem 0;font-size:0.82rem;}
-.dcard-table td:first-child{color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase;font-size:0.68rem;width:80px;}
-.dcard-table td:last-child{color:#fff;font-family:'Cinzel',serif;}
-.dcard-rewards-label{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.4rem;}
-.dcard-rewards{list-style:none;display:flex;flex-direction:column;gap:0.3rem;}
-.dcard-rewards li{font-size:0.82rem;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:0.5rem;}
-.dcard-rewards li::before{content:'▸';font-size:0.6rem;opacity:0.5;}
-.dcard-enter{margin-top:auto;padding:0.65rem;border:1px solid;color:#fff;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;cursor:pointer;text-transform:uppercase;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.3s;background:rgba(255,255,255,0.06);}
-.dcard-enter:hover{background:rgba(255,255,255,0.14);}
-.dcard.easy{border-color:rgba(0,255,136,0.25);}
-.dcard.medium{border-color:rgba(59,130,246,0.3);}
-.dcard.hard{border-color:rgba(168,85,247,0.35);}
-.dcard.extreme{border-color:rgba(255,34,68,0.4);}
-@media(max-width:600px){.dcard{grid-template-columns:1fr;}.dcard-img{min-height:160px;}.dcard-img-overlay{background:linear-gradient(180deg,transparent 60%,rgba(8,8,16,0.9) 100%);}}
+/* ═══════════ DUNGEON PREMIUM ═══════════ */
+.dng-wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+.dng-energy{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.1rem 1.4rem;margin-bottom:2rem;max-width:480px;}
+.dng-energy-left{display:flex;align-items:center;gap:0.8rem;}
+.dng-energy-icon{font-size:1.1rem;opacity:0.7;}
+.dng-energy-label{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(138,147,165,0.6);font-weight:500;margin-bottom:0.15rem;}
+.dng-energy-val{font-family:'Cinzel',serif;font-size:1rem;color:#E6EAF2;font-weight:600;}
+.dng-energy-max{font-size:0.78rem;color:rgba(138,147,165,0.5);font-weight:400;}
+.dng-bar-track{height:4px;background:rgba(255,255,255,0.06);overflow:hidden;margin-bottom:0.35rem;}
+.dng-bar-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),rgba(198,168,90,0.8));transition:width 0.6s ease;}
+.dng-energy-regen{font-size:0.62rem;color:rgba(138,147,165,0.4);letter-spacing:0.06em;}
+.dng-cards{display:flex;flex-direction:column;gap:1.2rem;}
+.dc{display:grid;grid-template-columns:260px 1fr;border:1px solid rgba(255,255,255,0.07);overflow:hidden;transition:transform 0.22s ease,box-shadow 0.22s,border-color 0.22s;background:rgba(255,255,255,0.02);}
+.dc:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.12);}
+.dc-img{position:relative;overflow:hidden;}
+.dc-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.75;transition:opacity 0.22s;}
+.dc:hover .dc-img img{opacity:0.9;}
+.dc-img-fade{position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(5,7,13,0.85) 100%);}
+.dc-body{padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:0.9rem;}
+.dc-head{display:flex;align-items:center;gap:0.6rem;}
+.dc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;opacity:0.85;}
+.dc-diff{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;letter-spacing:0.05em;}
+.dc-rec{margin-left:auto;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(138,147,165,0.4);border:1px solid rgba(255,255,255,0.06);padding:0.15rem 0.5rem;}
+.dc-table{width:100%;border-collapse:collapse;}
+.dc-table tr{border-bottom:1px solid rgba(255,255,255,0.05);}
+.dc-table tr:last-child{border-bottom:none;}
+.dc-table td{padding:0.32rem 0;font-size:0.78rem;}
+.dt-l{color:rgba(138,147,165,0.5);letter-spacing:0.1em;text-transform:uppercase;font-size:0.62rem;font-weight:500;width:65px;}
+.dt-v{color:#E6EAF2;font-weight:500;}
+.dc-rew-label{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(138,147,165,0.4);font-weight:500;margin-bottom:0.45rem;}
+.dc-rew-list{display:flex;flex-direction:column;gap:0.25rem;}
+.dc-rew-list span{font-size:0.75rem;color:rgba(230,234,242,0.55);}
+.dc-btn{margin-top:auto;padding:0.65rem 1rem;background:rgba(255,255,255,0.04);border:1px solid;color:var(--dc);border-color:color-mix(in srgb,var(--dc) 25%,transparent);font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.14em;cursor:pointer;text-transform:uppercase;transition:all 0.2s;}
+.dc-btn:hover{background:color-mix(in srgb,var(--dc) 10%,transparent);transform:translateY(-1px);}
+.dc-btn:active{transform:scale(0.98);}
+@media(max-width:600px){.dc{grid-template-columns:1fr;}.dc-img{min-height:140px;}.dc-img-fade{background:linear-gradient(180deg,transparent 40%,rgba(5,7,13,0.9) 100%);}}
 
 /* ═══════════ FORGE ═══════════ */
 .forge-wrap{max-width:880px;margin:0 auto;padding:0 1.5rem 5rem;display:flex;flex-direction:column;gap:1rem;}
@@ -209,7 +284,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .inv-slot.empty{opacity:0.18;font-size:0.9rem;color:rgba(255,255,255,0.3);}
 .inv-qty{font-size:0.58rem;font-family:'Cinzel',serif;color:var(--gold);}
 /* ═══════════ TABS ═══════════ */
-.tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:0 1.5rem;margin-bottom:0;}
+.tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:5rem 1.5rem 0;margin-bottom:0;}
 .tab-btn{padding:0.8rem 1.4rem;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;margin-bottom:-1px;}
 .tab-btn:hover{color:rgba(255,255,255,0.8);}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
@@ -265,65 +340,146 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <li><a onclick="showPage('market')" id="nav-market">Market</a></li>
     <li><a onclick="showPage('profile')" id="nav-profile">Profile</a></li>
   </ul>
-  <button class="nav-btn" onclick="window.location.href='summon.html'">Connect Wallet</button>
+  <button class="nav-btn" onclick="alert('Coming Soon')">Connect Wallet</button>
 </nav>
 
 <!-- ══ DASHBOARD ══ -->
 <div class="page active" id="page-dashboard">
-  <div class="hero-img-wrap">
-    <img src="assets/dashboard/hero.jpg" alt="Slime Breaker" class="hero-img">
-    <div class="hero-img-overlay"></div>
-  </div>
-  <div class="dash-menu">
-    <button class="dash-btn primary" onclick="showPage('gacha')">🎰 Try Gacha</button>
-    <button class="dash-btn" onclick="showPage('nft')">⚔ Gallery</button>
-    <button class="dash-btn" onclick="showPage('dungeon')">🏯 Dungeon</button>
-    <button class="dash-btn" onclick="showPage('forge')">⚗️ Forge</button>
-  </div>
-  <div class="steps-section">
-    <p class="section-label">Gameplay Loop</p>
-    <h2 class="section-title" style="text-align:center;">How It Works</h2>
-    <div class="divider"></div>
-    <p class="section-desc" style="text-align:center;margin-bottom:2.5rem;">Simple idle mechanics, deep strategy. No real-time combat.</p>
-    <div class="steps-grid">
-      <div class="step-card"><div class="step-num">01</div><div class="step-icon">🎰</div><div class="step-title">Gacha</div><div class="step-desc">Roll to collect Slime NFTs across 5 rarity tiers. Each with unique weapons and powers.</div></div>
-      <div class="step-card"><div class="step-num">02</div><div class="step-icon">⚔️</div><div class="step-title">Dungeon Run</div><div class="step-desc">Send your Slime in, choose difficulty, wait for timer, collect loot automatically.</div></div>
-      <div class="step-card"><div class="step-num">03</div><div class="step-icon">📦</div><div class="step-title">Loot & Boxes</div><div class="step-desc">Collect potions, ores, equipment. Hard dungeons drop $SLIME, Bankr and ETH boxes.</div></div>
-      <div class="step-card"><div class="step-num">04</div><div class="step-icon">⚗️</div><div class="step-title">Forge</div><div class="step-desc">Combine dungeon materials to craft powerful potions and equipment for your Slimes.</div></div>
-      <div class="step-card"><div class="step-num">05</div><div class="step-icon">⬆️</div><div class="step-title">Upgrade</div><div class="step-desc">Use materials and $SLIME to level up NFTs. Higher level Slimes clear harder dungeons.</div></div>
+
+  <!-- HERO -->
+  <div class="hub-hero">
+    <img src="assets/dashboard/hero.jpg" alt="Slime Breaker" class="hub-hero-img">
+    <div class="hub-hero-fade"></div>
+    <div class="hub-hero-content">
+      <div class="hub-hero-title">Slime Breaker</div>
+      <div class="hub-hero-sub">Web3 Idle Dungeon · Base Network</div>
     </div>
+  </div>
+
+  <!-- ACTION BUTTONS -->
+  <div class="hub-actions">
+    <button class="hab hab-gold" onclick="window.location.href='summon.html'">Gacha</button>
+    <button class="hab" onclick="showPage('dungeon')">Dungeon</button>
+    <button class="hab" onclick="showPage('ascend');switchTab('ascend','forge')">Forge</button>
+    <button class="hab" onclick="showPage('slimecards');switchTab('slimecards','collection')">Collection</button>
+  </div>
+
+  <div class="hub-body">
+
+    <!-- QUICK STATS -->
+    <div class="hub-stats">
+      <div class="hub-stat">
+        <div class="hs-num">50</div>
+        <div class="hs-label">Slimes</div>
+      </div>
+      <div class="hub-stat">
+        <div class="hs-num">0</div>
+        <div class="hs-label">Runs</div>
+      </div>
+      <div class="hub-stat">
+        <div class="hs-num">0</div>
+        <div class="hs-label">$SLIME</div>
+      </div>
+      <div class="hub-stat">
+        <div class="hs-num">0</div>
+        <div class="hs-label">Items</div>
+      </div>
+    </div>
+
+    <!-- YOUR SLIMES ROW -->
+    <div class="hub-section">
+      <div class="hub-section-head">
+        <span class="hub-section-label">Your Slimes</span>
+        <button class="hub-section-link" onclick="showPage('slimecards');switchTab('slimecards','collection')">View all →</button>
+      </div>
+      <div class="hub-slime-row" id="hubSlimeRow"></div>
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+    <div class="hub-section">
+      <div class="hub-section-head">
+        <span class="hub-section-label">Recent Activity</span>
+      </div>
+      <div class="hub-activity">
+        <div class="ha-item"><span class="ha-dot" style="background:#b07ed4"></span><span class="ha-text">Summoned <strong>Ivory Swordsman</strong></span><span class="ha-time">Just now</span></div>
+        <div class="ha-item"><span class="ha-dot" style="background:#C6A85A"></span><span class="ha-text">Collection unlocked · 50 Slimes</span><span class="ha-time">—</span></div>
+        <div class="ha-item"><span class="ha-dot" style="background:#6b9fd4"></span><span class="ha-text">Dungeon Easy · Ready to enter</span><span class="ha-time">—</span></div>
+        <div class="ha-item"><span class="ha-dot" style="background:#7ec8a0"></span><span class="ha-text">Welcome to Slime Breaker</span><span class="ha-time">—</span></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 
 <!-- ══ SLIME CARDS ══ -->
 <div class="page" id="page-slimecards">
-  <div class="pg-head">
-    <p class="section-label">Your Slimes</p>
-    <h2 class="section-title">Slime Cards</h2>
-    <div class="divider"></div>
-  </div>
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="window.location.href='summon.html'">Summon</button>
-    <button class="tab-btn" onclick="switchTab('slimecards','collection')">⚔️ Collection</button>
-    <button class="tab-btn" onclick="switchTab('slimecards','pets')">🐾 Pets</button>
+    <button class="tab-btn active" onclick="switchTab('slimecards','summon')">Summon</button>
+    <button class="tab-btn" onclick="switchTab('slimecards','collection')">Collection</button>
+    <button class="tab-btn" onclick="switchTab('slimecards','pets')">Pets</button>
   </div>
 
   <!-- SUMMON TAB -->
   <div class="tab-content active" id="tab-slimecards-summon">
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1.5rem;text-align:center;padding:2rem;">
-      <div style="width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(90,120,240,0.5),rgba(40,50,140,0.8));box-shadow:0 0 40px rgba(80,120,255,0.3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;" onclick="window.location.href='summon.html'" onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 0 60px rgba(80,120,255,0.5)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 0 40px rgba(80,120,255,0.3)'">
+      <div onclick="window.location.href='summon.html'"
+        onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 0 60px rgba(80,120,255,0.5)'"
+        onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 0 40px rgba(80,120,255,0.3)'"
+        style="width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(90,120,240,0.5),rgba(40,50,140,0.8));box-shadow:0 0 40px rgba(80,120,255,0.3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;">
         <div style="width:40px;height:40px;border-radius:50%;background:radial-gradient(circle,rgba(160,180,255,0.9),rgba(80,100,200,0.6));"></div>
       </div>
       <div style="font-family:'Cinzel Decorative',serif;font-size:1rem;color:rgba(180,200,230,0.6);letter-spacing:0.2em;">Enter Summon</div>
       <div style="font-size:0.65rem;letter-spacing:0.15em;color:rgba(198,168,90,0.4);font-family:'Rajdhani',sans-serif;">100 $SLIME per pull</div>
-      <button onclick="window.location.href='summon.html'" style="margin-top:0.5rem;padding:0.7rem 2rem;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;background:rgba(198,168,90,0.07);border:1px solid rgba(198,168,90,0.3);color:rgba(198,168,90,0.8);cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(198,168,90,0.6)';this.style.color='#C6A85A'" onmouseout="this.style.borderColor='rgba(198,168,90,0.3)';this.style.color='rgba(198,168,90,0.8)'">Open Summon</button>
+      <button onclick="window.location.href='summon.html'"
+        onmouseover="this.style.borderColor='rgba(198,168,90,0.6)';this.style.color='#C6A85A'"
+        onmouseout="this.style.borderColor='rgba(198,168,90,0.3)';this.style.color='rgba(198,168,90,0.8)'"
+        style="padding:0.7rem 2rem;font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;background:rgba(198,168,90,0.07);border:1px solid rgba(198,168,90,0.3);color:rgba(198,168,90,0.8);cursor:pointer;transition:all 0.2s;">
+        Open Summon
+      </button>
     </div>
   </div>
 
   <!-- COLLECTION TAB -->
   <div class="tab-content" id="tab-slimecards-collection">
-    <div class="nft-grid" id="nftGrid"></div>
+    <div class="coll-wrap">
+      <!-- Header -->
+      <div class="coll-header">
+        <div>
+          <div class="coll-label">Your Slimes</div>
+          <div class="coll-title">Collection</div>
+          <div class="coll-divider"></div>
+        </div>
+        <div class="coll-count" id="collCount">50 Slimes</div>
+      </div>
+      <!-- Controls -->
+      <div class="coll-controls">
+        <div class="coll-filters" id="collFilters">
+          <button class="cf-btn active" onclick="collFilter('all',this)">All</button>
+          <button class="cf-btn" onclick="collFilter('common',this)">Common</button>
+          <button class="cf-btn" onclick="collFilter('rare',this)">Rare</button>
+          <button class="cf-btn" onclick="collFilter('epic',this)">Epic</button>
+          <button class="cf-btn" onclick="collFilter('legend',this)">Legend</button>
+          <button class="cf-btn" onclick="collFilter('mythic',this)">Mythic</button>
+        </div>
+        <div class="coll-sort">
+          <select class="cs-select" onchange="collSort(this.value)">
+            <option value="id">Sort: Default</option>
+            <option value="level">Sort: Level ↓</option>
+            <option value="rarity">Sort: Rarity</option>
+            <option value="name">Sort: Name</option>
+          </select>
+        </div>
+      </div>
+      <!-- Grid -->
+      <div class="coll-grid" id="collGrid"></div>
+      <!-- Empty state -->
+      <div class="coll-empty" id="collEmpty" style="display:none;">
+        <div class="ce-icon">◈</div>
+        <div class="ce-title">No Slimes Found</div>
+        <div class="ce-sub">Try changing your filters</div>
+      </div>
+    </div>
   </div>
 
   <!-- PETS TAB -->
@@ -372,61 +528,145 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ DUNGEON ══ -->
 <div class="page" id="page-dungeon">
-  <div class="pg-head">
-    <p class="section-label">Adventure</p>
-    <h2 class="section-title">Dungeon</h2>
-    <div class="divider"></div>
-  </div>
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('dungeon','run')">⚔️ Dungeon Run</button>
-    <button class="tab-btn" onclick="switchTab('dungeon','quest')">📜 Quest</button>
+    <button class="tab-btn active" onclick="switchTab('dungeon','run')">Dungeon Run</button>
+    <button class="tab-btn" onclick="switchTab('dungeon','quest')">Quest</button>
   </div>
 
   <!-- DUNGEON RUN TAB -->
   <div class="tab-content active" id="tab-dungeon-run">
-    <div class="dungeon-section">
-      <div class="energy-box">
-        <div class="energy-top"><span class="energy-label">⚡ Energy</span><span class="energy-num">70 / 100</span></div>
-        <div class="energy-track"><div class="energy-fill"></div></div>
-        <div class="energy-regen">+1 per 5 min · Full in 2h30m</div>
+    <div class="dng-wrap">
+
+      <!-- Energy Panel -->
+      <div class="dng-energy">
+        <div class="dng-energy-left">
+          <span class="dng-energy-icon">⚡</span>
+          <div>
+            <div class="dng-energy-label">Energy</div>
+            <div class="dng-energy-val">70 <span class="dng-energy-max">/ 100</span></div>
+          </div>
+        </div>
+        <div class="dng-energy-right">
+          <div class="dng-bar-track"><div class="dng-bar-fill" style="width:70%"></div></div>
+          <div class="dng-energy-regen">+1 every 5 min · Full in 2h30m</div>
+        </div>
       </div>
-      <div class="dungeon-grid">
-        <div class="dcard easy">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_easy.png" alt="Easy" onerror="this.style.background='#0a1a0a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--green)">🟢 Easy</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>30 min</td></tr><tr><td>Energy</td><td style="color:var(--green)">10</td></tr><tr><td>Fee</td><td style="color:var(--green)">Free</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions</li><li>Ore & Equipment</li><li>Pet drop (2%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+      <!-- Dungeon Cards -->
+      <div class="dng-cards">
+
+        <div class="dc" data-diff="easy">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_easy.png" alt="Easy" onerror="this.style.background='#081208'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#6EE7B7"></div>
+              <div class="dc-diff" style="color:#6EE7B7">Easy</div>
+              <div class="dc-rec">Lv. 1+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">30 min</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#6EE7B7">10</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#6EE7B7">Free</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions</span>
+                <span>⚙️ Equipment</span>
+                <span>🐾 Pet drop (2%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#6EE7B7">Enter Dungeon →</button>
           </div>
         </div>
-        <div class="dcard medium">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_medium.png" alt="Medium" onerror="this.style.background='#0a0a1a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--rare)">🔵 Medium</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>2 hours</td></tr><tr><td>Energy</td><td style="color:var(--rare)">20</td></tr><tr><td>Fee</td><td style="color:var(--rare)">Free</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME</li><li>Pet drop (5%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+        <div class="dc" data-diff="medium">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_medium.png" alt="Medium" onerror="this.style.background='#080a14'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#60A5FA"></div>
+              <div class="dc-diff" style="color:#60A5FA">Medium</div>
+              <div class="dc-rec">Lv. 15+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">2 hours</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#60A5FA">20</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#60A5FA">Free</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions + Items</span>
+                <span>📦 Box $SLIME</span>
+                <span>🐾 Pet drop (5%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#60A5FA">Enter Dungeon →</button>
           </div>
         </div>
-        <div class="dcard hard">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_hard.png" alt="Hard" onerror="this.style.background='#0f0a1a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--epic)">🟣 Hard</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>6 hours</td></tr><tr><td>Energy</td><td style="color:var(--epic)">30</td></tr><tr><td>Fee</td><td style="color:var(--epic)">$SLIME</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr</li><li>Pet drop (10%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+        <div class="dc" data-diff="hard">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_hard.png" alt="Hard" onerror="this.style.background='#0e0814'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#C084FC"></div>
+              <div class="dc-diff" style="color:#C084FC">Hard</div>
+              <div class="dc-rec">Lv. 30+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">6 hours</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#C084FC">30</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#C084FC">$SLIME</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions + Items</span>
+                <span>📦 Box $SLIME + Bankr</span>
+                <span>🐾 Pet drop (10%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#C084FC">Enter Dungeon →</button>
           </div>
         </div>
-        <div class="dcard extreme">
-          <div class="dcard-img"><img src="assets/dungeon/dungeon_extreme.png" alt="Extreme" onerror="this.style.background='#1a0a0a'"><div class="dcard-img-overlay"></div></div>
-          <div class="dcard-body">
-            <div class="dcard-diff" style="color:var(--mythic)">🔴 Extreme</div>
-            <table class="dcard-table"><tr><td>Timer</td><td>12 hours</td></tr><tr><td>Energy</td><td style="color:var(--mythic)">40</td></tr><tr><td>Fee</td><td style="color:var(--mythic)">$SLIME</td></tr></table>
-            <div><div class="dcard-rewards-label">Rewards</div><ul class="dcard-rewards"><li>Potions + Items</li><li>📦 Box $SLIME + Bankr + ETH</li><li>Pet drop (18%)</li></ul></div>
-            <button class="dcard-enter">Enter Dungeon →</button>
+
+        <div class="dc" data-diff="extreme">
+          <div class="dc-img">
+            <img src="assets/dungeon/dungeon_extreme.png" alt="Extreme" onerror="this.style.background='#140808'">
+            <div class="dc-img-fade"></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-head">
+              <div class="dc-dot" style="background:#F87171"></div>
+              <div class="dc-diff" style="color:#F87171">Extreme</div>
+              <div class="dc-rec">Lv. 50+</div>
+            </div>
+            <table class="dc-table">
+              <tr><td class="dt-l">Timer</td><td class="dt-v">12 hours</td></tr>
+              <tr><td class="dt-l">Energy</td><td class="dt-v" style="color:#F87171">40</td></tr>
+              <tr><td class="dt-l">Fee</td><td class="dt-v" style="color:#F87171">$SLIME</td></tr>
+            </table>
+            <div class="dc-rewards">
+              <div class="dc-rew-label">Rewards</div>
+              <div class="dc-rew-list">
+                <span>🧪 Potions + Items</span>
+                <span>📦 Box $SLIME + Bankr + ETH</span>
+                <span>🐾 Pet drop (18%)</span>
+              </div>
+            </div>
+            <button class="dc-btn" style="--dc:#F87171">Enter Dungeon →</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -490,14 +730,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ ASCEND ══ -->
 <div class="page" id="page-ascend">
-  <div class="pg-head">
-    <p class="section-label">Power Up</p>
-    <h2 class="section-title">Ascend</h2>
-    <div class="divider"></div>
-  </div>
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('ascend','forge')">⚗️ Forge</button>
-    <button class="tab-btn" onclick="switchTab('ascend','upgrade')">⬆️ Upgrade</button>
+    <button class="tab-btn active" onclick="switchTab('ascend','forge')">Forge</button>
+    <button class="tab-btn" onclick="switchTab('ascend','upgrade')">Upgrade</button>
   </div>
 
   <!-- FORGE TAB -->
@@ -543,7 +778,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
             <div class="upgrade-mat-row"><span>💎</span><span id="matCrystal">Crystal Ore ×3</span></div>
             <div class="upgrade-mat-row"><span>💰</span><span id="matSlime">50 $SLIME</span></div>
           </div>
-          <button class="upgrade-btn" id="upgradeBtn" onclick="doUpgrade()" style="display:none;">⬆️ UPGRADE</button>
+          <button class="upgrade-btn" id="upgradeBtn" onclick="doUpgrade()" style="display:none;">UPGRADE</button>
         </div>
       </div>
       <!-- BOTTOM: Slime grid -->
@@ -555,12 +790,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ MARKET ══ -->
 <div class="page" id="page-market">
-  <div class="pg-head">
-    <p class="section-label">Player Trading</p>
-    <h2 class="section-title">Market</h2>
-    <div class="divider"></div>
-    <p class="section-desc">Buy and sell items with other players using $SLIME.</p>
-  </div>
   <div class="market-wrap">
     <div class="coming-soon"><div class="cs-icon">🏪</div><div class="cs-title">Coming Soon</div><p class="cs-desc">The player market is under construction. Soon you'll be able to trade dungeon loot, potions and equipment with other players.</p></div>
     <div style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:4px;color:rgba(255,255,255,0.18);text-transform:uppercase;margin-bottom:1rem;">Preview</div>
@@ -575,11 +804,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 <!-- ══ PROFILE ══ -->
 <div class="page" id="page-profile">
-  <div class="pg-head">
-    <p class="section-label">Commander</p>
-    <h2 class="section-title">Profile</h2>
-    <div class="divider"></div>
-  </div>
   <div class="profile-wrap">
     <div class="wallet-box"><div class="wallet-icon">👛</div><div class="wallet-label">Connect Your Wallet</div><button class="btn-primary">Connect Wallet</button></div>
     <div class="stats-grid">
@@ -715,24 +939,85 @@ const cardData = [
 ];
 
 const cardNums = Array.from({length:50},(_,i)=>i+1);
+const collGrid = document.getElementById('collGrid');
+const collLevels = {};
+cardData.forEach(c => { collLevels[c.id] = 1; });
+let collCurrent = [...cardData];
+let collFilterVal = 'all';
+let collSortVal = 'id';
+let collSelectedId = null;
+
+function buildCollGrid(data) {
+  collGrid.innerHTML = '';
+  const empty = document.getElementById('collEmpty');
+  if(!data.length) { empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  document.getElementById('collCount').textContent = `${data.length} Slime${data.length!==1?'s':''}`;
+  data.forEach(c => {
+    const id = String(c.id).padStart(3,'0');
+    const col = RARITY_COLOR[c.rarity];
+    const lv = collLevels[c.id];
+    const div = document.createElement('div');
+    div.className = 'cc' + (collSelectedId===c.id?' cc-selected':'');
+    div.dataset.rarity = c.rarity;
+    div.id = `cc-${c.id}`;
+    div.innerHTML = `
+      <div class="cc-rdot" style="background:${col}"></div>
+      <img src="assets/card/card_${id}.png" loading="lazy" onerror="this.style.background='#0d1018'">
+      <div class="cc-overlay">
+        <div class="cc-name">${c.name}</div>
+        <div class="cc-lv">Lv.${lv}</div>
+      </div>`;
+    div.onclick = () => {
+      collSelectedId = c.id;
+      document.querySelectorAll('.cc').forEach(d=>d.classList.remove('cc-selected'));
+      div.classList.add('cc-selected');
+      openNftModal(c.id);
+    };
+    collGrid.appendChild(div);
+  });
+}
+
+function collFilter(rarity, el) {
+  collFilterVal = rarity;
+  document.querySelectorAll('.cf-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  applyCollFilters();
+}
+
+function collSort(val) {
+  collSortVal = val;
+  applyCollFilters();
+}
+
+function applyCollFilters() {
+  let data = collFilterVal === 'all' ? [...cardData] : cardData.filter(c=>c.rarity===collFilterVal);
+  const order = {common:0,rare:1,epic:2,legend:3,mythic:4};
+  if(collSortVal==='rarity') data.sort((a,b)=>order[b.rarity]-order[a.rarity]);
+  else if(collSortVal==='level') data.sort((a,b)=>collLevels[b.id]-collLevels[a.id]);
+  else if(collSortVal==='name') data.sort((a,b)=>a.name.localeCompare(b.name));
+  else data.sort((a,b)=>a.id-b.id);
+  buildCollGrid(data);
+}
+
+buildCollGrid(cardData);
+
+// ── HUB SLIME ROW ──
+const hubRow = document.getElementById('hubSlimeRow');
+if(hubRow) {
+  cardData.slice(0, 8).forEach(c => {
+    const id = String(c.id).padStart(3,'0');
+    const div = document.createElement('div');
+    div.className = 'hub-sc';
+    div.innerHTML = `<img src="assets/card/card_${id}.png" loading="lazy" onerror="this.style.background='#0d1018'">`;
+    div.onclick = () => { showPage('slimecards'); switchTab('slimecards','collection'); };
+    hubRow.appendChild(div);
+  });
+}
+
+// Keep nftGrid reference for modal (empty hidden div)
 const nftGrid = document.getElementById('nftGrid');
-cardData.forEach(c => {
-  const id = String(c.id).padStart(3,'0');
-  const col = RARITY_COLOR[c.rarity];
-  // NFT collection grid
-  const div = document.createElement('div');
-  div.className = 'nft-card';
-  div.style.borderColor = col + '44';
-  div.innerHTML = `
-    <img src="assets/card/card_${id}.png" alt="${c.name}" loading="lazy" onerror="this.style.background='#1a1a2e'">
-    <div class="card-rarity-dot" style="background:${col};"></div>
-    <div class="card-info">
-      <div class="card-info-rarity" style="color:${col}">${c.rarity.toUpperCase()}</div>
-      <div class="card-info-name">${c.name}</div>
-    </div>`;
-  div.onclick = () => openNftModal(c.id);
-  nftGrid.appendChild(div);
-});
+
 
 // ── UPGRADE SYSTEM ──
 const upgradeSelectGrid = document.getElementById('upgradeSelectGrid');
@@ -815,7 +1100,7 @@ function doUpgrade() {
   const btn = document.getElementById('upgradeBtn');
   btn.textContent = '✨ UPGRADED!';
   btn.style.background = 'linear-gradient(135deg,#00ff88,#00aa55)';
-  setTimeout(() => { btn.textContent = '⬆️ UPGRADE'; btn.style.background = ''; }, 1500);
+  setTimeout(() => { btn.textContent = 'UPGRADE'; btn.style.background = ''; }, 1500);
 }
 function openNftModal(n) {
   const c = cardData.find(x => x.id === n);
