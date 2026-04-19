@@ -584,7 +584,7 @@ body::after {
 
 <!-- VIDEO OVERLAY -->
 <div id="video-overlay">
-  <video id="summon-video" src="assets/video/orb_clean.mp4" muted playsinline></video>
+  <video id="summon-video" muted playsinline></video>
 </div>
 
 <div id="bg"></div>
@@ -800,6 +800,12 @@ async function summon(n) {
   const scene = document.getElementById('scene');
   const video = document.getElementById('summon-video');
   const videoOverlay = document.getElementById('video-overlay');
+
+  // Auto-select portrait or landscape based on device
+  const isPortrait = window.innerHeight > window.innerWidth;
+  video.src = isPortrait
+    ? 'assets/video/orb_clean.mp4'
+    : 'assets/video/orb_landscape.mp4';
 
   // ── CHARGE ORB BRIEFLY ──
   scene.classList.add('charging');
