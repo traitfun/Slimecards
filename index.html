@@ -284,6 +284,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .inv-slot.empty{opacity:0.18;font-size:0.9rem;color:rgba(255,255,255,0.3);}
 .inv-qty{font-size:0.58rem;font-family:'Cinzel',serif;color:var(--gold);}
 /* ═══════════ TABS ═══════════ */
+/* ═══════════ PETS ═══════════ */
+.pets-wrap{max-width:900px;margin:0 auto;padding:1.5rem 1.5rem 5rem;}
+.pets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1rem;}
+.pet-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);overflow:hidden;cursor:pointer;transition:all 0.25s;filter:saturate(0.8);}
+.pet-card:hover{transform:translateY(-3px);border-color:rgba(198,168,90,0.3);filter:saturate(1);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+.pet-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
+.pet-card-info{padding:0.6rem;background:rgba(5,7,13,0.8);}
+.pet-card-name{font-family:'Cinzel',serif;font-size:0.68rem;color:#E6EAF2;margin-bottom:0.15rem;}
+.pet-card-skill{font-size:0.58rem;color:rgba(198,168,90,0.6);}
+.pet-card-lv{font-size:0.6rem;color:rgba(138,147,165,0.5);float:right;font-family:'Cinzel',serif;}
+#pet-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem;}
+#pet-modal.open{display:flex;}
+.pet-upgrade-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:0.8rem;margin:0.8rem 0;}
+.pet-mat-label{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(138,147,165,0.4);margin-bottom:0.5rem;}
+.pet-mat-row{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:rgba(230,234,242,0.6);padding:0.18rem 0;}
+.pet-skill-track{height:4px;background:rgba(255,255,255,0.06);margin-top:0.3rem;}
+.pet-skill-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),rgba(198,168,90,0.9));transition:width 0.5s ease;}
 .tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:5rem 1.5rem 0;margin-bottom:0;}
 .tab-btn{padding:0.8rem 1.4rem;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;margin-bottom:-1px;}
 .tab-btn:hover{color:rgba(255,255,255,0.8);}
@@ -484,10 +501,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
   <!-- PETS TAB -->
   <div class="tab-content" id="tab-slimecards-pets">
-    <div style="text-align:center;padding:5rem 2rem;">
-      <div style="font-size:3rem;margin-bottom:1rem;">🐾</div>
-      <div style="font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;">Pets Coming Soon</div>
-      <p style="color:rgba(255,255,255,0.4);font-size:0.88rem;">Pets drop from dungeon runs. Equip them to boost your Slimes in battle.</p>
+    <div class="pets-wrap">
+      <div class="pets-grid" id="petsGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PET MODAL -->
+<div id="pet-modal" onclick="closePetModal(event)">
+  <div class="modal-box">
+    <button class="modal-close-btn" onclick="closePetModal()">✕</button>
+    <img id="petModalImg" src="" alt="" class="modal-img">
+    <div class="modal-info">
+      <div id="petModalName" class="modal-title"></div>
+      <div id="petModalSkill" style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin:0.3rem 0 1rem;letter-spacing:1px;"></div>
+      <div id="petModalStats"></div>
+      <div class="pet-upgrade-box" id="petUpgradeBox">
+        <div class="pet-mat-label">Upgrade Materials</div>
+        <div id="petMats"></div>
+        <button class="asc-btn" onclick="doPetUpgrade()" style="display:block;margin-top:0.8rem;">Upgrade Pet</button>
+      </div>
+      <button onclick="closePetModal()" class="btn-primary" style="margin-top:auto;">Close</button>
     </div>
   </div>
 </div>
@@ -936,9 +970,24 @@ const cardData = [
   {id:48, name:'Thunder God',       rarity:'mythic'},
   {id:49, name:'Abyssal Serpent',   rarity:'mythic'},
   {id:50, name:'Gladiator Rex',     rarity:'mythic'},
+  // NEW BATCH
+  {id:51, name:'Void Phantom',      rarity:'epic'},
+  {id:52, name:'Jungle Mystic',     rarity:'rare'},
+  {id:53, name:'Pumpkin Reaper',    rarity:'rare'},
+  {id:54, name:'Arctic Wanderer',   rarity:'rare'},
+  {id:55, name:'Inferno Demon',     rarity:'epic'},
+  {id:56, name:'Amber Torch',       rarity:'rare'},
+  {id:57, name:'Necro Warden',      rarity:'epic'},
+  {id:58, name:'Blaze Crusader',    rarity:'rare'},
+  {id:59, name:'Rainbow Unicorn',   rarity:'epic'},
+  {id:60, name:'Swamp Druid',       rarity:'rare'},
+  {id:61, name:'Phantom Reaper',    rarity:'legend'},
+  {id:62, name:'Void Sorcerer',     rarity:'epic'},
+  {id:63, name:'Storm Herald',      rarity:'rare'},
+  {id:64, name:'Celestial Ghost',   rarity:'rare'},
 ];
 
-const cardNums = Array.from({length:50},(_,i)=>i+1);
+const cardNums = Array.from({length:64},(_,i)=>i+1);
 const collGrid = document.getElementById('collGrid');
 const collLevels = {};
 cardData.forEach(c => { collLevels[c.id] = 1; });
@@ -1001,6 +1050,90 @@ function applyCollFilters() {
 }
 
 buildCollGrid(cardData);
+
+// ── PET SYSTEM ──
+const PET_DATA = [
+  {id:'aquapaw',    name:'Aquapaw',     skill:'+HP Regen',    desc:'+16% HP regen per dungeon',  max_skill:16, unit:'%', img:'assets/pet/pet_aquapaw.png'},
+  {id:'pyronix',    name:'Pyronix',     skill:'+ATK Bonus',   desc:'+10% ATK bonus',             max_skill:10, unit:'%', img:'assets/pet/pet_pyronix.png'},
+  {id:'gearpup',    name:'Gearpup',     skill:'+EXP Gain',    desc:'+20% EXP gain',              max_skill:20, unit:'%', img:'assets/pet/pet_gearpup.png'},
+  {id:'terron',     name:'Terron',      skill:'+DEF/-Energy', desc:'+15% DEF, -10% energy cost', max_skill:15, unit:'%', img:'assets/pet/pet_terron.png'},
+  {id:'shadowfang', name:'Shadowfang',  skill:'+$SLIME Drop', desc:'+10% $SLIME drop rate',      max_skill:10, unit:'%', img:'assets/pet/pet_shadowfang.png'},
+  {id:'lumikin',    name:'Lumikin',     skill:'+Heal',        desc:'+12% heal after dungeon',    max_skill:12, unit:'%', img:'assets/pet/pet_lumikin.png'},
+  {id:'frostkit',   name:'Frostkit',    skill:'+Loot Box',    desc:'+6% Loot Box chance',        max_skill:6,  unit:'%', img:'assets/pet/pet_frostkit.png'},
+  {id:'aerisprite', name:'Aerisprite',  skill:'+Rare Box',    desc:'+4% Rare Loot Box chance',   max_skill:4,  unit:'%', img:'assets/pet/pet_aerisprite.png'},
+];
+const PET_MAT = {
+  1:{shard:3, crystal:1, slime:30},
+  2:{shard:5, crystal:2, slime:60},
+  3:{shard:8, crystal:4, slime:120},
+  4:{shard:12,crystal:6, slime:250},
+};
+const petLevels = {};
+PET_DATA.forEach(p => { petLevels[p.id] = 1; });
+let selectedPetId = null;
+
+const petsGrid = document.getElementById('petsGrid');
+if(petsGrid) {
+  PET_DATA.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'pet-card';
+    div.id = `petcard-${p.id}`;
+    div.innerHTML = `
+      <img src="${p.img}" loading="lazy" onerror="this.style.background='#0d1018'">
+      <div class="pet-card-info">
+        <span class="pet-card-lv">LV1</span>
+        <div class="pet-card-name">${p.name}</div>
+        <div class="pet-card-skill">${p.skill}</div>
+      </div>`;
+    div.onclick = () => openPetModal(p.id);
+    petsGrid.appendChild(div);
+  });
+}
+
+function openPetModal(id) {
+  const p = PET_DATA.find(x => x.id === id);
+  selectedPetId = id;
+  const lv = petLevels[id];
+  const skillVal = (p.max_skill * lv / 5).toFixed(1);
+  const skillNext = lv < 5 ? (p.max_skill * (lv+1) / 5).toFixed(1) : null;
+
+  document.getElementById('petModalImg').src = p.img;
+  document.getElementById('petModalName').textContent = p.name;
+  document.getElementById('petModalSkill').textContent = p.desc;
+  document.getElementById('petModalStats').innerHTML = `
+    <div class="upgrade-stat-row"><span>Level</span><span style="color:var(--gold)">${lv} / 5 ${lv===5?'⭐':''}</span></div>
+    <div class="upgrade-stat-row"><span>Skill</span><span style="color:#7ec8a0">${skillVal}${p.unit}</span></div>
+    <div style="margin:0.5rem 0;">
+      <div style="font-size:0.6rem;color:rgba(138,147,165,0.4);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Power</div>
+      <div class="pet-skill-track"><div class="pet-skill-fill" style="width:${lv/5*100}%"></div></div>
+    </div>`;
+  if(lv < 5) {
+    const mat = PET_MAT[lv];
+    document.getElementById('petUpgradeBox').style.display = 'block';
+    document.getElementById('petMats').innerHTML = `
+      <div class="pet-mat-row"><span>🐾</span><span>Pet Shard ×${mat.shard}</span></div>
+      <div class="pet-mat-row"><span>💎</span><span>Crystal Ore ×${mat.crystal}</span></div>
+      <div class="pet-mat-row"><span>🌕</span><span>${mat.slime} $SLIME</span></div>
+      <div class="pet-mat-row" style="color:rgba(198,168,90,0.5);margin-top:0.3rem;"><span>→</span><span>${skillVal}${p.unit} → ${skillNext}${p.unit}</span></div>`;
+  } else {
+    document.getElementById('petUpgradeBox').style.display = 'none';
+  }
+  document.getElementById('pet-modal').classList.add('open');
+}
+
+function doPetUpgrade() {
+  if(!selectedPetId || petLevels[selectedPetId] >= 5) return;
+  petLevels[selectedPetId]++;
+  document.getElementById(`petcard-${selectedPetId}`).querySelector('.pet-card-lv').textContent = `LV${petLevels[selectedPetId]}`;
+  openPetModal(selectedPetId);
+  const btn = document.querySelector('#petUpgradeBox .asc-btn');
+  if(btn) { btn.textContent='✨ Upgraded!'; btn.style.background='linear-gradient(135deg,#3a7a50,#7ec8a0)'; setTimeout(()=>{btn.textContent='Upgrade Pet';btn.style.background='';},1500); }
+}
+
+function closePetModal(e) {
+  if(!e || e.target===document.getElementById('pet-modal'))
+    document.getElementById('pet-modal').classList.remove('open');
+}
 
 // ── HUB SLIME ROW ──
 const hubRow = document.getElementById('hubSlimeRow');
