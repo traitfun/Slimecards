@@ -21,7 +21,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-links a.active{color:var(--gold);background:rgba(240,192,64,0.08);}
 .nav-btn{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;padding:0.45rem 1.1rem;font-family:'Cinzel',serif;font-weight:700;font-size:0.72rem;letter-spacing:2px;cursor:pointer;clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);transition:all 0.3s;flex-shrink:0;}
 .nav-btn:hover{box-shadow:0 0 20px rgba(240,192,64,0.4);}
-@media(max-width:768px){.nav-links{display:none;}}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+}
+@media(min-width:769px){
+  .hamburger{display:none;}
+  .mobile-menu{display:none!important;}
+}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px;}
+.hamburger span{width:20px;height:2px;background:rgba(255,255,255,0.6);display:block;transition:all 0.2s;}
+.mobile-menu{position:fixed;top:48px;left:0;right:0;z-index:99;background:rgba(8,8,16,0.98);border-bottom:1px solid rgba(240,192,64,0.15);padding:0.8rem 1.5rem;display:flex;flex-direction:column;gap:0;backdrop-filter:blur(12px);}
+.mobile-menu a{color:rgba(255,255,255,0.6);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;padding:0.7rem 0;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;}
+.mobile-menu a:last-child{border-bottom:none;}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--gold);}
 
 /* PAGES */
 .page{display:none;min-height:100vh;}
@@ -36,7 +49,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* ═══════════ DASHBOARD ═══════════ */
 /* ═══════════ DASHBOARD HUB ═══════════ */
-.hub-hero{position:relative;width:100%;padding-top:3.5rem;}
+.hub-hero{position:relative;width:100%;padding-top:3.5rem;}@media(min-width:769px){.hub-hero{padding-top:3.5rem;}}
 .hub-hero-img{width:100%;height:52vw;max-height:420px;min-height:220px;object-fit:cover;object-position:center top;display:block;}
 .hub-hero-fade{position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(0deg,#0B0F1A 0%,rgba(11,15,26,0.6) 55%,transparent 100%);}
 .hub-hero-content{position:absolute;bottom:1.4rem;left:1.5rem;}
@@ -436,7 +449,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .pet-mat-row{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:rgba(230,234,242,0.6);padding:0.18rem 0;}
 .pet-skill-track{height:4px;background:rgba(255,255,255,0.06);margin-top:0.3rem;}
 .pet-skill-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),rgba(198,168,90,0.9));transition:width 0.5s ease;}
-.tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:5rem 1.5rem 0;margin-bottom:0;}
+.tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);padding:5rem 1.5rem 0;margin-bottom:0;}@media(min-width:769px){.tab-bar{padding-top:5rem;}}
 .tab-btn{padding:0.8rem 1.4rem;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;margin-bottom:-1px;}
 .tab-btn:hover{color:rgba(255,255,255,0.8);}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
@@ -493,7 +506,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <li><a onclick="showPage('profile')" id="nav-profile">Profile</a></li>
   </ul>
   <button class="nav-btn" onclick="alert('Coming Soon')">Connect Wallet</button>
+  <div class="hamburger" onclick="toggleMobileMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<div class="mobile-menu" id="mobile-menu" style="display:none;">
+  <a onclick="showPage('dashboard');closeMobileMenu()" id="mnav-dashboard">Dashboard</a>
+  <a onclick="showPage('slimecards');closeMobileMenu()" id="mnav-slimecards">Slime Cards</a>
+  <a onclick="showPage('dungeon');closeMobileMenu()" id="mnav-dungeon">Dungeon</a>
+  <a onclick="showPage('ascend');closeMobileMenu()" id="mnav-ascend">Ascend</a>
+  <a onclick="showPage('market');closeMobileMenu()" id="mnav-market">Market</a>
+  <a onclick="showPage('profile');closeMobileMenu()" id="mnav-profile">Profile</a>
+</div>
 
 <!-- ══ DASHBOARD ══ -->
 <div class="page active" id="page-dashboard">
@@ -1115,10 +1139,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.querySelectorAll('.mobile-menu a').forEach(a => a.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   const el = document.getElementById('nav-' + name);
   if(el) el.classList.add('active');
+  const mel = document.getElementById('mnav-' + name);
+  if(mel) mel.classList.add('active');
   window.scrollTo(0, 0);
+}
+
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const isOpen = menu.style.display !== 'none';
+  menu.style.display = isOpen ? 'none' : 'flex';
+  const hb = document.getElementById('hamburger');
+  hb.style.opacity = isOpen ? '1' : '0.7';
+}
+
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').style.display = 'none';
 }
 
 // ── TAB SWITCHER ──

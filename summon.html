@@ -295,7 +295,7 @@ html, body {
 
 /* ── ROLL COUNT ── */
 #roll-stats {
-  position: fixed; top: 5rem; left: 50%; transform: translateX(-50%);
+  position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
   display: flex; gap: 2rem; z-index: 20;
 }
 .rs { text-align: center; }
@@ -562,6 +562,28 @@ html, body {
 #summon-video {
   width: 100%; height: 100%;
   object-fit: cover;
+}
+/* Desktop: portrait video centered, landscape fills */
+@media(min-width: 600px) and (orientation: landscape) {
+  #summon-video { width: 100%; height: 100%; object-fit: cover; }
+}
+@media(min-width: 769px) {
+  #summon-video {
+    width: auto; height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+/* Desktop responsive */
+@media(min-width: 769px) {
+  #orb-wrap { width: 300px; height: 300px; }
+  #orb-halo { inset: -55px; }
+  #orb-rays  { inset: -75px; }
+  #ring1 { inset: -28px; }
+  #ring2 { inset: -12px; }
+  #ring3 { inset: 12px; }
+  #stage { gap: 2.8rem; }
+  .summon-btn { padding: 0.8rem 2.5rem; font-size: 0.9rem; }
 }
 </style>
 body::after {
