@@ -816,33 +816,29 @@ async function summon(n) {
   document.getElementById('bg').style.opacity = '1';
 
   // Try play video, fallback to flash if no video
-  const hasVideo = video && video.src && !video.src.endsWith('undefined');
-  if (hasVideo) {
+  let videoPlayed = false;
+  try {
     videoOverlay.classList.add('active');
     video.currentTime = 0;
-    video.play().catch(() => {});
-
-    // Wait for video to end or timeout 10s
+    await video.play();
+    videoPlayed = true;
     await new Promise(resolve => {
       const timeout = setTimeout(resolve, 10000);
       video.onended = () => { clearTimeout(timeout); resolve(); };
+      video.onerror = () => { clearTimeout(timeout); resolve(); };
     });
-
-    // Flash at end of video
-    const flash = document.getElementById('flash');
-    flash.style.opacity = '1';
-    await wait(120);
-    flash.style.opacity = '0';
-
     videoOverlay.classList.remove('active');
     video.pause();
-  } else {
-    // Fallback: original flash
-    const flash = document.getElementById('flash');
-    flash.style.opacity = '1';
-    await wait(120);
-    flash.style.opacity = '0';
+  } catch(e) {
+    videoOverlay.classList.remove('active');
+    videoPlayed = false;
   }
+
+  // Flash
+  const flash = document.getElementById('flash');
+  flash.style.opacity = '1';
+  await wait(120);
+  flash.style.opacity = '0';
 
   await wait(100);
 
