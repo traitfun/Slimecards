@@ -549,7 +549,19 @@ html, body {
 }
 #multi-close:hover { border-color: rgba(198,168,90,0.55); color: #C6A85A; }
 
-/* Grain overlay */
+/* ── VIDEO OVERLAY ── */
+#video-overlay {
+  position: fixed; inset: 0; z-index: 80;
+  background: #000;
+  display: none;
+  align-items: center; justify-content: center;
+}
+#video-overlay.active { display: flex; }
+#summon-video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+</style>
 body::after {
   content: '';
   position: fixed; inset: 0; z-index: 200;
@@ -567,6 +579,12 @@ body::after {
 </div>
 
 <div id="flash"></div>
+
+<!-- VIDEO OVERLAY -->
+<div id="video-overlay">
+  <video id="summon-video" src="assets/video/orb_clean.mp4" muted playsinline></video>
+</div>
+
 <div id="bg"></div>
 <div id="nebula"></div>
 <div id="particles"></div>
@@ -768,7 +786,6 @@ async function summon(n) {
   if (isRolling) return;
   isRolling = true;
 
-  // Close hint
   document.getElementById('summon-hint').style.opacity = '0.3';
   document.getElementById('btns').style.opacity = '0.4';
   document.getElementById('btns').style.pointerEvents = 'none';
@@ -779,30 +796,53 @@ async function summon(n) {
   updateStats();
 
   const scene = document.getElementById('scene');
+  const video = document.getElementById('summon-video');
+  const videoOverlay = document.getElementById('video-overlay');
 
-  // ── STEP 1: CHARGE ──
+  // ── CHARGE ORB BRIEFLY ──
   scene.classList.add('charging');
-  scene.style.transition = 'transform 0.8s cubic-bezier(0.2,0,0.1,1)';
   scene.style.transform = 'scale(1.04)';
-  document.getElementById('bg').style.transition = 'opacity 0.8s';
   document.getElementById('bg').style.opacity = '0.5';
-  await wait(700);
+  await wait(600);
 
-  // ── STEP 2: TENSION ──
+  // ── TENSION ──
   document.getElementById('orb-wrap').style.animation = 'vibrate 0.15s ease infinite';
-  await wait(400);
+  await wait(300);
 
-  // ── STEP 3: FLASH ──
+  // ── PLAY VIDEO ──
   document.getElementById('orb-wrap').style.animation = '';
-  const flash = document.getElementById('flash');
-  flash.style.opacity = '1';
-  await wait(120);
-  flash.style.opacity = '0';
-
-  // Reset scene
   scene.classList.remove('charging');
   scene.style.transform = 'scale(1)';
   document.getElementById('bg').style.opacity = '1';
+
+  // Try play video, fallback to flash if no video
+  const hasVideo = video && video.src && !video.src.endsWith('undefined');
+  if (hasVideo) {
+    videoOverlay.classList.add('active');
+    video.currentTime = 0;
+    video.play().catch(() => {});
+
+    // Wait for video to end or timeout 10s
+    await new Promise(resolve => {
+      const timeout = setTimeout(resolve, 10000);
+      video.onended = () => { clearTimeout(timeout); resolve(); };
+    });
+
+    // Flash at end of video
+    const flash = document.getElementById('flash');
+    flash.style.opacity = '1';
+    await wait(120);
+    flash.style.opacity = '0';
+
+    videoOverlay.classList.remove('active');
+    video.pause();
+  } else {
+    // Fallback: original flash
+    const flash = document.getElementById('flash');
+    flash.style.opacity = '1';
+    await wait(120);
+    flash.style.opacity = '0';
+  }
 
   await wait(100);
 
@@ -812,6 +852,7 @@ async function summon(n) {
     await multiReveal(cards);
   }
 }
+
 
 async function singleReveal(card) {
   currentCard = card;
