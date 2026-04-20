@@ -285,7 +285,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .profile-wrap{max-width:100%;padding:0 0 5rem;display:flex;flex-direction:column;gap:0;}
 
 /* ── HERO 50:50 ── */
-.prf-hero{display:grid;grid-template-columns:1fr 1fr;min-height:220px;padding-top:3.5rem;}
+.prf-hero{display:grid;grid-template-columns:1fr 1fr;min-height:160px;padding-top:3rem;}
 
 /* LEFT — char picker */
 .prf-char-side{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(6,8,15,0.9);border-right:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:background 0.2s;padding:1.5rem 1rem;position:relative;overflow:hidden;}
@@ -305,11 +305,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* RIGHT — stats */
 .prf-stats-side{display:flex;flex-direction:column;justify-content:center;gap:0;background:rgba(4,5,12,0.95);border-bottom:1px solid rgba(255,255,255,0.06);}
-.prf-stat-row{display:flex;flex-direction:column;justify-content:center;padding:0.85rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.04);flex:1;}
+.prf-stat-row{display:flex;flex-direction:column;justify-content:center;padding:0.5rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);flex:1;}
 .prf-stat-row:last-child{border-bottom:none;}
-.prf-stat-ico{font-size:12px;margin-bottom:3px;opacity:0.6;}
-.prf-stat-val{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:600;color:#E6EAF2;line-height:1;}
-.prf-stat-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:3px;}
+.prf-stat-ico{display:none;}
+.prf-stat-val{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:600;color:#E6EAF2;line-height:1;}
+.prf-stat-lbl{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:2px;}
 .prf-stat-bar{height:2px;background:rgba(255,255,255,0.06);margin-top:6px;overflow:hidden;}
 .prf-stat-bar-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),var(--gold));transition:width 0.5s;}
 
@@ -358,7 +358,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-mat-nm{font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;}
 
 /* ── CARDS GRID ── */
-.prf-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
+.prf-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
 .prf-crd{display:grid;grid-template-columns:64px 1fr;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
 .prf-crd:hover{border-color:rgba(198,168,90,0.3);}
 .prf-crd.active-card{border-color:rgba(198,168,90,0.55);}
@@ -380,11 +380,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-crd-pill.active{border-color:rgba(34,211,238,0.35);color:#22d3ee;}
 
 /* ── PETS GRID ── */
-.prf-pets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
-.prf-pet{display:grid;grid-template-columns:64px 1fr;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.prf-pets-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.prf-pet{display:grid;grid-template-columns:52px 1fr;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
 .prf-pet:hover{border-color:rgba(198,168,90,0.3);}
 .prf-pet.active-pet{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.02);}
-.prf-pet-thumb{width:64px;height:64px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2rem;background:rgba(255,255,255,0.03);}
+.prf-pet-thumb{width:52px;height:52px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2rem;background:rgba(255,255,255,0.03);}
 .prf-pet-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:saturate(0.85);}
 .prf-pet-body{padding:6px 8px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;}
 .prf-pet-nm{font-family:'Cinzel',serif;font-size:9px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;}
@@ -968,11 +968,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   <div class="tab-content active" id="tab-ascend-forge">
     <div class="forge-wrap">
       <div class="forge-label">⚗️ Potions</div>
-      <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🧪</div><div class="res-name">Small Potion</div><div class="res-desc">HP +20</div><button class="craft-btn">Craft</button></div></div>
+      <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon"></div><div class="res-name">Small Potion</div><div class="res-desc">HP +20</div><button class="craft-btn">Craft</button></div></div>
       <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Gold Ore</div><div class="ing-qty">×2</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚗️</div><div class="res-name">Medium Potion</div><div class="res-desc">HP +50</div><button class="craft-btn">Craft</button></div></div>
       <div class="recipe"><div class="ing"><div class="ing-icon">💎</div><div class="ing-name">Crystal Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🔮</div><div class="res-name">Large Potion</div><div class="res-desc">HP +100</div><button class="craft-btn">Craft</button></div></div>
       <div class="recipe"><div class="ing"><div class="ing-icon">✨</div><div class="ing-name">Void Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">⭐</div><div class="ing-name">Prime Core</div><div class="ing-qty">×1</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">💊</div><div class="res-name">Elixir</div><div class="res-desc">Full HP Restore</div><button class="craft-btn">Craft</button></div></div>
-      <div class="forge-label" style="margin-top:0.3rem;">⚡ Energy</div>
+      <div class="forge-label" style="margin-top:0.3rem;">Energy</div>
       <div class="recipe"><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×5</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🌿</div><div class="ing-name">Stone Shard</div><div class="ing-qty">×3</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">⚡</div><div class="res-name">Stamina Drink</div><div class="res-desc">Energy +30</div><button class="craft-btn">Craft</button></div></div>
       <div class="forge-label" style="margin-top:0.3rem;">🛡️ Equipment</div>
       <div class="recipe"><div class="ing"><div class="ing-icon">⚙️</div><div class="ing-name">Silver Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">+</div><div class="ing"><div class="ing-icon">🪨</div><div class="ing-name">Iron Ore</div><div class="ing-qty">×4</div></div><div class="rec-arrow">→</div><div class="res"><div class="res-icon">🛡️</div><div class="res-name">Iron Shield</div><div class="res-desc">DEF +5</div><button class="craft-btn">Craft</button></div></div>
@@ -1023,7 +1023,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <div class="coming-soon"><div class="cs-icon">🏪</div><div class="cs-title">Coming Soon</div><p class="cs-desc">The player market is under construction. Soon you'll be able to trade dungeon loot, potions and equipment with other players.</p></div>
     <div style="font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:4px;color:rgba(255,255,255,0.18);text-transform:uppercase;margin-bottom:1rem;">Preview</div>
     <div class="market-grid">
-      <div class="listing"><div class="listing-icon">🧪</div><div class="listing-name">Small Potion ×5</div><div class="listing-seller">by 0x1234...abcd</div><div class="listing-price"><span>Price</span><span>25 $SLIME</span></div></div>
+      <div class="listing"><div class="listing-icon"></div><div class="listing-name">Small Potion ×5</div><div class="listing-seller">by 0x1234...abcd</div><div class="listing-price"><span>Price</span><span>25 $SLIME</span></div></div>
       <div class="listing"><div class="listing-icon">⚙️</div><div class="listing-name">Silver Ore ×10</div><div class="listing-seller">by 0xabcd...5678</div><div class="listing-price"><span>Price</span><span>80 $SLIME</span></div></div>
       <div class="listing"><div class="listing-icon">🛡️</div><div class="listing-name">Iron Shield</div><div class="listing-seller">by 0x9876...efgh</div><div class="listing-price"><span>Price</span><span>120 $SLIME</span></div></div>
       <div class="listing"><div class="listing-icon">💎</div><div class="listing-name">Crystal Ore ×3</div><div class="listing-seller">by 0xijkl...2345</div><div class="listing-price"><span>Price</span><span>150 $SLIME</span></div></div>
@@ -1043,7 +1043,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
           <div class="prf-char-plus-big">＋</div>
         </div>
         <div id="prf-char-display-active" style="display:none;flex-direction:column;align-items:center;gap:6px;">
-          <div class="prf-char-emoji-big" id="prf-char-emoji-big">🧙</div>
+          <img id="prf-char-img" src="" style="width:56px;height:56px;object-fit:cover;object-position:top;border:1px solid rgba(198,168,90,0.3);">
           <div class="prf-char-nm" id="prf-char-nm"></div>
           <div class="prf-char-rar" id="prf-char-rar"></div>
           <div class="prf-char-hpbar"><div class="prf-char-hpfill" id="prf-char-hpfill" style="width:40%"></div></div>
@@ -1053,23 +1053,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       <!-- RIGHT: stats -->
       <div class="prf-stats-side">
         <div class="prf-stat-row">
-          <div class="prf-stat-ico">★</div>
           <div class="prf-stat-val">Lv 12</div>
           <div class="prf-stat-lbl">Level · Commander</div>
         </div>
         <div class="prf-stat-row">
-          <div class="prf-stat-ico">⚡</div>
           <div class="prf-stat-val" id="prf-energy-val">70 / 100</div>
           <div class="prf-stat-lbl">Energy</div>
           <div class="prf-stat-bar"><div class="prf-stat-bar-fill" id="prf-energy-bar" style="width:70%"></div></div>
         </div>
         <div class="prf-stat-row">
-          <div class="prf-stat-ico">🃏</div>
           <div class="prf-stat-val">50</div>
           <div class="prf-stat-lbl">Cards</div>
         </div>
         <div class="prf-stat-row">
-          <div class="prf-stat-ico">🐾</div>
           <div class="prf-stat-val">6</div>
           <div class="prf-stat-lbl">Pets</div>
         </div>
@@ -1078,10 +1074,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
     <!-- TAB NAVBAR -->
     <div class="prf-tabs">
-      <div class="prf-tab on" onclick="prfTab('items',this)"><div class="prf-tab-ico">🧪</div><div class="prf-tab-lbl">Items</div></div>
-      <div class="prf-tab" onclick="prfTab('resource',this)"><div class="prf-tab-ico">📦</div><div class="prf-tab-lbl">Resource</div></div>
-      <div class="prf-tab" onclick="prfTab('cards',this)"><div class="prf-tab-ico">⚔️</div><div class="prf-tab-lbl">Card</div></div>
-      <div class="prf-tab" onclick="prfTab('pets',this)"><div class="prf-tab-ico">🐾</div><div class="prf-tab-lbl">Pet</div></div>
+      <div class="prf-tab on" onclick="prfTab('items',this)"><div class="prf-tab-lbl">Items</div></div>
+      <div class="prf-tab" onclick="prfTab('resource',this)"><div class="prf-tab-lbl">Resource</div></div>
+      <div class="prf-tab" onclick="prfTab('cards',this)"><div class="prf-tab-lbl">Card</div></div>
+      <div class="prf-tab" onclick="prfTab('pets',this)"><div class="prf-tab-lbl">Pet</div></div>
     </div>
 
     <!-- BODY -->
@@ -1089,10 +1085,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <!-- PANEL: Items (Potions + Materials) -->
       <div class="prf-panel on" id="prf-p-items">
-        <div class="prf-sec"><div class="prf-sec-lbl">🧪 HP Potions</div></div>
+        <div class="prf-sec"><div class="prf-sec-lbl">HP Potions</div></div>
         <div class="prf-resources">
           <div class="prf-res">
-            <div class="prf-res-ico">🧪</div>
+            <div class="prf-res-ico"></div>
             <div class="prf-res-body"><div class="prf-res-name">Small Potion</div><div class="prf-res-desc">Restore 20 HP — Card or Pet</div></div>
             <div class="prf-res-qty" id="qty-small">×4</div>
             <button class="prf-res-use green" onclick="openUseModal('small',20)">Use</button>
@@ -1110,7 +1106,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
             <button class="prf-res-use green" id="btn-large" onclick="openUseModal('large',100)" disabled>Use</button>
           </div>
         </div>
-        <div class="prf-sec" style="margin-top:0.5rem;"><div class="prf-sec-lbl">🪨 Materials</div></div>
+        <div class="prf-sec" style="margin-top:0.5rem;"><div class="prf-sec-lbl">Materials</div></div>
         <div class="prf-mat-grid">
           <div class="prf-mat"><div class="prf-mat-ico">🪨</div><div class="prf-mat-amt">×12</div><div class="prf-mat-nm">Stone</div></div>
           <div class="prf-mat"><div class="prf-mat-ico">⚙️</div><div class="prf-mat-amt">×8</div><div class="prf-mat-nm">Silver Ore</div></div>
@@ -1125,7 +1121,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <!-- PANEL: Resource (Energy + Lootbox) -->
       <div class="prf-panel" id="prf-p-resource">
-        <div class="prf-sec"><div class="prf-sec-lbl">⚡ Energy</div></div>
+        <div class="prf-sec"><div class="prf-sec-lbl">Energy</div></div>
         <div class="prf-resources">
           <div class="prf-res">
             <div class="prf-res-ico">⚡</div>
@@ -1134,7 +1130,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
             <button class="prf-res-use gold" onclick="useEnergy()">Use</button>
           </div>
         </div>
-        <div class="prf-sec" style="margin-top:0.5rem;"><div class="prf-sec-lbl">📦 Loot Box</div><div class="prf-sec-badge" id="qty-lootbox-badge">×3</div></div>
+        <div class="prf-sec" style="margin-top:0.5rem;"><div class="prf-sec-lbl">Loot Box</div><div class="prf-sec-badge" id="qty-lootbox-badge">×3</div></div>
         <div class="prf-lootbox-area">
           <div class="lb-card-wrap" onclick="openLootbox()">
             <div class="lb-card" id="lb-card">
@@ -1148,13 +1144,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
       <!-- PANEL: Cards -->
       <div class="prf-panel" id="prf-p-cards">
-        <div class="prf-sec"><div class="prf-sec-lbl">⚔️ Your Slimes</div></div>
+        <div class="prf-sec"><div class="prf-sec-lbl">Your Slimes</div></div>
         <div class="prf-cards-grid" id="prf-cards-grid"></div>
       </div>
 
       <!-- PANEL: Pets -->
       <div class="prf-panel" id="prf-p-pets">
-        <div class="prf-sec"><div class="prf-sec-lbl">🐾 Your Pets</div></div>
+        <div class="prf-sec"><div class="prf-sec-lbl">Your Pets</div></div>
         <div class="prf-pets-grid">
           <div class="prf-pet active-pet">
             <div class="prf-pet-thumb"><img src="assets/pet/pet_shadowfang.png" onerror="this.outerHTML='🦊'"></div>
@@ -1869,28 +1865,27 @@ function closeMulti(){document.getElementById('multi-overlay').classList.remove(
   }
 
   function syncCharBtn(){
-    const btn = document.getElementById('prf-char-btn');
-    const emoEl = document.getElementById('prf-char-emoji');
-    const subEl = document.getElementById('prf-char-sub');
-    const nameEl = document.getElementById('prf-char-name');
-    const hpFill = document.getElementById('prf-char-hp-fill');
-    if(!btn) return;
+    const plusEl   = document.getElementById('prf-char-display-plus');
+    const activeEl = document.getElementById('prf-char-display-active');
+    const imgEl    = document.getElementById('prf-char-img');
+    const nmEl     = document.getElementById('prf-char-nm');
+    const rarEl    = document.getElementById('prf-char-rar');
+    const hpFill   = document.getElementById('prf-char-hpfill');
+    const labelEl  = document.getElementById('prf-char-label');
+    if(!plusEl) return;
     if(prfActive){
-      btn.classList.add('has-char');
-      emoEl.textContent = getCharEmoji(prfActive);
-      subEl.style.display = 'none';
-      nameEl.style.display = 'block';
-      nameEl.textContent = NAMES[prfActive-1]||'Slime #'+prfActive;
+      plusEl.style.display   = 'none';
+      activeEl.style.display = 'flex';
+      if(imgEl)   imgEl.src = `assets/card/card_${String(prfActive).padStart(3,'0')}.png`;
+      if(nmEl)    nmEl.textContent  = NAMES[prfActive-1]||'Slime #'+prfActive;
+      if(rarEl)   rarEl.textContent = RARITY[prfActive-1]||'Common';
+      if(labelEl) labelEl.textContent = 'Active';
       const pct = Math.max(0,(charHp.cur/charHp.max)*100);
-      hpFill.style.width = pct+'%';
-      hpFill.className = 'prf-char-hp-fill '+hpCls(charHp.cur,charHp.max);
+      if(hpFill){ hpFill.style.width=pct+'%'; hpFill.className='prf-char-hpfill '+hpCls(charHp.cur,charHp.max); }
     } else {
-      btn.classList.remove('has-char');
-      emoEl.textContent = '＋';
-      subEl.style.display = '';
-      subEl.textContent = 'Pick Char';
-      nameEl.style.display = 'none';
-      hpFill.style.width = '100%';
+      plusEl.style.display   = 'flex';
+      activeEl.style.display = 'none';
+      if(labelEl) labelEl.textContent = 'Pick Character';
     }
   }
 
