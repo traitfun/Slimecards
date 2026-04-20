@@ -1070,6 +1070,95 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       </div>
     </div>
 
+    <!-- TAB NAVBAR -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);background:rgba(6,8,15,0.98);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:48px;z-index:50;margin-top:24px;">
+      <div class="prf-d-tab on" onclick="prfDTab('items',this)" style="padding:12px 4px;text-align:center;cursor:pointer;border-bottom:2px solid var(--gold);background:rgba(198,168,90,0.04);">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Items</div>
+      </div>
+      <div class="prf-d-tab" onclick="prfDTab('resource',this)" style="padding:12px 4px;text-align:center;cursor:pointer;border-bottom:2px solid transparent;">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);">Resource</div>
+      </div>
+      <div class="prf-d-tab" onclick="prfDTab('cards',this)" style="padding:12px 4px;text-align:center;cursor:pointer;border-bottom:2px solid transparent;">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);">Card</div>
+      </div>
+      <div class="prf-d-tab" onclick="prfDTab('pets',this)" style="padding:12px 4px;text-align:center;cursor:pointer;border-bottom:2px solid transparent;">
+        <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.25);">Pet</div>
+      </div>
+    </div>
+
+    <!-- PANELS -->
+    <div style="padding:1rem 1.2rem 5rem;">
+
+      <!-- Items panel -->
+      <div id="prf-panel-items" style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:4px;">HP Potions</div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:10px 12px;">
+          <div style="font-size:20px;width:28px;text-align:center;">🧪</div>
+          <div style="flex:1;"><div style="font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;">Small Potion</div><div style="font-size:10px;color:rgba(255,255,255,0.28);font-style:italic;">Restore 20 HP — Card or Pet</div></div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);">×4</div>
+          <button style="padding:5px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.28);color:#34d399;">Use</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:10px 12px;">
+          <div style="font-size:20px;width:28px;text-align:center;">⚗️</div>
+          <div style="flex:1;"><div style="font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;">Medium Potion</div><div style="font-size:10px;color:rgba(255,255,255,0.28);font-style:italic;">Restore 50 HP — Card or Pet</div></div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);">×1</div>
+          <button style="padding:5px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.28);color:#34d399;">Use</button>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin:8px 0 4px;">Materials</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">🪨</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×12</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Stone</div></div>
+          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">⚙️</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×8</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Silver</div></div>
+          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">💎</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×3</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Crystal</div></div>
+          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">✨</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×1</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Void</div></div>
+        </div>
+      </div>
+
+      <!-- Resource panel -->
+      <div id="prf-panel-resource" style="display:none;flex-direction:column;gap:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:4px;">Energy</div>
+        <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:10px 12px;">
+          <div style="font-size:20px;width:28px;text-align:center;">⚡</div>
+          <div style="flex:1;"><div style="font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;">Stamina Flask</div><div style="font-size:10px;color:rgba(255,255,255,0.28);font-style:italic;">Restore +30 Energy</div></div>
+          <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);">×2</div>
+          <button style="padding:5px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;background:rgba(198,168,90,0.08);border:1px solid rgba(198,168,90,0.28);color:var(--gold);">Use</button>
+        </div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin:8px 0 4px;">Loot Box <span style="float:right;padding:2px 7px;border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.2);">×3</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:1rem 0;">
+          <div style="width:100px;aspect-ratio:2/3;border:1px solid rgba(198,168,90,0.3);background:radial-gradient(circle,#12102a,#060810);display:flex;align-items:center;justify-content:center;font-size:2.5rem;cursor:pointer;">📦</div>
+          <button style="padding:8px 22px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Open Box</button>
+        </div>
+      </div>
+
+      <!-- Cards panel -->
+      <div id="prf-panel-cards" style="display:none;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:12px;">Your Slimes</div>
+        <div id="prf-cards-inner" style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;"></div>
+      </div>
+
+      <!-- Pets panel -->
+      <div id="prf-panel-pets" style="display:none;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:12px;">Your Pets</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+          <div style="border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;">
+            <div style="width:100%;aspect-ratio:1;overflow:hidden;background:#0d1018;display:flex;align-items:center;justify-content:center;"><img src="assets/pet/pet_shadowfang.png" style="width:100%;height:100%;object-fit:cover;object-position:top;" onerror="this.style.display='none'"></div>
+            <div style="padding:4px 5px;"><div style="font-family:'Cinzel',serif;font-size:8px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Shadowfang</div><div style="font-size:7.5px;color:rgba(198,168,90,0.7);margin-top:2px;">+5% $SLIME</div><div style="font-size:7px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.22);margin-top:3px;">Lv 2</div></div>
+          </div>
+          <div style="border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;">
+            <div style="width:100%;aspect-ratio:1;overflow:hidden;background:#0d1018;display:flex;align-items:center;justify-content:center;"><img src="assets/pet/pet_frostkit.png" style="width:100%;height:100%;object-fit:cover;object-position:top;" onerror="this.style.display='none'"></div>
+            <div style="padding:4px 5px;"><div style="font-family:'Cinzel',serif;font-size:8px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Frostkit</div><div style="font-size:7.5px;color:rgba(198,168,90,0.7);margin-top:2px;">+3% Loot Box</div><div style="font-size:7px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.22);margin-top:3px;">Lv 1</div></div>
+          </div>
+          <div style="border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;">
+            <div style="width:100%;aspect-ratio:1;overflow:hidden;background:#0d1018;display:flex;align-items:center;justify-content:center;"><img src="assets/pet/pet_gearpup.png" style="width:100%;height:100%;object-fit:cover;object-position:top;" onerror="this.style.display='none'"></div>
+            <div style="padding:4px 5px;"><div style="font-family:'Cinzel',serif;font-size:8px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Gearpup</div><div style="font-size:7.5px;color:rgba(198,168,90,0.7);margin-top:2px;">+8% EXP</div><div style="font-size:7px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.22);margin-top:3px;">Lv 1</div></div>
+          </div>
+          <div style="border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;">
+            <div style="width:100%;aspect-ratio:1;overflow:hidden;background:#0d1018;display:flex;align-items:center;justify-content:center;"><img src="assets/pet/pet_aquapaw.png" style="width:100%;height:100%;object-fit:cover;object-position:top;" onerror="this.style.display='none'"></div>
+            <div style="padding:4px 5px;"><div style="font-family:'Cinzel',serif;font-size:8px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Aquapaw</div><div style="font-size:7.5px;color:rgba(198,168,90,0.7);margin-top:2px;">+6% HP Regen</div><div style="font-size:7px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.22);margin-top:3px;">Lv 1</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panels -->
 
   </div>
 </div>
@@ -1509,17 +1598,46 @@ const sw = Array.from({length:95},()=>({
 
   // Tab switcher
   window.prfDTab = function(name, btn) {
-    ['cards','pets','items'].forEach(t => {
+    ['items','resource','cards','pets'].forEach(t => {
       const el = document.getElementById('prf-panel-'+t);
-      if(el) el.style.display = (t===name ? (t==='cards'?'grid':'block') : 'none');
+      if(el) el.style.display = 'none';
     });
-    document.querySelectorAll('.prf-d-tab').forEach(b => b.classList.remove('on'));
-    btn.classList.add('on');
+    const target = document.getElementById('prf-panel-'+name);
+    if(target) target.style.display = (name==='items'||name==='resource') ? 'flex' : 'block';
+    document.querySelectorAll('.prf-d-tab').forEach(b => {
+      b.style.borderBottom = '2px solid transparent';
+      b.style.background = 'none';
+      const lbl = b.querySelector('div');
+      if(lbl) lbl.style.color = 'rgba(255,255,255,0.25)';
+    });
+    btn.style.borderBottom = '2px solid var(--gold)';
+    btn.style.background = 'rgba(198,168,90,0.04)';
+    const lbl = btn.querySelector('div');
+    if(lbl) lbl.style.color = 'var(--gold)';
+    if(name==='cards') buildCardsPanel();
   };
 
-  // Build collection grid
-  function buildGrid() {
-    const grid = document.getElementById('prf-panel-cards');
+  function buildCardsPanel() {
+    const inner = document.getElementById('prf-cards-inner');
+    if(!inner || inner.children.length) return;
+    for(let i=1;i<=50;i++){
+      const d = document.createElement('div');
+      d.style.cssText = 'border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;cursor:pointer;transition:border-color 0.2s;';
+      d.innerHTML = `
+        <div style="width:100%;aspect-ratio:1;overflow:hidden;background:#0d1018;">
+          <img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;object-position:top;filter:saturate(0.82);"
+            onerror="this.style.display='none'">
+        </div>
+        <div style="padding:4px 5px;">
+          <div style="font-family:'Cinzel',serif;font-size:8px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${NAMES[i-1]||'Slime #'+i}</div>
+          <div style="font-size:7px;font-family:'DM Mono',monospace;color:rgba(255,255,255,0.22);margin-top:2px;">Lv ${Math.floor(Math.random()*15)+1}</div>
+        </div>`;
+      d.onmouseover = () => d.style.borderColor = 'rgba(201,168,76,0.3)';
+      d.onmouseout  = () => d.style.borderColor = 'rgba(255,255,255,0.07)';
+      inner.appendChild(d);
+    }
+  }
     if(!grid || grid.children.length) return;
     NAMES.forEach((name, i) => {
       const lv = Math.floor(Math.random()*15)+1;
