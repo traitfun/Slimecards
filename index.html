@@ -1638,29 +1638,6 @@ const sw = Array.from({length:95},()=>({
       inner.appendChild(d);
     }
   }
-    if(!grid || grid.children.length) return;
-    NAMES.forEach((name, i) => {
-      const lv = Math.floor(Math.random()*15)+1;
-      const rar = RARITY[i]||'common';
-      const d = document.createElement('div');
-      d.className = 'prf-d-card';
-      d.innerHTML = `
-        <div class="prf-d-card-img-wrap">
-          <img src="assets/card/card_${String(i+1).padStart(3,'0')}.png" loading="lazy"
-            onerror="this.outerHTML='<div class=prf-d-card-empty>◈</div>'" alt="${name}">
-        </div>
-        <div class="prf-d-rdot ${rar}"></div>
-        <div class="prf-d-card-info">
-          <div class="prf-d-card-name">${name}</div>
-          <div class="prf-d-card-lv">Lv ${lv}</div>
-        </div>`;
-      d.onclick = () => {
-        document.querySelectorAll('.prf-d-card').forEach(c=>c.classList.remove('sel'));
-        d.classList.add('sel');
-      };
-      grid.appendChild(d);
-    });
-  }
 
   // Build modal
   function buildModal() {
