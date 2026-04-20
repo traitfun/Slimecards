@@ -1650,56 +1650,34 @@ const sw = Array.from({length:95},()=>({
   let prfActive = null;
 
   // Tab switcher
-  // ── MATERIALS DATA ──
+  // ── MATERIALS ──
   const MATERIALS = [
-    {id:'item_001', name:'Slimestone',   qty:12, tier:'common'},
-    {id:'item_002', name:'Goorock',      qty:8,  tier:'common'},
-    {id:'item_003', name:'Muddlet',      qty:6,  tier:'common'},
-    {id:'item_004', name:'Grimbit',      qty:15, tier:'common'},
-    {id:'item_005', name:'Slurry',       qty:4,  tier:'common'},
-    {id:'item_006', name:'Bogchunk',     qty:3,  tier:'uncommon'},
-    {id:'item_007', name:'Dregshard',    qty:7,  tier:'uncommon'},
-    {id:'item_008', name:'Murkclay',     qty:2,  tier:'uncommon'},
-    {id:'item_009', name:'Vilebit',      qty:5,  tier:'uncommon'},
-    {id:'item_010', name:'Slimegravel',  qty:9,  tier:'uncommon'},
-    {id:'item_011', name:'Oozeflake',    qty:1,  tier:'rare'},
-    {id:'item_012', name:'Boglump',      qty:3,  tier:'rare'},
-    {id:'item_013', name:'Mirebit',      qty:2,  tier:'rare'},
-    {id:'item_014', name:'Gunkstone',    qty:4,  tier:'rare'},
-    {id:'item_015', name:'Slimegrit',    qty:6,  tier:'rare'},
-    {id:'item_016', name:'Bogdust',      qty:1,  tier:'epic'},
-    {id:'item_017', name:'Crudshard',    qty:2,  tier:'epic'},
-    {id:'item_018', name:'Oozerock',     qty:1,  tier:'epic'},
-    {id:'item_019', name:'Grimcore',     qty:0,  tier:'legend'},
-    {id:'item_020', name:'Slimechip',    qty:1,  tier:'mythic'},
+    {id:'item_001', name:'Slimestone',  qty:12},
+    {id:'item_002', name:'Goorock',     qty:8},
+    {id:'item_003', name:'Muddlet',     qty:6},
+    {id:'item_004', name:'Grimbit',     qty:15},
+    {id:'item_005', name:'Slurry',      qty:4},
+    {id:'item_006', name:'Bogchunk',    qty:3},
+    {id:'item_007', name:'Dregshard',   qty:7},
+    {id:'item_008', name:'Murkclay',    qty:2},
   ];
-
-  const TIER_COLOR = {
-    common:'rgba(255,255,255,0.15)',
-    uncommon:'rgba(96,165,250,0.4)',
-    rare:'rgba(168,85,247,0.4)',
-    epic:'rgba(240,192,64,0.4)',
-    legend:'rgba(248,113,113,0.4)',
-    mythic:'rgba(255,50,50,0.6)',
-  };
 
   function buildMaterials() {
     const grid = document.getElementById('materials-grid');
     if(!grid || grid.children.length) return;
     MATERIALS.forEach(item => {
-      const isEmpty = item.qty === 0;
       const d = document.createElement('div');
-      d.style.cssText = `background:rgba(255,255,255,0.025);border:1px solid ${TIER_COLOR[item.tier]||'rgba(255,255,255,0.06)'};text-align:center;cursor:pointer;transition:all 0.2s;opacity:${isEmpty?'0.35':'1'};position:relative;`;
+      d.style.cssText = 'background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);text-align:center;cursor:pointer;transition:border-color 0.2s;overflow:hidden;';
       d.innerHTML = `
         <img src="assets/item/${item.id}.png" loading="lazy"
-          style="width:100%;aspect-ratio:1;object-fit:cover;display:block;"
-          onerror="this.style.cssText='width:100%;aspect-ratio:1;background:#0d1018;display:block'">
+          style="width:100%;aspect-ratio:1/1;object-fit:cover;display:block;"
+          onerror="this.style.cssText='width:100%;aspect-ratio:1/1;background:#0d1018;display:block'">
         <div style="padding:3px 2px 4px;">
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);">×${item.qty}</div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;">${item.name}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);">×${item.qty}</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 3px;">${item.name}</div>
         </div>`;
-      d.onmouseover = () => { if(!isEmpty) d.style.borderColor = 'rgba(255,255,255,0.3)'; };
-      d.onmouseout  = () => { d.style.borderColor = TIER_COLOR[item.tier]||'rgba(255,255,255,0.06)'; };
+      d.onmouseover = () => d.style.borderColor = 'rgba(255,255,255,0.25)';
+      d.onmouseout  = () => d.style.borderColor = 'rgba(255,255,255,0.08)';
       grid.appendChild(d);
     });
   }
