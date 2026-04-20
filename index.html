@@ -1070,38 +1070,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       </div>
     </div>
 
-    <!-- COLLECTION -->
-    <div>
-      <div class="prf-d-divider">
-        <div class="prf-d-divider-lbl">Collection</div>
-        <div class="prf-d-divider-line"></div>
-      </div>
-      <div class="prf-d-tabs">
-        <button class="prf-d-tab on" onclick="prfDTab('cards',this)">Cards</button>
-        <button class="prf-d-tab" onclick="prfDTab('pets',this)">Pets</button>
-        <button class="prf-d-tab" onclick="prfDTab('items',this)">Items</button>
-      </div>
-      <div id="prf-panel-cards" class="prf-d-grid"></div>
-      <div id="prf-panel-pets" style="display:none;padding:60px 0;text-align:center;">
-        <div style="font-family:'Cinzel',serif;font-size:14px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;">Your Pets</div>
-        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.1);margin-top:8px;">6 Companions</div>
-      </div>
-      <div id="prf-panel-items" style="display:none;padding:60px 0;text-align:center;">
-        <div style="font-family:'Cinzel',serif;font-size:14px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;">Inventory</div>
-        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.1);margin-top:8px;">Resources · Materials · Loot</div>
-      </div>
-    </div>
 
   </div>
 </div>
 
-<!-- Char Select Modal (reused) -->
-<div id="prf-modal" onclick="if(event.target===this)prfCloseModal()">
-  <div class="prf-sheet">
-    <div class="prf-sheet-title">Select Active Character</div>
-    <div class="prf-sheet-sub">Tap a card to equip</div>
-    <div class="prf-modal-grid" id="prf-modal-grid"></div>
-    <button class="prf-close-btn" onclick="prfCloseModal()">← Close</button>
+<!-- Char Select Modal -->
+<div id="prf-modal" style="position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center;padding:0 0 0 0;" onclick="if(event.target===this)prfCloseModal()">
+  <div style="width:100%;max-width:560px;background:#0a0d16;border:1px solid rgba(255,255,255,0.07);border-bottom:none;padding:1.2rem 1rem 2rem;animation:prfRise 0.28s cubic-bezier(0.2,0,0.1,1);position:relative;">
+    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.3),transparent);"></div>
+    <div style="font-family:'Cinzel',serif;font-size:13px;color:#e2ddd6;margin-bottom:3px;">Select Active Character</div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:14px;">Tap to equip</div>
+    <div id="prf-modal-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-height:50vh;overflow-y:auto;"></div>
+    <button onclick="prfCloseModal()" style="width:100%;margin-top:12px;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.25);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;">← Close</button>
   </div>
 </div>
 <div id="prf-toast"></div>
@@ -1568,11 +1548,17 @@ const sw = Array.from({length:95},()=>({
   function buildModal() {
     const grid = document.getElementById('prf-modal-grid');
     if(!grid || grid.children.length) return;
-    for(let i=1;i<=20;i++){
+    for(let i=1;i<=50;i++){
       const d = document.createElement('div');
-      d.className = 'prf-modal-card'+(i===prfActive?' sel':'');
       d.id = 'prf-md-'+i;
-      d.innerHTML = `<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.background='#0d1018'"><div class="prf-modal-lbl">${NAMES[i-1]||'Slime #'+i}</div>`;
+      d.style.cssText = 'border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;filter:saturate(0.65);transition:all 0.2s;'+(i===prfActive?'border-color:rgba(201,168,76,0.6);filter:saturate(1);':'');
+      d.innerHTML = `
+        <img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy"
+          style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;"
+          onerror="this.style.cssText='width:100%;aspect-ratio:2/3;background:#0d1018;display:block'">
+        <div style="font-family:\'DM Mono\',monospace;font-size:7.5px;padding:3px 4px;background:rgba(5,7,13,0.9);color:rgba(255,255,255,0.25);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;">${NAMES[i-1]||'Slime #'+i}</div>`;
+      d.onmouseover = () => { if(i!==prfActive) d.style.filter='saturate(0.9)'; };
+      d.onmouseout  = () => { if(i!==prfActive) d.style.filter='saturate(0.65)'; };
       d.onclick = () => prfSetActive(i);
       grid.appendChild(d);
     }
@@ -1603,8 +1589,12 @@ const sw = Array.from({length:95},()=>({
     const mn = document.getElementById('prf-main-name'); if(mn) mn.textContent=name;
     const ml = document.getElementById('prf-main-lv'); if(ml) ml.textContent=`Lv ${lv} · ${rar.charAt(0).toUpperCase()+rar.slice(1)}`;
 
-    document.querySelectorAll('.prf-modal-card').forEach(c=>c.classList.remove('sel'));
-    const md = document.getElementById('prf-md-'+id); if(md) md.classList.add('sel');
+    document.querySelectorAll('[id^="prf-md-"]').forEach(c=>{
+      c.style.borderColor='rgba(255,255,255,0.07)';
+      c.style.filter='saturate(0.65)';
+    });
+    const md = document.getElementById('prf-md-'+id);
+    if(md){ md.style.borderColor='rgba(201,168,76,0.6)'; md.style.filter='saturate(1)'; }
 
     prfCloseModal();
     prfToast(name+' equipped','gold');
@@ -1612,10 +1602,12 @@ const sw = Array.from({length:95},()=>({
 
   window.prfOpenModal = function() {
     buildModal();
-    document.getElementById('prf-modal').classList.add('open');
+    const m = document.getElementById('prf-modal');
+    if(m){ m.style.display='flex'; }
   };
   window.prfCloseModal = function() {
-    document.getElementById('prf-modal').classList.remove('open');
+    const m = document.getElementById('prf-modal');
+    if(m){ m.style.display='none'; }
   };
 
   let toastTimer;
