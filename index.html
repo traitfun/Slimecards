@@ -282,123 +282,94 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .listing-price span:last-child{font-family:'Cinzel',serif;color:var(--gold);}
 
 /* ═══════════ PROFILE ═══════════ */
-/* ══ PROFILE PAGE ══ */
-.profile-wrap{max-width:100%;padding:0 2rem 5rem;display:flex;flex-direction:column;gap:1rem;}
-/* Top bar strip */
-.prf-topbar{display:grid;grid-template-columns:1fr auto;gap:0.8rem;align-items:center;padding:0.75rem 2rem;background:rgba(6,8,15,0.7);border:1px solid rgba(255,255,255,0.07);margin-bottom:0;}
-.prf-ps{display:flex;flex-direction:column;gap:4px;}
-.prf-level{display:flex;align-items:center;gap:7px;}
-.prf-lv-pill{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.12em;padding:2px 8px;background:rgba(198,168,90,0.1);border:1px solid rgba(198,168,90,0.35);color:var(--gold);}
-.prf-lv-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);font-family:'DM Mono',monospace;}
-.prf-energy{display:flex;align-items:center;gap:6px;}
-.prf-e-lbl{font-size:10px;color:rgba(255,255,255,0.25);font-family:'DM Mono',monospace;white-space:nowrap;}
-.prf-e-track{flex:1;max-width:70px;height:2px;background:rgba(255,255,255,0.07);}
-.prf-e-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),var(--gold));width:70%;}
-/* Right active slime */
-.prf-as{display:flex;align-items:center;gap:8px;}
-.prf-avatar{width:40px;aspect-ratio:2/3;border:1px solid rgba(198,168,90,0.3);overflow:hidden;cursor:pointer;position:relative;flex-shrink:0;transition:border-color 0.2s,box-shadow 0.2s;}
-.prf-avatar:hover{border-color:var(--gold);box-shadow:0 0 14px rgba(198,168,90,0.18);}
-.prf-avatar img{width:100%;height:100%;object-fit:cover;display:block;}
-.prf-avatar::after{content:'▾';position:absolute;bottom:0;right:0;font-size:7px;color:rgba(198,168,90,0.7);background:rgba(0,0,0,0.5);padding:1px 2px;}
-.prf-info{display:flex;flex-direction:column;gap:3px;min-width:0;}
-.prf-tag{font-size:8px;letter-spacing:0.28em;text-transform:uppercase;color:#22d3ee;opacity:0.65;font-family:'DM Mono',monospace;}
-.prf-slime-name{font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:85px;}
-.prf-hp-row{display:flex;align-items:center;gap:5px;}
-.prf-hp-track{flex:1;height:3px;background:rgba(255,255,255,0.07);overflow:hidden;}
-.prf-hp-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);transition:width 0.4s,background 0.4s;}
-.prf-hp-fill.med{background:linear-gradient(90deg,#fbbf24,#fde68a);}
-.prf-hp-fill.low{background:linear-gradient(90deg,#f87171,#fca5a5);}
-.prf-hp-num{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);white-space:nowrap;}
-.prf-heal-btn{width:28px;height:28px;flex-shrink:0;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all 0.2s;}
-.prf-heal-btn:hover{background:rgba(52,211,153,0.14);border-color:rgba(52,211,153,0.45);}
-.prf-heal-btn:active{transform:scale(0.9);}
-/* Overview card */
-.prf-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1rem 1.1rem;position:relative;overflow:hidden;}
-.prf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,168,90,0.25),transparent);}
-.prf-ov-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.9rem;}
-.prf-wallet{font-family:'DM Mono',monospace;font-size:13px;color:#e2ddd6;}
-.prf-wallet em{color:var(--gold);font-style:normal;}
-.prf-wallet-sub{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:3px;font-family:'DM Mono',monospace;}
-.prf-rank{padding:3px 9px;border:1px solid rgba(180,105,45,0.45);font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;color:#d08040;background:rgba(180,105,45,0.06);}
-.prf-ov-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
-.prf-stat{text-align:center;padding:8px 5px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);}
-.prf-stat-num{font-family:'Cinzel',serif;font-size:16px;font-weight:500;color:#e2ddd6;}
-.prf-stat-key{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-top:3px;}
-/* Active slime showcase */
-.prf-showcase{border-color:rgba(198,168,90,0.18);overflow:hidden;}
-.prf-sc-head{display:flex;align-items:center;gap:7px;padding:7px 12px;border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(198,168,90,0.03);}
-.prf-sc-dot{width:6px;height:6px;border-radius:50%;background:#22d3ee;box-shadow:0 0 8px #22d3ee;animation:prfPulse 2.2s ease-in-out infinite;}
-@keyframes prfPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
-.prf-sc-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#22d3ee;}
-.prf-sc-body{display:grid;grid-template-columns:90px 1fr;}
-.prf-sc-img{position:relative;overflow:hidden;}
-.prf-sc-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82) brightness(0.9);}
-.prf-sc-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(6,8,15,0.7) 100%),linear-gradient(0deg,rgba(6,8,15,0.3) 0%,transparent 40%);}
-.prf-sc-data{padding:12px 13px;display:flex;flex-direction:column;justify-content:center;gap:7px;}
-.prf-sc-name{font-family:'Cinzel',serif;font-size:14px;font-weight:500;color:#e2ddd6;line-height:1.1;}
-.prf-sc-lv{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:-2px;}
-.prf-sc-hp{display:flex;flex-direction:column;gap:4px;}
-.prf-sc-hp-top{display:flex;justify-content:space-between;align-items:baseline;}
-.prf-sc-hp-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);}
-.prf-sc-hp-val{font-family:'DM Mono',monospace;font-size:12px;color:#34d399;transition:color 0.3s;}
-.prf-sc-hp-val.med{color:#fbbf24;}.prf-sc-hp-val.low{color:#f87171;}
-.prf-sc-track{height:5px;background:rgba(255,255,255,0.07);overflow:hidden;}
-.prf-sc-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);transition:width 0.4s,background 0.4s;}
-.prf-sc-fill.med{background:linear-gradient(90deg,#fbbf24,#fde68a);}
-.prf-sc-fill.low{background:linear-gradient(90deg,#f87171,#fca5a5);}
-.prf-sc-buff{font-size:10px;color:rgba(34,211,238,0.45);font-style:italic;}
-/* Bottom tabs */
-.prf-tabs{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);}
-.prf-tab{padding:9px 4px;text-align:center;cursor:pointer;border-top:2px solid transparent;transition:all 0.2s;}
-.prf-tab:hover{background:rgba(255,255,255,0.02);}
-.prf-tab.on{border-top-color:var(--gold);background:rgba(198,168,90,0.04);}
-.prf-tab-ico{font-size:16px;}
-.prf-tab-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:3px;}
-.prf-tab.on .prf-tab-lbl{color:var(--gold);}
-/* Tab panels */
-.prf-panel{display:none;flex-direction:column;gap:8px;}
-.prf-panel.on{display:flex;}
-.prf-sec-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);}
-/* Materials */
+.profile-wrap{max-width:100%;padding:0 0 5rem;display:flex;flex-direction:column;gap:0;}
+
+/* ── HERO STATS BAR ── */
+.prf-hero{display:flex;align-items:stretch;gap:0;padding:4rem 1.2rem 0.9rem;background:rgba(6,8,15,0.85);border-bottom:1px solid rgba(255,255,255,0.06);position:relative;}
+.prf-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,168,90,0.2),transparent);}
+
+/* [+] character picker */
+.prf-char-btn{width:62px;height:82px;flex-shrink:0;border:1px dashed rgba(198,168,90,0.35);background:rgba(198,168,90,0.04);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all 0.22s;position:relative;overflow:hidden;}
+.prf-char-btn:hover{border-color:rgba(198,168,90,0.7);background:rgba(198,168,90,0.08);}
+.prf-char-btn.has-char{border-style:solid;border-color:rgba(198,168,90,0.4);}
+.prf-char-emoji{font-size:2rem;line-height:1;transition:transform 0.2s;}
+.prf-char-btn:hover .prf-char-emoji{transform:scale(1.1);}
+.prf-char-plus{font-size:1.5rem;color:rgba(198,168,90,0.5);line-height:1;}
+.prf-char-sub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(198,168,90,0.4);}
+.prf-char-name{font-family:'Cinzel',serif;font-size:8px;color:rgba(230,220,190,0.8);text-align:center;padding:0 3px;line-height:1.2;max-width:58px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.prf-char-hp-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.05);}
+.prf-char-hp-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);transition:width 0.4s;}
+.prf-char-hp-fill.med{background:linear-gradient(90deg,#fbbf24,#fde68a);}
+.prf-char-hp-fill.low{background:linear-gradient(90deg,#f87171,#fca5a5);}
+
+/* Stats beside [+] */
+.prf-hero-stats{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:0;padding-left:1rem;}
+.prf-hs{display:flex;flex-direction:column;justify-content:center;padding:0.4rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+.prf-hs:nth-child(odd){border-right:1px solid rgba(255,255,255,0.04);}
+.prf-hs-ico{font-size:11px;margin-bottom:2px;}
+.prf-hs-val{font-family:'Cinzel',serif;font-size:15px;color:#E6EAF2;line-height:1;}
+.prf-hs-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:2px;}
+.prf-hs-bar{height:2px;background:rgba(255,255,255,0.06);margin-top:4px;overflow:hidden;}
+.prf-hs-bar-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),var(--gold));transition:width 0.5s;}
+
+/* ── BODY ── */
+.prf-body{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:1rem;}
+
+/* Section label */
+.prf-sec{display:flex;align-items:center;justify-content:space-between;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:8px;}
+.prf-sec-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);}
+.prf-sec-badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.2);}
+
+/* ── RESOURCES (use items) ── */
+.prf-resources{display:flex;flex-direction:column;gap:6px;}
+.prf-res{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:10px 12px;transition:border-color 0.2s;position:relative;}
+.prf-res:hover{border-color:rgba(255,255,255,0.1);}
+.prf-res-ico{font-size:22px;flex-shrink:0;width:28px;text-align:center;}
+.prf-res-body{flex:1;min-width:0;}
+.prf-res-name{font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;line-height:1;}
+.prf-res-desc{font-size:10px;color:rgba(255,255,255,0.28);margin-top:2px;font-style:italic;}
+.prf-res-qty{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:26px;text-align:right;}
+.prf-res-use{padding:5px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border:none;flex-shrink:0;}
+.prf-res-use.green{background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.28);color:#34d399;}
+.prf-res-use.green:hover{background:rgba(52,211,153,0.15);border-color:rgba(52,211,153,0.5);}
+.prf-res-use.gold{background:rgba(198,168,90,0.08);border:1px solid rgba(198,168,90,0.28);color:var(--gold);}
+.prf-res-use.gold:hover{background:rgba(198,168,90,0.15);border-color:rgba(198,168,90,0.5);}
+.prf-res-use.blue{background:rgba(96,165,250,0.08);border:1px solid rgba(96,165,250,0.28);color:#60a5fa;}
+.prf-res-use.blue:hover{background:rgba(96,165,250,0.15);border-color:rgba(96,165,250,0.5);}
+.prf-res-use:disabled{opacity:0.3;cursor:not-allowed;}
+.prf-res-use:active:not(:disabled){transform:scale(0.93);}
+.prf-res-zero{opacity:0.35;}
+
+/* ── MATERIALS ── */
 .prf-mat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
 .prf-mat{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;cursor:pointer;transition:border-color 0.2s;}
 .prf-mat:hover{border-color:rgba(255,255,255,0.13);}
 .prf-mat-ico{font-size:20px;}
 .prf-mat-amt{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;}
 .prf-mat-nm{font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;}
-/* Consumables */
-.prf-cons-list{display:flex;flex-direction:column;gap:6px;}
-.prf-con{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 11px;transition:border-color 0.2s;}
-.prf-con:hover{border-color:rgba(255,255,255,0.1);}
-.prf-con-ico{font-size:20px;flex-shrink:0;}
-.prf-con-body{flex:1;}
-.prf-con-name{font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;}
-.prf-con-desc{font-size:10px;color:rgba(255,255,255,0.3);margin-top:1px;font-style:italic;}
-.prf-con-qty{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);flex-shrink:0;}
-.prf-use-btn{padding:4px 9px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.prf-use-g{background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.25);color:#34d399;}
-.prf-use-g:hover{background:rgba(52,211,153,0.14);border-color:rgba(52,211,153,0.45);}
-.prf-use-gold{background:rgba(198,168,90,0.07);border:1px solid rgba(198,168,90,0.25);color:var(--gold);}
-.prf-use-gold:hover{background:rgba(198,168,90,0.14);border-color:rgba(198,168,90,0.45);}
-.prf-use-btn:active{transform:scale(0.94);}
-/* Cards mini */
+
+/* ── CARDS MINI ── */
 .prf-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;}
 .prf-mini-card{border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;filter:saturate(0.7);transition:all 0.22s;}
 .prf-mini-card:hover{filter:saturate(1);transform:translateY(-2px);}
 .prf-mini-card.active{border-color:var(--gold);filter:saturate(1);}
 .prf-mini-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
-/* Pets */
+
+/* ── PETS ── */
 .prf-pets-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;}
 .prf-pet{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:8px 10px;cursor:pointer;transition:border-color 0.2s;}
 .prf-pet:hover{border-color:rgba(198,168,90,0.25);}
 .prf-pet.active-pet{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.03);}
-.prf-pet-thumb{width:34px;aspect-ratio:2/3;overflow:hidden;border:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+.prf-pet-thumb{width:34px;aspect-ratio:2/3;overflow:hidden;border:1px solid rgba(255,255,255,0.08);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:rgba(255,255,255,0.03);}
 .prf-pet-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8);}
 .prf-pet-meta{flex:1;min-width:0;}
 .prf-pet-nm{font-family:'Cinzel',serif;font-size:10px;color:#e2ddd6;}
 .prf-pet-sk{font-size:9px;color:rgba(198,168,90,0.5);margin-top:2px;}
 .prf-pet-lv{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);margin-top:2px;}
-/* Select modal */
+.prf-pet-hp-bar{height:2px;background:rgba(255,255,255,0.06);margin-top:4px;overflow:hidden;}
+.prf-pet-hp-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);}
+
+/* ── CHAR SELECT MODAL ── */
 #prf-modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;padding:1rem;}
 #prf-modal.open{display:flex;}
 .prf-sheet{width:100%;max-width:520px;background:#0a0d16;border:1px solid rgba(255,255,255,0.07);border-bottom:none;padding:1.2rem 1rem 2rem;animation:prfRise 0.28s cubic-bezier(0.2,0,0.1,1);position:relative;}
@@ -414,11 +385,51 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-modal-lbl{font-family:'DM Mono',monospace;font-size:8px;padding:3px 4px;background:rgba(5,7,13,0.9);color:rgba(255,255,255,0.25);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
 .prf-close-btn{width:100%;margin-top:12px;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.25);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
 .prf-close-btn:hover{border-color:rgba(255,255,255,0.16);color:rgba(255,255,255,0.5);}
-/* Toast */
+
+/* ── USE MODAL ── */
+#use-modal{position:fixed;inset:0;z-index:310;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1.5rem;}
+#use-modal.open{display:flex;}
+.use-box{background:#0a0d16;border:1px solid rgba(255,255,255,0.08);padding:1.4rem;max-width:320px;width:100%;position:relative;}
+.use-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,168,90,0.3),transparent);}
+.use-title{font-family:'Cinzel',serif;font-size:13px;color:#e2ddd6;margin-bottom:4px;}
+.use-sub{font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:14px;font-family:'DM Mono',monospace;}
+.use-target-toggle{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
+.use-tt-btn{padding:8px;text-align:center;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);cursor:pointer;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);transition:all 0.2s;}
+.use-tt-btn.on{border-color:rgba(198,168,90,0.4);color:var(--gold);background:rgba(198,168,90,0.06);}
+.use-target-list{display:flex;flex-direction:column;gap:5px;max-height:180px;overflow-y:auto;margin-bottom:14px;}
+.use-target-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);cursor:pointer;transition:all 0.2s;}
+.use-target-item:hover{border-color:rgba(198,168,90,0.3);background:rgba(198,168,90,0.04);}
+.use-target-item.sel{border-color:var(--gold);background:rgba(198,168,90,0.06);}
+.uti-ico{font-size:18px;flex-shrink:0;}
+.uti-name{font-family:'Cinzel',serif;font-size:10px;color:#e2ddd6;flex:1;}
+.uti-hp{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);}
+.use-confirm-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.use-confirm-btn{padding:9px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border:1px solid;}
+.use-confirm-btn.yes{background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.3);color:#34d399;}
+.use-confirm-btn.yes:hover{background:rgba(52,211,153,0.16);}
+.use-confirm-btn.no{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);}
+.use-confirm-btn.no:hover{background:rgba(255,255,255,0.05);}
+
+/* ── LOOTBOX ── */
+.prf-lootbox-area{display:flex;flex-direction:column;align-items:center;gap:12px;padding:1rem 0;}
+.lb-card-wrap{width:100px;aspect-ratio:2/3;perspective:800px;cursor:pointer;}
+.lb-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);}
+.lb-card.flipped{transform:rotateY(180deg);}
+.lb-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;border:1px solid rgba(198,168,90,0.3);}
+.lb-back{background:radial-gradient(circle,#12102a,#060810);font-size:2.5rem;}
+.lb-front{transform:rotateY(180deg);background:#0a0d16;font-size:3rem;flex-direction:column;gap:6px;}
+.lb-reward-name{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-align:center;}
+.lb-open-btn{padding:8px 20px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all 0.2s;}
+.lb-open-btn:hover{box-shadow:0 0 18px rgba(198,168,90,0.35);}
+.lb-open-btn:disabled{opacity:0.35;cursor:not-allowed;}
+
+/* ── TOAST ── */
 #prf-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:5px 16px;z-index:400;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;opacity:0;transition:opacity 0.25s;pointer-events:none;white-space:nowrap;}
 #prf-toast.green{background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);color:#34d399;}
 #prf-toast.gold{background:rgba(198,168,90,0.12);border:1px solid rgba(198,168,90,0.3);color:var(--gold);}
+#prf-toast.red{background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);color:#f87171;}
 #prf-toast.show{opacity:1;}
+@keyframes prfPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
 .wallet-icon{font-size:2.8rem;margin-bottom:0.7rem;}
 .wallet-label{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:1.2rem;}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:0.9rem;}
@@ -999,139 +1010,190 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 <div class="page" id="page-profile">
   <div class="profile-wrap">
 
-    <!-- Top bar strip -->
-    <div class="prf-topbar">
-      <div class="prf-ps">
-        <div class="prf-level">
-          <div class="prf-lv-pill">Lv 12</div>
-          <div class="prf-lv-title">Commander</div>
+    <!-- HERO STATS BAR -->
+    <div class="prf-hero">
+      <!-- [+] Character picker -->
+      <div class="prf-char-btn" id="prf-char-btn" onclick="prfOpenModal()">
+        <div class="prf-char-emoji" id="prf-char-emoji">＋</div>
+        <div class="prf-char-sub" id="prf-char-sub">Pick Char</div>
+        <div class="prf-char-name" id="prf-char-name" style="display:none"></div>
+        <div class="prf-char-hp-bar"><div class="prf-char-hp-fill" id="prf-char-hp-fill" style="width:100%"></div></div>
+      </div>
+
+      <!-- Stats grid -->
+      <div class="prf-hero-stats">
+        <div class="prf-hs">
+          <div class="prf-hs-ico">⚡</div>
+          <div class="prf-hs-val" id="prf-energy-val">70</div>
+          <div class="prf-hs-lbl">Energy</div>
+          <div class="prf-hs-bar"><div class="prf-hs-bar-fill" id="prf-energy-bar" style="width:70%"></div></div>
         </div>
-        <div class="prf-energy">
-          <span style="font-size:10px;opacity:.45">⚡</span>
-          <span class="prf-e-lbl">70 / 100</span>
-          <div class="prf-e-track"><div class="prf-e-fill"></div></div>
+        <div class="prf-hs">
+          <div class="prf-hs-ico">★</div>
+          <div class="prf-hs-val">Lv 12</div>
+          <div class="prf-hs-lbl">Level</div>
+        </div>
+        <div class="prf-hs">
+          <div class="prf-hs-ico">🃏</div>
+          <div class="prf-hs-val">50</div>
+          <div class="prf-hs-lbl">Cards</div>
+        </div>
+        <div class="prf-hs">
+          <div class="prf-hs-ico">🐾</div>
+          <div class="prf-hs-val">6</div>
+          <div class="prf-hs-lbl">Pets</div>
         </div>
       </div>
-      <div class="prf-as">
-        <div class="prf-avatar" onclick="prfOpenModal()">
-          <img id="prf-tb-img" src="assets/card/card_001.png" onerror="this.style.background='#0d1018'">
+    </div>
+
+    <!-- BODY -->
+    <div class="prf-body">
+
+      <!-- RESOURCES: Energy Flask -->
+      <div>
+        <div class="prf-sec">
+          <div class="prf-sec-lbl">⚡ Energy</div>
         </div>
-        <div class="prf-info">
-          <div class="prf-tag">Active</div>
-          <div class="prf-slime-name" id="prf-tb-name">Ivory Swordsman</div>
-          <div class="prf-hp-row">
-            <div class="prf-hp-track">
-              <div class="prf-hp-fill" id="prf-tb-hp" style="width:40%"></div>
+        <div class="prf-resources">
+          <div class="prf-res" id="res-energy">
+            <div class="prf-res-ico">⚡</div>
+            <div class="prf-res-body">
+              <div class="prf-res-name">Stamina Flask</div>
+              <div class="prf-res-desc">Restore +30 Energy (user)</div>
             </div>
-            <span class="prf-hp-num" id="prf-tb-txt">40/100</span>
+            <div class="prf-res-qty" id="qty-energy">×2</div>
+            <button class="prf-res-use gold" onclick="useEnergy()">Use</button>
           </div>
         </div>
-        <button class="prf-heal-btn" onclick="prfHeal(20)">🧪</button>
       </div>
-    </div>
 
-    <!-- Player Overview -->
-    <div class="prf-card">
-      <div class="prf-ov-top">
-        <div>
-          <div class="prf-wallet"><em>0xA91</em>...F3D</div>
-          <div class="prf-wallet-sub">Slime Breaker · Base Network</div>
+      <!-- RESOURCES: HP Potions -->
+      <div>
+        <div class="prf-sec">
+          <div class="prf-sec-lbl">🧪 HP Potions</div>
         </div>
-        <div class="prf-rank">🏅 Bronze</div>
-      </div>
-      <div class="prf-ov-stats">
-        <div class="prf-stat"><div class="prf-stat-num">2,450</div><div class="prf-stat-key">Power</div></div>
-        <div class="prf-stat"><div class="prf-stat-num">18</div><div class="prf-stat-key">Runs</div></div>
-        <div class="prf-stat"><div class="prf-stat-num" style="color:var(--gold)">340</div><div class="prf-stat-key">$SLIME</div></div>
-      </div>
-    </div>
-
-    <!-- Active Slime Showcase -->
-    <div class="prf-card prf-showcase">
-      <div class="prf-sc-head">
-        <div class="prf-sc-dot"></div>
-        <div class="prf-sc-lbl">Active Slime</div>
-      </div>
-      <div class="prf-sc-body">
-        <div class="prf-sc-img"><img id="prf-ss-img" src="assets/card/card_001.png" onerror="this.style.background='#0d1018'"></div>
-        <div class="prf-sc-data">
-          <div>
-            <div class="prf-sc-name" id="prf-ss-name">Ivory Swordsman</div>
-            <div class="prf-sc-lv" id="prf-ss-lv">LV 8 · Common</div>
-          </div>
-          <div class="prf-sc-hp">
-            <div class="prf-sc-hp-top">
-              <span class="prf-sc-hp-lbl">HP</span>
-              <span class="prf-sc-hp-val" id="prf-ss-val">40 / 100</span>
+        <div class="prf-resources">
+          <div class="prf-res">
+            <div class="prf-res-ico">🧪</div>
+            <div class="prf-res-body">
+              <div class="prf-res-name">Small Potion</div>
+              <div class="prf-res-desc">Restore 20 HP — Card or Pet</div>
             </div>
-            <div class="prf-sc-track"><div class="prf-sc-fill" id="prf-ss-hp" style="width:40%"></div></div>
+            <div class="prf-res-qty" id="qty-small">×4</div>
+            <button class="prf-res-use green" onclick="openUseModal('small',20)">Use</button>
           </div>
-          <div class="prf-sc-buff">🐾 +5% $SLIME Drop · Shadowfang</div>
+          <div class="prf-res">
+            <div class="prf-res-ico">⚗️</div>
+            <div class="prf-res-body">
+              <div class="prf-res-name">Medium Potion</div>
+              <div class="prf-res-desc">Restore 50 HP — Card or Pet</div>
+            </div>
+            <div class="prf-res-qty" id="qty-medium">×1</div>
+            <button class="prf-res-use green" onclick="openUseModal('medium',50)">Use</button>
+          </div>
+          <div class="prf-res">
+            <div class="prf-res-ico">🔮</div>
+            <div class="prf-res-body">
+              <div class="prf-res-name">Large Potion</div>
+              <div class="prf-res-desc">Restore 100 HP — Card or Pet</div>
+            </div>
+            <div class="prf-res-qty" id="qty-large">×0</div>
+            <button class="prf-res-use green" onclick="openUseModal('large',100)" id="btn-large" disabled>Use</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Bottom Tabs -->
-    <div class="prf-tabs">
-      <div class="prf-tab on" onclick="prfTab('materials',this)"><div class="prf-tab-ico">🪨</div><div class="prf-tab-lbl">Materials</div></div>
-      <div class="prf-tab" onclick="prfTab('consumables',this)"><div class="prf-tab-ico">🧪</div><div class="prf-tab-lbl">Items</div></div>
-      <div class="prf-tab" onclick="prfTab('cards',this)"><div class="prf-tab-ico">⚔️</div><div class="prf-tab-lbl">Slimes</div></div>
-      <div class="prf-tab" onclick="prfTab('pets',this)"><div class="prf-tab-ico">🐾</div><div class="prf-tab-lbl">Pets</div></div>
-    </div>
-
-    <div class="prf-panel on" id="prf-p-materials">
-      <div class="prf-sec-lbl">Materials</div>
-      <div class="prf-mat-grid">
-        <div class="prf-mat"><div class="prf-mat-ico">🪨</div><div class="prf-mat-amt">×12</div><div class="prf-mat-nm">Stone</div></div>
-        <div class="prf-mat"><div class="prf-mat-ico">⚙️</div><div class="prf-mat-amt">×8</div><div class="prf-mat-nm">Silver Ore</div></div>
-        <div class="prf-mat"><div class="prf-mat-ico">💎</div><div class="prf-mat-amt">×3</div><div class="prf-mat-nm">Crystal</div></div>
-        <div class="prf-mat"><div class="prf-mat-ico">✨</div><div class="prf-mat-amt">×1</div><div class="prf-mat-nm">Void Shard</div></div>
-        <div class="prf-mat"><div class="prf-mat-ico">🌿</div><div class="prf-mat-amt">×6</div><div class="prf-mat-nm">Iron Ore</div></div>
-        <div class="prf-mat"><div class="prf-mat-ico">🔩</div><div class="prf-mat-amt">×4</div><div class="prf-mat-nm">Gold Ore</div></div>
-        <div class="prf-mat"><div class="prf-mat-ico">⭐</div><div class="prf-mat-amt">×0</div><div class="prf-mat-nm">Prime Core</div></div>
-        <div class="prf-mat"><div class="prf-mat-ico">🐾</div><div class="prf-mat-amt">×5</div><div class="prf-mat-nm">Pet Shard</div></div>
+      <!-- RESOURCES: Loot Box -->
+      <div>
+        <div class="prf-sec">
+          <div class="prf-sec-lbl">📦 Loot Box</div>
+          <div class="prf-sec-badge" id="qty-lootbox-badge">×3</div>
+        </div>
+        <div class="prf-lootbox-area">
+          <div class="lb-card-wrap" onclick="openLootbox()" id="lb-wrap">
+            <div class="lb-card" id="lb-card">
+              <div class="lb-face lb-back">📦</div>
+              <div class="lb-face lb-front" id="lb-front">
+                <div id="lb-reward-ico">🎁</div>
+                <div class="lb-reward-name" id="lb-reward-name">—</div>
+              </div>
+            </div>
+          </div>
+          <button class="lb-open-btn" id="lb-open-btn" onclick="openLootbox()">Open Box</button>
+        </div>
       </div>
-    </div>
 
-    <div class="prf-panel" id="prf-p-consumables">
-      <div class="prf-sec-lbl">Consumables</div>
-      <div class="prf-cons-list">
-        <div class="prf-con"><div class="prf-con-ico">🧪</div><div class="prf-con-body"><div class="prf-con-name">Small Potion</div><div class="prf-con-desc">Restore 20 HP</div></div><div class="prf-con-qty">×4</div><button class="prf-use-btn prf-use-g" onclick="prfHeal(20)">Use</button></div>
-        <div class="prf-con"><div class="prf-con-ico">⚗️</div><div class="prf-con-body"><div class="prf-con-name">Medium Potion</div><div class="prf-con-desc">Restore 50 HP</div></div><div class="prf-con-qty">×1</div><button class="prf-use-btn prf-use-g" onclick="prfHeal(50)">Use</button></div>
-        <div class="prf-con"><div class="prf-con-ico">⚡</div><div class="prf-con-body"><div class="prf-con-name">Stamina Flask</div><div class="prf-con-desc">+30 Energy</div></div><div class="prf-con-qty">×2</div><button class="prf-use-btn prf-use-gold">Use</button></div>
-        <div class="prf-con"><div class="prf-con-ico">🔮</div><div class="prf-con-body"><div class="prf-con-name">Dungeon Token</div><div class="prf-con-desc">+1 Extra dungeon run</div></div><div class="prf-con-qty">×1</div><button class="prf-use-btn prf-use-gold">Use</button></div>
+      <!-- MATERIALS -->
+      <div>
+        <div class="prf-sec">
+          <div class="prf-sec-lbl">🪨 Materials</div>
+        </div>
+        <div class="prf-mat-grid">
+          <div class="prf-mat"><div class="prf-mat-ico">🪨</div><div class="prf-mat-amt">×12</div><div class="prf-mat-nm">Stone</div></div>
+          <div class="prf-mat"><div class="prf-mat-ico">⚙️</div><div class="prf-mat-amt">×8</div><div class="prf-mat-nm">Silver Ore</div></div>
+          <div class="prf-mat"><div class="prf-mat-ico">💎</div><div class="prf-mat-amt">×3</div><div class="prf-mat-nm">Crystal</div></div>
+          <div class="prf-mat"><div class="prf-mat-ico">✨</div><div class="prf-mat-amt">×1</div><div class="prf-mat-nm">Void Shard</div></div>
+          <div class="prf-mat"><div class="prf-mat-ico">🌿</div><div class="prf-mat-amt">×6</div><div class="prf-mat-nm">Iron Ore</div></div>
+          <div class="prf-mat"><div class="prf-mat-ico">🔩</div><div class="prf-mat-amt">×4</div><div class="prf-mat-nm">Gold Ore</div></div>
+          <div class="prf-mat"><div class="prf-mat-ico">⭐</div><div class="prf-mat-amt">×0</div><div class="prf-mat-nm">Prime Core</div></div>
+          <div class="prf-mat"><div class="prf-mat-ico">🐾</div><div class="prf-mat-amt">×5</div><div class="prf-mat-nm">Pet Shard</div></div>
+        </div>
       </div>
-    </div>
 
-    <div class="prf-panel" id="prf-p-cards">
-      <div class="prf-sec-lbl">Your Slimes</div>
-      <div class="prf-cards-grid" id="prf-cards-grid"></div>
-    </div>
-
-    <div class="prf-panel" id="prf-p-pets">
-      <div class="prf-sec-lbl">Your Pets</div>
-      <div class="prf-pets-grid">
-        <div class="prf-pet active-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_shadowfang.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Shadowfang</div><div class="prf-pet-sk">+5% $SLIME Drop</div><div class="prf-pet-lv">LV 2 — Active</div></div></div>
-        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_frostkit.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Frostkit</div><div class="prf-pet-sk">+3% Loot Box</div><div class="prf-pet-lv">LV 1</div></div></div>
-        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_gearpup.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Gearpup</div><div class="prf-pet-sk">+8% EXP Gain</div><div class="prf-pet-lv">LV 1</div></div></div>
-        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_aquapaw.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Aquapaw</div><div class="prf-pet-sk">+6% HP Regen</div><div class="prf-pet-lv">LV 1</div></div></div>
-        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_pyronix.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Pyronix</div><div class="prf-pet-sk">+5% ATK Bonus</div><div class="prf-pet-lv">LV 1</div></div></div>
-        <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_lumikin.png" onerror="this.style.background='#0d1018'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Lumikin</div><div class="prf-pet-sk">+6% Heal</div><div class="prf-pet-lv">LV 1</div></div></div>
+      <!-- CARDS -->
+      <div>
+        <div class="prf-sec">
+          <div class="prf-sec-lbl">⚔️ Your Slimes</div>
+        </div>
+        <div class="prf-cards-grid" id="prf-cards-grid"></div>
       </div>
-    </div>
 
+      <!-- PETS -->
+      <div>
+        <div class="prf-sec">
+          <div class="prf-sec-lbl">🐾 Your Pets</div>
+        </div>
+        <div class="prf-pets-grid">
+          <div class="prf-pet active-pet"><div class="prf-pet-thumb">🦊</div><div class="prf-pet-meta"><div class="prf-pet-nm">Shadowfang</div><div class="prf-pet-sk">+5% $SLIME Drop</div><div class="prf-pet-lv">LV 2 — Active</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:80%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb">🐺</div><div class="prf-pet-meta"><div class="prf-pet-nm">Frostkit</div><div class="prf-pet-sk">+3% Loot Box</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:60%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb">🐱</div><div class="prf-pet-meta"><div class="prf-pet-nm">Gearpup</div><div class="prf-pet-sk">+8% EXP Gain</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:45%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb">🐢</div><div class="prf-pet-meta"><div class="prf-pet-nm">Aquapaw</div><div class="prf-pet-sk">+6% HP Regen</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:90%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb">🐉</div><div class="prf-pet-meta"><div class="prf-pet-nm">Pyronix</div><div class="prf-pet-sk">+5% ATK Bonus</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:30%;background:linear-gradient(90deg,#f87171,#fca5a5)"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb">🦋</div><div class="prf-pet-meta"><div class="prf-pet-nm">Lumikin</div><div class="prf-pet-sk">+6% Heal</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:70%"></div></div></div></div>
+        </div>
+      </div>
+
+    </div><!-- /prf-body -->
   </div>
 </div>
 
-<!-- Profile Select Modal -->
+<!-- Char Select Modal -->
 <div id="prf-modal" onclick="prfHandleOverlay(event)">
   <div class="prf-sheet">
-    <div class="prf-sheet-title">Select Active Slime</div>
-    <div class="prf-sheet-sub">Tap to equip</div>
+    <div class="prf-sheet-title">Select Active Character</div>
+    <div class="prf-sheet-sub">Tap to equip as active slime</div>
     <div class="prf-modal-grid" id="prf-modal-grid"></div>
     <button class="prf-close-btn" onclick="prfCloseModal()">← Close</button>
   </div>
 </div>
+
+<!-- Use Item Modal (Card/Pet target) -->
+<div id="use-modal" onclick="useModalOverlay(event)">
+  <div class="use-box">
+    <div class="use-title" id="use-modal-title">Use Small Potion</div>
+    <div class="use-sub" id="use-modal-sub">+20 HP · Choose target</div>
+    <div class="use-target-toggle">
+      <div class="use-tt-btn on" id="use-tt-card" onclick="useSetTarget('card')">⚔️ Card</div>
+      <div class="use-tt-btn" id="use-tt-pet" onclick="useSetTarget('pet')">🐾 Pet</div>
+    </div>
+    <div class="use-target-list" id="use-target-list"></div>
+    <div class="use-confirm-row">
+      <button class="use-confirm-btn yes" onclick="confirmUse()">Confirm</button>
+      <button class="use-confirm-btn no" onclick="closeUseModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div id="prf-toast"></div>
 
 <script>
@@ -1679,50 +1741,129 @@ async function multiRoll(n){
 function closeMulti(){document.getElementById('multi-overlay').classList.remove('open');isRolling=false;}
 // ── PROFILE SYSTEM ──
 (function(){
+  // ── CHAR EMOJIS per rarity ──
+  const CHAR_EMOJI = {
+    Common:['🧙','🗡️','🏹','🎣','🛡️','⚙️','🪃','🔮','📖','🃏','🎯','❄️','🏜️','⚡','🌑','🌑','🌸','⚓','🌟','💎'],
+    Rare:['🦊','🐺','🦅','🐉','🦁','🌊','💨','🔥','🌙','⭐','🐲','📜'],
+    Epic:['💜','🌀','⚡','🦋','🌈','🔱','💫','🗝️','🌊','🎭'],
+    Legend:['👑','🏆','🌟','⚔️','🔥'],
+    Mythic:['💀','🌑','👾','🐍','🔮']
+  };
+
   const NAMES=['Ivory Swordsman','Shadow Rogue','Rose Archer','Crimson Fisher','Silver Knight','Teal Clockwork','Blush Bowman','Indigo Orb','Violet Scribe','Lime Trickster','Scarlet Spearman','Frost Wanderer','Sand Warrior','Glitch Runner','Dark Pilgrim','Dusk Stalker','Sakura Ronin','Navy Anchor','Starfall Mage','Crystal Ghost','Jade Soldier','Paper Golem','Prism Duelist','Origami Titan','Twin Tempest','Fire Emperor','Desert Pharaoh','Astral Keeper','Coral Warden','Aqua Trident','Rainbow Dancer','Inferno Oracle','Bloomblade','Void Paladin','Necro Sovereign','Crystal Empress','Lava Reaper','Celestial Herald','Toxic Gunner','Golden Pharaoh','Moon Phantom','Void Harbinger','Neon Chaos','Arctic Specter','Solar Champion','Grim Specter','Crimson Shogun','Thunder God','Abyssal Serpent','Gladiator Rex'];
   const RARITY=['Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Legend','Legend','Legend','Legend','Legend','Legend','Legend','Mythic','Mythic','Mythic','Mythic','Mythic'];
-  let prfHp=40, prfMax=100, prfActive=1;
 
+  // ── GLOBAL STATE ──
+  window.ENERGY = { cur: 70, max: 100 };
+  let prfActive = null; // null = no char selected
+  let charHp = { cur: 40, max: 100 };
+
+  // inventory quantities
+  const INV = { energy: 2, small: 4, medium: 1, large: 0, lootbox: 3 };
+
+  // pet hp state (index → {cur,max})
+  const PETS = [
+    {name:'Shadowfang', ico:'🦊', skill:'+5% $SLIME', hp:80, max:100},
+    {name:'Frostkit',   ico:'🐺', skill:'+3% Loot',  hp:60, max:100},
+    {name:'Gearpup',    ico:'🐱', skill:'+8% EXP',   hp:45, max:100},
+    {name:'Aquapaw',    ico:'🐢', skill:'+6% Regen',  hp:90, max:100},
+    {name:'Pyronix',    ico:'🐉', skill:'+5% ATK',   hp:30, max:100},
+    {name:'Lumikin',    ico:'🦋', skill:'+6% Heal',  hp:70, max:100}
+  ];
+
+  // ── HELPERS ──
   function hpCls(h,m){const p=h/m;return p>0.5?'':(p>0.25?'med':'low');}
 
-  function prfSyncHP(){
-    const pct=Math.max(0,(prfHp/prfMax)*100);
-    const cls=hpCls(prfHp,prfMax);
-    const tbBar=document.getElementById('prf-tb-hp');
-    if(tbBar){tbBar.style.width=pct+'%';tbBar.className='prf-hp-fill '+cls;}
-    const tbTxt=document.getElementById('prf-tb-txt');
-    if(tbTxt) tbTxt.textContent=prfHp+'/'+prfMax;
-    const ssBar=document.getElementById('prf-ss-hp');
-    if(ssBar){ssBar.style.width=pct+'%';ssBar.className='prf-sc-fill '+cls;}
-    const ssVal=document.getElementById('prf-ss-val');
-    if(ssVal){ssVal.textContent=prfHp+' / '+prfMax;ssVal.className='prf-sc-hp-val '+cls;}
+  let toastTimer;
+  window.prfToast = function(msg,type='green'){
+    const el=document.getElementById('prf-toast');
+    if(!el)return;
+    clearTimeout(toastTimer);
+    el.textContent=msg; el.className=type+' show';
+    toastTimer=setTimeout(()=>el.classList.remove('show'),2000);
+  };
+
+  // ── ENERGY SYNC (dungeon bar) ──
+  function syncEnergyUI(){
+    const pct = Math.max(0,(ENERGY.cur/ENERGY.max)*100);
+    const bar = document.getElementById('prf-energy-bar');
+    const val = document.getElementById('prf-energy-val');
+    if(bar) bar.style.width = pct+'%';
+    if(val) val.textContent = ENERGY.cur+' / '+ENERGY.max;
+    // sync dungeon page too
+    const dngVal = document.querySelector('.dng-energy-val');
+    const dngBar = document.querySelector('.dng-bar-fill');
+    if(dngVal) dngVal.innerHTML = ENERGY.cur+' <span class="dng-energy-max">/ '+ENERGY.max+'</span>';
+    if(dngBar) dngBar.style.width = pct+'%';
   }
 
-  window.prfHeal=function(amt){
-    const prev=prfHp;
-    prfHp=Math.min(prfMax,prfHp+amt);
-    prfSyncHP();
-    prfToast(prfHp>prev?'+'+(prfHp-prev)+' HP':'Already full!',prfHp>prev?'green':'gold');
+  // ── USE ENERGY ──
+  window.useEnergy = function(){
+    if(INV.energy <= 0){ prfToast('No Stamina Flask!','red'); return; }
+    if(ENERGY.cur >= ENERGY.max){ prfToast('Energy already full!','gold'); return; }
+    INV.energy--;
+    ENERGY.cur = Math.min(ENERGY.max, ENERGY.cur + 30);
+    document.getElementById('qty-energy').textContent = '×'+INV.energy;
+    syncEnergyUI();
+    prfToast('⚡ +30 Energy restored','gold');
   };
 
-  window.prfTab=function(name,btn){
-    document.querySelectorAll('.prf-panel').forEach(p=>p.classList.remove('on'));
-    document.querySelectorAll('.prf-tab').forEach(b=>b.classList.remove('on'));
-    const panel=document.getElementById('prf-p-'+name);
-    if(panel) panel.classList.add('on');
-    btn.classList.add('on');
+  // ── CHAR SELECTOR ──
+  function getCharEmoji(id){
+    const rar = RARITY[id-1]||'Common';
+    const arr = CHAR_EMOJI[rar]||CHAR_EMOJI.Common;
+    return arr[(id-1) % arr.length];
+  }
+
+  function syncCharBtn(){
+    const btn = document.getElementById('prf-char-btn');
+    const emoEl = document.getElementById('prf-char-emoji');
+    const subEl = document.getElementById('prf-char-sub');
+    const nameEl = document.getElementById('prf-char-name');
+    const hpFill = document.getElementById('prf-char-hp-fill');
+    if(!btn) return;
+    if(prfActive){
+      btn.classList.add('has-char');
+      emoEl.textContent = getCharEmoji(prfActive);
+      subEl.style.display = 'none';
+      nameEl.style.display = 'block';
+      nameEl.textContent = NAMES[prfActive-1]||'Slime #'+prfActive;
+      const pct = Math.max(0,(charHp.cur/charHp.max)*100);
+      hpFill.style.width = pct+'%';
+      hpFill.className = 'prf-char-hp-fill '+hpCls(charHp.cur,charHp.max);
+    } else {
+      btn.classList.remove('has-char');
+      emoEl.textContent = '＋';
+      subEl.style.display = '';
+      subEl.textContent = 'Pick Char';
+      nameEl.style.display = 'none';
+      hpFill.style.width = '100%';
+    }
+  }
+
+  window.prfSetActive = function(id){
+    prfActive = id;
+    charHp = { cur: Math.floor(Math.random()*65)+20, max: 100 };
+    syncCharBtn();
+    document.querySelectorAll('.prf-modal-card').forEach(c=>c.classList.remove('sel'));
+    document.querySelectorAll('.prf-mini-card').forEach(c=>c.classList.remove('active'));
+    const md=document.getElementById('prf-md-'+id); if(md) md.classList.add('sel');
+    const mc=document.getElementById('prf-mc-'+id); if(mc) mc.classList.add('active');
+    prfCloseModal();
+    prfToast((NAMES[id-1]||'Slime #'+id)+' equipped','gold');
   };
 
-  let prfToastTimer;
-  window.prfToast=function(msg,type='green'){
-    const el=document.getElementById('prf-toast');
-    if(!el) return;
-    clearTimeout(prfToastTimer);
-    el.textContent=msg; el.className=type+' show';
-    prfToastTimer=setTimeout(()=>el.classList.remove('show'),1800);
+  window.prfOpenModal = function(){
+    buildPrfModal();
+    document.getElementById('prf-modal').classList.add('open');
+  };
+  window.prfCloseModal = function(){
+    document.getElementById('prf-modal').classList.remove('open');
+  };
+  window.prfHandleOverlay = function(e){
+    if(e.target===document.getElementById('prf-modal')) prfCloseModal();
   };
 
-  // Build mini cards grid
   function buildPrfCards(){
     const grid=document.getElementById('prf-cards-grid');
     if(!grid||grid.children.length) return;
@@ -1730,13 +1871,12 @@ function closeMulti(){document.getElementById('multi-overlay').classList.remove(
       const d=document.createElement('div');
       d.className='prf-mini-card'+(i===prfActive?' active':'');
       d.id='prf-mc-'+i;
-      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.background='#0d1018'">`;
+      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.fontSize='2rem';this.outerHTML='<div style=\'display:flex;align-items:center;justify-content:center;aspect-ratio:2/3;font-size:1.5rem;background:#0d1018\'>${getCharEmoji(i)}</div>'">`;
       d.onclick=()=>prfSetActive(i);
       grid.appendChild(d);
     }
   }
 
-  // Build modal grid
   function buildPrfModal(){
     const grid=document.getElementById('prf-modal-grid');
     if(!grid||grid.children.length) return;
@@ -1744,56 +1884,155 @@ function closeMulti(){document.getElementById('multi-overlay').classList.remove(
       const d=document.createElement('div');
       d.className='prf-modal-card'+(i===prfActive?' sel':'');
       d.id='prf-md-'+i;
-      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.background='#0d1018'"><div class="prf-modal-lbl">${NAMES[i-1]||'Slime #'+i}</div>`;
+      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.parentNode.querySelector('.prf-modal-emoji').style.display='flex'"><div class="prf-modal-emoji" style="display:none;align-items:center;justify-content:center;aspect-ratio:2/3;font-size:2rem;background:#0d1018">${getCharEmoji(i)}</div><div class="prf-modal-lbl">${NAMES[i-1]||'Slime #'+i}</div>`;
       d.onclick=()=>prfSetActive(i);
       grid.appendChild(d);
     }
   }
 
-  window.prfSetActive=function(id){
-    prfActive=id;
-    const src=`assets/card/card_${String(id).padStart(3,'0')}.png`;
-    const name=NAMES[id-1]||'Slime #'+id;
-    const rar=RARITY[id-1]||'Common';
-    const lv=Math.floor(Math.random()*12)+1;
-    const els={img1:'prf-tb-img',name1:'prf-tb-name',img2:'prf-ss-img',name2:'prf-ss-name',lv:'prf-ss-lv'};
-    if(document.getElementById(els.img1)) document.getElementById(els.img1).src=src;
-    if(document.getElementById(els.name1)) document.getElementById(els.name1).textContent=name;
-    if(document.getElementById(els.img2)) document.getElementById(els.img2).src=src;
-    if(document.getElementById(els.name2)) document.getElementById(els.name2).textContent=name;
-    if(document.getElementById(els.lv)) document.getElementById(els.lv).textContent=`LV ${lv} · ${rar}`;
-    prfHp=Math.floor(Math.random()*65)+20; prfMax=100; prfSyncHP();
-    document.querySelectorAll('.prf-modal-card').forEach(c=>c.classList.remove('sel'));
-    document.querySelectorAll('.prf-mini-card').forEach(c=>c.classList.remove('active'));
-    const md=document.getElementById('prf-md-'+id); if(md) md.classList.add('sel');
-    const mc=document.getElementById('prf-mc-'+id); if(mc) mc.classList.add('active');
-    prfCloseModal();
-    prfToast(name+' equipped','gold');
+  // ── USE MODAL (Card/Pet HP) ──
+  let useCtx = { type: null, amt: 0, target: 'card', selIdx: null };
+
+  window.openUseModal = function(type, amt){
+    const qty = INV[type];
+    if(qty <= 0){ prfToast('No '+type+' potion!','red'); return; }
+    useCtx = { type, amt, target: 'card', selIdx: null };
+    document.getElementById('use-modal-title').textContent = type.charAt(0).toUpperCase()+type.slice(1)+' Potion';
+    document.getElementById('use-modal-sub').textContent = '+'+amt+' HP · Choose target';
+    useSetTarget('card');
+    document.getElementById('use-modal').classList.add('open');
   };
 
-  window.prfOpenModal=function(){
-    buildPrfModal();
-    document.getElementById('prf-modal').classList.add('open');
-  };
-  window.prfCloseModal=function(){
-    document.getElementById('prf-modal').classList.remove('open');
-  };
-  window.prfHandleOverlay=function(e){
-    if(e.target===document.getElementById('prf-modal')) prfCloseModal();
+  window.useSetTarget = function(t){
+    useCtx.target = t;
+    useCtx.selIdx = null;
+    document.getElementById('use-tt-card').className='use-tt-btn'+(t==='card'?' on':'');
+    document.getElementById('use-tt-pet').className='use-tt-btn'+(t==='pet'?' on':'');
+    buildUseTargetList();
   };
 
-  // Init when profile page is shown
+  function buildUseTargetList(){
+    const list = document.getElementById('use-target-list');
+    list.innerHTML = '';
+    if(useCtx.target === 'card'){
+      // show first 8 cards
+      for(let i=1;i<=8;i++){
+        const hp=Math.floor(Math.random()*80)+10;
+        const max=100;
+        const d=document.createElement('div');
+        d.className='use-target-item'+(i===1?' sel':'');
+        d.dataset.idx=i;
+        d.innerHTML=`<div class="uti-ico">${getCharEmoji(i)}</div><div class="uti-name">${NAMES[i-1]||'Slime #'+i}</div><div class="uti-hp">${hp}/${max} HP</div>`;
+        d.onclick=function(){
+          document.querySelectorAll('.use-target-item').forEach(x=>x.classList.remove('sel'));
+          this.classList.add('sel');
+          useCtx.selIdx=parseInt(this.dataset.idx);
+        };
+        list.appendChild(d);
+      }
+      if(!useCtx.selIdx) useCtx.selIdx = 1;
+    } else {
+      PETS.forEach((p,i)=>{
+        const d=document.createElement('div');
+        d.className='use-target-item'+(i===0?' sel':'');
+        d.dataset.idx=i;
+        d.innerHTML=`<div class="uti-ico">${p.ico}</div><div class="uti-name">${p.name}</div><div class="uti-hp">${p.hp}/${p.max} HP</div>`;
+        d.onclick=function(){
+          document.querySelectorAll('.use-target-item').forEach(x=>x.classList.remove('sel'));
+          this.classList.add('sel');
+          useCtx.selIdx=parseInt(this.dataset.idx);
+        };
+        list.appendChild(d);
+      });
+      if(useCtx.selIdx===null) useCtx.selIdx = 0;
+    }
+  }
+
+  window.confirmUse = function(){
+    const {type,amt,target,selIdx} = useCtx;
+    if(selIdx===null){ prfToast('Pick a target first','gold'); return; }
+    INV[type]--;
+    // update qty display
+    const qtyEl = document.getElementById('qty-'+type);
+    if(qtyEl) qtyEl.textContent = '×'+INV[type];
+    // disable btn if 0
+    if(INV[type]<=0){
+      const btn=document.getElementById('btn-'+type);
+      if(btn) btn.disabled=true;
+    }
+    if(target==='card'){
+      // heal active char if it's the selected one
+      if(selIdx===prfActive){
+        charHp.cur=Math.min(charHp.max,charHp.cur+amt);
+        syncCharBtn();
+      }
+      prfToast('🧪 +'+amt+' HP → '+(NAMES[selIdx-1]||'Slime #'+selIdx),'green');
+    } else {
+      const pet=PETS[selIdx];
+      if(pet){ pet.hp=Math.min(pet.max,pet.hp+amt); }
+      prfToast('🧪 +'+amt+' HP → '+(pet?pet.name:'Pet'),'green');
+    }
+    closeUseModal();
+  };
+
+  window.closeUseModal = function(){
+    document.getElementById('use-modal').classList.remove('open');
+  };
+  window.useModalOverlay = function(e){
+    if(e.target===document.getElementById('use-modal')) closeUseModal();
+  };
+
+  // ── LOOTBOX ──
+  const LOOT_POOL = [
+    {ico:'🧪',name:'Small Potion x2'},{ico:'⚗️',name:'Medium Potion x1'},
+    {ico:'🪨',name:'Stone Shard x5'},{ico:'⚙️',name:'Silver Ore x3'},
+    {ico:'💎',name:'Crystal Ore x1'},{ico:'⚡',name:'Stamina Flask x1'},
+    {ico:'🌿',name:'Iron Ore x8'},{ico:'✨',name:'Void Shard x1'},
+    {ico:'🐾',name:'Pet Shard x3'},{ico:'💰',name:'50 $SLIME'}
+  ];
+  let lbOpen=false;
+
+  window.openLootbox = function(){
+    if(INV.lootbox<=0){ prfToast('No Loot Box!','red'); return; }
+    if(lbOpen) return;
+    lbOpen=true;
+    INV.lootbox--;
+    document.getElementById('qty-lootbox-badge').textContent='×'+INV.lootbox;
+    const card=document.getElementById('lb-card');
+    const btn=document.getElementById('lb-open-btn');
+    const reward=LOOT_POOL[Math.floor(Math.random()*LOOT_POOL.length)];
+    document.getElementById('lb-reward-ico').textContent=reward.ico;
+    document.getElementById('lb-reward-name').textContent=reward.name;
+    btn.disabled=true;
+    setTimeout(()=>{
+      card.classList.add('flipped');
+      setTimeout(()=>{
+        prfToast('Got: '+reward.name,'gold');
+        btn.textContent='Open Again';
+        btn.disabled=false;
+        btn.onclick=function(){
+          card.classList.remove('flipped');
+          lbOpen=false;
+          btn.textContent='Open Box';
+          btn.onclick=openLootbox;
+        };
+      },800);
+    },100);
+  };
+
+  // ── INIT ──
   const origShowPage=window.showPage;
   window.showPage=function(name){
     origShowPage(name);
     if(name==='profile'){
       buildPrfCards();
       buildPrfModal();
-      prfSyncHP();
+      syncCharBtn();
+      syncEnergyUI();
     }
   };
-
-  prfSyncHP();
+  syncCharBtn();
+  syncEnergyUI();
 })();
 </script>
 </body>
