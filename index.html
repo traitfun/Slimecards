@@ -370,7 +370,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-pet{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:8px 10px;cursor:pointer;transition:border-color 0.2s;}
 .prf-pet:hover{border-color:rgba(198,168,90,0.25);}
 .prf-pet.active-pet{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.03);}
-.prf-pet-thumb{width:34px;aspect-ratio:1;overflow:hidden;border:1px solid rgba(255,255,255,0.08);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:rgba(255,255,255,0.03);}
+.prf-pet-thumb{width:40px;height:52px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:rgba(255,255,255,0.03);}
+.prf-pet-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85);}
 .prf-pet-meta{flex:1;min-width:0;}
 .prf-pet-nm{font-family:'Cinzel',serif;font-size:10px;color:#e2ddd6;}
 .prf-pet-sk{font-size:9px;color:rgba(198,168,90,0.5);margin-top:2px;}
@@ -1141,12 +1142,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       <div class="prf-panel" id="prf-p-pets">
         <div class="prf-sec"><div class="prf-sec-lbl">🐾 Your Pets</div></div>
         <div class="prf-pets-grid">
-          <div class="prf-pet active-pet"><div class="prf-pet-thumb">🦊</div><div class="prf-pet-meta"><div class="prf-pet-nm">Shadowfang</div><div class="prf-pet-sk">+5% $SLIME Drop</div><div class="prf-pet-lv">LV 2 — Active</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:80%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb">🐺</div><div class="prf-pet-meta"><div class="prf-pet-nm">Frostkit</div><div class="prf-pet-sk">+3% Loot Box</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:60%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb">🐱</div><div class="prf-pet-meta"><div class="prf-pet-nm">Gearpup</div><div class="prf-pet-sk">+8% EXP Gain</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:45%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb">🐢</div><div class="prf-pet-meta"><div class="prf-pet-nm">Aquapaw</div><div class="prf-pet-sk">+6% HP Regen</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:90%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb">🐉</div><div class="prf-pet-meta"><div class="prf-pet-nm">Pyronix</div><div class="prf-pet-sk">+5% ATK Bonus</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:30%;background:linear-gradient(90deg,#f87171,#fca5a5)"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb">🦋</div><div class="prf-pet-meta"><div class="prf-pet-nm">Lumikin</div><div class="prf-pet-sk">+6% Heal</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:70%"></div></div></div></div>
+          <div class="prf-pet active-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_shadowfang.png" onerror="this.outerHTML='🦊'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Shadowfang</div><div class="prf-pet-sk">+5% $SLIME Drop</div><div class="prf-pet-lv">LV 2 — Active</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:80%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_frostkit.png" onerror="this.outerHTML='🐺'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Frostkit</div><div class="prf-pet-sk">+3% Loot Box</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:60%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_gearpup.png" onerror="this.outerHTML='🐱'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Gearpup</div><div class="prf-pet-sk">+8% EXP Gain</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:45%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_aquapaw.png" onerror="this.outerHTML='🐢'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Aquapaw</div><div class="prf-pet-sk">+6% HP Regen</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:90%"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_pyronix.png" onerror="this.outerHTML='🐉'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Pyronix</div><div class="prf-pet-sk">+5% ATK Bonus</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:30%;background:linear-gradient(90deg,#f87171,#fca5a5)"></div></div></div></div>
+          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_lumikin.png" onerror="this.outerHTML='🦋'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Lumikin</div><div class="prf-pet-sk">+6% Heal</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:70%"></div></div></div></div>
         </div>
       </div>
 
