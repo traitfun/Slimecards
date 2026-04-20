@@ -357,27 +357,41 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-mat-amt{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;}
 .prf-mat-nm{font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;}
 
-/* ── CARDS MINI ── */
-.prf-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;}
-.prf-mini-card{border:1px solid rgba(255,255,255,0.07);overflow:hidden;cursor:pointer;filter:saturate(0.7);transition:all 0.22s;}
-.prf-mini-card:hover{filter:saturate(1);transform:translateY(-2px);}
-.prf-mini-card.active{border-color:var(--gold);filter:saturate(1);}
-.prf-mini-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
-.prf-mini-card-emo{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:2rem;background:#0d1018;}
+/* ── CARDS GRID ── */
+.prf-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
+.prf-crd{display:grid;grid-template-columns:64px 1fr;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.prf-crd:hover{border-color:rgba(198,168,90,0.3);}
+.prf-crd.active-card{border-color:rgba(198,168,90,0.55);}
+.prf-crd-img{width:64px;height:64px;overflow:hidden;flex-shrink:0;}
+.prf-crd-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:saturate(0.82);}
+.prf-crd-img-emo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:#0d1018;}
+.prf-crd-body{padding:6px 8px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;}
+.prf-crd-name{font-family:'Cinzel',serif;font-size:9px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;}
+.prf-crd-stats{display:flex;flex-direction:column;gap:3px;}
+.prf-crd-stat{display:flex;align-items:center;gap:4px;}
+.prf-crd-stat-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.3);width:22px;flex-shrink:0;}
+.prf-crd-bar-track{flex:1;height:3px;background:rgba(255,255,255,0.07);overflow:hidden;}
+.prf-crd-bar-fill{height:100%;transition:width 0.4s;}
+.prf-crd-bar-fill.hp{background:linear-gradient(90deg,#f87171,#fca5a5);}
+.prf-crd-bar-fill.atk{background:linear-gradient(90deg,#fb923c,#fdba74);}
+.prf-crd-bar-fill.spd{background:linear-gradient(90deg,#60a5fa,#93c5fd);}
+.prf-crd-footer{display:flex;gap:3px;margin-top:4px;}
+.prf-crd-pill{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.22);}
+.prf-crd-pill.active{border-color:rgba(34,211,238,0.35);color:#22d3ee;}
 
-/* ── PETS ── */
-.prf-pets-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;}
-.prf-pet{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:8px 10px;cursor:pointer;transition:border-color 0.2s;}
-.prf-pet:hover{border-color:rgba(198,168,90,0.25);}
-.prf-pet.active-pet{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.03);}
-.prf-pet-thumb{width:40px;height:52px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:rgba(255,255,255,0.03);}
-.prf-pet-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85);}
-.prf-pet-meta{flex:1;min-width:0;}
-.prf-pet-nm{font-family:'Cinzel',serif;font-size:10px;color:#e2ddd6;}
-.prf-pet-sk{font-size:9px;color:rgba(198,168,90,0.5);margin-top:2px;}
-.prf-pet-lv{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);margin-top:2px;}
-.prf-pet-hp-bar{height:2px;background:rgba(255,255,255,0.06);margin-top:4px;overflow:hidden;}
-.prf-pet-hp-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);}
+/* ── PETS GRID ── */
+.prf-pets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;}
+.prf-pet{display:grid;grid-template-columns:64px 1fr;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.prf-pet:hover{border-color:rgba(198,168,90,0.3);}
+.prf-pet.active-pet{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.02);}
+.prf-pet-thumb{width:64px;height:64px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2rem;background:rgba(255,255,255,0.03);}
+.prf-pet-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:saturate(0.85);}
+.prf-pet-body{padding:6px 8px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;}
+.prf-pet-nm{font-family:'Cinzel',serif;font-size:9px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;}
+.prf-pet-sk{font-family:'DM Mono',monospace;font-size:8px;color:rgba(198,168,90,0.7);flex:1;}
+.prf-pet-footer{display:flex;gap:3px;margin-top:4px;}
+.prf-pet-pill{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.22);}
+.prf-pet-pill.active{border-color:rgba(34,211,238,0.35);color:#22d3ee;}
 
 /* ── LOOTBOX ── */
 .prf-lootbox-area{display:flex;flex-direction:column;align-items:center;gap:12px;padding:1rem 0;}
@@ -1142,12 +1156,54 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
       <div class="prf-panel" id="prf-p-pets">
         <div class="prf-sec"><div class="prf-sec-lbl">🐾 Your Pets</div></div>
         <div class="prf-pets-grid">
-          <div class="prf-pet active-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_shadowfang.png" onerror="this.outerHTML='🦊'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Shadowfang</div><div class="prf-pet-sk">+5% $SLIME Drop</div><div class="prf-pet-lv">LV 2 — Active</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:80%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_frostkit.png" onerror="this.outerHTML='🐺'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Frostkit</div><div class="prf-pet-sk">+3% Loot Box</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:60%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_gearpup.png" onerror="this.outerHTML='🐱'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Gearpup</div><div class="prf-pet-sk">+8% EXP Gain</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:45%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_aquapaw.png" onerror="this.outerHTML='🐢'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Aquapaw</div><div class="prf-pet-sk">+6% HP Regen</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:90%"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_pyronix.png" onerror="this.outerHTML='🐉'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Pyronix</div><div class="prf-pet-sk">+5% ATK Bonus</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:30%;background:linear-gradient(90deg,#f87171,#fca5a5)"></div></div></div></div>
-          <div class="prf-pet"><div class="prf-pet-thumb"><img src="assets/pet/pet_lumikin.png" onerror="this.outerHTML='🦋'"></div><div class="prf-pet-meta"><div class="prf-pet-nm">Lumikin</div><div class="prf-pet-sk">+6% Heal</div><div class="prf-pet-lv">LV 1</div><div class="prf-pet-hp-bar"><div class="prf-pet-hp-fill" style="width:70%"></div></div></div></div>
+          <div class="prf-pet active-pet">
+            <div class="prf-pet-thumb"><img src="assets/pet/pet_shadowfang.png" onerror="this.outerHTML='🦊'"></div>
+            <div class="prf-pet-body">
+              <div class="prf-pet-nm">Shadowfang</div>
+              <div class="prf-pet-sk">+5% $SLIME Drop</div>
+              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 2</span><span class="prf-pet-pill active">Active</span></div>
+            </div>
+          </div>
+          <div class="prf-pet">
+            <div class="prf-pet-thumb"><img src="assets/pet/pet_frostkit.png" onerror="this.outerHTML='🐺'"></div>
+            <div class="prf-pet-body">
+              <div class="prf-pet-nm">Frostkit</div>
+              <div class="prf-pet-sk">+3% Loot Box</div>
+              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
+            </div>
+          </div>
+          <div class="prf-pet">
+            <div class="prf-pet-thumb"><img src="assets/pet/pet_gearpup.png" onerror="this.outerHTML='🐱'"></div>
+            <div class="prf-pet-body">
+              <div class="prf-pet-nm">Gearpup</div>
+              <div class="prf-pet-sk">+8% EXP Gain</div>
+              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
+            </div>
+          </div>
+          <div class="prf-pet">
+            <div class="prf-pet-thumb"><img src="assets/pet/pet_aquapaw.png" onerror="this.outerHTML='🐢'"></div>
+            <div class="prf-pet-body">
+              <div class="prf-pet-nm">Aquapaw</div>
+              <div class="prf-pet-sk">+6% HP Regen</div>
+              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
+            </div>
+          </div>
+          <div class="prf-pet">
+            <div class="prf-pet-thumb"><img src="assets/pet/pet_pyronix.png" onerror="this.outerHTML='🐉'"></div>
+            <div class="prf-pet-body">
+              <div class="prf-pet-nm">Pyronix</div>
+              <div class="prf-pet-sk">+5% ATK Bonus</div>
+              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
+            </div>
+          </div>
+          <div class="prf-pet">
+            <div class="prf-pet-thumb"><img src="assets/pet/pet_lumikin.png" onerror="this.outerHTML='🦋'"></div>
+            <div class="prf-pet-body">
+              <div class="prf-pet-nm">Lumikin</div>
+              <div class="prf-pet-sk">+6% Heal</div>
+              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1843,9 +1899,22 @@ function closeMulti(){document.getElementById('multi-overlay').classList.remove(
     charHp = { cur: Math.floor(Math.random()*65)+20, max: 100 };
     syncCharBtn();
     document.querySelectorAll('.prf-modal-card').forEach(c=>c.classList.remove('sel'));
-    document.querySelectorAll('.prf-mini-card').forEach(c=>c.classList.remove('active'));
+    document.querySelectorAll('.prf-crd').forEach(c=>{
+      c.classList.remove('active-card');
+      c.querySelector('.prf-crd-footer .active')?.remove();
+    });
     const md=document.getElementById('prf-md-'+id); if(md) md.classList.add('sel');
-    const mc=document.getElementById('prf-mc-'+id); if(mc) mc.classList.add('active');
+    const crd=document.getElementById('prf-crd-'+id);
+    if(crd){
+      crd.classList.add('active-card');
+      const footer=crd.querySelector('.prf-crd-footer');
+      if(footer&&!footer.querySelector('.active')){
+        const pill=document.createElement('span');
+        pill.className='prf-crd-pill active';
+        pill.textContent='Active';
+        footer.appendChild(pill);
+      }
+    }
     prfCloseModal();
     prfToast((NAMES[id-1]||'Slime #'+id)+' equipped','gold');
   };
@@ -1865,10 +1934,30 @@ function closeMulti(){document.getElementById('multi-overlay').classList.remove(
     const grid=document.getElementById('prf-cards-grid');
     if(!grid||grid.children.length) return;
     for(let i=1;i<=12;i++){
+      const hp  = Math.floor(Math.random()*60)+30;
+      const atk = Math.floor(Math.random()*70)+20;
+      const spd = Math.floor(Math.random()*70)+20;
+      const isActive = (i===prfActive);
       const d=document.createElement('div');
-      d.className='prf-mini-card'+(i===prfActive?' active':'');
-      d.id='prf-mc-'+i;
-      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.fontSize='2rem';this.outerHTML='<div style=\'display:flex;align-items:center;justify-content:center;aspect-ratio:2/3;font-size:1.5rem;background:#0d1018\'>${getCharEmoji(i)}</div>'">`;
+      d.className='prf-crd'+(isActive?' active-card':'');
+      d.id='prf-crd-'+i;
+      d.innerHTML=`
+        <div class="prf-crd-img">
+          <img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy"
+            onerror="this.parentNode.innerHTML='<div class=prf-crd-img-emo>${getCharEmoji(i)}</div>'">
+        </div>
+        <div class="prf-crd-body">
+          <div class="prf-crd-name">${NAMES[i-1]||'Slime #'+i}</div>
+          <div class="prf-crd-stats">
+            <div class="prf-crd-stat"><div class="prf-crd-stat-lbl">HP</div><div class="prf-crd-bar-track"><div class="prf-crd-bar-fill hp" style="width:${hp}%"></div></div></div>
+            <div class="prf-crd-stat"><div class="prf-crd-stat-lbl">ATK</div><div class="prf-crd-bar-track"><div class="prf-crd-bar-fill atk" style="width:${atk}%"></div></div></div>
+            <div class="prf-crd-stat"><div class="prf-crd-stat-lbl">SPD</div><div class="prf-crd-bar-track"><div class="prf-crd-bar-fill spd" style="width:${spd}%"></div></div></div>
+          </div>
+          <div class="prf-crd-footer">
+            <span class="prf-crd-pill">Lv ${Math.floor(Math.random()*15)+1}</span>
+            ${isActive?'<span class="prf-crd-pill active">Active</span>':''}
+          </div>
+        </div>`;
       d.onclick=()=>prfSetActive(i);
       grid.appendChild(d);
     }
