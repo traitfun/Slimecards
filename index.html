@@ -281,192 +281,115 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .listing-price span:first-child{color:rgba(255,255,255,0.25);font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;}
 .listing-price span:last-child{font-family:'Cinzel',serif;color:var(--gold);}
 
-/* ═══════════ PROFILE ═══════════ */
-.profile-wrap{max-width:100%;padding:0 0 5rem;display:flex;flex-direction:column;gap:0;}
 
-/* ── HERO 50:50 ── */
-.prf-hero{display:grid;grid-template-columns:1fr 1fr;padding-top:3rem;}
+/* ═══════════ PROFILE (DESKTOP) ═══════════ */
+#page-profile .profile-wrap{max-width:1140px;margin:0 auto;padding:0 40px 80px;}
 
-/* LEFT — char picker */
-.prf-char-side{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(6,8,15,0.9);border-right:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:background 0.2s;padding:1.5rem 1rem;position:relative;overflow:hidden;}
-.prf-char-side:hover{background:rgba(198,168,90,0.04);}
-.prf-char-side::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(198,168,90,0.04) 0%,transparent 70%);pointer-events:none;}
-.prf-char-emoji-big{font-size:4rem;line-height:1;transition:transform 0.2s;filter:drop-shadow(0 0 12px rgba(198,168,90,0.2));}
-.prf-char-side:hover .prf-char-emoji-big{transform:scale(1.08);}
-.prf-char-plus-big{width:64px;height:64px;border:1.5px dashed rgba(198,168,90,0.35);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:rgba(198,168,90,0.4);transition:all 0.2s;}
-.prf-char-side:hover .prf-char-plus-big{border-color:rgba(198,168,90,0.7);color:rgba(198,168,90,0.8);}
-.prf-char-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);}
-.prf-char-nm{font-family:'Cinzel',serif;font-size:11px;color:rgba(230,220,190,0.85);text-align:center;max-width:90px;line-height:1.3;}
-.prf-char-rar{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(198,168,90,0.5);}
-.prf-char-hpbar{width:80%;height:3px;background:rgba(255,255,255,0.06);overflow:hidden;margin-top:4px;}
-.prf-char-hpfill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);transition:width 0.4s;}
-.prf-char-hpfill.med{background:linear-gradient(90deg,#fbbf24,#fde68a);}
-.prf-char-hpfill.low{background:linear-gradient(90deg,#f87171,#fca5a5);}
+/* Hero */
+.prf-d-hero{display:grid;grid-template-columns:320px 1fr;gap:60px;align-items:center;margin-bottom:64px;animation:prfFadeUp 0.5s ease both;}
+@keyframes prfFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.prf-d-art{position:relative;width:320px;height:400px;flex-shrink:0;}
+.prf-d-art-glow{position:absolute;inset:-24px;background:radial-gradient(ellipse at center,rgba(201,168,76,0.1) 0%,transparent 65%);pointer-events:none;}
+.prf-d-art-frame{position:absolute;inset:0;border:1px solid rgba(201,168,76,0.2);z-index:1;pointer-events:none;}
+.prf-d-art-frame::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.prf-d-art-frame::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(240,192,64,0.4),transparent);}
+.prf-d-corner{position:absolute;width:12px;height:12px;z-index:2;}
+.prf-d-corner.tl{top:-1px;left:-1px;border-top:1px solid var(--gold);border-left:1px solid var(--gold);}
+.prf-d-corner.tr{top:-1px;right:-1px;border-top:1px solid var(--gold);border-right:1px solid var(--gold);}
+.prf-d-corner.bl{bottom:-1px;left:-1px;border-bottom:1px solid var(--gold);border-left:1px solid var(--gold);}
+.prf-d-corner.br{bottom:-1px;right:-1px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold);}
+.prf-d-art-inner{width:100%;height:100%;overflow:hidden;position:relative;}
+.prf-d-art-inner img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:saturate(0.85) brightness(0.88);}
+.prf-d-art-empty{width:100%;height:100%;background:linear-gradient(160deg,#0e1520,#0a0f18,#12101e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:background 0.2s;}
+.prf-d-art-empty:hover{background:linear-gradient(160deg,#121a28,#0d1320,#16142a);}
+.prf-d-art-empty-ico{font-family:'Cinzel Decorative',serif;font-size:40px;color:rgba(201,168,76,0.12);}
+.prf-d-art-empty-txt{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.prf-d-active-tag{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.24em;text-transform:uppercase;padding:4px 12px;background:rgba(78,201,196,0.08);border:1px solid rgba(78,201,196,0.25);color:#4ec9c4;white-space:nowrap;z-index:3;}
 
-/* RIGHT — stats */
-.prf-stats-side{display:flex;flex-direction:column;justify-content:center;gap:0;background:rgba(4,5,12,0.95);border-bottom:1px solid rgba(255,255,255,0.06);}
-.prf-stat-row{display:flex;flex-direction:column;justify-content:center;padding:0.45rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);}
-.prf-stat-row:last-child{border-bottom:none;}
-.prf-stat-ico{display:none;}
-.prf-stat-val{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:600;color:#E6EAF2;line-height:1;}
-.prf-stat-lbl{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:2px;}
-.prf-stat-bar{height:2px;background:rgba(255,255,255,0.06);margin-top:6px;overflow:hidden;}
-.prf-stat-bar-fill{height:100%;background:linear-gradient(90deg,rgba(198,168,90,0.5),var(--gold));transition:width 0.5s;}
+/* Info right */
+.prf-d-info{display:flex;flex-direction:column;gap:28px;animation:prfFadeUp 0.5s 0.1s ease both;}
+.prf-d-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(201,168,76,0.6);}
+.prf-d-name{font-family:'Cinzel Decorative',serif;font-size:44px;font-weight:700;color:#e8e2d6;line-height:1;letter-spacing:0.02em;}
+.prf-d-rankrow{display:flex;align-items:center;gap:14px;}
+.prf-d-level{font-family:'Cinzel',serif;font-size:14px;color:rgba(232,226,214,0.55);letter-spacing:0.08em;}
+.prf-d-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.15);}
+.prf-d-rank{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);padding:3px 10px;border:1px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.06);}
+.prf-d-xp-block{display:flex;flex-direction:column;gap:10px;}
+.prf-d-xp-toprow{display:flex;justify-content:space-between;align-items:baseline;}
+.prf-d-xp-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.22);}
+.prf-d-xp-val{font-family:'Cinzel',serif;font-size:13px;color:rgba(232,226,214,0.5);}
+.prf-d-xp-track{height:3px;background:rgba(255,255,255,0.05);position:relative;overflow:hidden;}
+.prf-d-xp-fill{height:100%;width:70%;background:linear-gradient(90deg,rgba(201,168,76,0.4),var(--gold));position:relative;}
+.prf-d-xp-fill::after{content:'';position:absolute;right:0;top:-2px;bottom:-2px;width:2px;background:#e8c96e;box-shadow:0 0 8px var(--gold);}
+.prf-d-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);}
+.prf-d-stat{padding:18px 20px;background:var(--dark2);display:flex;flex-direction:column;gap:5px;}
+.prf-d-stat-num{font-family:'Cinzel Decorative',serif;font-size:22px;font-weight:700;color:#e8e2d6;line-height:1;}
+.prf-d-stat-key{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:2px;}
 
-/* ── TAB NAVBAR ── */
-.prf-tabs{display:grid;grid-template-columns:repeat(4,1fr);background:rgba(6,8,15,0.98);border-bottom:1px solid rgba(255,255,255,0.07);position:sticky;top:48px;z-index:50;}
-.prf-tab{padding:11px 4px;text-align:center;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;}
-.prf-tab:hover{background:rgba(255,255,255,0.02);}
-.prf-tab.on{border-bottom-color:var(--gold);background:rgba(198,168,90,0.04);}
-.prf-tab-ico{font-size:15px;}
-.prf-tab-lbl{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:3px;}
-.prf-tab.on .prf-tab-lbl{color:var(--gold);}
+/* Section divider */
+.prf-d-divider{display:flex;align-items:center;gap:20px;margin-bottom:28px;}
+.prf-d-divider-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.36em;text-transform:uppercase;color:rgba(255,255,255,0.22);white-space:nowrap;}
+.prf-d-divider-line{flex:1;height:1px;background:rgba(255,255,255,0.06);}
 
-/* ── PANELS ── */
-.prf-body{padding:0.8rem 0.8rem;display:flex;flex-direction:column;gap:0.8rem;overflow-x:hidden;}
-.prf-panel{display:none;}
-.prf-panel.on{display:flex;flex-direction:column;gap:1rem;}
+/* Loadout */
+.prf-d-loadout{margin-bottom:64px;animation:prfFadeUp 0.5s 0.2s ease both;}
+.prf-d-loadout-grid{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;}
+.prf-d-main-card{position:relative;width:200px;height:264px;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;}
+.prf-d-main-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(201,168,76,0.07);}
+.prf-d-main-inner{width:100%;height:100%;background:linear-gradient(160deg,#12101e,#0a0d16);border:1px solid rgba(201,168,76,0.22);overflow:hidden;position:relative;}
+.prf-d-main-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2;}
+.prf-d-main-inner img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:saturate(0.82) brightness(0.88);}
+.prf-d-main-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;font-size:36px;color:rgba(201,168,76,0.1);background:linear-gradient(160deg,#12101e,#0a0d16);}
+.prf-d-main-footer{position:absolute;bottom:0;left:0;right:0;padding:32px 12px 12px;background:linear-gradient(0deg,rgba(5,7,13,0.95) 0%,transparent 100%);}
+.prf-d-main-name{font-family:'Cinzel',serif;font-size:12px;color:#e8e2d6;letter-spacing:0.04em;}
+.prf-d-main-lv{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-top:3px;}
+.prf-d-main-tag{position:absolute;top:9px;right:9px;font-family:'DM Mono',monospace;font-size:6.5px;letter-spacing:0.2em;text-transform:uppercase;padding:3px 7px;background:rgba(78,201,196,0.1);border:1px solid rgba(78,201,196,0.28);color:#4ec9c4;z-index:3;}
+.prf-d-support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.prf-d-slot{position:relative;height:120px;background:var(--dark2);border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;overflow:hidden;}
+.prf-d-slot:hover{border-color:rgba(201,168,76,0.22);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.3);}
+.prf-d-slot.active-slot{border-color:rgba(78,201,196,0.22);box-shadow:0 0 20px rgba(78,201,196,0.04);}
+.prf-d-slot img{width:100%;height:100%;object-fit:cover;object-position:top;filter:saturate(0.75) brightness(0.82);display:block;}
+.prf-d-slot-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
+.prf-d-slot-empty-ico{font-family:'Cinzel',serif;font-size:20px;color:rgba(255,255,255,0.05);}
+.prf-d-slot-empty-txt{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.18);}
+.prf-d-slot-footer{position:absolute;bottom:0;left:0;right:0;padding:22px 9px 8px;background:linear-gradient(0deg,rgba(5,7,13,0.92) 0%,transparent 100%);}
+.prf-d-slot-name{font-family:'Cinzel',serif;font-size:9.5px;color:#e8e2d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.prf-d-slot-lv{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-top:2px;}
+.prf-d-slot-tag{position:absolute;top:6px;right:6px;font-family:'DM Mono',monospace;font-size:6px;letter-spacing:0.16em;text-transform:uppercase;padding:2px 5px;border:1px solid;}
+.prf-d-slot-tag.card{border-color:rgba(201,168,76,0.3);color:rgba(201,168,76,0.7);background:rgba(201,168,76,0.05);}
+.prf-d-slot-tag.pet{border-color:rgba(78,201,196,0.3);color:rgba(78,201,196,0.7);background:rgba(78,201,196,0.05);}
+.prf-d-build-info{padding:16px 0 0;border-top:1px solid rgba(255,255,255,0.06);margin-top:4px;display:flex;gap:32px;}
+.prf-d-build-stat{display:flex;flex-direction:column;gap:4px;}
+.prf-d-build-num{font-family:'Cinzel Decorative',serif;font-size:18px;color:#e8e2d6;line-height:1;}
+.prf-d-build-num.gold{color:var(--gold);}
+.prf-d-build-key{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.22);}
 
-/* Section label */
-.prf-sec{display:flex;align-items:center;justify-content:space-between;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:8px;}
-.prf-sec-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);}
-.prf-sec-badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.2);}
+/* Tabs */
+.prf-d-tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:32px;}
+.prf-d-tab{padding:13px 26px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.25);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;transition:color 0.2s,border-color 0.2s;}
+.prf-d-tab:hover{color:rgba(255,255,255,0.5);}
+.prf-d-tab.on{color:var(--gold);border-bottom-color:var(--gold);}
 
-/* ── RESOURCES ── */
-.prf-resources{display:flex;flex-direction:column;gap:6px;}
-.prf-res{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:10px 12px;transition:border-color 0.2s;}
-.prf-res:hover{border-color:rgba(255,255,255,0.1);}
-.prf-res-ico{font-size:22px;flex-shrink:0;width:28px;text-align:center;}
-.prf-res-body{flex:1;min-width:0;}
-.prf-res-name{font-family:'Cinzel',serif;font-size:11px;color:#e2ddd6;line-height:1;}
-.prf-res-desc{font-size:10px;color:rgba(255,255,255,0.28);margin-top:2px;font-style:italic;}
-.prf-res-qty{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:26px;text-align:right;}
-.prf-res-use{padding:5px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;flex-shrink:0;}
-.prf-res-use.green{background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.28);color:#34d399;}
-.prf-res-use.green:hover{background:rgba(52,211,153,0.15);border-color:rgba(52,211,153,0.5);}
-.prf-res-use.gold{background:rgba(198,168,90,0.08);border:1px solid rgba(198,168,90,0.28);color:var(--gold);}
-.prf-res-use.gold:hover{background:rgba(198,168,90,0.15);border-color:rgba(198,168,90,0.5);}
-.prf-res-use:disabled{opacity:0.3;cursor:not-allowed;}
-.prf-res-use:active:not(:disabled){transform:scale(0.93);}
+/* Collection grid */
+.prf-d-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
+.prf-d-card{position:relative;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s;}
+.prf-d-card:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 16px 40px rgba(0,0,0,0.5),0 0 20px rgba(201,168,76,0.05);}
+.prf-d-card.sel .prf-d-card-img-wrap{box-shadow:0 0 0 1px rgba(201,168,76,0.5),0 0 24px rgba(201,168,76,0.1);}
+.prf-d-card-img-wrap{aspect-ratio:2/3;overflow:hidden;border:1px solid rgba(255,255,255,0.06);background:var(--dark2);transition:box-shadow 0.25s;}
+.prf-d-card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.8) brightness(0.88);transition:filter 0.25s;}
+.prf-d-card:hover .prf-d-card-img-wrap img{filter:saturate(0.95) brightness(1.02);}
+.prf-d-card-empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;font-size:24px;color:rgba(255,255,255,0.05);background:linear-gradient(160deg,#0e1420,#090d15);}
+.prf-d-card-info{padding:9px 2px 0;}
+.prf-d-card-name{font-family:'Cinzel',serif;font-size:10px;color:rgba(232,226,214,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.03em;}
+.prf-d-card-lv{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:3px;}
+.prf-d-rdot{position:absolute;top:7px;left:7px;width:5px;height:5px;border-radius:50%;}
+.prf-d-rdot.common{background:#9ca3af;}
+.prf-d-rdot.rare{background:#60a5fa;box-shadow:0 0 6px #60a5fa88;}
+.prf-d-rdot.epic{background:#a78bfa;box-shadow:0 0 6px #a78bfa88;}
+.prf-d-rdot.legend{background:var(--gold);box-shadow:0 0 6px rgba(240,192,64,0.7);}
+.prf-d-rdot.mythic{background:#f87171;box-shadow:0 0 6px #f8717188;}
 
-/* ── MATERIALS ── */
-.prf-mat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
-.prf-mat{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;cursor:pointer;transition:border-color 0.2s;}
-.prf-mat:hover{border-color:rgba(255,255,255,0.13);}
-.prf-mat-ico{font-size:20px;}
-.prf-mat-amt{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;}
-.prf-mat-nm{font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;}
-
-/* ── CARDS GRID ── */
-.prf-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;}
-.prf-crd{display:grid;grid-template-columns:64px 1fr;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);cursor:pointer;transition:border-color 0.2s;}
-.prf-crd:hover{border-color:rgba(198,168,90,0.3);}
-.prf-crd.active-card{border-color:rgba(198,168,90,0.55);}
-.prf-crd-img{width:64px;height:64px;overflow:hidden;flex-shrink:0;}
-.prf-crd-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:saturate(0.82);}
-.prf-crd-img-emo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:#0d1018;}
-.prf-crd-body{padding:4px 5px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;}
-.prf-crd-name{font-family:'Cinzel',serif;font-size:9px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;}
-.prf-crd-stats{display:flex;flex-direction:column;gap:3px;}
-.prf-crd-stat{display:flex;align-items:center;gap:4px;}
-.prf-crd-stat-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.3);width:22px;flex-shrink:0;}
-.prf-crd-bar-track{flex:1;height:3px;background:rgba(255,255,255,0.07);overflow:hidden;}
-.prf-crd-bar-fill{height:100%;transition:width 0.4s;}
-.prf-crd-bar-fill.hp{background:linear-gradient(90deg,#f87171,#fca5a5);}
-.prf-crd-bar-fill.atk{background:linear-gradient(90deg,#fb923c,#fdba74);}
-.prf-crd-bar-fill.spd{background:linear-gradient(90deg,#60a5fa,#93c5fd);}
-.prf-crd-footer{display:flex;gap:3px;margin-top:4px;}
-.prf-crd-pill{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.22);}
-.prf-crd-pill.active{border-color:rgba(34,211,238,0.35);color:#22d3ee;}
-
-/* ── PETS GRID ── */
-.prf-pets-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;}
-.prf-pet{display:grid;grid-template-columns:44px 1fr;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.025);cursor:pointer;transition:border-color 0.2s;}
-.prf-pet:hover{border-color:rgba(198,168,90,0.3);}
-.prf-pet.active-pet{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.02);}
-.prf-pet-thumb{width:44px;height:44px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2rem;background:rgba(255,255,255,0.03);}
-.prf-pet-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;filter:saturate(0.85);}
-.prf-pet-body{padding:4px 5px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;}
-.prf-pet-nm{font-family:'Cinzel',serif;font-size:9px;color:#e2ddd6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;}
-.prf-pet-sk{font-family:'DM Mono',monospace;font-size:8px;color:rgba(198,168,90,0.7);flex:1;}
-.prf-pet-footer{display:flex;gap:3px;margin-top:4px;}
-.prf-pet-pill{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:0.08em;text-transform:uppercase;padding:2px 5px;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.22);}
-.prf-pet-pill.active{border-color:rgba(34,211,238,0.35);color:#22d3ee;}
-
-/* ── LOOTBOX ── */
-.prf-lootbox-area{display:flex;flex-direction:column;align-items:center;gap:12px;padding:1rem 0;}
-.lb-card-wrap{width:110px;aspect-ratio:2/3;perspective:800px;cursor:pointer;}
-.lb-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);}
-.lb-card.flipped{transform:rotateY(180deg);}
-.lb-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;border:1px solid rgba(198,168,90,0.3);}
-.lb-back{background:radial-gradient(circle,#12102a,#060810);font-size:2.8rem;}
-.lb-front{transform:rotateY(180deg);background:#0a0d16;font-size:3rem;flex-direction:column;gap:6px;}
-.lb-reward-name{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-align:center;padding:0 6px;}
-.lb-open-btn{padding:8px 22px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),#b8860b);color:#000;border:none;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all 0.2s;}
-.lb-open-btn:hover{box-shadow:0 0 18px rgba(198,168,90,0.35);}
-.lb-open-btn:disabled{opacity:0.35;cursor:not-allowed;}
-
-/* ── CHAR SELECT MODAL ── */
-#prf-modal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,0.88);backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;padding:1rem;}
-#prf-modal.open{display:flex;}
-.prf-sheet{width:100%;max-width:520px;background:#0a0d16;border:1px solid rgba(255,255,255,0.07);border-bottom:none;padding:1.2rem 1rem 2rem;animation:prfRise 0.28s cubic-bezier(0.2,0,0.1,1);position:relative;}
-.prf-sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,168,90,0.28),transparent);}
-@keyframes prfRise{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-.prf-sheet-title{font-family:'Cinzel',serif;font-size:14px;font-weight:500;color:#e2ddd6;margin-bottom:3px;}
-.prf-sheet-sub{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:14px;}
-.prf-modal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:55vh;overflow-y:auto;}
-.prf-modal-card{cursor:pointer;border:1px solid rgba(255,255,255,0.07);overflow:hidden;filter:saturate(0.65);transition:all 0.22s;}
-.prf-modal-card:hover{filter:saturate(0.9);transform:translateY(-2px);}
-.prf-modal-card.sel{border-color:var(--gold);filter:saturate(1);box-shadow:0 0 12px rgba(198,168,90,0.14);}
-.prf-modal-card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block;}
-.prf-modal-emo{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:#0d1018;}
-.prf-modal-lbl{font-family:'DM Mono',monospace;font-size:8px;padding:3px 4px;background:rgba(5,7,13,0.9);color:rgba(255,255,255,0.25);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
-.prf-close-btn{width:100%;margin-top:12px;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.25);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.prf-close-btn:hover{border-color:rgba(255,255,255,0.16);color:rgba(255,255,255,0.5);}
-
-/* ── USE MODAL ── */
-#use-modal{position:fixed;inset:0;z-index:310;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:1.5rem;}
-#use-modal.open{display:flex;}
-.use-box{background:#0a0d16;border:1px solid rgba(255,255,255,0.08);padding:1.4rem;max-width:320px;width:100%;position:relative;}
-.use-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,168,90,0.3),transparent);}
-.use-title{font-family:'Cinzel',serif;font-size:13px;color:#e2ddd6;margin-bottom:4px;}
-.use-sub{font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:14px;font-family:'DM Mono',monospace;}
-.use-target-toggle{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
-.use-tt-btn{padding:8px;text-align:center;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);cursor:pointer;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);transition:all 0.2s;}
-.use-tt-btn.on{border-color:rgba(198,168,90,0.4);color:var(--gold);background:rgba(198,168,90,0.06);}
-.use-target-list{display:flex;flex-direction:column;gap:5px;max-height:180px;overflow-y:auto;margin-bottom:14px;}
-.use-target-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);cursor:pointer;transition:all 0.2s;}
-.use-target-item:hover{border-color:rgba(198,168,90,0.3);background:rgba(198,168,90,0.04);}
-.use-target-item.sel{border-color:var(--gold);background:rgba(198,168,90,0.06);}
-.uti-ico{font-size:18px;flex-shrink:0;}
-.uti-name{font-family:'Cinzel',serif;font-size:10px;color:#e2ddd6;flex:1;}
-.uti-hp{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);}
-.use-confirm-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.use-confirm-btn{padding:9px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border:1px solid;}
-.use-confirm-btn.yes{background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.3);color:#34d399;}
-.use-confirm-btn.yes:hover{background:rgba(52,211,153,0.16);}
-.use-confirm-btn.no{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);}
-.use-confirm-btn.no:hover{background:rgba(255,255,255,0.05);}
-
-/* ── TOAST ── */
-#prf-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:5px 16px;z-index:400;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;opacity:0;transition:opacity 0.25s;pointer-events:none;white-space:nowrap;}
-#prf-toast.green{background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);color:#34d399;}
-#prf-toast.gold{background:rgba(198,168,90,0.12);border:1px solid rgba(198,168,90,0.3);color:var(--gold);}
-#prf-toast.red{background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.3);color:#f87171;}
-#prf-toast.show{opacity:1;}
-@keyframes prfPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
-.wallet-icon{font-size:2.8rem;margin-bottom:0.7rem;}
-.wallet-label{font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:3px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:1.2rem;}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:0.9rem;}
-.stat-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.1rem;text-align:center;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);}
-.stat-box-num{font-family:'Cinzel Decorative',serif;font-size:1.7rem;font-weight:900;color:var(--gold);}
-.stat-box-label{font-size:0.62rem;letter-spacing:3px;color:rgba(255,255,255,0.28);text-transform:uppercase;margin-top:0.2rem;}
-.inv-label{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:4px;color:rgba(255,255,255,0.22);text-transform:uppercase;margin-bottom:0.9rem;}
-.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:0.65rem;}
-.inv-slot{aspect-ratio:1;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.15rem;font-size:1.5rem;cursor:pointer;transition:all 0.3s;}
-.inv-slot:hover{border-color:rgba(240,192,64,0.3);background:rgba(240,192,64,0.04);}
-.inv-slot.empty{opacity:0.18;font-size:0.9rem;color:rgba(255,255,255,0.3);}
-.inv-qty{font-size:0.58rem;font-family:'Cinzel',serif;color:var(--gold);}
+/* Char select modal - reuse existing */
 /* ═══════════ TABS ═══════════ */
 /* ═══════════ PETS ═══════════ */
 .pets-wrap{max-width:100%;padding:1.5rem 2rem 5rem;}
@@ -1031,209 +954,156 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </div>
 
+
 <!-- ══ PROFILE ══ -->
 <div class="page" id="page-profile">
   <div class="profile-wrap">
 
-    <!-- HERO 50:50 -->
-    <div class="prf-hero">
-      <!-- LEFT: [+] char picker -->
-      <div class="prf-char-side" id="prf-char-side" onclick="prfOpenModal()">
-        <div id="prf-char-display-plus" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-          <div class="prf-char-plus-big">＋</div>
+    <!-- HERO -->
+    <div class="prf-d-hero">
+      <!-- LEFT: Art -->
+      <div class="prf-d-art" id="prf-art-wrap">
+        <div class="prf-d-art-glow"></div>
+        <div class="prf-d-art-frame"></div>
+        <div class="prf-d-corner tl"></div>
+        <div class="prf-d-corner tr"></div>
+        <div class="prf-d-corner bl"></div>
+        <div class="prf-d-corner br"></div>
+        <div class="prf-d-art-inner">
+          <img id="prf-art-img" src="" style="display:none" alt="">
+          <div class="prf-d-art-empty" id="prf-art-empty" onclick="prfOpenModal()">
+            <div class="prf-d-art-empty-ico">◈</div>
+            <div class="prf-d-art-empty-txt">Pick Character</div>
+          </div>
         </div>
-        <div id="prf-char-display-active" style="display:none;flex-direction:column;align-items:center;gap:6px;">
-          <img id="prf-char-img" src="" style="width:56px;height:56px;object-fit:cover;object-position:top;border:1px solid rgba(198,168,90,0.3);">
-          <div class="prf-char-nm" id="prf-char-nm"></div>
-          <div class="prf-char-rar" id="prf-char-rar"></div>
-          <div class="prf-char-hpbar"><div class="prf-char-hpfill" id="prf-char-hpfill" style="width:40%"></div></div>
-        </div>
-        <div class="prf-char-label" id="prf-char-label">Pick Character</div>
+        <div class="prf-d-active-tag" id="prf-active-tag" style="display:none">Active</div>
       </div>
-      <!-- RIGHT: stats -->
-      <div class="prf-stats-side">
-        <div class="prf-stat-row">
-          <div class="prf-stat-val">Lv 12</div>
-          <div class="prf-stat-lbl">Level · Commander</div>
+
+      <!-- RIGHT: Info -->
+      <div class="prf-d-info">
+        <div class="prf-d-eyebrow">Commander Profile</div>
+        <div class="prf-d-name">Astralis</div>
+        <div class="prf-d-rankrow">
+          <div class="prf-d-level">Lv 12</div>
+          <div class="prf-d-dot"></div>
+          <div class="prf-d-rank">Silver Rank</div>
+          <div class="prf-d-dot"></div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);">Base Network</div>
         </div>
-        <div class="prf-stat-row">
-          <div class="prf-stat-val" id="prf-energy-val">70 / 100</div>
-          <div class="prf-stat-lbl">Energy</div>
-          <div class="prf-stat-bar"><div class="prf-stat-bar-fill" id="prf-energy-bar" style="width:70%"></div></div>
+        <div class="prf-d-xp-block">
+          <div class="prf-d-xp-toprow">
+            <div class="prf-d-xp-lbl">Experience</div>
+            <div class="prf-d-xp-val" id="prf-xp-val">70 / 100 XP</div>
+          </div>
+          <div class="prf-d-xp-track">
+            <div class="prf-d-xp-fill" id="prf-xp-fill" style="width:70%"></div>
+          </div>
         </div>
-        <div class="prf-stat-row">
-          <div class="prf-stat-val">50</div>
-          <div class="prf-stat-lbl">Cards</div>
-        </div>
-        <div class="prf-stat-row">
-          <div class="prf-stat-val">6</div>
-          <div class="prf-stat-lbl">Pets</div>
+        <div class="prf-d-stats">
+          <div class="prf-d-stat">
+            <div class="prf-d-stat-num">50</div>
+            <div class="prf-d-stat-key">Cards</div>
+          </div>
+          <div class="prf-d-stat">
+            <div class="prf-d-stat-num">6</div>
+            <div class="prf-d-stat-key">Pets</div>
+          </div>
+          <div class="prf-d-stat">
+            <div class="prf-d-stat-num">18</div>
+            <div class="prf-d-stat-key">Runs</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB NAVBAR -->
-    <div class="prf-tabs">
-      <div class="prf-tab on" onclick="prfTab('items',this)"><div class="prf-tab-lbl">Items</div></div>
-      <div class="prf-tab" onclick="prfTab('resource',this)"><div class="prf-tab-lbl">Resource</div></div>
-      <div class="prf-tab" onclick="prfTab('cards',this)"><div class="prf-tab-lbl">Card</div></div>
-      <div class="prf-tab" onclick="prfTab('pets',this)"><div class="prf-tab-lbl">Pet</div></div>
+    <!-- LOADOUT -->
+    <div class="prf-d-loadout">
+      <div class="prf-d-divider">
+        <div class="prf-d-divider-lbl">Equipped</div>
+        <div class="prf-d-divider-line"></div>
+      </div>
+      <div class="prf-d-loadout-grid">
+        <!-- Main card -->
+        <div>
+          <div class="prf-d-main-card" onclick="prfOpenModal()">
+            <div class="prf-d-main-inner">
+              <img id="prf-main-img" src="" style="display:none" alt="">
+              <div class="prf-d-main-empty" id="prf-main-empty">◈</div>
+              <div class="prf-d-main-footer">
+                <div class="prf-d-main-name" id="prf-main-name">—</div>
+                <div class="prf-d-main-lv" id="prf-main-lv">Select a card</div>
+              </div>
+            </div>
+            <div class="prf-d-corner tl"></div>
+            <div class="prf-d-corner tr"></div>
+            <div class="prf-d-corner bl"></div>
+            <div class="prf-d-corner br"></div>
+            <div class="prf-d-main-tag" id="prf-main-tag" style="display:none">Active</div>
+          </div>
+        </div>
+
+        <!-- Support + build -->
+        <div>
+          <div class="prf-d-support-grid">
+            <div class="prf-d-slot active-slot">
+              <div class="prf-d-slot-empty"><div class="prf-d-slot-empty-ico">⊕</div><div class="prf-d-slot-empty-txt">Support</div></div>
+              <div class="prf-d-slot-footer"><div class="prf-d-slot-name">Shadow Rogue</div><div class="prf-d-slot-lv">Lv 5</div></div>
+              <div class="prf-d-slot-tag card">Card</div>
+            </div>
+            <div class="prf-d-slot active-slot">
+              <div class="prf-d-slot-empty"><div class="prf-d-slot-empty-ico">⊕</div><div class="prf-d-slot-empty-txt">Support</div></div>
+              <div class="prf-d-slot-footer"><div class="prf-d-slot-name">Rose Archer</div><div class="prf-d-slot-lv">Lv 14</div></div>
+              <div class="prf-d-slot-tag card">Card</div>
+            </div>
+            <div class="prf-d-slot active-slot">
+              <div class="prf-d-slot-empty"><div class="prf-d-slot-empty-ico">⊕</div><div class="prf-d-slot-empty-txt">Pet</div></div>
+              <div class="prf-d-slot-footer"><div class="prf-d-slot-name">Shadowfang</div><div class="prf-d-slot-lv">Lv 2 · +5% $SLIME</div></div>
+              <div class="prf-d-slot-tag pet">Pet</div>
+            </div>
+          </div>
+          <div class="prf-d-build-info">
+            <div class="prf-d-build-stat"><div class="prf-d-build-num">2,450</div><div class="prf-d-build-key">Power</div></div>
+            <div class="prf-d-build-stat"><div class="prf-d-build-num gold">340</div><div class="prf-d-build-key">$SLIME</div></div>
+            <div class="prf-d-build-stat"><div class="prf-d-build-num">🏅 Bronze</div><div class="prf-d-build-key">Rank</div></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- BODY -->
-    <div class="prf-body">
-
-      <!-- PANEL: Items (Potions + Materials) -->
-      <div class="prf-panel on" id="prf-p-items">
-        <div class="prf-sec"><div class="prf-sec-lbl">HP Potions</div></div>
-        <div class="prf-resources">
-          <div class="prf-res">
-            <div class="prf-res-ico"></div>
-            <div class="prf-res-body"><div class="prf-res-name">Small Potion</div><div class="prf-res-desc">Restore 20 HP — Card or Pet</div></div>
-            <div class="prf-res-qty" id="qty-small">×4</div>
-            <button class="prf-res-use green" onclick="openUseModal('small',20)">Use</button>
-          </div>
-          <div class="prf-res">
-            <div class="prf-res-ico">⚗️</div>
-            <div class="prf-res-body"><div class="prf-res-name">Medium Potion</div><div class="prf-res-desc">Restore 50 HP — Card or Pet</div></div>
-            <div class="prf-res-qty" id="qty-medium">×1</div>
-            <button class="prf-res-use green" onclick="openUseModal('medium',50)">Use</button>
-          </div>
-          <div class="prf-res">
-            <div class="prf-res-ico">🔮</div>
-            <div class="prf-res-body"><div class="prf-res-name">Large Potion</div><div class="prf-res-desc">Restore 100 HP — Card or Pet</div></div>
-            <div class="prf-res-qty" id="qty-large">×0</div>
-            <button class="prf-res-use green" id="btn-large" onclick="openUseModal('large',100)" disabled>Use</button>
-          </div>
-        </div>
-        <div class="prf-sec" style="margin-top:0.5rem;"><div class="prf-sec-lbl">Materials</div></div>
-        <div class="prf-mat-grid">
-          <div class="prf-mat"><div class="prf-mat-ico">🪨</div><div class="prf-mat-amt">×12</div><div class="prf-mat-nm">Stone</div></div>
-          <div class="prf-mat"><div class="prf-mat-ico">⚙️</div><div class="prf-mat-amt">×8</div><div class="prf-mat-nm">Silver Ore</div></div>
-          <div class="prf-mat"><div class="prf-mat-ico">💎</div><div class="prf-mat-amt">×3</div><div class="prf-mat-nm">Crystal</div></div>
-          <div class="prf-mat"><div class="prf-mat-ico">✨</div><div class="prf-mat-amt">×1</div><div class="prf-mat-nm">Void Shard</div></div>
-          <div class="prf-mat"><div class="prf-mat-ico">🌿</div><div class="prf-mat-amt">×6</div><div class="prf-mat-nm">Iron Ore</div></div>
-          <div class="prf-mat"><div class="prf-mat-ico">🔩</div><div class="prf-mat-amt">×4</div><div class="prf-mat-nm">Gold Ore</div></div>
-          <div class="prf-mat"><div class="prf-mat-ico">⭐</div><div class="prf-mat-amt">×0</div><div class="prf-mat-nm">Prime Core</div></div>
-          <div class="prf-mat"><div class="prf-mat-ico">🐾</div><div class="prf-mat-amt">×5</div><div class="prf-mat-nm">Pet Shard</div></div>
-        </div>
+    <!-- COLLECTION -->
+    <div>
+      <div class="prf-d-divider">
+        <div class="prf-d-divider-lbl">Collection</div>
+        <div class="prf-d-divider-line"></div>
       </div>
-
-      <!-- PANEL: Resource (Energy + Lootbox) -->
-      <div class="prf-panel" id="prf-p-resource">
-        <div class="prf-sec"><div class="prf-sec-lbl">Energy</div></div>
-        <div class="prf-resources">
-          <div class="prf-res">
-            <div class="prf-res-ico">⚡</div>
-            <div class="prf-res-body"><div class="prf-res-name">Stamina Flask</div><div class="prf-res-desc">Restore +30 Energy</div></div>
-            <div class="prf-res-qty" id="qty-energy">×2</div>
-            <button class="prf-res-use gold" onclick="useEnergy()">Use</button>
-          </div>
-        </div>
-        <div class="prf-sec" style="margin-top:0.5rem;"><div class="prf-sec-lbl">Loot Box</div><div class="prf-sec-badge" id="qty-lootbox-badge">×3</div></div>
-        <div class="prf-lootbox-area">
-          <div class="lb-card-wrap" onclick="openLootbox()">
-            <div class="lb-card" id="lb-card">
-              <div class="lb-face lb-back">📦</div>
-              <div class="lb-face lb-front"><div id="lb-reward-ico">🎁</div><div class="lb-reward-name" id="lb-reward-name">—</div></div>
-            </div>
-          </div>
-          <button class="lb-open-btn" id="lb-open-btn" onclick="openLootbox()">Open Box</button>
-        </div>
+      <div class="prf-d-tabs">
+        <button class="prf-d-tab on" onclick="prfDTab('cards',this)">Cards</button>
+        <button class="prf-d-tab" onclick="prfDTab('pets',this)">Pets</button>
+        <button class="prf-d-tab" onclick="prfDTab('items',this)">Items</button>
       </div>
-
-      <!-- PANEL: Cards -->
-      <div class="prf-panel" id="prf-p-cards">
-        <div class="prf-sec"><div class="prf-sec-lbl">Your Slimes</div></div>
-        <div class="prf-cards-grid" id="prf-cards-grid"></div>
+      <div id="prf-panel-cards" class="prf-d-grid"></div>
+      <div id="prf-panel-pets" style="display:none;padding:60px 0;text-align:center;">
+        <div style="font-family:'Cinzel',serif;font-size:14px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;">Your Pets</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.1);margin-top:8px;">6 Companions</div>
       </div>
-
-      <!-- PANEL: Pets -->
-      <div class="prf-panel" id="prf-p-pets">
-        <div class="prf-sec"><div class="prf-sec-lbl">Your Pets</div></div>
-        <div class="prf-pets-grid">
-          <div class="prf-pet active-pet">
-            <div class="prf-pet-thumb"><img src="assets/pet/pet_shadowfang.png" onerror="this.outerHTML='🦊'"></div>
-            <div class="prf-pet-body">
-              <div class="prf-pet-nm">Shadowfang</div>
-              <div class="prf-pet-sk">+5% $SLIME Drop</div>
-              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 2</span><span class="prf-pet-pill active">Active</span></div>
-            </div>
-          </div>
-          <div class="prf-pet">
-            <div class="prf-pet-thumb"><img src="assets/pet/pet_frostkit.png" onerror="this.outerHTML='🐺'"></div>
-            <div class="prf-pet-body">
-              <div class="prf-pet-nm">Frostkit</div>
-              <div class="prf-pet-sk">+3% Loot Box</div>
-              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
-            </div>
-          </div>
-          <div class="prf-pet">
-            <div class="prf-pet-thumb"><img src="assets/pet/pet_gearpup.png" onerror="this.outerHTML='🐱'"></div>
-            <div class="prf-pet-body">
-              <div class="prf-pet-nm">Gearpup</div>
-              <div class="prf-pet-sk">+8% EXP Gain</div>
-              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
-            </div>
-          </div>
-          <div class="prf-pet">
-            <div class="prf-pet-thumb"><img src="assets/pet/pet_aquapaw.png" onerror="this.outerHTML='🐢'"></div>
-            <div class="prf-pet-body">
-              <div class="prf-pet-nm">Aquapaw</div>
-              <div class="prf-pet-sk">+6% HP Regen</div>
-              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
-            </div>
-          </div>
-          <div class="prf-pet">
-            <div class="prf-pet-thumb"><img src="assets/pet/pet_pyronix.png" onerror="this.outerHTML='🐉'"></div>
-            <div class="prf-pet-body">
-              <div class="prf-pet-nm">Pyronix</div>
-              <div class="prf-pet-sk">+5% ATK Bonus</div>
-              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
-            </div>
-          </div>
-          <div class="prf-pet">
-            <div class="prf-pet-thumb"><img src="assets/pet/pet_lumikin.png" onerror="this.outerHTML='🦋'"></div>
-            <div class="prf-pet-body">
-              <div class="prf-pet-nm">Lumikin</div>
-              <div class="prf-pet-sk">+6% Heal</div>
-              <div class="prf-pet-footer"><span class="prf-pet-pill">Lv 1</span></div>
-            </div>
-          </div>
-        </div>
+      <div id="prf-panel-items" style="display:none;padding:60px 0;text-align:center;">
+        <div style="font-family:'Cinzel',serif;font-size:14px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;">Inventory</div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.1);margin-top:8px;">Resources · Materials · Loot</div>
       </div>
+    </div>
 
-    </div><!-- /prf-body -->
   </div>
 </div>
 
-<!-- Char Select Modal -->
-<div id="prf-modal" onclick="prfHandleOverlay(event)">
+<!-- Char Select Modal (reused) -->
+<div id="prf-modal" onclick="if(event.target===this)prfCloseModal()">
   <div class="prf-sheet">
     <div class="prf-sheet-title">Select Active Character</div>
-    <div class="prf-sheet-sub">Tap to equip as active slime</div>
+    <div class="prf-sheet-sub">Tap a card to equip</div>
     <div class="prf-modal-grid" id="prf-modal-grid"></div>
     <button class="prf-close-btn" onclick="prfCloseModal()">← Close</button>
   </div>
 </div>
-
-<!-- Use Item Modal (Card/Pet target) -->
-<div id="use-modal" onclick="useModalOverlay(event)">
-  <div class="use-box">
-    <div class="use-title" id="use-modal-title">Use Small Potion</div>
-    <div class="use-sub" id="use-modal-sub">+20 HP · Choose target</div>
-    <div class="use-target-toggle">
-      <div class="use-tt-btn on" id="use-tt-card" onclick="useSetTarget('card')">⚔️ Card</div>
-      <div class="use-tt-btn" id="use-tt-pet" onclick="useSetTarget('pet')">🐾 Pet</div>
-    </div>
-    <div class="use-target-list" id="use-target-list"></div>
-    <div class="use-confirm-row">
-      <button class="use-confirm-btn yes" onclick="confirmUse()">Confirm</button>
-      <button class="use-confirm-btn no" onclick="closeUseModal()">Cancel</button>
-    </div>
-  </div>
-</div>
-
 <div id="prf-toast"></div>
 
 <script>
@@ -1660,461 +1530,124 @@ const sw = Array.from({length:95},()=>({
   bhCtx.fillStyle=mask;bhCtx.fillRect(0,0,bhW,bhH);
   requestAnimationFrame(bhLoop);
 })();
-}
-initBH();
 
-// ── GACHA ──
-const CARDS = cardData.map(c => ({
-  name: c.name,
-  rarity: c.rarity,
-  img: 'assets/card/card_' + String(c.id).padStart(3,'0') + '.png',
-  w: RARITY_WEIGHT[c.rarity]
-}));
-const totalW = CARDS.reduce((s,c)=>s+c.w,0);
-let totalRolls=0,collected=new Set(),isRolling=false,currentCard=null;
-const wait = ms => new Promise(r=>setTimeout(r,ms));
-
-function drawCard(){
-  let r=Math.random()*totalW;
-  for(const c of CARDS){r-=c.w;if(r<=0)return c;}
-  return CARDS[CARDS.length-1];
-}
-
-function flashScreen(col,dur=120){
-  const f=document.getElementById('reveal-flash');
-  f.style.background=col;f.style.opacity='1';
-  setTimeout(()=>f.style.opacity='0',dur);
-}
-function spawnBurst(x,y,col,n=14){
-  for(let i=0;i<n;i++){
-    const b=document.createElement('div');b.className='burst-p';
-    b.style.cssText=`left:${x}px;top:${y}px;background:${col};`;
-    document.body.appendChild(b);
-    const a=(i/n)*Math.PI*2,d=80+Math.random()*120;
-    b.style.transition='all 0.9s cubic-bezier(0.2,0.8,0.3,1)';
-    setTimeout(()=>{b.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(0)`;b.style.opacity='0';},50);
-    setTimeout(()=>b.remove(),1000);
-  }
-}
-function orbShake(){
-  const o=document.getElementById('orbWrap');
-  o.style.animation='none';
-  setTimeout(()=>{
-    o.style.transition='transform 0.05s';
-    let i=0;
-    const s=setInterval(()=>{
-      o.style.transform=`translate(${(Math.random()-.5)*12}px,${(Math.random()-.5)*12}px)`;
-      if(++i>8){clearInterval(s);o.style.transform='';}
-    },60);
-  },10);
-}
-function updateStats(){
-  document.getElementById('totalRolls').textContent=totalRolls;
-  document.getElementById('uniqueCount').textContent=collected.size;
-}
-
-async function roll(n){
-  if(isRolling) return;
-  isRolling=true;
-  if(n===1) await singleRoll();
-  else await multiRoll(n);
-}
-
-async function singleRoll(){
-  const card=drawCard();
-  currentCard=card;totalRolls++;collected.add(card.name);updateStats();
-  orbShake();
-  await wait(300);
-  flashScreen('rgba(240,192,64,0.6)',200);
-  await wait(400);
-  document.getElementById('revealImg').src=card.img;
-  document.getElementById('cardFlip').classList.remove('flipped');
-  document.getElementById('reveal-name').style.opacity='0';
-  document.getElementById('reveal-actions').style.opacity='0';
-  document.getElementById('gacha-overlay').classList.add('open');
-  setTimeout(()=>{
-    document.getElementById('cardFlip').classList.add('flipped');
-    setTimeout(()=>{
-      document.getElementById('reveal-name').textContent=card.name;document.getElementById('reveal-name').style.color=RARITY_COLOR[card.rarity];
-      document.getElementById('reveal-name').style.opacity='1';
-      document.getElementById('reveal-actions').style.opacity='1';
-      spawnBurst(window.innerWidth/2,window.innerHeight/2,'#f0c040',16);
-    },500);
-  },900);
-}
-
-function flipRevealCard(){
-  const flip=document.getElementById('cardFlip');
-  if(!flip.classList.contains('flipped')){
-    flip.classList.add('flipped');
-    setTimeout(()=>{
-      document.getElementById('reveal-name').textContent=currentCard.name;document.getElementById('reveal-name').style.color=RARITY_COLOR[currentCard.rarity];
-      document.getElementById('reveal-name').style.opacity='1';
-      document.getElementById('reveal-actions').style.opacity='1';
-      spawnBurst(window.innerWidth/2,window.innerHeight/2,'#f0c040',16);
-    },400);
-  }
-}
-function closeReveal(){document.getElementById('gacha-overlay').classList.remove('open');isRolling=false;}
-function rollAgain(){closeReveal();setTimeout(()=>roll(1),400);}
-
-async function multiRoll(n){
-  const cards=Array.from({length:n},()=>drawCard());
-  totalRolls+=n;cards.forEach(c=>collected.add(c.name));updateStats();
-  orbShake();
-  flashScreen('rgba(168,85,247,0.4)',200);
-  await wait(250);flashScreen('rgba(240,192,64,0.5)',150);
-  await wait(200);flashScreen('rgba(255,255,255,0.5)',150);
-  await wait(400);
-  const grid=document.getElementById('multiGrid');
-  const closeBtn=document.getElementById('multiClose');
-  grid.innerHTML='';closeBtn.style.opacity='0';
-  document.getElementById('multi-overlay').classList.add('open');
-  cards.forEach((card,i)=>{
-    const div=document.createElement('div');div.className='mini-card';
-    div.innerHTML=`<img src="${card.img}" alt="${card.name}" loading="lazy">`;
-    grid.appendChild(div);
-    setTimeout(()=>{div.classList.add('show');if(i%3===0)flashScreen('rgba(240,192,64,0.3)',80);},100+i*120);
-  });
-  setTimeout(()=>closeBtn.style.opacity='1',100+cards.length*120+500);
-}
-function closeMulti(){document.getElementById('multi-overlay').classList.remove('open');isRolling=false;}
-// ── PROFILE SYSTEM ──
+// ── PROFILE DESKTOP JS ──
 (function(){
-  // ── CHAR EMOJIS per rarity ──
-  const CHAR_EMOJI = {
-    Common:['🧙','🗡️','🏹','🎣','🛡️','⚙️','🪃','🔮','📖','🃏','🎯','❄️','🏜️','⚡','🌑','🌑','🌸','⚓','🌟','💎'],
-    Rare:['🦊','🐺','🦅','🐉','🦁','🌊','💨','🔥','🌙','⭐','🐲','📜'],
-    Epic:['💜','🌀','⚡','🦋','🌈','🔱','💫','🗝️','🌊','🎭'],
-    Legend:['👑','🏆','🌟','⚔️','🔥'],
-    Mythic:['💀','🌑','👾','🐍','🔮']
+  const NAMES=['Ivory Swordsman','Shadow Rogue','Rose Archer','Crimson Fisher','Silver Knight','Teal Clockwork','Blush Bowman','Indigo Orb','Violet Scribe','Lime Trickster','Scarlet Spearman','Frost Wanderer','Sand Warrior','Glitch Runner','Dark Pilgrim','Dusk Stalker','Sakura Ronin','Navy Anchor','Starfall Mage','Crystal Ghost','Jade Soldier','Paper Golem','Prism Duelist','Origami Titan','Twin Tempest','Fire Emperor','Desert Pharaoh','Astral Keeper','Coral Warden','Aqua Trident','Rainbow Dancer','Inferno Oracle','Bloomblade','Void Paladin','Necro Sovereign','Crystal Empress','Lava Reaper','Celestial Herald','Toxic Gunner','Golden Pharaoh','Moon Phantom','Void Harbinger','Neon Chaos','Arctic Specter','Solar Champion','Grim Specter','Crimson Shogun','Thunder God','Abyssal Serpent','Gladiator Rex'];
+  const RARITY=['common','common','common','common','common','common','common','common','common','common','common','common','common','common','common','common','rare','rare','rare','rare','rare','rare','rare','rare','rare','rare','rare','rare','epic','epic','epic','epic','epic','epic','epic','epic','epic','epic','legend','legend','legend','legend','legend','legend','legend','mythic','mythic','mythic','mythic','mythic'];
+
+  let prfActive = null;
+
+  // Tab switcher
+  window.prfDTab = function(name, btn) {
+    ['cards','pets','items'].forEach(t => {
+      const el = document.getElementById('prf-panel-'+t);
+      if(el) el.style.display = (t===name ? (t==='cards'?'grid':'block') : 'none');
+    });
+    document.querySelectorAll('.prf-d-tab').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
   };
 
-  const NAMES=['Ivory Swordsman','Shadow Rogue','Rose Archer','Crimson Fisher','Silver Knight','Teal Clockwork','Blush Bowman','Indigo Orb','Violet Scribe','Lime Trickster','Scarlet Spearman','Frost Wanderer','Sand Warrior','Glitch Runner','Dark Pilgrim','Dusk Stalker','Sakura Ronin','Navy Anchor','Starfall Mage','Crystal Ghost','Jade Soldier','Paper Golem','Prism Duelist','Origami Titan','Twin Tempest','Fire Emperor','Desert Pharaoh','Astral Keeper','Coral Warden','Aqua Trident','Rainbow Dancer','Inferno Oracle','Bloomblade','Void Paladin','Necro Sovereign','Crystal Empress','Lava Reaper','Celestial Herald','Toxic Gunner','Golden Pharaoh','Moon Phantom','Void Harbinger','Neon Chaos','Arctic Specter','Solar Champion','Grim Specter','Crimson Shogun','Thunder God','Abyssal Serpent','Gladiator Rex'];
-  const RARITY=['Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Common','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Rare','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Epic','Legend','Legend','Legend','Legend','Legend','Legend','Legend','Mythic','Mythic','Mythic','Mythic','Mythic'];
+  // Build collection grid
+  function buildGrid() {
+    const grid = document.getElementById('prf-panel-cards');
+    if(!grid || grid.children.length) return;
+    NAMES.forEach((name, i) => {
+      const lv = Math.floor(Math.random()*15)+1;
+      const rar = RARITY[i]||'common';
+      const d = document.createElement('div');
+      d.className = 'prf-d-card';
+      d.innerHTML = `
+        <div class="prf-d-card-img-wrap">
+          <img src="assets/card/card_${String(i+1).padStart(3,'0')}.png" loading="lazy"
+            onerror="this.outerHTML='<div class=prf-d-card-empty>◈</div>'" alt="${name}">
+        </div>
+        <div class="prf-d-rdot ${rar}"></div>
+        <div class="prf-d-card-info">
+          <div class="prf-d-card-name">${name}</div>
+          <div class="prf-d-card-lv">Lv ${lv}</div>
+        </div>`;
+      d.onclick = () => {
+        document.querySelectorAll('.prf-d-card').forEach(c=>c.classList.remove('sel'));
+        d.classList.add('sel');
+      };
+      grid.appendChild(d);
+    });
+  }
 
-  // ── GLOBAL STATE ──
-  window.ENERGY = { cur: 70, max: 100 };
-  let prfActive = null; // null = no char selected
-  let charHp = { cur: 40, max: 100 };
+  // Build modal
+  function buildModal() {
+    const grid = document.getElementById('prf-modal-grid');
+    if(!grid || grid.children.length) return;
+    for(let i=1;i<=20;i++){
+      const d = document.createElement('div');
+      d.className = 'prf-modal-card'+(i===prfActive?' sel':'');
+      d.id = 'prf-md-'+i;
+      d.innerHTML = `<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.style.background='#0d1018'"><div class="prf-modal-lbl">${NAMES[i-1]||'Slime #'+i}</div>`;
+      d.onclick = () => prfSetActive(i);
+      grid.appendChild(d);
+    }
+  }
 
-  // inventory quantities
-  const INV = { energy: 2, small: 4, medium: 1, large: 0, lootbox: 3 };
+  window.prfSetActive = function(id) {
+    prfActive = id;
+    const src = `assets/card/card_${String(id).padStart(3,'0')}.png`;
+    const name = NAMES[id-1]||'Slime #'+id;
+    const rar = RARITY[id-1]||'common';
+    const lv = Math.floor(Math.random()*12)+1;
 
-  // pet hp state (index → {cur,max})
-  const PETS = [
-    {name:'Shadowfang', ico:'🦊', skill:'+5% $SLIME', hp:80, max:100},
-    {name:'Frostkit',   ico:'🐺', skill:'+3% Loot',  hp:60, max:100},
-    {name:'Gearpup',    ico:'🐱', skill:'+8% EXP',   hp:45, max:100},
-    {name:'Aquapaw',    ico:'🐢', skill:'+6% Regen',  hp:90, max:100},
-    {name:'Pyronix',    ico:'🐉', skill:'+5% ATK',   hp:30, max:100},
-    {name:'Lumikin',    ico:'🦋', skill:'+6% Heal',  hp:70, max:100}
-  ];
+    // hero art
+    const artImg = document.getElementById('prf-art-img');
+    const artEmpty = document.getElementById('prf-art-empty');
+    const artTag = document.getElementById('prf-active-tag');
+    if(artImg){ artImg.src=src; artImg.style.display='block'; artImg.onerror=()=>{ artImg.style.display='none'; if(artEmpty) artEmpty.style.display='flex'; }; }
+    if(artEmpty) artEmpty.style.display='none';
+    if(artTag) artTag.style.display='block';
 
-  // ── HELPERS ──
-  function hpCls(h,m){const p=h/m;return p>0.5?'':(p>0.25?'med':'low');}
+    // main card
+    const mainImg = document.getElementById('prf-main-img');
+    const mainEmpty = document.getElementById('prf-main-empty');
+    const mainTag = document.getElementById('prf-main-tag');
+    if(mainImg){ mainImg.src=src; mainImg.style.display='block'; mainImg.onerror=()=>{ mainImg.style.display='none'; if(mainEmpty) mainEmpty.style.display='flex'; }; }
+    if(mainEmpty) mainEmpty.style.display='none';
+    if(mainTag) mainTag.style.display='block';
+    const mn = document.getElementById('prf-main-name'); if(mn) mn.textContent=name;
+    const ml = document.getElementById('prf-main-lv'); if(ml) ml.textContent=`Lv ${lv} · ${rar.charAt(0).toUpperCase()+rar.slice(1)}`;
+
+    document.querySelectorAll('.prf-modal-card').forEach(c=>c.classList.remove('sel'));
+    const md = document.getElementById('prf-md-'+id); if(md) md.classList.add('sel');
+
+    prfCloseModal();
+    prfToast(name+' equipped','gold');
+  };
+
+  window.prfOpenModal = function() {
+    buildModal();
+    document.getElementById('prf-modal').classList.add('open');
+  };
+  window.prfCloseModal = function() {
+    document.getElementById('prf-modal').classList.remove('open');
+  };
 
   let toastTimer;
-  window.prfToast = function(msg,type='green'){
-    const el=document.getElementById('prf-toast');
-    if(!el)return;
+  window.prfToast = function(msg, type='green') {
+    const el = document.getElementById('prf-toast');
+    if(!el) return;
     clearTimeout(toastTimer);
     el.textContent=msg; el.className=type+' show';
     toastTimer=setTimeout(()=>el.classList.remove('show'),2000);
   };
 
-  // ── ENERGY SYNC (dungeon bar) ──
-  function syncEnergyUI(){
-    const pct = Math.max(0,(ENERGY.cur/ENERGY.max)*100);
-    const bar = document.getElementById('prf-energy-bar');
-    const val = document.getElementById('prf-energy-val');
-    if(bar) bar.style.width = pct+'%';
-    if(val) val.textContent = ENERGY.cur+' / '+ENERGY.max;
-    // sync dungeon page too
-    const dngVal = document.querySelector('.dng-energy-val');
-    const dngBar = document.querySelector('.dng-bar-fill');
-    if(dngVal) dngVal.innerHTML = ENERGY.cur+' <span class="dng-energy-max">/ '+ENERGY.max+'</span>';
-    if(dngBar) dngBar.style.width = pct+'%';
-  }
-
-  // ── USE ENERGY ──
-  // ── TAB SWITCHER ──
-  window.prfTab = function(name, btn){
-    document.querySelectorAll("#page-profile .prf-panel").forEach(p=>p.classList.remove("on"));
-    document.querySelectorAll("#page-profile .prf-tab").forEach(b=>b.classList.remove("on"));
-    const panel = document.getElementById("prf-p-"+name);
-    if(panel) panel.classList.add("on");
-    if(btn) btn.classList.add("on");
-  };
-
-  window.useEnergy = function(){
-    if(INV.energy <= 0){ prfToast('No Stamina Flask!','red'); return; }
-    if(ENERGY.cur >= ENERGY.max){ prfToast('Energy already full!','gold'); return; }
-    INV.energy--;
-    ENERGY.cur = Math.min(ENERGY.max, ENERGY.cur + 30);
-    document.getElementById('qty-energy').textContent = '×'+INV.energy;
-    syncEnergyUI();
-    prfToast('⚡ +30 Energy restored','gold');
-  };
-
-  // ── CHAR SELECTOR ──
-  function getCharEmoji(id){
-    const rar = RARITY[id-1]||'Common';
-    const arr = CHAR_EMOJI[rar]||CHAR_EMOJI.Common;
-    return arr[(id-1) % arr.length];
-  }
-
-  function syncCharBtn(){
-    const plusEl   = document.getElementById('prf-char-display-plus');
-    const activeEl = document.getElementById('prf-char-display-active');
-    const imgEl    = document.getElementById('prf-char-img');
-    const nmEl     = document.getElementById('prf-char-nm');
-    const rarEl    = document.getElementById('prf-char-rar');
-    const hpFill   = document.getElementById('prf-char-hpfill');
-    const labelEl  = document.getElementById('prf-char-label');
-    if(!plusEl) return;
-    if(prfActive){
-      plusEl.style.display   = 'none';
-      activeEl.style.display = 'flex';
-      if(imgEl)   imgEl.src = `assets/card/card_${String(prfActive).padStart(3,'0')}.png`;
-      if(nmEl)    nmEl.textContent  = NAMES[prfActive-1]||'Slime #'+prfActive;
-      if(rarEl)   rarEl.textContent = RARITY[prfActive-1]||'Common';
-      if(labelEl) labelEl.textContent = 'Active';
-      const pct = Math.max(0,(charHp.cur/charHp.max)*100);
-      if(hpFill){ hpFill.style.width=pct+'%'; hpFill.className='prf-char-hpfill '+hpCls(charHp.cur,charHp.max); }
-    } else {
-      plusEl.style.display   = 'flex';
-      activeEl.style.display = 'none';
-      if(labelEl) labelEl.textContent = 'Pick Character';
-    }
-  }
-
-  window.prfSetActive = function(id){
-    prfActive = id;
-    charHp = { cur: Math.floor(Math.random()*65)+20, max: 100 };
-    syncCharBtn();
-    document.querySelectorAll('.prf-modal-card').forEach(c=>c.classList.remove('sel'));
-    document.querySelectorAll('.prf-crd').forEach(c=>{
-      c.classList.remove('active-card');
-      c.querySelector('.prf-crd-footer .active')?.remove();
-    });
-    const md=document.getElementById('prf-md-'+id); if(md) md.classList.add('sel');
-    const crd=document.getElementById('prf-crd-'+id);
-    if(crd){
-      crd.classList.add('active-card');
-      const footer=crd.querySelector('.prf-crd-footer');
-      if(footer&&!footer.querySelector('.active')){
-        const pill=document.createElement('span');
-        pill.className='prf-crd-pill active';
-        pill.textContent='Active';
-        footer.appendChild(pill);
-      }
-    }
-    prfCloseModal();
-    prfToast((NAMES[id-1]||'Slime #'+id)+' equipped','gold');
-  };
-
-  window.prfOpenModal = function(){
-    buildPrfModal();
-    document.getElementById('prf-modal').classList.add('open');
-  };
-  window.prfCloseModal = function(){
-    document.getElementById('prf-modal').classList.remove('open');
-  };
-  window.prfHandleOverlay = function(e){
-    if(e.target===document.getElementById('prf-modal')) prfCloseModal();
-  };
-
-  function buildPrfCards(){
-    const grid=document.getElementById('prf-cards-grid');
-    if(!grid||grid.children.length) return;
-    for(let i=1;i<=12;i++){
-      const hp  = Math.floor(Math.random()*60)+30;
-      const atk = Math.floor(Math.random()*70)+20;
-      const spd = Math.floor(Math.random()*70)+20;
-      const isActive = (i===prfActive);
-      const d=document.createElement('div');
-      d.className='prf-crd'+(isActive?' active-card':'');
-      d.id='prf-crd-'+i;
-      d.innerHTML=`
-        <div class="prf-crd-img">
-          <img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy"
-            onerror="this.parentNode.innerHTML='<div class=prf-crd-img-emo>${getCharEmoji(i)}</div>'">
-        </div>
-        <div class="prf-crd-body">
-          <div class="prf-crd-name">${NAMES[i-1]||'Slime #'+i}</div>
-          <div class="prf-crd-stats">
-            <div class="prf-crd-stat"><div class="prf-crd-stat-lbl">HP</div><div class="prf-crd-bar-track"><div class="prf-crd-bar-fill hp" style="width:${hp}%"></div></div></div>
-            <div class="prf-crd-stat"><div class="prf-crd-stat-lbl">ATK</div><div class="prf-crd-bar-track"><div class="prf-crd-bar-fill atk" style="width:${atk}%"></div></div></div>
-            <div class="prf-crd-stat"><div class="prf-crd-stat-lbl">SPD</div><div class="prf-crd-bar-track"><div class="prf-crd-bar-fill spd" style="width:${spd}%"></div></div></div>
-          </div>
-          <div class="prf-crd-footer">
-            <span class="prf-crd-pill">Lv ${Math.floor(Math.random()*15)+1}</span>
-            ${isActive?'<span class="prf-crd-pill active">Active</span>':''}
-          </div>
-        </div>`;
-      d.onclick=()=>prfSetActive(i);
-      grid.appendChild(d);
-    }
-  }
-
-  function buildPrfModal(){
-    const grid=document.getElementById('prf-modal-grid');
-    if(!grid||grid.children.length) return;
-    for(let i=1;i<=16;i++){
-      const d=document.createElement('div');
-      d.className='prf-modal-card'+(i===prfActive?' sel':'');
-      d.id='prf-md-'+i;
-      d.innerHTML=`<img src="assets/card/card_${String(i).padStart(3,'0')}.png" loading="lazy" onerror="this.parentNode.querySelector('.prf-modal-emoji').style.display='flex'"><div class="prf-modal-emoji" style="display:none;align-items:center;justify-content:center;aspect-ratio:2/3;font-size:2rem;background:#0d1018">${getCharEmoji(i)}</div><div class="prf-modal-lbl">${NAMES[i-1]||'Slime #'+i}</div>`;
-      d.onclick=()=>prfSetActive(i);
-      grid.appendChild(d);
-    }
-  }
-
-  // ── USE MODAL (Card/Pet HP) ──
-  let useCtx = { type: null, amt: 0, target: 'card', selIdx: null };
-
-  window.openUseModal = function(type, amt){
-    const qty = INV[type];
-    if(qty <= 0){ prfToast('No '+type+' potion!','red'); return; }
-    useCtx = { type, amt, target: 'card', selIdx: null };
-    document.getElementById('use-modal-title').textContent = type.charAt(0).toUpperCase()+type.slice(1)+' Potion';
-    document.getElementById('use-modal-sub').textContent = '+'+amt+' HP · Choose target';
-    useSetTarget('card');
-    document.getElementById('use-modal').classList.add('open');
-  };
-
-  window.useSetTarget = function(t){
-    useCtx.target = t;
-    useCtx.selIdx = null;
-    document.getElementById('use-tt-card').className='use-tt-btn'+(t==='card'?' on':'');
-    document.getElementById('use-tt-pet').className='use-tt-btn'+(t==='pet'?' on':'');
-    buildUseTargetList();
-  };
-
-  function buildUseTargetList(){
-    const list = document.getElementById('use-target-list');
-    list.innerHTML = '';
-    if(useCtx.target === 'card'){
-      // show first 8 cards
-      for(let i=1;i<=8;i++){
-        const hp=Math.floor(Math.random()*80)+10;
-        const max=100;
-        const d=document.createElement('div');
-        d.className='use-target-item'+(i===1?' sel':'');
-        d.dataset.idx=i;
-        d.innerHTML=`<div class="uti-ico">${getCharEmoji(i)}</div><div class="uti-name">${NAMES[i-1]||'Slime #'+i}</div><div class="uti-hp">${hp}/${max} HP</div>`;
-        d.onclick=function(){
-          document.querySelectorAll('.use-target-item').forEach(x=>x.classList.remove('sel'));
-          this.classList.add('sel');
-          useCtx.selIdx=parseInt(this.dataset.idx);
-        };
-        list.appendChild(d);
-      }
-      if(!useCtx.selIdx) useCtx.selIdx = 1;
-    } else {
-      PETS.forEach((p,i)=>{
-        const d=document.createElement('div');
-        d.className='use-target-item'+(i===0?' sel':'');
-        d.dataset.idx=i;
-        d.innerHTML=`<div class="uti-ico">${p.ico}</div><div class="uti-name">${p.name}</div><div class="uti-hp">${p.hp}/${p.max} HP</div>`;
-        d.onclick=function(){
-          document.querySelectorAll('.use-target-item').forEach(x=>x.classList.remove('sel'));
-          this.classList.add('sel');
-          useCtx.selIdx=parseInt(this.dataset.idx);
-        };
-        list.appendChild(d);
-      });
-      if(useCtx.selIdx===null) useCtx.selIdx = 0;
-    }
-  }
-
-  window.confirmUse = function(){
-    const {type,amt,target,selIdx} = useCtx;
-    if(selIdx===null){ prfToast('Pick a target first','gold'); return; }
-    INV[type]--;
-    // update qty display
-    const qtyEl = document.getElementById('qty-'+type);
-    if(qtyEl) qtyEl.textContent = '×'+INV[type];
-    // disable btn if 0
-    if(INV[type]<=0){
-      const btn=document.getElementById('btn-'+type);
-      if(btn) btn.disabled=true;
-    }
-    if(target==='card'){
-      // heal active char if it's the selected one
-      if(selIdx===prfActive){
-        charHp.cur=Math.min(charHp.max,charHp.cur+amt);
-        syncCharBtn();
-      }
-      prfToast('🧪 +'+amt+' HP → '+(NAMES[selIdx-1]||'Slime #'+selIdx),'green');
-    } else {
-      const pet=PETS[selIdx];
-      if(pet){ pet.hp=Math.min(pet.max,pet.hp+amt); }
-      prfToast('🧪 +'+amt+' HP → '+(pet?pet.name:'Pet'),'green');
-    }
-    closeUseModal();
-  };
-
-  window.closeUseModal = function(){
-    document.getElementById('use-modal').classList.remove('open');
-  };
-  window.useModalOverlay = function(e){
-    if(e.target===document.getElementById('use-modal')) closeUseModal();
-  };
-
-  // ── LOOTBOX ──
-  const LOOT_POOL = [
-    {ico:'🧪',name:'Small Potion x2'},{ico:'⚗️',name:'Medium Potion x1'},
-    {ico:'🪨',name:'Stone Shard x5'},{ico:'⚙️',name:'Silver Ore x3'},
-    {ico:'💎',name:'Crystal Ore x1'},{ico:'⚡',name:'Stamina Flask x1'},
-    {ico:'🌿',name:'Iron Ore x8'},{ico:'✨',name:'Void Shard x1'},
-    {ico:'🐾',name:'Pet Shard x3'},{ico:'💰',name:'50 $SLIME'}
-  ];
-  let lbOpen=false;
-
-  window.openLootbox = function(){
-    if(INV.lootbox<=0){ prfToast('No Loot Box!','red'); return; }
-    if(lbOpen) return;
-    lbOpen=true;
-    INV.lootbox--;
-    document.getElementById('qty-lootbox-badge').textContent='×'+INV.lootbox;
-    const card=document.getElementById('lb-card');
-    const btn=document.getElementById('lb-open-btn');
-    const reward=LOOT_POOL[Math.floor(Math.random()*LOOT_POOL.length)];
-    document.getElementById('lb-reward-ico').textContent=reward.ico;
-    document.getElementById('lb-reward-name').textContent=reward.name;
-    btn.disabled=true;
-    setTimeout(()=>{
-      card.classList.add('flipped');
-      setTimeout(()=>{
-        prfToast('Got: '+reward.name,'gold');
-        btn.textContent='Open Again';
-        btn.disabled=false;
-        btn.onclick=function(){
-          card.classList.remove('flipped');
-          lbOpen=false;
-          btn.textContent='Open Box';
-          btn.onclick=openLootbox;
-        };
-      },800);
-    },100);
-  };
-
-  // ── INIT ──
-  const origShowPage=window.showPage;
-  window.showPage=function(name){
+  const origShowPage = window.showPage;
+  window.showPage = function(name) {
     origShowPage(name);
-    if(name==='profile'){
-      buildPrfCards();
-      buildPrfModal();
-      syncCharBtn();
-      syncEnergyUI();
+    if(name==='profile') {
+      buildGrid();
+      buildModal();
     }
   };
-  syncCharBtn();
-  syncEnergyUI();
 })();
+
 </script>
 </body>
 </html>
