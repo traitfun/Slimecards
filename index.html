@@ -283,12 +283,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 
 /* ═══════════ PROFILE (DESKTOP) ═══════════ */
-#page-profile .profile-wrap{max-width:1140px;margin:0 auto;padding:0 40px 80px;}
+#page-profile .profile-wrap{max-width:100%;padding:0;}
 
 /* Hero */
-.prf-d-hero{display:grid;grid-template-columns:320px 1fr;gap:60px;align-items:center;padding:3.5rem 40px 0;animation:prfFadeUp 0.5s ease both;}
+.prf-d-hero{display:grid;grid-template-columns:320px 1fr;gap:60px;align-items:center;padding:0.8rem 1.2rem 0.5rem;animation:prfFadeUp 0.5s ease both;}
+@media(max-width:768px){
+  .prf-d-hero{grid-template-columns:100px 1fr;gap:12px;padding:0.6rem 1rem 0.4rem;align-items:start;}
+}
 @keyframes prfFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .prf-d-art{position:relative;width:320px;height:400px;flex-shrink:0;}
+@media(max-width:768px){.prf-d-art{width:100px;height:132px;}}
 .prf-d-art-glow{position:absolute;inset:-24px;background:radial-gradient(ellipse at center,rgba(201,168,76,0.1) 0%,transparent 65%);pointer-events:none;}
 .prf-d-art-frame{position:absolute;inset:0;border:1px solid rgba(201,168,76,0.2);z-index:1;pointer-events:none;}
 .prf-d-art-frame::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
@@ -308,6 +312,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* Info right */
 .prf-d-info{display:flex;flex-direction:column;gap:28px;animation:prfFadeUp 0.5s 0.1s ease both;}
+@media(max-width:768px){.prf-d-info{gap:6px;}}
+.prf-d-name{font-family:'Cinzel Decorative',serif;font-size:44px;font-weight:700;color:#e8e2d6;line-height:1;letter-spacing:0.02em;}
+@media(max-width:768px){.prf-d-name{font-size:20px;}}
+.prf-d-rankrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+@media(max-width:768px){.prf-d-rankrow{gap:6px;}}
+.prf-d-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);}
+@media(max-width:768px){.prf-d-stats{margin-top:2px;}}
+.prf-d-stat{padding:18px 20px;background:var(--dark2);display:flex;flex-direction:column;gap:5px;}
+@media(max-width:768px){.prf-d-stat{padding:6px 8px;}}
+.prf-d-stat-num{font-family:'Cinzel Decorative',serif;font-size:22px;font-weight:700;color:#e8e2d6;line-height:1;}
+@media(max-width:768px){.prf-d-stat-num{font-size:14px;}}
+.prf-d-stat-key{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:2px;}
 .prf-d-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(201,168,76,0.6);}
 .prf-d-name{font-family:'Cinzel Decorative',serif;font-size:44px;font-weight:700;color:#e8e2d6;line-height:1;letter-spacing:0.02em;}
 .prf-d-rankrow{display:flex;align-items:center;gap:14px;}
@@ -315,6 +331,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-d-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.15);}
 .prf-d-rank{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);padding:3px 10px;border:1px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.06);}
 .prf-d-xp-block{display:flex;flex-direction:column;gap:10px;}
+@media(max-width:768px){.prf-d-xp-block{display:none;}}
 .prf-d-xp-toprow{display:flex;justify-content:space-between;align-items:baseline;}
 .prf-d-xp-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(255,255,255,0.22);}
 .prf-d-xp-val{font-family:'Cinzel',serif;font-size:13px;color:rgba(232,226,214,0.5);}
@@ -332,9 +349,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-d-divider-line{flex:1;height:1px;background:rgba(255,255,255,0.06);}
 
 /* Loadout */
-.prf-d-loadout{margin-bottom:64px;animation:prfFadeUp 0.5s 0.2s ease both;}
-.prf-d-loadout-grid{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start;}
-.prf-d-main-card{position:relative;width:200px;height:264px;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;}
+.prf-d-loadout{margin-bottom:0;padding:0 1.2rem 0.5rem;animation:prfFadeUp 0.5s 0.2s ease both;}
+.prf-d-loadout-grid{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start;}
+@media(max-width:768px){.prf-d-loadout-grid{grid-template-columns:100px 1fr;gap:8px;}}
+.prf-d-main-card{position:relative;width:100%;aspect-ratio:2/3;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;}
 .prf-d-main-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(201,168,76,0.07);}
 .prf-d-main-inner{width:100%;height:100%;background:linear-gradient(160deg,#12101e,#0a0d16);border:1px solid rgba(201,168,76,0.22);overflow:hidden;position:relative;}
 .prf-d-main-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2;}
@@ -345,7 +363,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-d-main-lv{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-top:3px;}
 .prf-d-main-tag{position:absolute;top:9px;right:9px;font-family:'DM Mono',monospace;font-size:6.5px;letter-spacing:0.2em;text-transform:uppercase;padding:3px 7px;background:rgba(78,201,196,0.1);border:1px solid rgba(78,201,196,0.28);color:#4ec9c4;z-index:3;}
 .prf-d-support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.prf-d-slot{position:relative;height:120px;background:var(--dark2);border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;overflow:hidden;}
+.prf-d-slot{position:relative;height:80px;background:var(--dark2);border:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;overflow:hidden;}
+@media(max-width:768px){.prf-d-slot{height:70px;}}
 .prf-d-slot:hover{border-color:rgba(201,168,76,0.22);transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.3);}
 .prf-d-slot.active-slot{border-color:rgba(78,201,196,0.22);box-shadow:0 0 20px rgba(78,201,196,0.04);}
 .prf-d-slot img{width:100%;height:100%;object-fit:cover;object-position:top;filter:saturate(0.75) brightness(0.82);display:block;}
@@ -390,11 +409,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .prf-d-rdot.mythic{background:#f87171;box-shadow:0 0 6px #f8717188;}
 
 /* ── PROFILE PAGE LAYOUT ── */
-#page-profile{display:none;flex-direction:column;height:100vh;overflow:hidden;}
-#page-profile.active{display:flex;}
-#page-profile .profile-wrap{display:flex;flex-direction:column;height:100%;overflow:hidden;}
-.prf-fixed-top{flex-shrink:0;overflow:hidden;}
-.prf-scroll-body{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}
+#page-profile{display:none;min-height:unset!important;height:100vh;overflow:hidden;}
+#page-profile.active{display:block;}
+#page-profile .profile-wrap{height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+.prf-fixed-top{flex-shrink:0;}
+.prf-scroll-body{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;min-height:0;}
 .prf-scroll-body::-webkit-scrollbar{width:3px;}
 .prf-scroll-body::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.2);}
 .prf-tab-nav{display:grid;grid-template-columns:repeat(4,1fr);background:rgba(6,8,15,0.98);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
@@ -1093,14 +1112,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
     </div><!-- /prf-section-stats -->
 
-    <!-- INVENTORY SECTION (coming soon) -->
-    <div id="prf-section-inventory" style="display:none;flex:1;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:60px 20px;">
-      <div style="font-family:'Cinzel Decorative',serif;font-size:28px;color:rgba(201,168,76,0.12);">⚗️</div>
-      <div style="font-family:'Cinzel',serif;font-size:15px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;">Inventory</div>
-      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.1);">Coming Soon</div>
-    </div>
-
-    <!-- TAB NAVBAR (always visible) -->
+    <!-- TAB NAVBAR (always visible, always here) -->
     <div class="prf-tab-nav">
       <div class="prf-d-tab on" onclick="prfDTab('items',this)" style="padding:12px 4px;text-align:center;cursor:pointer;border-bottom:2px solid var(--gold);background:rgba(198,168,90,0.04);">
         <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Items</div>
@@ -1119,7 +1131,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
     <!-- SCROLLABLE PANELS -->
     <div class="prf-scroll-body">
-    <div style="padding:1rem 1.2rem 5rem;">
+
+    <!-- INVENTORY SECTION (coming soon) - inside scroll -->
+    <div id="prf-section-inventory" style="display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:80px 20px;">
+      <div style="font-family:'Cinzel Decorative',serif;font-size:28px;color:rgba(201,168,76,0.12);">⚗️</div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;color:rgba(255,255,255,0.2);letter-spacing:0.1em;">Inventory</div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.1);">Coming Soon</div>
+    </div>
+
+    <div id="prf-scroll-panels" style="padding:1rem 1.2rem 5rem;">
 
       <!-- Items panel -->
       <div id="prf-panel-items" style="display:flex;flex-direction:column;gap:8px;">
@@ -1137,12 +1157,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
           <button style="padding:5px 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.28);color:#34d399;">Use</button>
         </div>
         <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);margin:8px 0 4px;">Materials</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
-          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">🪨</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×12</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Stone</div></div>
-          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">⚙️</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×8</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Silver</div></div>
-          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">💎</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×3</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Crystal</div></div>
-          <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06);padding:9px 4px;text-align:center;"><div style="font-size:18px;">✨</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-top:3px;">×1</div><div style="font-size:9px;color:rgba(255,255,255,0.22);margin-top:2px;">Void</div></div>
-        </div>
+        <div id="materials-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:6px;"></div>
       </div>
 
       <!-- Resource panel -->
@@ -1195,7 +1210,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
         </div>
       </div>
 
-    </div><!-- /panels -->
+    </div><!-- /prf-scroll-panels -->
     </div><!-- /prf-scroll-body -->
 
   </div>
@@ -1635,15 +1650,69 @@ const sw = Array.from({length:95},()=>({
   let prfActive = null;
 
   // Tab switcher
+  // ── MATERIALS DATA ──
+  const MATERIALS = [
+    {id:'item_001', name:'Slimestone',   qty:12, tier:'common'},
+    {id:'item_002', name:'Goorock',      qty:8,  tier:'common'},
+    {id:'item_003', name:'Muddlet',      qty:6,  tier:'common'},
+    {id:'item_004', name:'Grimbit',      qty:15, tier:'common'},
+    {id:'item_005', name:'Slurry',       qty:4,  tier:'common'},
+    {id:'item_006', name:'Bogchunk',     qty:3,  tier:'uncommon'},
+    {id:'item_007', name:'Dregshard',    qty:7,  tier:'uncommon'},
+    {id:'item_008', name:'Murkclay',     qty:2,  tier:'uncommon'},
+    {id:'item_009', name:'Vilebit',      qty:5,  tier:'uncommon'},
+    {id:'item_010', name:'Slimegravel',  qty:9,  tier:'uncommon'},
+    {id:'item_011', name:'Oozeflake',    qty:1,  tier:'rare'},
+    {id:'item_012', name:'Boglump',      qty:3,  tier:'rare'},
+    {id:'item_013', name:'Mirebit',      qty:2,  tier:'rare'},
+    {id:'item_014', name:'Gunkstone',    qty:4,  tier:'rare'},
+    {id:'item_015', name:'Slimegrit',    qty:6,  tier:'rare'},
+    {id:'item_016', name:'Bogdust',      qty:1,  tier:'epic'},
+    {id:'item_017', name:'Crudshard',    qty:2,  tier:'epic'},
+    {id:'item_018', name:'Oozerock',     qty:1,  tier:'epic'},
+    {id:'item_019', name:'Grimcore',     qty:0,  tier:'legend'},
+    {id:'item_020', name:'Slimechip',    qty:1,  tier:'mythic'},
+  ];
+
+  const TIER_COLOR = {
+    common:'rgba(255,255,255,0.15)',
+    uncommon:'rgba(96,165,250,0.4)',
+    rare:'rgba(168,85,247,0.4)',
+    epic:'rgba(240,192,64,0.4)',
+    legend:'rgba(248,113,113,0.4)',
+    mythic:'rgba(255,50,50,0.6)',
+  };
+
+  function buildMaterials() {
+    const grid = document.getElementById('materials-grid');
+    if(!grid || grid.children.length) return;
+    MATERIALS.forEach(item => {
+      const isEmpty = item.qty === 0;
+      const d = document.createElement('div');
+      d.style.cssText = `background:rgba(255,255,255,0.025);border:1px solid ${TIER_COLOR[item.tier]||'rgba(255,255,255,0.06)'};text-align:center;cursor:pointer;transition:all 0.2s;opacity:${isEmpty?'0.35':'1'};position:relative;`;
+      d.innerHTML = `
+        <img src="assets/item/${item.id}.png" loading="lazy"
+          style="width:100%;aspect-ratio:1;object-fit:cover;display:block;"
+          onerror="this.style.cssText='width:100%;aspect-ratio:1;background:#0d1018;display:block'">
+        <div style="padding:3px 2px 4px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);">×${item.qty}</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px;">${item.name}</div>
+        </div>`;
+      d.onmouseover = () => { if(!isEmpty) d.style.borderColor = 'rgba(255,255,255,0.3)'; };
+      d.onmouseout  = () => { d.style.borderColor = TIER_COLOR[item.tier]||'rgba(255,255,255,0.06)'; };
+      grid.appendChild(d);
+    });
+  }
+
   window.prfTopTab = function(name, btn) {
-    const stats = document.getElementById('prf-section-stats');
-    const inv   = document.getElementById('prf-section-inventory');
-    if(name === 'stats') {
-      if(stats) stats.style.display = 'block';
-      if(inv)   inv.style.display   = 'none';
+    const inv      = document.getElementById('prf-section-inventory');
+    const panels   = document.getElementById('prf-scroll-panels');
+    if(name === 'inventory') {
+      if(inv)    inv.style.display    = 'flex';
+      if(panels) panels.style.display = 'none';
     } else {
-      if(stats) stats.style.display = 'none';
-      if(inv)   inv.style.display   = 'flex';
+      if(inv)    inv.style.display    = 'none';
+      if(panels) panels.style.display = 'block';
     }
     ['prf-top-stats','prf-top-inventory'].forEach(id => {
       const el = document.getElementById(id);
@@ -1784,6 +1853,7 @@ const sw = Array.from({length:95},()=>({
     if(name==='profile') {
       buildGrid();
       buildModal();
+      buildMaterials();
     }
   };
 })();
